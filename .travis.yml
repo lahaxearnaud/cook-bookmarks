@@ -3,6 +3,10 @@ language: php
 php:
   - 5.4
 
+addons:
+  hosts:
+    - cuisine.dev
+
 before_script:
   - mkdir tests/_log
   - chmod 777 -R tests/_log
@@ -10,7 +14,6 @@ before_script:
   - travis_retry composer self-update
   - travis_retry composer install --no-interaction --prefer-source --dev
   - mysql -e 'create database db_test;'
-  - travis_retry php artisan migrate
-  - travis_retry php artisan db:seed
+  - travis_retry php artisan migrate --force --seed
 
 script: vendor/bin/codecept run
