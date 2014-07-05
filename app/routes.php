@@ -11,6 +11,9 @@
 |
 */
 
+Route::model('user', 'User');
+Route::model('article', 'Article');
+
 Route::get('/', function()
 {
 	return View::make('hello');
@@ -23,9 +26,7 @@ Route::group(array('prefix' => 'api/v1'), function() {
 	Route::delete('auth', 'Tappleby\AuthToken\AuthTokenController@destroy');
 
 	Route::group(array('before' => 'auth.token'), function() {
-		Route::get('/', function() {
-			return "Protected resource";
-		});
+		Route::resource('article', 'ArticlesController');
 	});
 
 });
