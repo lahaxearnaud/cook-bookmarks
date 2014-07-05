@@ -5,9 +5,11 @@ php:
 
 addons:
   hosts:
-    - cuisine.dev
+    - travis.dev
 
 before_script:
+  - php artisan env
+  - hostname
   - mkdir tests/_log
   - chmod 777 -R tests/_log
   - chmod 777 -R app/storage
