@@ -17,14 +17,13 @@ class CreateArticlesTable extends Migration {
 			$table->increments('id');
 			$table->string('title');
 			$table->string('url');
-			$table->integer('author_id');
+			$table->integer('author_id')->unsigned()->index();
 			$table->string('slug')->uniq()->index();
 			$table->text('indexable');
 			$table->text('body');
 			$table->timestamps();
 
 			$table->foreign('author_id')->references('id')->on('users')->onDelete('cascade');
-
 		});
 	}
 
