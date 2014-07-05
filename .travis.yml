@@ -2,14 +2,14 @@ language: php
 
 php:
   - 5.4
-  - 5.5
-  - 5.6
 
 before_script:
+  - chmod 777 -R tests/_log
+  - chmod 777 -R app/storage
   - travis_retry composer self-update
   - travis_retry composer install --no-interaction --prefer-source --dev
+  - mysql -e 'create database db_test;'
   - travis_retry php artisan migrate
   - travis_retry php artisan db:seed
-  - chmod 777 -R tests/_log
 
 script: vendor/bin/codecept run
