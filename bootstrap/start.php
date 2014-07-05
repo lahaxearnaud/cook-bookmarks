@@ -23,13 +23,20 @@ $app = new Illuminate\Foundation\Application;
 | given environment, then we will automatically detect it for you.
 |
 */
+$env = $app->detectEnvironment(function()
+{
+	if(is_file('.travis_env')) {
+		return 'testing';
+	}
 
-$env = $app->detectEnvironment(array(
+	switch (gethostname()) {
+		case 'homestead':
+			return 'local';
 
-	'local' => array('homestead'),
-	'testing' => array('travis.dev'),
-
-));
+		default:
+			return 'production';
+	}
+});
 
 /*
 |--------------------------------------------------------------------------
