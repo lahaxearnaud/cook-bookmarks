@@ -4,6 +4,7 @@ php:
   - 5.4
 
 before_script:
+  - mkdir tests/_log
   - chmod 777 -R tests/_log
   - chmod 777 -R app/storage
   - travis_retry composer self-update
