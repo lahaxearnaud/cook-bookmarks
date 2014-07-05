@@ -8,5 +8,8 @@ php:
 before_script:
   - travis_retry composer self-update
   - travis_retry composer install --no-interaction --prefer-source --dev
+  - travis_retry php artisan migrate
+  - travis_retry php artisan db:seed
+  - chmod 777 -R tests/_log
 
 script: vendor/bin/codecept run
