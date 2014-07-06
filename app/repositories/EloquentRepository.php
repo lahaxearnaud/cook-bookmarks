@@ -21,6 +21,14 @@ abstract class EloquentRepository implements RepositoryInterface {
 	 */
 	protected $with = array();
 
+
+	public function __construct(Model $model, $with = array())
+	{
+		$this->model = $model;
+		$this->with = $with;
+	}
+
+
 	/**
 	 * returns a collection of all models
 	 *
@@ -170,12 +178,7 @@ abstract class EloquentRepository implements RepositoryInterface {
 	 * @param  array  $where
 	 * @return Collection
 	 */
-	public function search($query, array $where = array())
-	{
-		Log::warning('No search behavior for '. get_class($this));
-
-		return new Collection();
-	}
+	abstract function search($query, array $where = array());
 
 	/**
 	 * returns the query builder with eager loading, or the model itself
