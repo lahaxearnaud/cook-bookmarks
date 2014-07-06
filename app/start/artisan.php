@@ -18,4 +18,3 @@ Artisan::add(new TailDayCommand);
 Artisan::add(new QualitySynthaxCommand);
 Artisan::add(new QualitySynthaxFixerCommand);
 Artisan::add(new CopyPastDetectorCommand);
-Artisan::add(new TestCommand);
