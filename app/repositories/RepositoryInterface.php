@@ -60,19 +60,17 @@ interface RepositoryInterface {
 	public function has($relation);
 
 	/**
-	 * @param int $page
-	 * @param int $limit
-	 * @return PaginatedInterface
+	 * @param  integer $nbByPage
+	 * @return Collection
 	 */
-	public function getPaginated($page = 1, $limit = 10);
+	public function paginate($nbByPage = 10);
 
 	/**
-	 * @param array $where
-	 * @param int $page
-	 * @param int $limit
-	 * @return PaginatedInterface
+	 * @param  array   $where
+	 * @param  integer $nbByPage
+	 * @return Collection
 	 */
-	public function getPaginatedWhere(array $where, $page = 1, $limit = 10);
+	public function paginateWhere(array $where, $nbByPage = 1);
 
 	/**
 	 * @param  integer $id

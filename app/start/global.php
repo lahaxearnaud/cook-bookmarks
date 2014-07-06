@@ -79,3 +79,15 @@ App::down(function()
 */
 
 require app_path().'/filters.php';
+
+
+/*
+|--------------------------------------------------------------------------
+| Dependencies Injection
+|--------------------------------------------------------------------------
+*/
+
+App::bind('ArticlesRepository', function($app)
+{
+    return new Repositories\ArticlesRepository(new Article(), array('author'));
+});

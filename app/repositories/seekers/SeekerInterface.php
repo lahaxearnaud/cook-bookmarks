@@ -1,6 +1,6 @@
 <?php
 
-namespace Seekers;
+namespace Repositories\Seekers;
 
 use Illuminate\Database\Eloquent\Collection;
 

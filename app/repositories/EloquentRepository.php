@@ -124,7 +124,7 @@ abstract class EloquentRepository implements RepositoryInterface {
 	 * @param int $limit
 	 * @return Collection
 	 */
-	public function getPaginated($nbByPage = 10)
+	public function paginate($nbByPage = 10)
 	{
 		$query = $this->make();
 
@@ -138,7 +138,7 @@ abstract class EloquentRepository implements RepositoryInterface {
 	 * @param int $limit
 	 * @return PaginatedInterface
 	 */
-	public function getPaginatedWhere(array $where, $nbByPage = 1)
+	public function paginateWhere(array $where, $nbByPage = 1)
 	{
 		$query = $this->make();
 
@@ -195,7 +195,7 @@ abstract class EloquentRepository implements RepositoryInterface {
 	 *
 	 * @return Builder|Model
 	 */
-	protected function make()
+	public function make()
 	{
 		return $this->model->with($this->with);
 	}
