@@ -40,6 +40,16 @@ abstract class EloquentRepository implements RepositoryInterface {
 	}
 
 	/**
+	 * returns a collection of all models
+	 *
+	 * @return Collection
+	 */
+	public function in($ids)
+	{
+		return $this->model->whereIn('id', $ids)->get();
+	}
+
+	/**
 	 * returns the model found
 	 *
 	 * @param int $id
