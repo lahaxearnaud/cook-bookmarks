@@ -91,3 +91,10 @@ App::bind('ArticlesRepository', function($app)
 {
     return new Repositories\ArticlesRepository(new Article(), array('author'));
 });
+
+App::bind('ArticlesController', function ($app)
+{
+    return new ArticlesController(
+        App::make('ArticlesRepository')
+    );
+});

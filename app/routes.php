@@ -26,7 +26,7 @@ Route::group(array('prefix' => 'api/v1'), function() {
 	Route::delete('auth', 'Tappleby\AuthToken\AuthTokenController@destroy');
 
 	Route::group(array('before' => 'auth.token'), function() {
-		Route::resource('article', 'ArticlesController');
+		Route::resource('articles', 'ArticlesController');
 	});
 
 });
