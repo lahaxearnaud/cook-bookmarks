@@ -11,3 +11,11 @@
 |
 */
 
+Artisan::add(new DatabaseResetCommand);
+Artisan::add(new TailDayCommand);
+
+// QA
+Artisan::add(new QualitySynthaxCommand);
+Artisan::add(new QualitySynthaxFixerCommand);
+Artisan::add(new CopyPastDetectorCommand);
+Artisan::add(new TestCommand);
