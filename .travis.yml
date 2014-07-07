@@ -5,7 +5,7 @@ php:
 
 addons:
   hosts:
-    - travis.dev
+    - cuisine.dev
 
 before_script:
   - mkdir tests/_log
