@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/lahaxearnaud/cook-bookmarks.svg)](https://travis-ci.org/lahaxearnaud/cook-bookmarks)
 
+[![Coverage Status](https://coveralls.io/repos/lahaxearnaud/cook-bookmarks/badge.png)](https://coveralls.io/r/lahaxearnaud/cook-bookmarks)
+
 ## Install
 
     - install composer
