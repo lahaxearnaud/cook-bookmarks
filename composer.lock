@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "860c29a9d9b9ea1b2918aa7fb2e0a495",
+    "hash": "c1e6acee94a855000cb37f6bcdc93d7d",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -584,7 +584,7 @@
         },
         {
             "name": "laravelbook/ardent",
-            "version": "dev-master",
+            "version": "v2.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravelbook/ardent.git",
@@ -802,7 +802,7 @@
         },
         {
             "name": "nickcernis/html-to-markdown",
-            "version": "dev-master",
+            "version": "2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nickcernis/html-to-markdown.git",
@@ -943,22 +943,24 @@
         },
         {
             "name": "phpseclib/phpseclib",
-            "version": "0.3.6",
+            "version": "0.3.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpseclib/phpseclib.git",
-                "reference": "0ea31d9b65d49a8661e93bec19f44e989bd34c69"
+                "reference": "8b8c62f278e363b75ddcacaf5803710232fbd3e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/0ea31d9b65d49a8661e93bec19f44e989bd34c69",
-                "reference": "0ea31d9b65d49a8661e93bec19f44e989bd34c69",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/8b8c62f278e363b75ddcacaf5803710232fbd3e4",
+                "reference": "8b8c62f278e363b75ddcacaf5803710232fbd3e4",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.0.0"
             },
             "require-dev": {
+                "phing/phing": "2.7.*",
+                "phpunit/phpunit": "4.0.*",
                 "squizlabs/php_codesniffer": "1.*"
             },
             "suggest": {
@@ -1034,7 +1036,7 @@
                 "x.509",
                 "x509"
             ],
-            "time": "2014-02-28 16:05:05"
+            "time": "2014-07-05 16:36:21"
         },
         {
             "name": "pimple/pimple",
@@ -3721,9 +3723,7 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
-        "laravelbook/ardent": 20,
         "shift31/laravel-elasticsearch": 20,
-        "nickcernis/html-to-markdown": 20,
         "maxhoffmann/parsedown-laravel": 20,
         "fivefilters/php-readability": 20
     },

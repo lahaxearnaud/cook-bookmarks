@@ -5,11 +5,11 @@
 	"license": "MIT",
 	"require": {
 		"laravel/framework": "4.2.*",
-		"laravelbook/ardent": "dev-master",
+		"laravelbook/ardent": "2.4.*",
 		"robclancy/presenter": "1.3.*",
 		"shift31/laravel-elasticsearch": "1.0.*@dev",
 
-		"nickcernis/html-to-markdown": "dev-master",
+		"nickcernis/html-to-markdown": "2.1.*",
 		"maxhoffmann/parsedown-laravel": "dev-master",
         "fivefilters/php-readability": "dev-master",
 
