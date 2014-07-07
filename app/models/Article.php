@@ -2,9 +2,8 @@
 
 use \LaravelBook\Ardent\Ardent;
 
-class Article extends Ardent {
-
-
+class Article extends Ardent
+{
     public static $rules = array(
         'title'     => 'required|min:5',
         'url'       => 'required|active_url',
@@ -13,9 +12,9 @@ class Article extends Ardent {
         'body'      => 'required|min:5',
     );
 
-	protected $fillable = [];
+    protected $fillable = [];
 
-	 /**
+     /**
      * Get the post's author.
      *
      * @return User

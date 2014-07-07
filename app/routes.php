@@ -18,19 +18,18 @@ Route::model('article', 'Article');
 Route::resource('articles', 'ArticlesController');
 
 
-Route::get('/', function()
-{
-	return View::make('hello');
+Route::get('/', function () {
+    return View::make('hello');
 });
 
-Route::group(array('prefix' => 'api/v1'), function() {
+Route::group(array('prefix' => 'api/v1'), function () {
 
-	Route::get('auth', 'Tappleby\AuthToken\AuthTokenController@index');
-	Route::post('auth', 'Tappleby\AuthToken\AuthTokenController@store');
-	Route::delete('auth', 'Tappleby\AuthToken\AuthTokenController@destroy');
+    Route::get('auth', 'Tappleby\AuthToken\AuthTokenController@index');
+    Route::post('auth', 'Tappleby\AuthToken\AuthTokenController@store');
+    Route::delete('auth', 'Tappleby\AuthToken\AuthTokenController@destroy');
 
-	Route::group(array('before' => 'auth.token'), function() {
-		Route::resource('articles', 'ArticlesController');
-	});
+    Route::group(array('before' => 'auth.token'), function () {
+        Route::resource('articles', 'ArticlesController');
+    });
 
 });

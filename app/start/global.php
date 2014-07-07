@@ -13,10 +13,10 @@
 
 ClassLoader::addDirectories(array(
 
-	app_path().'/commands',
-	app_path().'/controllers',
-	app_path().'/models',
-	app_path().'/database/seeds',
+    app_path().'/commands',
+    app_path().'/controllers',
+    app_path().'/models',
+    app_path().'/database/seeds',
 
 ));
 
@@ -46,15 +46,15 @@ Log::useFiles(storage_path().'/logs/laravel.log');
 |
 */
 
-App::error(function(Exception $exception, $code)
-{
-	Log::error($exception);
-	return array(
-		'code' => $exception->getCode(),
-		'message' => $exception->getMessage(),
-		'file' => $exception->getFile(),
-		'line' => $exception->getLine()
-	);
+App::error(function (Exception $exception, $code) {
+    Log::error($exception);
+
+    return array(
+        'code' => $exception->getCode(),
+        'message' => $exception->getMessage(),
+        'file' => $exception->getFile(),
+        'line' => $exception->getLine()
+    );
 });
 
 /*
@@ -68,9 +68,8 @@ App::error(function(Exception $exception, $code)
 |
 */
 
-App::down(function()
-{
-	return Response::make("Be right back!", 503);
+App::down(function () {
+    return Response::make("Be right back!", 503);
 });
 
 /*
@@ -86,20 +85,17 @@ App::down(function()
 
 require app_path().'/filters.php';
 
-
 /*
 |--------------------------------------------------------------------------
 | Dependencies Injection
 |--------------------------------------------------------------------------
 */
 
-App::bind('ArticlesRepository', function($app)
-{
+App::bind('ArticlesRepository', function ($app) {
     return new Repositories\ArticlesRepository(new Article(), array('author'));
 });
 
-App::bind('ArticlesController', function ($app)
-{
+App::bind('ArticlesController', function ($app) {
     return new ArticlesController(
         App::make('ArticlesRepository')
     );

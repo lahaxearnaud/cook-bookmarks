@@ -4,13 +4,13 @@ namespace Repositories\Seekers;
 
 use Illuminate\Database\Eloquent\Collection;
 
-interface SeekerInterface {
-
-	/**
+interface SeekerInterface
+{
+    /**
 	 *
 	 * @param  string $query
 	 * @param  array  $parameters
 	 * @return Collection
 	 */
-	public function query($query, array $parameters = array());
+    public function query($query, array $parameters = array());
 }

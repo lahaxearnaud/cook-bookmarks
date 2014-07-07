@@ -2,16 +2,16 @@
 
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserTable extends Migration {
-
-	/**
+class CreateUserTable extends Migration
+{
+    /**
 	 * Run the migrations.
 	 *
 	 * @return void
 	 */
-	public function up()
-	{
-		// Creates the users table
+    public function up()
+    {
+        // Creates the users table
         Schema::create('users', function ($table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
@@ -21,16 +21,16 @@ class CreateUserTable extends Migration {
             $table->string('remember_token')->nullable()->default(null);
             $table->timestamps();
         });
-	}
+    }
 
-	/**
+    /**
 	 * Reverse the migrations.
 	 *
 	 * @return void
 	 */
-	public function down()
-	{
-		Schema::drop('users');
-	}
+    public function down()
+    {
+        Schema::drop('users');
+    }
 
 }
