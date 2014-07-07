@@ -156,8 +156,9 @@ abstract class EloquentRepository implements RepositoryInterface {
 		foreach ($data as $key => $value) {
 			$model->{$key} =  $value;
 		}
+		$model->updateUniques();
 
-		$model->save();
+		return $model;
 	}
 
 	/**

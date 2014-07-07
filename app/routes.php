@@ -14,6 +14,10 @@
 Route::model('user', 'User');
 Route::model('article', 'Article');
 
+
+Route::resource('articles', 'ArticlesController');
+
+
 Route::get('/', function()
 {
 	return View::make('hello');

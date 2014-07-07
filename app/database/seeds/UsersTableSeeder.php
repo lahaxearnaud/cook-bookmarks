@@ -17,7 +17,6 @@ class UsersTableSeeder extends Seeder
                 'username'          => 'admin',
                 'email'             => 'admin@example.org',
                 'password'          => Hash::make('admin'),
-                'confirmation_code' => md5(microtime() . Config::get('app.key')),
                 'created_at'        => $dateNow,
                 'updated_at'        => $dateNow,
                 'remember_token'    => 'azerty'
@@ -26,7 +25,6 @@ class UsersTableSeeder extends Seeder
                 'username'          => 'user',
                 'email'             => 'user@example.org',
                 'password'          => Hash::make('user'),
-                'confirmation_code' => md5(microtime() . Config::get('app.key')),
                 'created_at'        => $dateNow,
                 'updated_at'        => $dateNow,
                 'remember_token'    => 'azerty'
