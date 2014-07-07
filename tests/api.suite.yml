@@ -1,3 +1,8 @@
 class_name: ninja
 modules:
-    enabled: [ninjaHelper]
+    enabled: [ninjaHelper, PhpBrowser, REST]
+    config:
+      PhpBrowser:
+          url: http://cuisine.dev/
+      REST:
+          url: http://cuisine.dev/
