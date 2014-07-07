@@ -17,7 +17,7 @@ before_script:
   - mysql -e 'create database db_test;'
   - php artisan env
   - travis_retry php artisan migrate --force --seed
-  - php artisan serve --host=cuisine.dev --port=8000 &
+  - php artisan serve --host=cuisine.dev --port=8100 &
   - sleep 10
 
 script: vendor/bin/codecept run
