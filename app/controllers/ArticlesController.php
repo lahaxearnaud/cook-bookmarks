@@ -6,26 +6,14 @@ class ArticlesController extends \BaseController {
 	{
 		$model = $this->repository->create(Input::all());
 
-		$errors = $model->errors();
-
-		if(count($errors) === 0) {
-			return Response::json(array('success' => true));
-		}
-
-		return Response::json($errors);
+		return $this->generateResponse($model->errors());
 	}
 
 	public function update($id)
 	{
 		$model = $this->repository->update($id, Input::all());
 
-		$errors = $model->errors();
-
-		if(count($errors) === 0) {
-			return Response::json(array('success' => true));
-		}
-
-		return Response::json($errors);
+		return $this->generateResponse($model->errors());
 	}
 
 }

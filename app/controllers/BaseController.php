@@ -74,4 +74,13 @@ abstract class BaseController extends Controller {
 
 		return $this->repository->dearch($query);
 	}
+
+	protected function generateResponse($errors)
+	{
+		if(count($errors) === 0) {
+			return Response::json(array('success' => true));
+		}
+
+		return Response::json($errors);
+	}
 }
