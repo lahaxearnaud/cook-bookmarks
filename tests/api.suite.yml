@@ -3,6 +3,6 @@ modules:
     enabled: [ninjaHelper, PhpBrowser, REST]
     config:
       PhpBrowser:
-          url: http://cuisine.dev/
+          url: http://127.0.0.1/
       REST:
-          url: http://cuisine.dev/
+          url: http://127.0.0.1/
