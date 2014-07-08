@@ -10,4 +10,3 @@ Artisan::call('migrate:reset');
 Artisan::call('migrate');
 Artisan::call('db:seed');
 Mail::pretend(true);
-Log::info('Boot');
