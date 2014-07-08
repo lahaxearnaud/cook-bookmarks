@@ -1,9 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
     ],
-    "hash": "bd3d64c8c01a204fbeb98a3ff03e192d",
+    "hash": "02eac0ddd46a1783eee10aa2caa7e3dc",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -2160,22 +2161,22 @@
     "packages-dev": [
         {
             "name": "barryvdh/laravel-debugbar",
-            "version": "v1.6.5",
+            "version": "v1.6.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/barryvdh/laravel-debugbar.git",
-                "reference": "23e17f9c939d85b3880ed65109040fc5c2b8562f"
+                "reference": "a3ec4b26c05beba60463c536dec5ab2a98656103"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/23e17f9c939d85b3880ed65109040fc5c2b8562f",
-                "reference": "23e17f9c939d85b3880ed65109040fc5c2b8562f",
+                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/a3ec4b26c05beba60463c536dec5ab2a98656103",
+                "reference": "a3ec4b26c05beba60463c536dec5ab2a98656103",
                 "shasum": ""
             },
             "require": {
                 "illuminate/filesystem": "~4.0",
                 "illuminate/support": "~4.0",
-                "maximebf/debugbar": "1.9.x",
+                "maximebf/debugbar": "~1.9",
                 "php": ">=5.3.0",
                 "symfony/finder": "~2.3"
             },
@@ -2208,7 +2209,7 @@
                 "profiler",
                 "webprofiler"
             ],
-            "time": "2014-06-24 08:55:57"
+            "time": "2014-07-08 07:20:07"
         },
         {
             "name": "barryvdh/laravel-ide-helper",
@@ -2492,23 +2493,23 @@
         },
         {
             "name": "codeception/codeception",
-            "version": "1.8.6",
+            "version": "1.8.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Codeception/Codeception.git",
-                "reference": "81b993c42b23800cb573489511a1a6927f50c914"
+                "reference": "16e2598ff6056c32249c01ae2117b92ab72d95f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Codeception/Codeception/zipball/81b993c42b23800cb573489511a1a6927f50c914",
-                "reference": "81b993c42b23800cb573489511a1a6927f50c914",
+                "url": "https://api.github.com/repos/Codeception/Codeception/zipball/16e2598ff6056c32249c01ae2117b92ab72d95f5",
+                "reference": "16e2598ff6056c32249c01ae2117b92ab72d95f5",
                 "shasum": ""
             },
             "require": {
                 "behat/mink": "1.5.*",
                 "behat/mink-goutte-driver": "1.0.*",
                 "behat/mink-selenium2-driver": "1.1.*",
-                "facebook/webdriver": "0.3",
+                "facebook/webdriver": "0.4",
                 "monolog/monolog": "*",
                 "php": ">=5.3.19",
                 "phpunit/phpunit": "3.7.*",
@@ -2556,7 +2557,7 @@
                 "functional testing",
                 "unit testing"
             ],
-            "time": "2014-06-03 23:43:32"
+            "time": "2014-07-08 01:27:22"
         },
         {
             "name": "fabpot/goutte",
@@ -2668,20 +2669,22 @@
         },
         {
             "name": "facebook/webdriver",
-            "version": "v0.3",
+            "version": "v0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/facebook/php-webdriver.git",
-                "reference": "1b0facc33133f0ff990df8cebe7f2e19b2603da3"
+                "reference": "342df507312ea5ae5337be47e16e4268d7ed661f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/facebook/php-webdriver/zipball/1b0facc33133f0ff990df8cebe7f2e19b2603da3",
-                "reference": "1b0facc33133f0ff990df8cebe7f2e19b2603da3",
+                "url": "https://api.github.com/repos/facebook/php-webdriver/zipball/342df507312ea5ae5337be47e16e4268d7ed661f",
+                "reference": "342df507312ea5ae5337be47e16e4268d7ed661f",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.19",
+                "php": ">=5.3.19"
+            },
+            "require-dev": {
                 "phpunit/phpunit": "3.7.*"
             },
             "type": "library",
@@ -2702,7 +2705,7 @@
                 "selenium",
                 "webdriver"
             ],
-            "time": "2013-11-26 23:16:02"
+            "time": "2014-02-21 18:22:11"
         },
         {
             "name": "instaclick/php-webdriver",
