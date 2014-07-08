@@ -3,9 +3,10 @@ namespace Codeception\Module;
 
 // here you can define custom functions for ninja
 
-class ninjaHelper extends \Codeception\Module
+class NinjaHelper extends \Codeception\Module
 {
 
+    protected $path = 'api/v1/';
     private $token = '';
 
     public function login($username, $password)
@@ -34,7 +35,7 @@ class ninjaHelper extends \Codeception\Module
         $rest->haveHttpHeader('X-Auth-Token', $this->token);
         $rest->haveHttpHeader('Content-Type', 'application/x-www-form-urlencoded');
 
-        $rest->{$method}($path, $params);
+        $rest->{$method}($this->path.$path, $params);
         $rest->seeResponseCodeIs($httpCode);
 
         if ($isJson) {
@@ -62,6 +63,7 @@ class ninjaHelper extends \Codeception\Module
 
 	public function isType($name, $format, $value, $parameter = '', $allowEmpty = false, $allowNull = false)
     {
+
         if (!$allowNull) {
             $this->assertTrue(!is_null($value), $name . ': can not be null');
         }
@@ -102,15 +104,15 @@ class ninjaHelper extends \Codeception\Module
                 break;
 
             case 'EMAIL':
-                $this->assertTrue(filter_var($value, FILTER_VALIDATE_EMAIL), $name . ': is not an email (' . $displayErrorValue . ')');
+                $this->assertTrue(filter_var($value, FILTER_VALIDATE_EMAIL) !== false, $name . ': is not an email (' . $displayErrorValue . ')');
                 break;
 
             case 'URL':
-                $this->assertTrue(filter_var($value, FILTER_VALIDATE_URL), $name . ': is not an url (' . $displayErrorValue . ')');
+                $this->assertTrue(filter_var($value, FILTER_VALIDATE_URL) !== false, $name . ': is not an url (' . $displayErrorValue . ')');
                 break;
 
             case 'IP':
-                $this->assertTrue(filter_var($value, FILTER_VALIDATE_IP), $name . ': is not an ip (' . $displayErrorValue . ')');
+                $this->assertTrue(filter_var($value, FILTER_VALIDATE_IP) !== false, $name . ': is not an ip (' . $displayErrorValue . ')');
                 break;
 
             case 'DATE':
@@ -118,7 +120,7 @@ class ninjaHelper extends \Codeception\Module
                     "options" => array(
                         "regexp" => '/(\d{4})-(\d{2})-(\d{2})/'
                     )
-                )), $name . ': is not a date (' . $displayErrorValue . ')');
+                )) !== false, $name . ': is not a date (' . $displayErrorValue . ')');
                 break;
 
             case 'DATETIME':
@@ -126,7 +128,7 @@ class ninjaHelper extends \Codeception\Module
                     "options" => array(
                         "regexp" => '(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})'
                     )
-                )), $name . ': is not a datetime (' . $displayErrorValue . ')');
+                )) !== false, $name . ': is not a datetime (' . $displayErrorValue . ')');
                 break;
 
             default:

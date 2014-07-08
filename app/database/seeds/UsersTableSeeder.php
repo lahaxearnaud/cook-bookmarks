@@ -1,13 +1,16 @@
 <?php
 
 use Carbon\Carbon;
+use \Faker\Internet;
 
 class UsersTableSeeder extends Seeder
 {
 
     public function run()
     {
-        DB::table('users')->delete();
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+        DB::table('users')->truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
 
         $dt      = Carbon::now();
         $dateNow = $dt->toDateTimeString();
@@ -15,7 +18,7 @@ class UsersTableSeeder extends Seeder
         $users = array(
             array(
                 'username'          => 'admin',
-                'email'             => 'admin@example.org',
+                'email'             => Internet::email('admin'),
                 'password'          => Hash::make('admin'),
                 'created_at'        => $dateNow,
                 'updated_at'        => $dateNow,
@@ -23,7 +26,7 @@ class UsersTableSeeder extends Seeder
             ),
             array(
                 'username'          => 'user',
-                'email'             => 'user@example.org',
+                'email'             => Internet::email('user'),
                 'password'          => Hash::make('user'),
                 'created_at'        => $dateNow,
                 'updated_at'        => $dateNow,

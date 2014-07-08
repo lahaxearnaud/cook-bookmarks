@@ -1,4 +1,4 @@
-class_name: ninja
+class_name: Ninja
 modules:
     enabled: [ninjaHelper, PhpBrowser, REST]
     config:

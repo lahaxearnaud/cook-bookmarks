@@ -41,8 +41,8 @@ class QualityTestCommand extends Command
             $this->info($buffer);
         });
         $process->setTimeout(60*60*60);// 1H
-        sleep(5);
-        $processTest = new Process('vendor/bin/codecept run ');
+        sleep(3);
+        $processTest = new Process('vendor/bin/codecept run -v --steps --coverage --no-interaction');
         $processTest->setTimeout(60*60*60);// 1H
         $processTest->run(function ($type, $buffer) {
             if (Process::ERR === $type) {

@@ -25,9 +25,9 @@ use Codeception\Module\REST;
  * @method void offsetUnset($offset)
 */
 
-class ninja extends \Codeception\AbstractGuy
+class Ninja extends \Codeception\AbstractGuy
 {
-    
+
     /**
      * This method is generated.
      * Documentation taken from corresponding module.
