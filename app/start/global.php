@@ -100,3 +100,11 @@ App::bind('ArticlesController', function ($app) {
         App::make('ArticlesRepository')
     );
 });
+
+/*
+|--------------------------------------------------------------------------
+| Observers
+|--------------------------------------------------------------------------
+*/
+
+Article::observe(new Observers\ArticleObserver);

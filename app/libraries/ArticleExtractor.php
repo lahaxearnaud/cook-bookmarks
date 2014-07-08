@@ -15,6 +15,7 @@ class ArticleExtractor
         $result = $readability->init();
 
         if(!$result) {
+
             return array(
                 'title' => '',
                 'body' => 'Unable to fetch content',
@@ -34,6 +35,7 @@ class ArticleExtractor
             $tidy->cleanRepair();
             $content = $tidy->value;
         }
+
 
         return array(
             'title' => $readability->getTitle()->textContent,
@@ -56,8 +58,10 @@ class ArticleExtractor
                 $html = $tidy->value;
             }
 
+
             return $this->extract($html ,$url);
         } catch(ClientErrorResponseException $e) {
+
             return array(
                 'title' => '',
                 'body' => $e->getMessage(),

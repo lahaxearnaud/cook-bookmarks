@@ -65,7 +65,9 @@ abstract class BaseController extends Controller
 	 */
     public function destroy($id)
     {
-        return $this->repository->delete($id);
+        $result = $this->repository->delete($id);
+
+        return Response::json(array('success' => $result));
     }
 
     public function search()

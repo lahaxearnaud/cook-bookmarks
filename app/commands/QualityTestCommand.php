@@ -2,7 +2,6 @@
 
 use Illuminate\Console\Command;
 use Symfony\Component\Process\Process;
-use Symfony\Component\Console\Input\InputArgument;
 
 class QualityTestCommand extends Command
 {
