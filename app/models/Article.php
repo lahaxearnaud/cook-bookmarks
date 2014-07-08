@@ -12,7 +12,7 @@ class Article extends Ardent
         'body'      => 'required|min:5',
     );
 
-    protected $fillable = [];
+    protected $guarded = array();
 
      /**
      * Get the post's author.

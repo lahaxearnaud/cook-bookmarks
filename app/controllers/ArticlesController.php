@@ -2,7 +2,7 @@
 
 class ArticlesController extends \BaseController
 {
-    public function create()
+    public function store()
     {
         $model = $this->repository->create(Input::all());
 

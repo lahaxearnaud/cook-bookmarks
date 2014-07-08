@@ -23,12 +23,16 @@ class ArticlesRepository extends EloquentRepository
 	 */
     public function create(array $data)
     {
+        $author = null;
+        if(isset($data['author_id'])) {
+            $author = \User::find($data['author_id']);
+        }else {
+            $author = $data['author'];
+            unset($data['author']);
+        }
 
-        $author = $data['author'];
-        unset($data['author']);
-
-        $model = parent::create($data);
-        $model->account()->associate($author);
+        $model = new \Article($data);
+        $model->author()->associate($author);
         $model->save();
 
         return $model;

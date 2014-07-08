@@ -25,7 +25,7 @@ abstract class BaseController extends Controller
 	 *
 	 * @return Response
 	 */
-    abstract public function create();
+    abstract public function store();
 
     /**
 	 * Display the specified resource.

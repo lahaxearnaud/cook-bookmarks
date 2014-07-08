@@ -9,7 +9,7 @@ class NinjaHelper extends \Codeception\Module
     protected $path = 'api/v1/';
     private $token = '';
 
-    public function login($username, $password)
+    public function login ($username, $password)
     {
         $rest = $this->getModule('REST');
 
@@ -26,7 +26,7 @@ class NinjaHelper extends \Codeception\Module
 
     }
 
-    public function call($path, $method = 'GET', array $params = array(), $httpCode = 200, $isJson = true)
+    public function call ($path, $method = 'GET', array $params = array(), $httpCode = 200, $isJson = TRUE)
     {
         $rest = $this->getModule('REST');
 
@@ -35,7 +35,7 @@ class NinjaHelper extends \Codeception\Module
         $rest->haveHttpHeader('X-Auth-Token', $this->token);
         $rest->haveHttpHeader('Content-Type', 'application/x-www-form-urlencoded');
 
-        $rest->{$method}($this->path.$path, $params);
+        $rest->{$method}($this->path . $path, $params);
         $rest->seeResponseCodeIs($httpCode);
 
         if ($isJson) {
@@ -50,18 +50,18 @@ class NinjaHelper extends \Codeception\Module
      *
      * @param bool $jsonDecode
      */
-    public function validateResponseWithClosure(\Closure $closure, $jsonDecode = true)
+    public function validateResponseWithClosure (\Closure $closure, $jsonDecode = TRUE)
     {
         $rest     = $this->getModule('REST');
         $response = $rest->grabResponse();
         if ($jsonDecode) {
-            $response = json_decode($response, true);
+            $response = json_decode($response, TRUE);
         }
 
         $closure($this, $response);
     }
 
-	public function isType($name, $format, $value, $parameter = '', $allowEmpty = false, $allowNull = false)
+    public function isType ($name, $format, $value, $parameter = '', $allowEmpty = FALSE, $allowNull = FALSE)
     {
 
         if (!$allowNull) {
@@ -69,10 +69,10 @@ class NinjaHelper extends \Codeception\Module
         }
 
         if (!$allowEmpty) {
-            $this->assertTrue(!empty($value) || $value === 0 || $value === false, $name . ': can not be empty');
+            $this->assertTrue(!empty($value) || $value === 0 || $value === FALSE, $name . ': can not be empty');
         }
 
-        $displayErrorValue = var_export($value, true);
+        $displayErrorValue = var_export($value, TRUE);
 
         switch ($format) {
             case 'INTEGER':
@@ -97,43 +97,49 @@ class NinjaHelper extends \Codeception\Module
                 break;
 
             case 'REGEX':
-                $matches = false;
+                $matches = FALSE;
                 preg_match($parameter, $value, $matches);
 
                 $this->assertTrue(is_array($matches) && count($matches) > 0, $name . ':does not match the regex : ' . $parameter . ' (' . $displayErrorValue . ')');
                 break;
 
             case 'EMAIL':
-                $this->assertTrue(filter_var($value, FILTER_VALIDATE_EMAIL) !== false, $name . ': is not an email (' . $displayErrorValue . ')');
+                $this->assertTrue(filter_var($value, FILTER_VALIDATE_EMAIL) !== FALSE, $name . ': is not an email (' . $displayErrorValue . ')');
                 break;
 
             case 'URL':
-                $this->assertTrue(filter_var($value, FILTER_VALIDATE_URL) !== false, $name . ': is not an url (' . $displayErrorValue . ')');
+                $this->assertTrue(filter_var($value, FILTER_VALIDATE_URL) !== FALSE, $name . ': is not an url (' . $displayErrorValue . ')');
                 break;
 
             case 'IP':
-                $this->assertTrue(filter_var($value, FILTER_VALIDATE_IP) !== false, $name . ': is not an ip (' . $displayErrorValue . ')');
+                $this->assertTrue(filter_var($value, FILTER_VALIDATE_IP) !== FALSE, $name . ': is not an ip (' . $displayErrorValue . ')');
                 break;
 
             case 'DATE':
                 $this->assertTrue(filter_var($value, FILTER_VALIDATE_REGEXP, array(
-                    "options" => array(
-                        "regexp" => '/(\d{4})-(\d{2})-(\d{2})/'
-                    )
-                )) !== false, $name . ': is not a date (' . $displayErrorValue . ')');
+                        "options" => array(
+                            "regexp" => '/(\d{4})-(\d{2})-(\d{2})/'
+                        )
+                    )) !== FALSE, $name . ': is not a date (' . $displayErrorValue . ')');
                 break;
 
             case 'DATETIME':
                 $this->assertTrue(filter_var($value, FILTER_VALIDATE_REGEXP, array(
-                    "options" => array(
-                        "regexp" => '(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})'
-                    )
-                )) !== false, $name . ': is not a datetime (' . $displayErrorValue . ')');
+                        "options" => array(
+                            "regexp" => '(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})'
+                        )
+                    )) !== FALSE, $name . ': is not a datetime (' . $displayErrorValue . ')');
                 break;
 
             default:
-                $this->assertTrue(false, 'Format ' . $format . ' not found');
+                $this->assertTrue(FALSE, 'Format ' . $format . ' not found');
                 break;
         }
     }
+
+    public function isEquals ($name, $expected, $value)
+    {
+        $this->assertEquals($value, $value, 'Expected that ' . print_r($name, TRUE) . ' equals ' . $expected . ' but was ' . print_r($value, TRUE));
+    }
+
 }
