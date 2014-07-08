@@ -2,6 +2,8 @@
 namespace Codeception\Module;
 
 // here you can define custom functions for ninja
+use Codeception\Util\Debug;
+
 
 class NinjaHelper extends \Codeception\Module
 {
@@ -57,6 +59,8 @@ class NinjaHelper extends \Codeception\Module
         if ($jsonDecode) {
             $response = json_decode($response, TRUE);
         }
+
+        $this->debug($response);
 
         $closure($this, $response);
     }

@@ -2,6 +2,7 @@
 
 use Illuminate\Console\Command;
 use Symfony\Component\Process\Process;
+use \Symfony\Component\Console\Input\InputArgument;
 
 class QualityTestCommand extends Command
 {
@@ -36,13 +37,19 @@ class QualityTestCommand extends Command
      */
     public function fire()
     {
+        $verbose = ($this->getOutput()->getVerbosity() > 1)?'-vvv':'';
+        $suite = $this->argument('suite');
+        $test = $this->argument('test');
+
         $process = new Process('php artisan serve --host=cuisine.dev --port=8100');
         $process->start(function ($type, $buffer) {
             $this->info($buffer);
         });
         $process->setTimeout(60*60*60);// 1H
         sleep(3);
-        $processTest = new Process('vendor/bin/codecept run -v --steps --coverage --no-interaction');
+
+        $codeception = 'vendor/bin/codecept run ' . $suite . ' ' . $test . ' ' . $verbose . ' --steps --coverage --no-interaction';
+        $processTest = new Process($codeception);
         $processTest->setTimeout(60*60*60);// 1H
         $processTest->run(function ($type, $buffer) {
             if (Process::ERR === $type) {
@@ -70,7 +77,10 @@ class QualityTestCommand extends Command
      */
     protected function getArguments()
     {
-        return array();
+        return array(
+            array('suite', null, InputArgument::OPTIONAL, ''),
+            array('test', null, InputArgument::OPTIONAL, ''),
+        );
     }
 
     /**
