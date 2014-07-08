@@ -26,10 +26,5 @@ Route::group(array('prefix' => 'api/v1'), function () {
 
     Route::resource('articles', 'ArticlesController');
 
-    /**
-    Route::group(array('before' => 'auth.token'), function () {
-        Route::resource('articles', 'ArticlesController');
-    });
-     **/
 
 });
