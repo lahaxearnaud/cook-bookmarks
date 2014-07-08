@@ -64,7 +64,6 @@ class QualitySynthaxCommand extends Command
      */
     protected function getArguments()
     {
-
         return array(
             array('file', null, InputArgument::OPTIONAL,  'app workbench', 'File(s)/Folder(s) to test',)
            );
@@ -77,7 +76,6 @@ class QualitySynthaxCommand extends Command
      */
     protected function getOptions()
     {
-
         return array();
     }
 }

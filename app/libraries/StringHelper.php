@@ -14,7 +14,6 @@ class StringHelper
      */
     public static function title($value)
     {
-
         return mb_convert_case($value, MB_CASE_TITLE);
     }
 
@@ -30,7 +29,6 @@ class StringHelper
         if (class_exists('tidy')) {
             $tidy = new tidy();
 
-
             return $tidy->repairString($value, array(
                 'show-body-only' => true,
             ));
@@ -41,7 +39,6 @@ class StringHelper
             $closedtags = $result[1];
             $len_opened = count($openedtags);
             if (count($closedtags) == $len_opened) {
-
                 return $value;
             }
             $openedtags = array_reverse($openedtags);
@@ -53,7 +50,6 @@ class StringHelper
                 }
             }
 
-
             return $value;
         }
     }
@@ -61,10 +57,8 @@ class StringHelper
     public static function date(Carbon $date)
     {
         if ($date->diffInDays(Carbon::now()) < 7) {
-
             return $date->diffForHumans();
         } else {
-
             return $date->toFormattedDateString();
         }
     }
@@ -73,13 +67,11 @@ class StringHelper
     {
 
         if ($nbWords <= 0) {
-
             return '';
         }
 
         // strip not allowed html tags
         $text = strip_tags($text, $allowedTags);
-
 
         return Str::words($text, $nbWords, $end);
     }

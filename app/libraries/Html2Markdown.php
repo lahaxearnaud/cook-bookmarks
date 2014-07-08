@@ -9,7 +9,6 @@ class Html2Markdown extends HTML_To_Markdown
     {
         $this->set_option('strip_tags', true);
 
-
         return parent::convert($html);
     }
 
