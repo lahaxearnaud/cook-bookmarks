@@ -9,6 +9,7 @@ addons:
 
 before_script:
   - mkdir tests/_log
+  - mkdir app/storage/logs
   - chmod 777 -R tests/_log
   - chmod 777 -R app/storage
   - touch .travis_env
