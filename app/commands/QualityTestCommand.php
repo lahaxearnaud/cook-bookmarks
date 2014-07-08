@@ -57,7 +57,10 @@ class QualityTestCommand extends Command
         });
 
         $process->stop(0);
-        exit($processTest->getStatus());
+
+        if(!$processTest->isSuccessful()){
+            throw new Exception('Tests failed.', $processTest->getExitCode());
+        }
     }
 
     /**
