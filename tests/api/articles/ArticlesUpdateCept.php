@@ -18,6 +18,7 @@ $I->validateResponseWithClosure(function (Codeception\Module\NinjaHelper $api, $
     $api->isEquals('success', $response['success'], true);
 });
 
+
 $I->amGoingTo('Check if update works');
 $I->call('articles/2');
 $I->validateResponseWithClosure(function (Codeception\Module\NinjaHelper $api, $response) use ($title) {
