@@ -25,5 +25,7 @@ Route::group(array('prefix' => 'api/v1'), function () {
     Route::delete('auth', 'Tappleby\AuthToken\AuthTokenController@destroy');
 
     Route::resource('articles', 'ArticlesController');
+    Route::post('articles/url', [ 'as' => 'articles.url', 'uses' => 'ArticlesController@url']);
+    Route::get('articles/user/{user}', [ 'as' => 'articles.user', 'uses' => 'ArticlesController@user']);
 
 });

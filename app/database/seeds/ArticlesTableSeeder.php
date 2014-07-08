@@ -23,7 +23,7 @@ class ArticlesTableSeeder extends Seeder
             $articles[] = array(
                 'author_id'  => round(rand(1, 2)),
                 'title'      => $title,
-                'url'        => 'http://' . Internet::domainName(),
+                'url'        => 'http://github.com',
                 'slug'       => Internet::slug($i . '-' . $title),
                 'indexable'  => $body,
                 'body'       => $body,

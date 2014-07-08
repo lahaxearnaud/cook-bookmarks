@@ -13,7 +13,7 @@ $I->wantTo('update an article');
 $I->call('articles/2', 'PUT', array(
     'title' => $title
 ));
-$I->validateResponseWithClosure(function (Codeception\Module\NinjaHelper $api, $response) {
+$I->validateResponseWithClosure(function (Codeception\Module\NinjaHelper $api, $response) use ($I) {
     $api->isType('success', 'BOOLEAN', $response['success']);
     $api->isEquals('success', $response['success'], true);
 });

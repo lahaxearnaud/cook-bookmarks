@@ -16,4 +16,15 @@ class ArticlesController extends \BaseController
         return $this->generateResponse($model->errors());
     }
 
+    public function url()
+    {
+        return array();
+    }
+
+    public function user($user)
+    {
+        return $this->repository->paginateWhere(array(
+            'author_id' => $user->id
+        ), 20);
+    }
 }
