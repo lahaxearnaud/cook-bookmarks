@@ -77,6 +77,7 @@ class QualityTestCommand extends Command
      */
     protected function getArguments()
     {
+
         return array(
             array('suite', null, InputArgument::OPTIONAL, ''),
             array('test', null, InputArgument::OPTIONAL, ''),
@@ -90,6 +91,7 @@ class QualityTestCommand extends Command
      */
     protected function getOptions()
     {
+
         return array();
     }
 }

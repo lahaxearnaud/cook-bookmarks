@@ -38,6 +38,7 @@ class DatabaseResetCommand extends Command
      */
     protected function getArguments()
     {
+
         return array();
     }
 
@@ -48,6 +49,7 @@ class DatabaseResetCommand extends Command
      */
     protected function getOptions()
     {
+
         return array();
     }
 

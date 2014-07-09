@@ -21,6 +21,7 @@ class Article extends Ardent
      */
     public function author()
     {
+
         return $this->belongsTo('User', 'author_id');
     }
 }

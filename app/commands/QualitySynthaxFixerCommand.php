@@ -57,6 +57,7 @@ class QualitySynthaxFixerCommand extends Command
      */
     protected function getArguments()
     {
+
         return array();
     }
 
@@ -67,6 +68,7 @@ class QualitySynthaxFixerCommand extends Command
      */
     protected function getOptions()
     {
+
         return array();
     }
 }
