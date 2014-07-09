@@ -27,5 +27,6 @@ Route::group(array('prefix' => 'api/v1'), function () {
     Route::resource('articles', 'ArticlesController');
     Route::post('articles/url', [ 'as' => 'articles.url', 'uses' => 'ArticlesController@url']);
     Route::get('articles/user/{user}', [ 'as' => 'articles.user', 'uses' => 'ArticlesController@user']);
+    Route::get('articles/search/{query}', [ 'as' => 'articles.search', 'uses' => 'ArticlesController@search']);
 
 });
