@@ -14,7 +14,13 @@ abstract class BaseController extends Controller
     /**
 	 * Display a listing of the resource.
 	 * @return Response
-	 */
+     *
+     *
+     * @ApiDescription(description="Get all (paginated)")
+     * @ApiParams(name="page", type="integer", nullable=true, description="Page num")
+     * @ApiRoute(name="/?page={page}")
+     * @ApiMethod(type="get")
+     */
     public function index()
     {
 
@@ -33,7 +39,12 @@ abstract class BaseController extends Controller
 	 *
 	 * @param  int  $id
 	 * @return Response
-	 */
+     *
+     * @ApiDescription(description="Find an article")
+     * @ApiParams(name="id", type="integer", nullable=false, description="Article id")
+     * @ApiRoute(name="/{id}")
+     * @ApiMethod(type="get")
+     */
     public function show($id)
     {
 
@@ -54,7 +65,7 @@ abstract class BaseController extends Controller
 
     /**
 	 * Update the specified resource in storage.
-	 *
+	 * @author LAHAXE Arnaud
 	 * @param  int  $id
 	 * @return Response
 	 */
@@ -65,6 +76,11 @@ abstract class BaseController extends Controller
 	 *
 	 * @param  int  $id
 	 * @return Response
+     *
+     * @ApiDescription(description="Delete an article")
+     * @ApiParams(name="id", type="integer", nullable=false, description="Article id")
+     * @ApiRoute(name="/{id}")
+     * @ApiMethod(type="delete")
 	 */
     public function destroy($id)
     {
@@ -74,12 +90,21 @@ abstract class BaseController extends Controller
         return Response::json(array('success' => $result));
     }
 
+    /**
+     * @author LAHAXE Arnaud
+     * @return mixed
+     *
+     * @ApiDescription(description="Search an article")
+     * @ApiParams(name="query", type="string", nullable=false, description="Query for the search")
+     * @ApiRoute(name="/search/{query}")
+     * @ApiMethod(type="get")
+     */
     public function search()
     {
         $query = Input::get('query');
 
 
-        return $this->repository->dearch($query);
+        return $this->repository->search($query);
     }
 
     protected function generateResponse($errors)
