@@ -1,5 +1,5 @@
 <?php
-namespace Observers;
+namespace Observers\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

@@ -107,4 +107,4 @@ App::bind('ArticlesController', function ($app) {
 |--------------------------------------------------------------------------
 */
 
-Article::observe(new Observers\ArticleObserver);
+Article::observe(new Observers\Models\ArticleObserver);
