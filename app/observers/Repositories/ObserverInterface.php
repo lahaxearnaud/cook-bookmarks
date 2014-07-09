@@ -1,8 +1,6 @@
 <?php
 namespace Observers\Repositories;
 
-use Illuminate\Database\Eloquent\Model;
-
 interface ObserverInterface
 {
 
