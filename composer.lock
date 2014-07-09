@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "ae005513c0eea29a37187385701a5903",
+    "hash": "4322fa66d1527ff78b49c7ed99679acd",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -2647,14 +2647,8 @@
             "target-dir": "Crada/Apidoc",
             "source": {
                 "type": "git",
-                "url": "https://github.com/calinrada/php-apidoc.git",
-                "reference": "e0bd701c9f4abf9bd7776e888879c4aedd70658d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/calinrada/php-apidoc/zipball/e0bd701c9f4abf9bd7776e888879c4aedd70658d",
-                "reference": "e0bd701c9f4abf9bd7776e888879c4aedd70658d",
-                "shasum": ""
+                "url": "https://github.com/lahaxearnaud/php-apidoc.git",
+                "reference": "f0d81b068122e9d67a85d3abfa04550d1274bf57"
             },
             "require": {
                 "php": ">=5.3.2"
@@ -2670,20 +2664,17 @@
                     "Crada": ""
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "authors": [
                 {
-                    "name": "Kevin Saliou",
-                    "email": "kevin@saliou.name",
-                    "homepage": "http://saliou.name",
-                    "role": "Developer"
-                },
-                {
                     "name": "Calin Rada",
                     "email": "rada.calin@gmail.com"
+                },
+                {
+                    "name": "Kevin Saliou",
+                    "email": "kevin@saliou.name"
                 },
                 {
                     "name": "Borja Santos-Diez",
@@ -2698,7 +2689,7 @@
                 "generator",
                 "php"
             ],
-            "time": "2014-07-05 15:42:35"
+            "time": "2014-07-09 21:00:30"
         },
         {
             "name": "fabpot/goutte",
