@@ -17,7 +17,7 @@ class ArticlesTableSeeder extends Seeder
         $dateNow  = $dt->toDateTimeString();
         $articles = array();
 
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 30; $i++) {
             $title      = Lorem::sentence(6);
             $body       = Lorem::paragraph(10);
             $articles[] = array(
