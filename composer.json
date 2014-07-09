@@ -34,7 +34,8 @@
         "sebastian/phpcpd": "*",
         "squizlabs/php_codesniffer": "1.*",
         "fabpot/php-cs-fixer":"0.5.*",
-        "bobthecow/faker": "1.0.*@dev"
+        "bobthecow/faker": "1.0.*@dev",
+        "crada/php-apidoc": "@dev"
     },
 	"scripts": {
 		"post-install-cmd": [

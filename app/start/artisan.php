@@ -20,3 +20,4 @@ Artisan::add(new QualitySynthaxFixerCommand);
 Artisan::add(new QualityTestCommand);
 Artisan::add(new QualityComposerSecurityCommand);
 Artisan::add(new CopyPastDetectorCommand);
+Artisan::add(new DocsGenerateCommand);
