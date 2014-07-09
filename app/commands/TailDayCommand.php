@@ -53,7 +53,6 @@ class TailDayCommand extends Command
      */
     protected function getArguments()
     {
-
         return array();
     }
 
@@ -64,7 +63,6 @@ class TailDayCommand extends Command
      */
     protected function getOptions()
     {
-
         return array(
             array('type', null, InputOption::VALUE_OPTIONAL, 'Type log (ex cli, apache2...)', 'apache2'),
             array('lines', null, InputOption::VALUE_OPTIONAL, 'The number of lines to tail.', 20),

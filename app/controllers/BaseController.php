@@ -23,7 +23,6 @@ abstract class BaseController extends Controller
      */
     public function index()
     {
-
         return $this->repository->paginate(20);
     }
 
@@ -47,7 +46,6 @@ abstract class BaseController extends Controller
      */
     public function show($id)
     {
-
         return $this->repository->find($id);
     }
 
@@ -59,7 +57,6 @@ abstract class BaseController extends Controller
 	 */
     public function edit($id)
     {
-
         return $this->repository->find($id);
     }
 
@@ -86,7 +83,6 @@ abstract class BaseController extends Controller
     {
         $result = $this->repository->delete($id);
 
-
         return Response::json(array('success' => $result));
     }
 
@@ -103,17 +99,14 @@ abstract class BaseController extends Controller
     {
         $query = Input::get('query');
 
-
         return $this->repository->search($query);
     }
 
     protected function generateResponse($errors)
     {
         if(count($errors) === 0) {
-
             return Response::json(array('success' => true));
         }
-
 
         return Response::json($errors);
     }

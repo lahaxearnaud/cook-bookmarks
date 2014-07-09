@@ -14,7 +14,6 @@ class ArticlesRepository extends EloquentRepository
 	 */
     public function search($query, array $where = array())
     {
-
         return new Collection();
     }
 
@@ -35,7 +34,6 @@ class ArticlesRepository extends EloquentRepository
         $model = new \Article($data);
         $model->author()->associate($author);
         $model->save();
-
 
         return $model;
     }
