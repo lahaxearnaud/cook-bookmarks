@@ -55,12 +55,5 @@
 	"config": {
 		"preferred-install": "dist"
 	},
-	"minimum-stability": "stable",
-
-    "repositories": [
-        {
-            "type": "git",
-            "url": "https://github.com/lahaxearnaud/php-apidoc.git"
-        }
-    ]
+	"minimum-stability": "stable"
 }

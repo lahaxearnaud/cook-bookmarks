@@ -1,9 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
     ],
-    "hash": "4322fa66d1527ff78b49c7ed99679acd",
+    "hash": "ae005513c0eea29a37187385701a5903",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -2647,8 +2648,14 @@
             "target-dir": "Crada/Apidoc",
             "source": {
                 "type": "git",
-                "url": "https://github.com/lahaxearnaud/php-apidoc.git",
-                "reference": "f0d81b068122e9d67a85d3abfa04550d1274bf57"
+                "url": "https://github.com/calinrada/php-apidoc.git",
+                "reference": "429a84f44eec42b70e203dd64042463d6adea885"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/calinrada/php-apidoc/zipball/429a84f44eec42b70e203dd64042463d6adea885",
+                "reference": "429a84f44eec42b70e203dd64042463d6adea885",
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2"
@@ -2664,17 +2671,20 @@
                     "Crada": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "authors": [
                 {
-                    "name": "Calin Rada",
-                    "email": "rada.calin@gmail.com"
+                    "name": "Kevin Saliou",
+                    "email": "kevin@saliou.name",
+                    "homepage": "http://kevin.saliou.name",
+                    "role": "Developer"
                 },
                 {
-                    "name": "Kevin Saliou",
-                    "email": "kevin@saliou.name"
+                    "name": "Calin Rada",
+                    "email": "rada.calin@gmail.com"
                 },
                 {
                     "name": "Borja Santos-Diez",
@@ -2689,7 +2699,7 @@
                 "generator",
                 "php"
             ],
-            "time": "2014-07-09 21:00:30"
+            "time": "2014-07-10 07:52:30"
         },
         {
             "name": "fabpot/goutte",
