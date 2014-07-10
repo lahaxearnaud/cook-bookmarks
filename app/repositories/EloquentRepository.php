@@ -56,7 +56,7 @@ abstract class EloquentRepository implements RepositoryInterface
     {
         $query = $this->make();
 
-        return $query->find($id);
+        return $query->findOrFail($id);
     }
 
     /**
@@ -148,7 +148,7 @@ abstract class EloquentRepository implements RepositoryInterface
 	 */
     public function update($id, array $data)
     {
-        $model = $this->find($id);
+        $model = $this->findOrFail($id);
         foreach ($data as $key => $value) {
             $model->{$key} =  $value;
         }
@@ -163,7 +163,7 @@ abstract class EloquentRepository implements RepositoryInterface
 	 */
     public function delete($id)
     {
-        $model = $this->find($id);
+        $model = $this->findOrFail($id);
 
         return $model->delete();
     }

@@ -25,7 +25,7 @@ class ArticlesRepository extends EloquentRepository
     {
         $author = null;
         if(isset($data['author_id'])) {
-            $author = \User::find($data['author_id']);
+            $author = \User::findOrFail($data['author_id']);
         }else {
             $author = $data['author'];
             unset($data['author']);
