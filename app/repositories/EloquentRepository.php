@@ -148,7 +148,7 @@ abstract class EloquentRepository implements RepositoryInterface
 	 */
     public function update($id, array $data)
     {
-        $model = $this->findOrFail($id);
+        $model = $this->find($id);
         foreach ($data as $key => $value) {
             $model->{$key} =  $value;
         }
