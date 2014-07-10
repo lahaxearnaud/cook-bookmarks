@@ -20,6 +20,15 @@ abstract class BaseController extends Controller
      * @ApiParams(name="page", type="integer", nullable=true, description="Page num")
      * @ApiRoute(name="/?page={page}")
      * @ApiMethod(type="get")
+     * @ApiReturn(type="object", sample="{
+     *  'per_page':'integer',
+     *  'from':'integer',
+     *  'data':'array',
+     *  'total':'integer',
+     *  'current_page':'integer',
+     *  'last_page':'integer',
+     *  'to':'integer',
+     * }")
      */
     public function index()
     {
@@ -78,6 +87,9 @@ abstract class BaseController extends Controller
      * @ApiParams(name="id", type="integer", nullable=false, description="Article id")
      * @ApiRoute(name="/{id}")
      * @ApiMethod(type="delete")
+     * @ApiReturn(type="object", sample="{
+     *  'success':'bool',
+     * }")
 	 */
     public function destroy($id)
     {
