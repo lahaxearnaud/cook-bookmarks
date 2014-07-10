@@ -163,7 +163,7 @@ abstract class EloquentRepository implements RepositoryInterface
 	 */
     public function delete($id)
     {
-        $model = $this->findOrFail($id);
+        $model = $this->find($id);
 
         return $model->delete();
     }
