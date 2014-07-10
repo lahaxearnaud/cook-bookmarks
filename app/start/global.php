@@ -53,7 +53,9 @@ App::error(function (Exception $exception, $code) {
 
 App::error(function(Illuminate\Database\Eloquent\ModelNotFoundException $e)
 {
-    return Response::make($e->getMessage(), 404);
+    return Response::make(array(
+        'error' => $e->getMessage()
+    ), 404);
 });
 
 /*

@@ -8,6 +8,8 @@
 
 $I = new Ninja($scenario);
 $I->wantTo('get an article');
+
+$I->amGoingTo('Get an article with a good id');
 $I->call('articles/1');
 $I->validateResponseWithClosure(function (Codeception\Module\NinjaHelper $api, $response) {
     $api->isType('id', 'INTEGER', $response['id']);
@@ -20,3 +22,10 @@ $I->validateResponseWithClosure(function (Codeception\Module\NinjaHelper $api, $
     $api->isType('slug', 'STRING', $response['slug']);
     $api->isType('body', 'STRING', $response['body']);
 });
+
+$I->amGoingTo('Get an article with a bad id');
+$I->call('articles/1000', $method = 'GET', $params = array(), $httpCode = 404);
+
+$I->amGoingTo('Get an article with a string');
+$I->call('articles/aaa', $method = 'GET', $params = array(), $httpCode = 404);
+
