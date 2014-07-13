@@ -47,12 +47,17 @@ Log::useFiles(storage_path().'/logs/laravel.log');
 */
 
 App::error(function (Exception $exception, $code) {
+    Event::fire('apiLog', array($exception->getCode()));
+
+
     Log::error($exception);
 
 });
 
 App::error(function(Illuminate\Database\Eloquent\ModelNotFoundException $e)
 {
+    Event::fire('apiLog', array(404));
+
     return Response::make(array(
         'error' => $e->getMessage()
     ), 404);
@@ -94,6 +99,10 @@ require app_path().'/filters.php';
 
 App::bind('ArticlesRepository', function ($app) {
     return new Repositories\ArticlesRepository(new Article(), array('author'));
+});
+
+App::bind('LogsRepository', function ($app) {
+    return new Repositories\LogsRepository(new ApiLog());
 });
 
 App::bind('ArticlesController', function ($app) {

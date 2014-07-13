@@ -16,7 +16,7 @@ App::before(function ($request) {
 });
 
 App::after(function ($request, $response) {
-    //
+    Event::fire('apiLog', array($response->getStatusCode()));
 });
 
 /*
@@ -33,6 +33,8 @@ App::after(function ($request, $response) {
 Route::filter('auth', function () {
     if (Auth::guest()) {
         if (Request::ajax()) {
+            Event::fire('apiLog', array(401));
+
             return Response::make('Unauthorized', 401);
         } else {
             return Redirect::guest('login');
@@ -45,8 +47,11 @@ Route::filter('auth.basic', function () {
 });
 
 App::error(function (AuthTokenNotAuthorizedException $exception) {
+    Event::fire('apiLog', array($exception->getCode()));
+
     return Response::json(array('error' => $exception->getMessage()), $exception->getCode());
 });
+
 
 /*
 |--------------------------------------------------------------------------
@@ -78,4 +83,30 @@ Route::filter('csrf', function () {
     if (Session::token() != Input::get('_token')) {
         throw new Illuminate\Session\TokenMismatchException;
     }
+});
+
+/*
+|--------------------------------------------------------------------------
+| Api database logs listener
+|--------------------------------------------------------------------------
+*/
+Event::listen('apiLog', function($httpCode)
+{
+    $repository = App::make('LogsRepository');
+
+    $inputs = array();
+
+    if(!in_array(Route::currentRouteName(), Config::get('api.noParamsLogRoutesNames'))) {
+        $inputs = Input::all();
+    }
+
+    $repository->create(array(
+        'url'      => Request::url(),
+        'route'    => Route::currentRouteName(),
+        'params'   => json_encode($inputs),
+        'method'   => Request::method(),
+        'httpCode' => $httpCode,
+        'user_id'  => Auth::guest() ? NULL : Auth::User()->id,
+        'ip' => Request::getClientIp()
+    ));
 });

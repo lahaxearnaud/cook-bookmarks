@@ -19,8 +19,8 @@ class CreateLogsTable extends Migration {
             $table->string('route');
             $table->text('params');
             $table->text('method');
-            $table->text('errors');
             $table->integer('httpCode');
+            $table->string('ip', 45);
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
