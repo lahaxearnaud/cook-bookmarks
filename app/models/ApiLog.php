@@ -1,8 +1,8 @@
 <?php
 
-class ApiLog extends \Eloquent {
+class ApiLog extends \Eloquent
+{
     protected $guarded = array();
-
 
     /**
      * The database table used by the model.

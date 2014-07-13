@@ -52,7 +52,6 @@ App::error(function (AuthTokenNotAuthorizedException $exception) {
     return Response::json(array('error' => $exception->getMessage()), $exception->getCode());
 });
 
-
 /*
 |--------------------------------------------------------------------------
 | Guest Filter
@@ -90,8 +89,7 @@ Route::filter('csrf', function () {
 | Api database logs listener
 |--------------------------------------------------------------------------
 */
-Event::listen('apiLog', function($httpCode)
-{
+Event::listen('apiLog', function ($httpCode) {
     $repository = App::make('LogsRepository');
 
     $inputs = array();
