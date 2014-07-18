@@ -14,7 +14,6 @@
     - change database configuration (app/config/databases.php)
     - php artisan migrate
     - php artisan db:seed
-    - php artisan optimize
 
 ## Update
 	- composer update
