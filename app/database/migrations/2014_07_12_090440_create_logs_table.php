@@ -14,9 +14,9 @@ class CreateLogsTable extends Migration
     {
         Schema::create('logs', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned()->nullable()->index();
+            $table->integer('user_id')->unsigned()->nullable()->index(); // null for unlogged user
             $table->string('url');
-            $table->string('route');
+            $table->string('route')->nullable();// null for 404
             $table->text('params');
             $table->text('method');
             $table->integer('httpCode');
