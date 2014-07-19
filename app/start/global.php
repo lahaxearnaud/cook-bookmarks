@@ -103,9 +103,19 @@ App::bind('LogsRepository', function ($app) {
     return new Repositories\LogsRepository(new ApiLog());
 });
 
+App::bind('CategoriesRepository', function ($app) {
+    return new Repositories\CategoriesRepository(new Category(), array('user'));
+});
+
 App::bind('ArticlesController', function ($app) {
     return new ArticlesController(
         App::make('ArticlesRepository')
+    );
+});
+
+App::bind('CategoriesController', function ($app) {
+    return new CategoriesController(
+        App::make('CategoriesRepository')
     );
 });
 
@@ -116,3 +126,4 @@ App::bind('ArticlesController', function ($app) {
 */
 
 Article::observe(new Observers\Models\ArticleObserver);
+Category::observe(new Observers\Models\CategoryObserver);

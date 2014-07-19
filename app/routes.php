@@ -13,6 +13,7 @@
 
 Route::model('user', 'User');
 Route::model('article', 'Article');
+Route::model('category', 'Category');
 
 
 Route::resource('articles', 'ArticlesController');
@@ -28,5 +29,10 @@ Route::group(array('prefix' => 'api/v1'), function () {
     Route::post('articles/url', [ 'as' => 'articles.url', 'uses' => 'ArticlesController@url']);
     Route::get('articles/user/{user}', [ 'as' => 'articles.user', 'uses' => 'ArticlesController@user']);
     Route::get('articles/search/{query}', [ 'as' => 'articles.search', 'uses' => 'ArticlesController@search']);
+
+
+    Route::resource('categories', 'CategoriesController');
+    Route::get('categories/user/{user}', [ 'as' => 'categories.user', 'uses' => 'CategoriesController@user']);
+    Route::get('categories/search/{query}', [ 'as' => 'categories.search', 'uses' => 'CategoriesController@search']);
 
 });

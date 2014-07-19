@@ -39,6 +39,7 @@ class DocsGenerateCommand extends Command
     {
         $classes = array(
             'ArticlesController',
+            'CategoriesController',
         );
 
         $output_dir  = 'public/docs';

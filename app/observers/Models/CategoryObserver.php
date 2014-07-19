@@ -3,26 +3,26 @@ namespace Observers\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ArticleObserver extends Observer
+class CategoryObserver extends Observer
 {
     public function saved(Model $model)
     {
-        \Log::info("Article saved " . $model->id);
+        \Log::info("Category saved " . $model->id);
     }
 
     public function updated(Model $model)
     {
-        \Log::info("Article updated " . $model->id);
+        \Log::info("Category updated " . $model->id);
     }
 
     public function deleted(Model $model)
     {
-        \Log::info("Article deleted " . $model->id);
+        \Log::info("Category  deleted " . $model->id);
     }
 
     public function restored(Model $model)
     {
-        \Log::info("Article restored " . $model->id);
+        \Log::info("Category  restored " . $model->id);
     }
 
 }
