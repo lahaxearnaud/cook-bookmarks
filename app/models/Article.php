@@ -23,4 +23,13 @@ class Article extends Ardent
     {
         return $this->belongsTo('User', 'author_id');
     }
+
+    /**
+     * @author LAHAXE Arnaud <lahaxe.arnaud@gmail.com>
+     * @return Category|null
+     */
+    public function category()
+    {
+        return $this->belongsTo('Category', 'category_id');
+    }
 }

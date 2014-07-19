@@ -96,7 +96,7 @@ require app_path().'/filters.php';
 */
 
 App::bind('ArticlesRepository', function ($app) {
-    return new Repositories\ArticlesRepository(new Article(), array('author'));
+    return new Repositories\ArticlesRepository(new Article(), array('author', 'category'));
 });
 
 App::bind('LogsRepository', function ($app) {
