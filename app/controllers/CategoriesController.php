@@ -20,7 +20,7 @@ class CategoriesController extends \BaseController
 
     /**
      * @ApiDescription(description="Update an category")
-     * @ApiParams(name="id", type="integer", nullable=false, description="Article id")
+     * @ApiParams(name="id", type="integer", nullable=false, description="Category id")
      * @ApiRoute(name="/{id}")
      * @ApiMethod(type="put")
      */
@@ -33,7 +33,7 @@ class CategoriesController extends \BaseController
 
     /**
      * @ApiDescription(description="Update an category")
-     * @ApiParams(name="url", type="string", nullable=false, description="Url of the article")
+     * @ApiParams(name="url", type="string", nullable=false, description="Url of the category")
      * @ApiRoute(name="/url/{url}")
      * @ApiMethod(type="post")
      */
