@@ -14,7 +14,6 @@ before_script:
   - chmod 777 -R tests/_log
   - chmod 777 -R app/storage
   - touch .travis_env
-  - travis_retry composer self-update
   - travis_retry composer install --no-interaction --prefer-source --dev
   - mysql -e 'create database db_test;'
   - php artisan env
