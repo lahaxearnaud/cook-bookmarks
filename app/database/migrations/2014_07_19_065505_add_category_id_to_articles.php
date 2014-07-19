@@ -29,6 +29,7 @@ class AddCategoryIdToArticles extends Migration {
 	{
 		Schema::table('articles', function(Blueprint $table)
 		{
+            $table->dropForeign('articles_category_id_foreign');
             $table->dropColumn('category_id');
 		});
 	}
