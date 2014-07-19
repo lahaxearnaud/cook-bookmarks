@@ -11,7 +11,8 @@ $title = uniqid('title-');
 $I = new Ninja($scenario);
 $I->wantTo('update an article');
 $I->call('articles/2', 'PUT', array(
-    'title' => $title
+    'title' => $title,
+    'category_id' => 2,
 ));
 $I->validateResponseWithClosure(function (Codeception\Module\NinjaHelper $api, $response) use ($I) {
     $api->isType('success', 'BOOLEAN', $response['success']);
