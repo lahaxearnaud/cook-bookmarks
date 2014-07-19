@@ -31,8 +31,18 @@ class ArticlesRepository extends EloquentRepository
             unset($data['author']);
         }
 
+        $category = null;
+        if(isset($data['category_id'])) {
+            $category = \User::findOrFail($data['category_id']);
+        }else {
+            $category = $data['category'];
+            unset($data['category']);
+        }
+
         $model = new \Article($data);
         $model->author()->associate($author);
+        $model->category()->associate($category);
+
         $model->save();
 
         return $model;

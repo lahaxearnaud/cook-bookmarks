@@ -9,10 +9,9 @@
 $title = uniqid('title-');
 
 $I = new Ninja($scenario);
-$I->wantTo('update an article');
-$I->call('articles/2', 'PUT', array(
-    'title' => $title,
-    'category_id' => 2,
+$I->wantTo('update an category');
+$I->call('categories/2', 'PUT', array(
+    'name' => $title,
 ));
 $I->validateResponseWithClosure(function (Codeception\Module\NinjaHelper $api, $response) use ($I) {
     $api->isType('success', 'BOOLEAN', $response['success']);
@@ -21,8 +20,8 @@ $I->validateResponseWithClosure(function (Codeception\Module\NinjaHelper $api, $
 
 
 $I->amGoingTo('Check if update works');
-$I->call('articles/2');
+$I->call('categories/2');
 $I->validateResponseWithClosure(function (Codeception\Module\NinjaHelper $api, $response) use ($title) {
-    $api->isType('title', 'STRING', $response['title']);
-    $api->isEquals('title', $response['title'], $title);
+    $api->isType('name', 'STRING', $response['name']);
+    $api->isEquals('name', $response['name'], $title);
 });

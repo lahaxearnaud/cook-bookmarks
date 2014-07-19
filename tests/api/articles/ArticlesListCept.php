@@ -24,6 +24,12 @@ $I->validateResponseWithClosure(function (Codeception\Module\NinjaHelper $api, $
         $api->isType('author.username', 'STRING', $article['author']['username']);
         $api->isType('author.id', 'INTEGER', $article['author']['id']);
         $api->isType('author.email', 'EMAIL', $article['author']['email']);
+
+        $api->isType('category', 'ARRAY', $article['category']);
+        $api->isType('category.name', 'STRING', $article['category']['name']);
+        $api->isType('category.user_id', 'INTEGER', $article['category']['user_id']);
+        $api->isType('category.id', 'INTEGER', $article['category']['id']);
+
         $api->isType('title', 'STRING', $article['title']);
         $api->isType('url', 'URL', $article['url']);
         $api->isType('slug', 'STRING', $article['slug']);
