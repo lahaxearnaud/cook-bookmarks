@@ -51,7 +51,7 @@ class CategoriesController extends \BaseController
     public function user($user)
     {
         return $this->repository->paginateWhere(array(
-            'author_id' => $user->id
+            'user_id' => $user->id
         ), 20);
     }
 }
