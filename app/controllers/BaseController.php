@@ -96,7 +96,12 @@ abstract class BaseController extends Controller
     {
         $result = $this->repository->delete($id);
 
-        return $this->generateResponse(array(), array(), 200);
+        $errors = [];
+
+        if(!$result) {
+            $errors[] = 'Error during delete';
+        }
+        return $this->generateResponse($errors, array(), 200);
     }
 
     /**
