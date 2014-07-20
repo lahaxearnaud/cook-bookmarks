@@ -21,6 +21,10 @@ $I->validateResponseWithClosure(function (Codeception\Module\NinjaHelper $api, $
     $api->isType('name', 'STRING', $response['name']);
     $api->isType('user_id', 'INTEGER', $response['user_id']);
     $api->isType('id', 'INTEGER', $response['id']);
+
+    $api->isHyperMedia('show', $response);
+    $api->isHyperMedia('delete', $response);
+    $api->isHyperMedia('update', $response);
 });
 
 $I->amGoingTo('Get an category with a bad id');

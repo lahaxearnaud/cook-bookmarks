@@ -114,6 +114,44 @@ class Ninja extends \Codeception\AbstractGuy
      * ----------------------------------------------
      *
      *
+     * @see Codeception\Module\NinjaHelper::isEquals()
+     * @return \Codeception\Maybe
+     */
+    public function isEquals($name, $expected, $value) {
+        $this->scenario->addStep(new \Codeception\Step\Action('isEquals', func_get_args()));
+        if ($this->scenario->running()) {
+            $result = $this->scenario->runStep();
+            return new Maybe($result);
+        }
+        return new Maybe();
+    }
+
+ 
+    /**
+     * This method is generated.
+     * Documentation taken from corresponding module.
+     * ----------------------------------------------
+     *
+     *
+     * @see Codeception\Module\NinjaHelper::isHyperMedia()
+     * @return \Codeception\Maybe
+     */
+    public function isHyperMedia($action, $result) {
+        $this->scenario->addStep(new \Codeception\Step\Action('isHyperMedia', func_get_args()));
+        if ($this->scenario->running()) {
+            $result = $this->scenario->runStep();
+            return new Maybe($result);
+        }
+        return new Maybe();
+    }
+
+ 
+    /**
+     * This method is generated.
+     * Documentation taken from corresponding module.
+     * ----------------------------------------------
+     *
+     *
      * @see Codeception\Module::getName()
      * @return \Codeception\Maybe
      */

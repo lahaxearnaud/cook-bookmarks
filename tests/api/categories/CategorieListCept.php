@@ -28,5 +28,9 @@ $I->validateResponseWithClosure(function (Codeception\Module\NinjaHelper $api, $
         $api->isType('name', 'STRING', $article['name']);
         $api->isType('user_id', 'INTEGER', $article['user_id']);
         $api->isType('id', 'INTEGER', $article['id']);
+
+        $api->isHyperMedia('show', $article);
+        $api->isHyperMedia('delete', $article);
+        $api->isHyperMedia('update', $article);
     }
 });

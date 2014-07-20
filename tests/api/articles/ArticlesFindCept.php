@@ -27,6 +27,11 @@ $I->validateResponseWithClosure(function (Codeception\Module\NinjaHelper $api, $
     $api->isType('url', 'STRING', $response['url']);
     $api->isType('slug', 'STRING', $response['slug']);
     $api->isType('body', 'STRING', $response['body']);
+
+    $api->isHyperMedia('show', $response);
+    $api->isHyperMedia('delete', $response);
+    $api->isHyperMedia('update', $response);
+
 });
 
 $I->amGoingTo('Get an article with a bad id');

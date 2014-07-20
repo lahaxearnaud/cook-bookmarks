@@ -34,5 +34,14 @@ $I->validateResponseWithClosure(function (Codeception\Module\NinjaHelper $api, $
         $api->isType('url', 'URL', $article['url']);
         $api->isType('slug', 'STRING', $article['slug']);
         $api->isType('body', 'STRING', $article['body']);
+
+        $api->isType('_links', 'ARRAY', $article['_links']);
+        $api->isType('_links.show', 'ARRAY', $article['_links']['show']);
+        $api->isType('_links.show.url', 'URL', $article['_links']['show']['url']);
+        $api->isType('_links.show.method', 'STRING', $article['_links']['show']['method']);
+
+        $api->isHyperMedia('show', $article);
+        $api->isHyperMedia('delete', $article);
+        $api->isHyperMedia('update', $article);
     }
 });

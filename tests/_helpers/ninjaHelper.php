@@ -146,4 +146,13 @@ class NinjaHelper extends \Codeception\Module
         $this->assertEquals($value, $value, 'Expected that ' . print_r($name, TRUE) . ' equals ' . $expected . ' but was ' . print_r($value, TRUE));
     }
 
+
+    public function isHyperMedia($action, $result)
+    {
+        $this->isType('_links', 'ARRAY', $result['_links']);
+        $this->isType('_links.'.$action, 'ARRAY', $result['_links'][$action]);
+        $this->isType('_links.'.$action.'.url', 'URL', $result['_links'][$action]['url']);
+        $this->isType('_links.'.$action.'.method', 'STRING', $result['_links'][$action]['method']);
+    }
+
 }
