@@ -8,7 +8,7 @@
 
 use \LaravelBook\Ardent\Ardent;
 
-abstract class BaseModel extends Ardent
+abstract class BaseModel extends Ardent implements UrlApiInterface, HyperMediaInterface
 {
 
     protected $appends = array('_links');

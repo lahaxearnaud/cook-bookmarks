@@ -26,7 +26,7 @@
  * @method static \Illuminate\Database\Query\Builder|\Article whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Article whereCategoryId($value)
  */
-class Article extends BaseModel
+class Article extends BaseModel implements HyperMediaInterface
 {
     public static $rules = array(
         'title'     => 'required|min:5',

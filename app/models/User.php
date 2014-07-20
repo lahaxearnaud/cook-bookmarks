@@ -23,7 +23,7 @@ use Illuminate\Auth\Reminders\RemindableInterface;
  * @method static \Illuminate\Database\Query\Builder|\User whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\User whereUpdatedAt($value)
  */
-class User extends BaseModel implements UserInterface, RemindableInterface
+class User extends BaseModel implements UserInterface, RemindableInterface, HyperMediaInterface
 {
     use UserTrait, RemindableTrait;
 

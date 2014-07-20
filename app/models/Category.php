@@ -15,7 +15,7 @@
  * @method static \Illuminate\Database\Query\Builder|\Category whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Category whereUpdatedAt($value)
  */
-class Category extends BaseModel
+class Category extends BaseModel implements HyperMediaInterface
 {
     public static $rules = array(
         'name'     => 'required|min:3',

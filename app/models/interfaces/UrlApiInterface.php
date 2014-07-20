@@ -6,16 +6,15 @@
  * Time: 16:05
  */
 
-namespace Presenters;
 
 /**
  * Interface UrlPresenter
  *
  * @author  LAHAXE Arnaud <lahaxe.arnaud@gmail.com>
  *
- * @package Presenters
+ * @package Model
  */
-interface UrlPresenter
+interface UrlApiInterface
 {
     /**
      * @author LAHAXE Arnaud <lahaxe.arnaud@gmail.com>
