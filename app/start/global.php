@@ -107,6 +107,10 @@ App::bind('CategoriesRepository', function ($app) {
     return new Repositories\CategoriesRepository(new Category(), array('user'));
 });
 
+App::bind('NotesRepository', function ($app) {
+    return new Repositories\NotesRepository(new Note(), array('user'));
+});
+
 App::bind('ArticlesController', function ($app) {
     return new ArticlesController(
         App::make('ArticlesRepository')
@@ -119,6 +123,12 @@ App::bind('CategoriesController', function ($app) {
     );
 });
 
+App::bind('NotesController', function ($app) {
+    return new NotesController(
+        App::make('NotesRepository')
+    );
+});
+
 /*
 |--------------------------------------------------------------------------
 | Observers
@@ -127,3 +137,4 @@ App::bind('CategoriesController', function ($app) {
 
 Article::observe(new Observers\Models\ArticleObserver);
 Category::observe(new Observers\Models\CategoryObserver);
+Note::observe(new Observers\Models\NoteObserver);

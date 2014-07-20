@@ -14,6 +14,7 @@
 Route::model('user', 'User');
 Route::model('article', 'Article');
 Route::model('category', 'Category');
+Route::model('note', 'Note');
 
 
 Route::resource('articles', 'ArticlesController');
@@ -37,5 +38,8 @@ Route::group(array('prefix' => 'api/v1'), function () {
     Route::resource('categories', 'CategoriesController');
     Route::get('categories/user/{user}', [ 'as' => 'categories.user', 'uses' => 'CategoriesController@user']);
     Route::get('categories/search/{query}', [ 'as' => 'categories.search', 'uses' => 'CategoriesController@search']);
+
+
+    Route::resource('notes', 'NotesController');
 
 });
