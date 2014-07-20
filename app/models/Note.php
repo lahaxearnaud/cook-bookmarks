@@ -1,6 +1,5 @@
 <?php
 
-
 class Note extends BaseModel implements HyperMediaInterface
 {
     public static $rules = array(

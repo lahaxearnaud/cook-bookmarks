@@ -2,7 +2,6 @@
 
 use Carbon\Carbon;
 use \Faker\Lorem;
-use \Faker\Internet;
 
 class NotesTableSeeder extends Seeder
 {
