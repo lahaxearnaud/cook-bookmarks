@@ -32,17 +32,6 @@ class CategoriesController extends \BaseController
     }
 
     /**
-     * @ApiDescription(description="Update an category")
-     * @ApiParams(name="url", type="string", nullable=false, description="Url of the category")
-     * @ApiRoute(name="/url/{url}")
-     * @ApiMethod(type="post")
-     */
-    public function url()
-    {
-        return array();
-    }
-
-    /**
      * @ApiDescription(description="Get user categories (paginated)")
      * @ApiParams(name="id", type="integer", nullable=false, description="User id")
      * @ApiRoute(name="/user/{id}")
