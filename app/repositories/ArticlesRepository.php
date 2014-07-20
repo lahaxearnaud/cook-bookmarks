@@ -33,7 +33,7 @@ class ArticlesRepository extends EloquentRepository
 
         $category = null;
         if(isset($data['category_id'])) {
-            $category = \User::findOrFail($data['category_id']);
+            $category = \Category::findOrFail($data['category_id']);
         }else {
             $category = $data['category'];
             unset($data['category']);
