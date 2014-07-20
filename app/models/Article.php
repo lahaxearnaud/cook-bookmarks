@@ -28,7 +28,7 @@ use \LaravelBook\Ardent\Ardent;
  * @method static \Illuminate\Database\Query\Builder|\Article whereUpdatedAt($value) 
  * @method static \Illuminate\Database\Query\Builder|\Article whereCategoryId($value) 
  */
-class Article extends Ardent
+class Article extends BaseModel
 {
     public static $rules = array(
         'title'     => 'required|min:5',
@@ -39,6 +39,8 @@ class Article extends Ardent
     );
 
     protected $guarded = array();
+
+
 
      /**
      * Get the post's author.

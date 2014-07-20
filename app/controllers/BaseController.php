@@ -1,6 +1,7 @@
 <?php
 
 use Repositories\RepositoryInterface;
+use \Illuminate\Database\Eloquent\Model;
 
 abstract class BaseController extends Controller
 {
@@ -95,7 +96,7 @@ abstract class BaseController extends Controller
     {
         $result = $this->repository->delete($id);
 
-        return Response::json(array('success' => $result));
+        return $this->generateResponse(array(), array(), 200);
     }
 
     /**
@@ -114,12 +115,29 @@ abstract class BaseController extends Controller
         return $this->repository->search($query);
     }
 
-    protected function generateResponse($errors)
+    protected function generateResponse($errors, $headers = array(), $httpCode = 200)
     {
         if(count($errors) === 0) {
-            return Response::json(array('success' => true));
+            $response = Response::json(array(
+                'success' => true
+            ), $httpCode);
+            $response->headers->add($headers);
+
+            return $response;
         }
 
         return Response::json($errors);
+    }
+
+
+    protected function generateLocation(Model $model)
+    {
+        $routeName = 'api.v1.'.$model->getTable().'.show';
+
+        return array(
+             "location" =>  route($routeName, array(
+                'id' => $model->id
+            ))
+        );
     }
 }

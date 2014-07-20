@@ -19,7 +19,7 @@ $I->call('articles', 'POST', array(
     'slug'        => 'mega-slug-' . rand(),
     'indexable'   => $body,
     'body'        => $body,
-));
+), 201);
 
 $I->validateResponseWithClosure(function (Codeception\Module\NinjaHelper $api, $response) {
     $api->isType('success', 'BOOLEAN', $response['success']);

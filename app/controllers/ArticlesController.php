@@ -14,8 +14,7 @@ class ArticlesController extends \BaseController
     public function store()
     {
         $model = $this->repository->create(Input::all());
-
-        return $this->generateResponse($model->errors());
+        return $this->generateResponse($model->errors(), $this->generateLocation($model), 201);
     }
 
     /**
@@ -28,7 +27,7 @@ class ArticlesController extends \BaseController
     {
         $model = $this->repository->update($id, Input::all());
 
-        return $this->generateResponse($model->errors());
+        return $this->generateResponse($model->errors(), $this->generateLocation($model), 200);
     }
 
     /**

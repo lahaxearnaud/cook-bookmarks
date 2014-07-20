@@ -1,6 +1,6 @@
 <?php
 
-use \LaravelBook\Ardent\Ardent;
+use \Presenters\CategoryPresenter;
 
 /**
  * Category
@@ -17,11 +17,12 @@ use \LaravelBook\Ardent\Ardent;
  * @method static \Illuminate\Database\Query\Builder|\Category whereCreatedAt($value) 
  * @method static \Illuminate\Database\Query\Builder|\Category whereUpdatedAt($value) 
  */
-class Category extends Ardent
+class Category extends BaseModel
 {
     public static $rules = array(
         'name'     => 'required|min:3',
     );
+
 
     /**
      * The attributes excluded from the model's JSON form.

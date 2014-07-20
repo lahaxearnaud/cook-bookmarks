@@ -21,9 +21,12 @@ Route::resource('articles', 'ArticlesController');
 
 Route::group(array('prefix' => 'api/v1'), function () {
 
-    Route::get('auth', [ 'as' => 'user.get', 'uses' => 'Tappleby\AuthToken\AuthTokenController@index']);
-    Route::post('auth', [ 'as' => 'user.login', 'uses' => 'Tappleby\AuthToken\AuthTokenController@store']);
-    Route::delete('auth', [ 'as' => 'user.logout', 'uses' => 'Tappleby\AuthToken\AuthTokenController@destroy']);
+    Route::get('auth', [ 'as' => 'api.v1.users.get', 'uses' => 'Tappleby\AuthToken\AuthTokenController@index']);
+    Route::post('auth', [ 'as' => 'api.v1.users.login', 'uses' => 'Tappleby\AuthToken\AuthTokenController@store']);
+    Route::delete('auth', [ 'as' => 'api.v1.users.logout', 'uses' => 'Tappleby\AuthToken\AuthTokenController@destroy']);
+
+    Route::get('users/{user}', [ 'as' => 'api.v1.users.show', 'uses' => 'Tappleby\AuthToken\AuthTokenController@index']);
+
 
     Route::resource('articles', 'ArticlesController');
     Route::post('articles/url', [ 'as' => 'articles.url', 'uses' => 'ArticlesController@url']);

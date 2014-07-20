@@ -23,7 +23,7 @@ use Illuminate\Auth\Reminders\RemindableInterface;
  * @method static \Illuminate\Database\Query\Builder|\User whereCreatedAt($value) 
  * @method static \Illuminate\Database\Query\Builder|\User whereUpdatedAt($value) 
  */
-class User extends Eloquent implements UserInterface, RemindableInterface
+class User extends BaseModel implements UserInterface, RemindableInterface
 {
     use UserTrait, RemindableTrait;
 
@@ -40,5 +40,12 @@ class User extends Eloquent implements UserInterface, RemindableInterface
 	 * @var array
 	 */
     protected $hidden = array('password', 'remember_token', 'created_at', 'updated_at');
+
+    public function getLinksAttribute ()
+    {
+        return array(
+            'show'   => $this->findUrl(),
+        );
+    }
 
 }

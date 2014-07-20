@@ -15,7 +15,7 @@ class CategoriesController extends \BaseController
     {
         $model = $this->repository->create(Input::all());
 
-        return $this->generateResponse($model->errors());
+        return $this->generateResponse($model->errors(), $this->generateLocation($model), 201);
     }
 
     /**
@@ -28,7 +28,7 @@ class CategoriesController extends \BaseController
     {
         $model = $this->repository->update($id, Input::all());
 
-        return $this->generateResponse($model->errors());
+        return $this->generateResponse($model->errors(), $this->generateLocation($model), 200);
     }
 
     /**
