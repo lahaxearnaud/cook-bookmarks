@@ -6,7 +6,6 @@
  * Time: 16:05
  */
 
-
 /**
  * Interface UrlPresenter
  *

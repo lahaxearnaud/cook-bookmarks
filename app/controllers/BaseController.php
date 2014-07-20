@@ -101,6 +101,7 @@ abstract class BaseController extends Controller
         if(!$result) {
             $errors[] = 'Error during delete';
         }
+
         return $this->generateResponse($errors, array(), 200);
     }
 

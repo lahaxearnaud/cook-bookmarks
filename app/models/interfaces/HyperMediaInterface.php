@@ -6,7 +6,7 @@
  * Time: 21:27
  */
 
-interface HyperMediaInterface {
-
+interface HyperMediaInterface
+{
     public function getLinksAttribute();
-} 
+}
