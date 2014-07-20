@@ -129,7 +129,6 @@ abstract class BaseController extends Controller
         return Response::json($errors);
     }
 
-
     protected function generateLocation(Model $model)
     {
         $routeName = 'api.v1.'.$model->getTable().'.show';

@@ -1,7 +1,5 @@
 <?php
 
-use \Presenters\CategoryPresenter;
-
 /**
  * Category
  *
@@ -11,18 +9,17 @@ use \Presenters\CategoryPresenter;
  * @property string $name
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
- * @method static \Illuminate\Database\Query\Builder|\Category whereId($value) 
- * @method static \Illuminate\Database\Query\Builder|\Category whereUserId($value) 
- * @method static \Illuminate\Database\Query\Builder|\Category whereName($value) 
- * @method static \Illuminate\Database\Query\Builder|\Category whereCreatedAt($value) 
- * @method static \Illuminate\Database\Query\Builder|\Category whereUpdatedAt($value) 
+ * @method static \Illuminate\Database\Query\Builder|\Category whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Category whereUserId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Category whereName($value)
+ * @method static \Illuminate\Database\Query\Builder|\Category whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Category whereUpdatedAt($value)
  */
 class Category extends BaseModel
 {
     public static $rules = array(
         'name'     => 'required|min:3',
     );
-
 
     /**
      * The attributes excluded from the model's JSON form.

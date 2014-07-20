@@ -3,11 +3,10 @@
 use \Faker\Lorem;
 use Carbon\Carbon;
 
-
 class CategoriesTableSeeder extends Seeder
 {
 
-    public function run ()
+    public function run()
     {
 
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');

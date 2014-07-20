@@ -1,7 +1,5 @@
 <?php
 
-use \LaravelBook\Ardent\Ardent;
-
 /**
  * Article
  *
@@ -17,16 +15,16 @@ use \LaravelBook\Ardent\Ardent;
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property integer $category_id
- * @method static \Illuminate\Database\Query\Builder|\Article whereId($value) 
- * @method static \Illuminate\Database\Query\Builder|\Article whereTitle($value) 
- * @method static \Illuminate\Database\Query\Builder|\Article whereUrl($value) 
- * @method static \Illuminate\Database\Query\Builder|\Article whereAuthorId($value) 
- * @method static \Illuminate\Database\Query\Builder|\Article whereSlug($value) 
- * @method static \Illuminate\Database\Query\Builder|\Article whereIndexable($value) 
- * @method static \Illuminate\Database\Query\Builder|\Article whereBody($value) 
- * @method static \Illuminate\Database\Query\Builder|\Article whereCreatedAt($value) 
- * @method static \Illuminate\Database\Query\Builder|\Article whereUpdatedAt($value) 
- * @method static \Illuminate\Database\Query\Builder|\Article whereCategoryId($value) 
+ * @method static \Illuminate\Database\Query\Builder|\Article whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Article whereTitle($value)
+ * @method static \Illuminate\Database\Query\Builder|\Article whereUrl($value)
+ * @method static \Illuminate\Database\Query\Builder|\Article whereAuthorId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Article whereSlug($value)
+ * @method static \Illuminate\Database\Query\Builder|\Article whereIndexable($value)
+ * @method static \Illuminate\Database\Query\Builder|\Article whereBody($value)
+ * @method static \Illuminate\Database\Query\Builder|\Article whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Article whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Article whereCategoryId($value)
  */
 class Article extends BaseModel
 {
@@ -39,8 +37,6 @@ class Article extends BaseModel
     );
 
     protected $guarded = array();
-
-
 
      /**
      * Get the post's author.

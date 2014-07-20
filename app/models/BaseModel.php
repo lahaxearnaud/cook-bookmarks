@@ -8,14 +8,12 @@
 
 use \LaravelBook\Ardent\Ardent;
 
-
 abstract class BaseModel extends Ardent
 {
 
     protected $appends = array('_links');
 
-
-    public function getLinksAttribute ()
+    public function getLinksAttribute()
     {
         return array(
             'show'   => $this->findUrl(),
@@ -28,7 +26,7 @@ abstract class BaseModel extends Ardent
      * @author LAHAXE Arnaud <lahaxe.arnaud@gmail.com>
      * @return string
      */
-    public function findUrl ()
+    public function findUrl()
     {
         return array(
             'url'    => $this->generateRoute('show'),
@@ -40,7 +38,7 @@ abstract class BaseModel extends Ardent
      * @author LAHAXE Arnaud <lahaxe.arnaud@gmail.com>
      * @return string
      */
-    public function createUrl ()
+    public function createUrl()
     {
         return array(
             'url'    => $this->generateRoute('store'),
@@ -52,7 +50,7 @@ abstract class BaseModel extends Ardent
      * @author LAHAXE Arnaud <lahaxe.arnaud@gmail.com>
      * @return string
      */
-    public function deleteUrl ()
+    public function deleteUrl()
     {
         return array(
             'url'    => $this->generateRoute('destroy'),
@@ -64,7 +62,7 @@ abstract class BaseModel extends Ardent
      * @author LAHAXE Arnaud <lahaxe.arnaud@gmail.com>
      * @return string
      */
-    public function updateUrl ()
+    public function updateUrl()
     {
         return array(
             'url'    => $this->generateRoute('update'),
@@ -72,25 +70,25 @@ abstract class BaseModel extends Ardent
         );
     }
 
-    protected function getBaseUrlName ()
+    protected function getBaseUrlName()
     {
         return 'api.' . $this->getApiVersion() . '.' . $this->getTable() . '.';
     }
 
-    protected function getRouteName ($action)
+    protected function getRouteName($action)
     {
         return $this->getBaseUrlName() . $action;
     }
 
-    protected function generateRoute ($action)
+    protected function generateRoute($action)
     {
         return route($this->getRouteName($action), array(
             'id' => $this->id
         ));
     }
 
-    protected function getApiVersion ()
+    protected function getApiVersion()
     {
         return 'v1';
     }
-} 
+}

@@ -14,16 +14,16 @@
  * @property string $ip
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
- * @method static \Illuminate\Database\Query\Builder|\ApiLog whereId($value) 
- * @method static \Illuminate\Database\Query\Builder|\ApiLog whereUserId($value) 
- * @method static \Illuminate\Database\Query\Builder|\ApiLog whereUrl($value) 
- * @method static \Illuminate\Database\Query\Builder|\ApiLog whereRoute($value) 
- * @method static \Illuminate\Database\Query\Builder|\ApiLog whereParams($value) 
- * @method static \Illuminate\Database\Query\Builder|\ApiLog whereMethod($value) 
- * @method static \Illuminate\Database\Query\Builder|\ApiLog whereHttpCode($value) 
- * @method static \Illuminate\Database\Query\Builder|\ApiLog whereIp($value) 
- * @method static \Illuminate\Database\Query\Builder|\ApiLog whereCreatedAt($value) 
- * @method static \Illuminate\Database\Query\Builder|\ApiLog whereUpdatedAt($value) 
+ * @method static \Illuminate\Database\Query\Builder|\ApiLog whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\ApiLog whereUserId($value)
+ * @method static \Illuminate\Database\Query\Builder|\ApiLog whereUrl($value)
+ * @method static \Illuminate\Database\Query\Builder|\ApiLog whereRoute($value)
+ * @method static \Illuminate\Database\Query\Builder|\ApiLog whereParams($value)
+ * @method static \Illuminate\Database\Query\Builder|\ApiLog whereMethod($value)
+ * @method static \Illuminate\Database\Query\Builder|\ApiLog whereHttpCode($value)
+ * @method static \Illuminate\Database\Query\Builder|\ApiLog whereIp($value)
+ * @method static \Illuminate\Database\Query\Builder|\ApiLog whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\ApiLog whereUpdatedAt($value)
  */
 class ApiLog extends \Eloquent
 {

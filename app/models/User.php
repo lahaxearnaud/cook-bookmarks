@@ -15,13 +15,13 @@ use Illuminate\Auth\Reminders\RemindableInterface;
  * @property string $remember_token
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
- * @method static \Illuminate\Database\Query\Builder|\User whereId($value) 
- * @method static \Illuminate\Database\Query\Builder|\User whereUsername($value) 
- * @method static \Illuminate\Database\Query\Builder|\User whereEmail($value) 
- * @method static \Illuminate\Database\Query\Builder|\User wherePassword($value) 
- * @method static \Illuminate\Database\Query\Builder|\User whereRememberToken($value) 
- * @method static \Illuminate\Database\Query\Builder|\User whereCreatedAt($value) 
- * @method static \Illuminate\Database\Query\Builder|\User whereUpdatedAt($value) 
+ * @method static \Illuminate\Database\Query\Builder|\User whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\User whereUsername($value)
+ * @method static \Illuminate\Database\Query\Builder|\User whereEmail($value)
+ * @method static \Illuminate\Database\Query\Builder|\User wherePassword($value)
+ * @method static \Illuminate\Database\Query\Builder|\User whereRememberToken($value)
+ * @method static \Illuminate\Database\Query\Builder|\User whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\User whereUpdatedAt($value)
  */
 class User extends BaseModel implements UserInterface, RemindableInterface
 {
@@ -41,7 +41,7 @@ class User extends BaseModel implements UserInterface, RemindableInterface
 	 */
     protected $hidden = array('password', 'remember_token', 'created_at', 'updated_at');
 
-    public function getLinksAttribute ()
+    public function getLinksAttribute()
     {
         return array(
             'show'   => $this->findUrl(),

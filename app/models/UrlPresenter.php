@@ -15,8 +15,8 @@ namespace Presenters;
  *
  * @package Presenters
  */
-interface UrlPresenter {
-
+interface UrlPresenter
+{
     /**
      * @author LAHAXE Arnaud <lahaxe.arnaud@gmail.com>
      * @return string
@@ -41,4 +41,4 @@ interface UrlPresenter {
      */
     public function updateUrl();
 
-} 
+}
