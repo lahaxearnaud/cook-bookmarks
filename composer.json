@@ -22,7 +22,8 @@
 			"app/observers",
 			"app/repositories",
 			"app/database/migrations",
-			"app/database/seeds"
+			"app/database/seeds",
+            "tests/unit/TestCase.php"
 		]
 	},
 	"require-dev": {
