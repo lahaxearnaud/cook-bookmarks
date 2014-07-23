@@ -24,8 +24,7 @@
 			"app/database/migrations",
 			"app/database/seeds",
 
-            "tests/unit/TestCase.php",
-            "tests/unit/RepositoryCase.php"
+            "tests/unit/contract"
 		]
 	},
 	"require-dev": {
