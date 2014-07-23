@@ -84,7 +84,7 @@ abstract class EloquentRepository implements RepositoryInterface
     {
         $query = $this->make();
 
-        return $query->where($key, $operator, $value)->first();
+        return $query->where($key, $operator, $value)->firstOrFail();
     }
 
     /**
@@ -195,5 +195,13 @@ abstract class EloquentRepository implements RepositoryInterface
     public function make()
     {
         return $this->model->with($this->with);
+    }
+
+    /**
+     * @return Model
+     */
+    public function getModel ()
+    {
+        return $this->model;
     }
 }
