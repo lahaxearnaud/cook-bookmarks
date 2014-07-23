@@ -1,6 +1,4 @@
 <?php
-use Codeception\Util\Stub;
-use AspectMock\Test as test;
 
 abstract class RepositoryCase extends TestCase
 {
@@ -9,7 +7,6 @@ abstract class RepositoryCase extends TestCase
      * @var Repositories\RepositoryInterface
      */
     protected $repository;
-
 
     protected $model;
 
@@ -31,8 +28,7 @@ abstract class RepositoryCase extends TestCase
      *
      * @return string
      */
-    abstract function getRepositoryName();
-
+    abstract public function getRepositoryName();
 
     /**
      * ============================================
@@ -40,12 +36,14 @@ abstract class RepositoryCase extends TestCase
      * ============================================
      */
 
-    public function testFindOk() {
+    public function testFindOk()
+    {
         $model = $this->repository->find(1);
         $this->assertInstanceOf(get_class($this->model), $model);
     }
 
-    public function testFindKo() {
+    public function testFindKo()
+    {
         $this->setExpectedException('Illuminate\Database\Eloquent\ModelNotFoundException');
         $this->repository->find(-1);
     }
@@ -56,7 +54,8 @@ abstract class RepositoryCase extends TestCase
      * ============================================
      */
 
-    public function testAll() {
+    public function testAll()
+    {
         $models = $this->repository->all();
         $this->assertInstanceOf('\Illuminate\Database\Eloquent\Collection', $models);
     }
@@ -67,22 +66,26 @@ abstract class RepositoryCase extends TestCase
      * ============================================
      */
 
-    function testFindFirstByOk() {
+    public function testFindFirstByOk()
+    {
         $model = $this->repository->findFirstBy('id', 1, '=');
         $this->assertInstanceOf(get_class($this->model), $model);
     }
 
-    function testFindFirstByKoBadKey() {
+    public function testFindFirstByKoBadKey()
+    {
         $this->setExpectedException('Illuminate\Database\QueryException');
         $this->repository->findFirstBy('dummy', 1, '=');
     }
 
-    function testFindFirstByKoBadValue() {
+    public function testFindFirstByKoBadValue()
+    {
         $this->setExpectedException('Illuminate\Database\Eloquent\ModelNotFoundException');
         $this->repository->findFirstBy('id', -1, '=');
     }
 
-    function testFindFirstByKoBadOperator() {
+    public function testFindFirstByKoBadOperator()
+    {
         $this->setExpectedException('Illuminate\Database\Eloquent\ModelNotFoundException');
         $this->repository->findFirstBy('id', 1, 'dummy');
     }
@@ -93,24 +96,28 @@ abstract class RepositoryCase extends TestCase
      * ============================================
      */
 
-    function testFindAllByOk() {
+    public function testFindAllByOk()
+    {
         $models = $this->repository->findAllBy('id', 5, '>');
         $this->assertInstanceOf('\Illuminate\Database\Eloquent\Collection', $models);
     }
 
-    function testFindAllByKoBadKey() {
+    public function testFindAllByKoBadKey()
+    {
         $this->setExpectedException('Illuminate\Database\QueryException');
         $this->repository->findAllBy('dummy', 5, '>');
     }
 
-    function testFindAllByKoBadValue() {
+    public function testFindAllByKoBadValue()
+    {
         $models = $this->repository->findAllBy('id', 'dummy');
         $this->assertInstanceOf('\Illuminate\Database\Eloquent\Collection', $models);
         $this->assertEquals(0, $models->count());
 
     }
 
-    function testFindAllByKoBadOperator() {
+    public function testFindAllByKoBadOperator()
+    {
         $models = $this->repository->findAllBy('id', 5, 'dummy');
         $this->assertInstanceOf('\Illuminate\Database\Eloquent\Collection', $models);
         $this->assertEquals(0, $models->count());
@@ -122,12 +129,14 @@ abstract class RepositoryCase extends TestCase
      * ============================================
      */
 
-    function testPaginateOk() {
+    public function testPaginateOk()
+    {
         $paginate = $this->repository->paginate();
         $this->assertInstanceOf('\Illuminate\Pagination\Paginator', $paginate);
     }
 
-    function testPaginateKoBadNbPage() {
+    public function testPaginateKoBadNbPage()
+    {
         $this->setExpectedException('Illuminate\Database\QueryException');
         $this->repository->paginate(-10);
     }
@@ -138,28 +147,32 @@ abstract class RepositoryCase extends TestCase
      * ============================================
      */
 
-    function testPaginateWhereOk() {
+    public function testPaginateWhereOk()
+    {
         $paginate = $this->repository->paginateWhere(array(
             'id' => 1
         ));
         $this->assertInstanceOf('\Illuminate\Pagination\Paginator', $paginate);
     }
 
-    function testPaginateWhereKoBadKey() {
+    public function testPaginateWhereKoBadKey()
+    {
         $this->setExpectedException('Illuminate\Database\QueryException');
         $this->repository->paginateWhere(array(
             'dummy' => '3'
         ));
     }
 
-    function testPaginateWhereKoBadValue() {
+    public function testPaginateWhereKoBadValue()
+    {
         $paginate = $this->repository->paginateWhere(array(
             'id' => 'dummy'
         ));
         $this->assertInstanceOf('\Illuminate\Pagination\Paginator', $paginate);
     }
 
-    function testPaginateWhereKoBadNbPage() {
+    public function testPaginateWhereKoBadNbPage()
+    {
         $this->setExpectedException('Illuminate\Database\QueryException');
         $this->repository->paginateWhere(array(
             'id' => 1
@@ -172,12 +185,14 @@ abstract class RepositoryCase extends TestCase
      * ============================================
      */
 
-    function testDeleteOk() {
+    public function testDeleteOk()
+    {
         $result = $this->repository->delete(1);
         $this->assertTrue($result);
     }
 
-    function testDeleteKo() {
+    public function testDeleteKo()
+    {
         $this->setExpectedException('Illuminate\Database\Eloquent\ModelNotFoundException');
         $this->repository->delete(-1);
     }
@@ -188,8 +203,8 @@ abstract class RepositoryCase extends TestCase
      * ============================================
      */
 
-    abstract function testHasOk();
-    abstract function testHasKo();
+    abstract public function testHasOk();
+    abstract public function testHasKo();
 
     /**
      * ============================================
@@ -197,8 +212,8 @@ abstract class RepositoryCase extends TestCase
      * ============================================
      */
 
-    abstract function testUpdateOk();
-    abstract function testUpdateKo();
+    abstract public function testUpdateOk();
+    abstract public function testUpdateKo();
 
     /**
      * ============================================
@@ -206,8 +221,8 @@ abstract class RepositoryCase extends TestCase
      * ============================================
      */
 
-    abstract function testCreateOk();
-    abstract function testCreateKo();
+    abstract public function testCreateOk();
+    abstract public function testCreateKo();
 
     /**
      * ============================================
@@ -215,6 +230,6 @@ abstract class RepositoryCase extends TestCase
      * ============================================
      */
 
-    abstract function testSearchOk();
-    abstract function testSearchKo();
+    abstract public function testSearchOk();
+    abstract public function testSearchKo();
 }

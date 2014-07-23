@@ -33,4 +33,3 @@ $I->call('categories/1000', $method = 'GET', $params = array(), $httpCode = 404)
 
 $I->amGoingTo('Get an category with a string');
 $I->call('categories/aaa', $method = 'GET', $params = array(), $httpCode = 404);
-

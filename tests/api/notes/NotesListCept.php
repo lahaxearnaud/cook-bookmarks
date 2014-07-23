@@ -27,8 +27,6 @@ $I->validateResponseWithClosure(function (Codeception\Module\NinjaHelper $api, $
 
         $api->isType('body', 'STRING', $article['body']);
 
-
-
         $api->isHyperMedia('show', $article);
         $api->isHyperMedia('delete', $article);
         $api->isHyperMedia('update', $article);

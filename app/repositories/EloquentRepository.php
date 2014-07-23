@@ -200,7 +200,7 @@ abstract class EloquentRepository implements RepositoryInterface
     /**
      * @return Model
      */
-    public function getModel ()
+    public function getModel()
     {
         return $this->model;
     }

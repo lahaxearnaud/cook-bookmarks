@@ -36,7 +36,13 @@ class QualitySynthaxFixerCommand extends Command
      */
     public function fire()
     {
-        $process = new Process('vendor/bin/php-cs-fixer fix app --fixers=indentation,php_closing_tag,return,function_declaration,lowercase_keywords,object_operator,elseif,lowercase_keywords,trailing_spaces,unused_use,extra_empty_lines,braces,return,phpdoc_params,eof_ending,visibility -v');
+        $this->fix('app');
+        $this->fix('tests');
+    }
+
+    protected function fix($folder)
+    {
+        $process = new Process('vendor/bin/php-cs-fixer fix '.$folder.' --fixers=indentation,php_closing_tag,return,function_declaration,lowercase_keywords,object_operator,elseif,lowercase_keywords,trailing_spaces,unused_use,extra_empty_lines,braces,return,phpdoc_params,eof_ending,visibility -v');
         $process->run(function ($type, $buffer) {
             if (Process::ERR === $type) {
                 $this->error($buffer);

@@ -4,14 +4,13 @@ namespace Codeception\Module;
 // here you can define custom functions for ninja
 use Codeception\Util\Debug;
 
-
 class NinjaHelper extends \Codeception\Module
 {
 
     protected $path = 'api/v1/';
     private $token = '';
 
-    public function login ($username, $password)
+    public function login($username, $password)
     {
         $rest = $this->getModule('REST');
 
@@ -52,7 +51,7 @@ class NinjaHelper extends \Codeception\Module
      *
      * @param bool $jsonDecode
      */
-    public function validateResponseWithClosure (\Closure $closure, $jsonDecode = TRUE)
+    public function validateResponseWithClosure(\Closure $closure, $jsonDecode = TRUE)
     {
         $rest     = $this->getModule('REST');
         $response = $rest->grabResponse();
@@ -65,7 +64,7 @@ class NinjaHelper extends \Codeception\Module
         $closure($this, $response);
     }
 
-    public function isType ($name, $format, $value, $parameter = '', $allowEmpty = FALSE, $allowNull = FALSE)
+    public function isType($name, $format, $value, $parameter = '', $allowEmpty = FALSE, $allowNull = FALSE)
     {
 
         if (!$allowNull) {
@@ -141,11 +140,10 @@ class NinjaHelper extends \Codeception\Module
         }
     }
 
-    public function isEquals ($name, $expected, $value)
+    public function isEquals($name, $expected, $value)
     {
         $this->assertEquals($value, $value, 'Expected that ' . print_r($name, TRUE) . ' equals ' . $expected . ' but was ' . print_r($value, TRUE));
     }
-
 
     public function isHyperMedia($action, $result)
     {

@@ -6,8 +6,8 @@
  * Time: 07:28
  */
 
-class TestCase extends \PHPUnit_Framework_TestCase {
-
+class TestCase extends \PHPUnit_Framework_TestCase
+{
     public function setUp()
     {
         parent::setUp();
@@ -17,4 +17,4 @@ class TestCase extends \PHPUnit_Framework_TestCase {
         Artisan::call('db:seed');
     }
 
-} 
+}

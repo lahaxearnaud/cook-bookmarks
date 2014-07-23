@@ -10,8 +10,8 @@
  * Class NoteRepositoriesTest
  *
  */
-class NoteRepositoriesTest extends RepositoryCase {
-
+class NoteRepositoriesTest extends RepositoryCase
+{
     /**
      *
      * must match with the bind
@@ -22,7 +22,7 @@ class NoteRepositoriesTest extends RepositoryCase {
      *
      * @return string
      */
-    function getRepositoryName ()
+    public function getRepositoryName()
     {
         return 'NotesRepository';
     }
@@ -32,28 +32,27 @@ class NoteRepositoriesTest extends RepositoryCase {
      *  FindAllBy
      * ============================================
      */
-    function testHasOk ()
+    public function testHasOk()
     {
         // TODO: Implement testHasOk() method.
     }
 
-    function testHasKo ()
+    public function testHasKo()
     {
         // TODO: Implement testHasKo() method.
     }
-
 
     /**
      * ============================================
      *  Update
      * ============================================
      */
-    function testUpdateOk ()
+    public function testUpdateOk()
     {
         // TODO: Implement testUpdateOk() method.
     }
 
-    function testUpdateKo ()
+    public function testUpdateKo()
     {
         // TODO: Implement testUpdateKo() method.
     }
@@ -63,12 +62,12 @@ class NoteRepositoriesTest extends RepositoryCase {
      *  Create
      * ============================================
      */
-    function testCreateOk ()
+    public function testCreateOk()
     {
         // TODO: Implement testCreateOk() method.
     }
 
-    function testCreateKo ()
+    public function testCreateKo()
     {
         // TODO: Implement testCreateKo() method.
     }
@@ -78,12 +77,12 @@ class NoteRepositoriesTest extends RepositoryCase {
      *  Search
      * ============================================
      */
-    function testSearchOk ()
+    public function testSearchOk()
     {
         // TODO: Implement testSearchOk() method.
     }
 
-    function testSearchKo ()
+    public function testSearchKo()
     {
         // TODO: Implement testSearchKo() method.
     }

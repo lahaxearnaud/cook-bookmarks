@@ -39,4 +39,3 @@ $I->call('articles/1000', $method = 'GET', $params = array(), $httpCode = 404);
 
 $I->amGoingTo('Get an article with a string');
 $I->call('articles/aaa', $method = 'GET', $params = array(), $httpCode = 404);
-
