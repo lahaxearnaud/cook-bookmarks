@@ -3,6 +3,7 @@
 use Illuminate\Console\Command;
 use Symfony\Component\Process\Process;
 use \Symfony\Component\Console\Input\InputArgument;
+use \Symfony\Component\Console\Input\InputOption;
 
 class QualityTestCommand extends Command
 {
@@ -48,7 +49,12 @@ class QualityTestCommand extends Command
         $process->setTimeout(60*60*60);// 1H
         sleep(3);
 
-        $codeception = 'vendor/bin/codecept run ' . $suite . ' ' . $test . ' ' . $verbose . ' --steps --coverage --no-interaction';
+        $report = '';
+        if($this->option('coverage') !== 'none') {
+            $report = '--coverage  --report --'.$this->option('coverage');
+        }
+
+        $codeception = 'vendor/bin/codecept run ' . $suite . ' ' . $test . ' ' . $verbose . ' '. $report .' --no-interaction';
         $processTest = new Process($codeception);
         $processTest->setTimeout(60*60*60);// 1H
         $processTest->run(function ($type, $buffer) {
@@ -90,6 +96,8 @@ class QualityTestCommand extends Command
      */
     protected function getOptions()
     {
-        return array();
+        return array(
+            array('coverage', 'coverage', InputOption::VALUE_OPTIONAL, 'Code coverage none|tap|html', 'none')
+        );
     }
 }

@@ -19,4 +19,4 @@ before_script:
   - php artisan env
   - travis_retry php artisan migrate --force --seed
 
-script: php artisan qa:test
+script: php artisan qa:test --coverage=tap
