@@ -19,4 +19,8 @@ before_script:
   - php artisan env
   - travis_retry php artisan migrate --force --seed
 
-script: php artisan qa:test --coverage=tap
+script: php artisan qa:test --coverage=xml
+
+after_script:
+  - ls -alh tests/_log
+  - php vendor/bin/coveralls -v
