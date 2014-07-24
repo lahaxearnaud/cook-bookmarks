@@ -177,7 +177,9 @@ abstract class EloquentRepository implements RepositoryInterface
         $class = get_class($this->model);
         $model = new $class($data);
 
-        return $model->save();
+        $model->save();
+
+        return $model;
     }
 
     /**

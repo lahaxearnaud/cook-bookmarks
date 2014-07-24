@@ -25,7 +25,7 @@
  * @method static \Illuminate\Database\Query\Builder|\ApiLog whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\ApiLog whereUpdatedAt($value)
  */
-class ApiLog extends \Eloquent
+class ApiLog extends BaseModel
 {
     protected $guarded = array();
 
