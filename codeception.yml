@@ -24,3 +24,6 @@ coverage:
     exclude:
             - app/storage/*
             - app/database/*
+            - app/views/*
+            - app/config/*
+            - app/lang/*
