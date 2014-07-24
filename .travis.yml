@@ -16,6 +16,7 @@ before_script:
   - touch .travis_env
   - travis_retry composer install --no-interaction --prefer-source --dev
   - mysql -e 'create database db_test;'
+  - php artisan env
   - travis_retry php artisan migrate --force --seed
 
 script: php artisan qa:test --coverage=tap
