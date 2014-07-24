@@ -29,7 +29,7 @@ class ArticleRepositoriesTest extends RepositoryCase
 
     /**
      * ============================================
-     *  FindAllBy
+     *  Has
      * ============================================
      */
     public function testHasOk ()
@@ -116,6 +116,16 @@ class ArticleRepositoriesTest extends RepositoryCase
         ));
         $this->assertInstanceOf(get_class($this->model), $model);
 
+        $model = $this->repository->create(array(
+            'title'     => 'Lorem Ipsum',
+            'body'      => 'Lorem Ipsum dolore...',
+            'indexable' => 'Lorem Ipsum dolore...',
+            'url'       => 'http://google.com',
+            'author'    => User::find(1),
+            'category'  => Category::find(1)
+
+        ));
+        $this->assertInstanceOf(get_class($this->model), $model);
     }
 
     public function testCreateKo ()
@@ -161,9 +171,8 @@ class ArticleRepositoriesTest extends RepositoryCase
      */
     public function testSearchOk ()
     {
-        $results  = $this->repository->search('test');
+        $results = $this->repository->search('test');
         $this->assertInstanceOf('\Illuminate\Database\Eloquent\Collection', $results);
-
     }
 
     public function testSearchKo ()

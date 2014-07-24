@@ -29,19 +29,23 @@ class NoteRepositoriesTest extends RepositoryCase
 
     /**
      * ============================================
-     *  FindAllBy
+     *  Hass
      * ============================================
      */
-    public function testHasOk()
+    public function testHasOk ()
     {
-        // TODO: Implement testHasOk() method.
+        $models = $this->repository->has('user');
+        $this->assertInstanceOf('\Illuminate\Database\Eloquent\Collection', $models);
+
+        $models = $this->repository->has('article');
+        $this->assertInstanceOf('\Illuminate\Database\Eloquent\Collection', $models);
     }
 
-    public function testHasKo()
+    public function testHasKo ()
     {
-        // TODO: Implement testHasKo() method.
+        $this->setExpectedException('BadMethodCallException');
+        $this->repository->has('dummy');
     }
-
     /**
      * ============================================
      *  Update
@@ -49,12 +53,24 @@ class NoteRepositoriesTest extends RepositoryCase
      */
     public function testUpdateOk()
     {
-        // TODO: Implement testUpdateOk() method.
+        $result = $this->repository->update(1, array(
+            'body' => 'Lorem Ipsum dolore'
+        ));
+        $this->assertInstanceOf(get_class($this->model), $result);
+
+        $result = $this->repository->update(1, array(
+            'user_id' => 1
+        ));
+        $this->assertInstanceOf(get_class($this->model), $result);
     }
 
     public function testUpdateKo()
     {
-        // TODO: Implement testUpdateKo() method.
+        $this->setExpectedException('Illuminate\Database\Eloquent\ModelNotFoundException');
+        $result = $this->repository->update(-1, array(
+            'user_id' => 1
+        ));
+        $this->assertInstanceOf(get_class($this->model), $result);
     }
 
     /**
@@ -64,12 +80,58 @@ class NoteRepositoriesTest extends RepositoryCase
      */
     public function testCreateOk()
     {
-        // TODO: Implement testCreateOk() method.
+        $model = $this->repository->create(array(
+            'article_id' => 1,
+            'user_id' => 1,
+            'body' => 'Lorem Ipsum Dolore...'
+        ));
+        $this->assertInstanceOf(get_class($this->model), $model);
+
+        $model = $this->repository->create(array(
+            'article' => Article::find(1),
+            'user' => User::find(1),
+            'body' => 'Lorem Ipsum Dolore...'
+        ));
+        $this->assertInstanceOf(get_class($this->model), $model);
     }
 
     public function testCreateKo()
     {
-        // TODO: Implement testCreateKo() method.
+        $model = $this->repository->create(array(
+            'article_id' => 1,
+            'user_id' => 1,
+            'body' => 'L'
+        ));
+        $this->assertInstanceOf(get_class($this->model), $model);
+        $this->assertNotEmpty($model->errors());
+
+        $model = $this->repository->create(array(
+            'article' => Article::find(1),
+            'user' => User::find(1),
+            'body' => 'L'
+        ));
+        $this->assertInstanceOf(get_class($this->model), $model);
+        $this->assertNotEmpty($model->errors());
+    }
+
+    public function testCreateKoArticleNotFound()
+    {
+        $this->setExpectedException('Illuminate\Database\Eloquent\ModelNotFoundException');
+        $this->repository->create(array(
+            'article_id' => -1,
+            'user_id' => 1,
+            'body' => 'Lorem Ipsum Dolore'
+        ));
+    }
+
+    public function testCreateKoUserNotFound()
+    {
+        $this->setExpectedException('Illuminate\Database\Eloquent\ModelNotFoundException');
+        $this->repository->create(array(
+            'article_id' => 1,
+            'user_id' => -1,
+            'body' => 'Lorem Ipsum Dolore'
+        ));
     }
 
     /**
@@ -77,9 +139,10 @@ class NoteRepositoriesTest extends RepositoryCase
      *  Search
      * ============================================
      */
-    public function testSearchOk()
+    public function testSearchOk ()
     {
-        // TODO: Implement testSearchOk() method.
+        $results  = $this->repository->search('test');
+        $this->assertInstanceOf('\Illuminate\Database\Eloquent\Collection', $results);
     }
 
     public function testSearchKo()

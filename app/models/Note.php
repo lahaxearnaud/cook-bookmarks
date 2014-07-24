@@ -16,6 +16,11 @@ class Note extends BaseModel implements HyperMediaInterface
 
     protected $guarded = array();
 
+    public function author()
+    {
+        return $this->user();
+    }
+
     /**
      * Get the post's author.
      *
