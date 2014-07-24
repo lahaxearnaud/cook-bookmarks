@@ -22,7 +22,7 @@ class ArticleRepositoriesTest extends RepositoryCase
      *
      * @return string
      */
-    public function getRepositoryName()
+    public function getRepositoryName ()
     {
         return 'ArticlesRepository';
     }
@@ -32,14 +32,19 @@ class ArticleRepositoriesTest extends RepositoryCase
      *  FindAllBy
      * ============================================
      */
-    public function testHasOk()
+    public function testHasOk ()
     {
-        // TODO: Implement testHasOk() method.
+        $models = $this->repository->has('author');
+        $this->assertInstanceOf('\Illuminate\Database\Eloquent\Collection', $models);
+
+        $models = $this->repository->has('category');
+        $this->assertInstanceOf('\Illuminate\Database\Eloquent\Collection', $models);
     }
 
-    public function testHasKo()
+    public function testHasKo ()
     {
-        // TODO: Implement testHasKo() method.
+        $this->setExpectedException('BadMethodCallException');
+        $this->repository->has('dummy');
     }
 
     /**
@@ -47,14 +52,50 @@ class ArticleRepositoriesTest extends RepositoryCase
      *  Update
      * ============================================
      */
-    public function testUpdateOk()
+    public function testUpdateOk ()
     {
-        // TODO: Implement testUpdateOk() method.
+        $result = $this->repository->update(1, array(
+            'title' => 'Lorem Ipsum'
+        ));
+        $this->assertInstanceOf(get_class($this->model), $result);
+
+        $result = $this->repository->update(1, array(
+            'author_id' => 2
+        ));
+        $this->assertInstanceOf(get_class($this->model), $result);
+
+        $result = $this->repository->update(1, array(
+            'body' => 'Lorem Ipsum...'
+        ));
+        $this->assertInstanceOf(get_class($this->model), $result);
     }
 
-    public function testUpdateKo()
+    public function testUpdateKo ()
     {
-        // TODO: Implement testUpdateKo() method.
+        $result = $this->repository->update(1, array(
+            'title' => 'Lo'
+        ));
+        $this->assertEquals(1, count($result));
+    }
+
+    public function testUpdateKoArticleNotFound ()
+    {
+        $this->setExpectedException('Illuminate\Database\Eloquent\ModelNotFoundException');
+
+        $result = $this->repository->update(-1, array(
+            'title' => 'Lorem Ipsum'
+        ));
+    }
+
+
+    public function testUpdateKoAuthorNotFound ()
+    {
+        $this->setExpectedException('Illuminate\Database\QueryException');
+
+        $result = $this->repository->update(1, array(
+            'author_id' => -1
+        ));
+        $this->assertFalse($result);
     }
 
     /**
@@ -62,14 +103,55 @@ class ArticleRepositoriesTest extends RepositoryCase
      *  Create
      * ============================================
      */
-    public function testCreateOk()
+    public function testCreateOk ()
     {
-        // TODO: Implement testCreateOk() method.
+        $model = $this->repository->create(array(
+            'title'       => 'Lorem Ipsum',
+            'body'        => 'Lorem Ipsum dolore...',
+            'indexable'   => 'Lorem Ipsum dolore...',
+            'url'         => 'http://google.com',
+            'author_id'   => 1,
+            'category_id' => 1
+
+        ));
+        $this->assertInstanceOf(get_class($this->model), $model);
+
     }
 
-    public function testCreateKo()
+    public function testCreateKo ()
     {
-        // TODO: Implement testCreateKo() method.
+        $model = $this->repository->create(array(
+            'title'       => 'L',
+            'body'        => 'Lorem Ipsum dolore...',
+            'indexable'   => 'Lorem Ipsum dolore...',
+            'url'         => 'http://google.com',
+            'author_id'   => 1,
+            'category_id' => 1
+
+        ));
+        $this->assertNotEmpty($model->errors());
+
+        $model = $this->repository->create(array(
+            'title'       => 'Lorem Ipsum',
+            'body'        => 'L',
+            'indexable'   => 'Lorem Ipsum dolore...',
+            'url'         => 'http://google.com',
+            'author_id'   => 1,
+            'category_id' => 1
+
+        ));
+        $this->assertNotEmpty($model->errors());
+
+        $model = $this->repository->create(array(
+            'title'       => 'Lorem Ipsum',
+            'body'        => 'Lorem Ipsum dolore...',
+            'indexable'   => 'Lorem Ipsum dolore...',
+            'url'         => 'dummy',
+            'author_id'   => 1,
+            'category_id' => 1
+
+        ));
+        $this->assertNotEmpty($model->errors());
     }
 
     /**
@@ -77,12 +159,14 @@ class ArticleRepositoriesTest extends RepositoryCase
      *  Search
      * ============================================
      */
-    public function testSearchOk()
+    public function testSearchOk ()
     {
-        // TODO: Implement testSearchOk() method.
+        $results  = $this->repository->search('test');
+        $this->assertInstanceOf('\Illuminate\Database\Eloquent\Collection', $results);
+
     }
 
-    public function testSearchKo()
+    public function testSearchKo ()
     {
         // TODO: Implement testSearchKo() method.
     }
