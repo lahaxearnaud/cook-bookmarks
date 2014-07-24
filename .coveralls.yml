@@ -1,4 +1,4 @@
-service_name: travis-ci
+service_name: travis
 repo_token: mvM3G4KCRaULS7zMlPOxnxINysj70T1an
 coverage_clover: tests/_log/coverage.xml
 src_dir: app
