@@ -22,5 +22,4 @@ before_script:
 script: php artisan qa:test --coverage=xml
 
 after_script:
-  - ls -alh tests/_log
-  - php vendor/bin/coveralls -c .coveralls.yml
+  - php vendor/bin/coveralls -c .coveralls.yml -v

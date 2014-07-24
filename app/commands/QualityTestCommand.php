@@ -51,7 +51,7 @@ class QualityTestCommand extends Command
 
         $report = '';
         if($this->option('coverage') !== 'none') {
-            $report = '--coverage  --report --'.$this->option('coverage');
+            $report = '--coverage --report --'.$this->option('coverage');
         }
 
         $codeception = 'vendor/bin/codecept run ' . $suite . ' ' . $test . ' ' . $verbose . ' '. $report .' --no-interaction';
@@ -97,7 +97,7 @@ class QualityTestCommand extends Command
     protected function getOptions()
     {
         return array(
-            array('coverage', 'coverage', InputOption::VALUE_OPTIONAL, 'Code coverage none|tap|html', 'none')
+            array('coverage', 'coverage', InputOption::VALUE_OPTIONAL, 'Code coverage none|tap|html|xml', 'none')
         );
     }
 }
