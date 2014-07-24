@@ -1,5 +1,4 @@
-service_name: travis
-repo_token: mvM3G4KCRaULS7zMlPOxnxINysj70T1an
+service_name: Travis
 coverage_clover: tests/_log/coverage.xml
 src_dir: app
 json_path: tests/_log/coveralls-upload.json
