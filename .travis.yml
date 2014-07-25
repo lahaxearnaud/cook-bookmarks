@@ -19,7 +19,7 @@ before_script:
   - php artisan env
   - travis_retry php artisan migrate --force --seed
 
-script: php artisan qa:test --coverage=xml
+script: php artisan qa:test
 
 after_script:
   - export COVERALLS_RUN_LOCALLY=1
