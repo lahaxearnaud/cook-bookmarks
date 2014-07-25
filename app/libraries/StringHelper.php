@@ -54,15 +54,6 @@ class StringHelper
         }
     }
 
-    public static function date(Carbon $date)
-    {
-        if ($date->diffInDays(Carbon::now()) < 7) {
-            return $date->diffForHumans();
-        } else {
-            return $date->toFormattedDateString();
-        }
-    }
-
     public static function extract($text, $nbWords = 100, $end = '...', $allowedTags = '')
     {
 
