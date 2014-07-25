@@ -37,14 +37,8 @@ class StringHelperTest extends TestCase
     {
         if (class_exists('tidy')) {
             $test1 = String::tidy('<p>Lorem</i> ipsum dolor');
-            $test2 = String::tidy('<section>Lorem</div> ipsum dolor');
-
-
             $this->assertTrue(strpos($test1, '</p>') > 0);
             $this->assertFalse(strpos($test1, '</i>'));
-
-            $this->assertTrue(strpos($test2, '</section>') > 0);
-            $this->assertFalse(strpos($test2, '</div>'));
         }
     }
 
