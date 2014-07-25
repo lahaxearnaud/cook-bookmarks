@@ -27,3 +27,4 @@ coverage:
             - app/views/*
             - app/config/*
             - app/lang/*
+            - app/commands/*
