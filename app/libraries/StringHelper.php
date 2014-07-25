@@ -26,27 +26,11 @@ class StringHelper
         // Check to see if Tidy is available.
         if (class_exists('tidy')) {
             $tidy = new tidy();
+            $tidy->parseString($value);
+            $tidy->cleanRepair();
 
-            return $tidy->repairString($value, array(
-                'show-body-only' => true,
-            ));
-        } else { // No Tidy, Time for regex and possibly a broken DOM :(
-            preg_match_all('#<(?!meta|img|br|hr|input\b)\b([a-z]+)(?: .*)?(?<![/|/ ])>#iU', $value, $result);
-            $openedtags = $result[1];
-            preg_match_all('#</([a-z]+)>#iU', $value, $result);
-            $closedtags = $result[1];
-            $len_opened = count($openedtags);
-            if (count($closedtags) == $len_opened) {
-                return $value;
-            }
-            $openedtags = array_reverse($openedtags);
-            for ($i = 0; $i < $len_opened; $i++) {
-                if (!in_array($openedtags[$i], $closedtags)) {
-                    $value .= '</' . $openedtags[$i] . '>';
-                } else {
-                    unset($closedtags[array_search($openedtags[$i], $closedtags)]);
-                }
-            }
+            return $tidy;
+        } else {
 
             return $value;
         }

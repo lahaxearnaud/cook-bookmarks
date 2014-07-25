@@ -35,8 +35,10 @@ class StringHelperTest extends TestCase
 
     public function testTidy()
     {
-        $this->assertEquals('<div>Lorem</div> ipsum dolor', String::title('<div>Lorem</p> ipsum dolor'));
-        $this->assertEquals('<section>Lorem</section> ipsum dolor', String::title('<section>Lorem</div> ipsum dolor'));
+        if (class_exists('tidy')) {
+            $this->assertEquals('<p>Lorem</p> ipsum dolor', String::title('<p>Lorem</i> ipsum dolor'));
+            $this->assertEquals('<section>Lorem</section> ipsum dolor', String::title('<section>Lorem</div> ipsum dolor'));
+        }
     }
 
 }
