@@ -40,11 +40,11 @@ class StringHelperTest extends TestCase
             $test2 = String::tidy('<section>Lorem</div> ipsum dolor');
 
 
-            $this->assertTrue(strpos('</p>', $test1) > 0);
-            $this->assertFalse(strpos('</i>', $test1));
+            $this->assertTrue(strpos($test1, '</p>') > 0);
+            $this->assertFalse(strpos($test1, '</i>'));
 
-            $this->assertTrue(strpos('</section>', $test2) > 0);
-            $this->assertFalse(strpos('</div>', $test2));
+            $this->assertTrue(strpos($test2, '</section>') > 0);
+            $this->assertFalse(strpos($test2, '</div>'));
         }
     }
 
