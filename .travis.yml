@@ -25,5 +25,5 @@ after_script:
   - export COVERALLS_RUN_LOCALLY=1
   - export COVERALLS_REPO_TOKEN=mvM3G4KCRaULS7zMlPOxnxINysj70T1an
   - php vendor/bin/coveralls -c .coveralls.yml -v
-  - CODECLIMATE_REPO_TOKEN="222f6b907fed2dce854442dde1f73ad32ee748766f96f80c3f3ee9250bb05e8b" bin/test-reporter --coverage-report=tests/_log/coverage.xml --stdout > codeclimate.json
-  - curl -X POST -d @codeclimate.json -H 'Content-Type: application/json' -H 'User-Agent: Code Climate (PHP Test Reporter v0.1.1)' https://codeclimate.com/test_reports
+  - CODECLIMATE_REPO_TOKEN="222f6b907fed2dce854442dde1f73ad32ee748766f96f80c3f3ee9250bb05e8b" vendor/bin/test-reporter --coverage-report=tests/_log/coverage.xml --stdout > codeclimate.json
+  - "curl -X POST -d @codeclimate.json -H 'Content-Type: application/json' -H 'User-Agent: Code Climate (PHP Test Reporter v0.1.1)' https://codeclimate.com/test_reports -k"
