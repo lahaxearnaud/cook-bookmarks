@@ -28,12 +28,10 @@ class StringHelper
             $tidy = new tidy();
             $tidy->parseString($value);
             $tidy->cleanRepair();
-
-            return $tidy;
-        } else {
-
-            return $value;
+            $value = $tidy->__toString();
         }
+
+        return $value;
     }
 
     public static function extract($text, $nbWords = 100, $end = '...', $allowedTags = '')
