@@ -28,7 +28,7 @@ class StringHelper
             $tidy = new tidy();
             $tidy->parseString($value);
             $tidy->cleanRepair();
-            $value = $tidy->__toString();
+            $value = $tidy;
         }
 
         return $value;
