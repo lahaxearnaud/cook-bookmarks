@@ -1,7 +1,6 @@
 <?php
 
 use Carbon\Carbon;
-use \Faker\Internet;
 
 class LogsTableSeeder extends Seeder
 {
