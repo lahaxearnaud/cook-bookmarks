@@ -30,7 +30,7 @@ class StringHelper
             $tidy = new tidy();
             $tidy->parseString($value, $options, $encoding);
             $tidy->cleanRepair();
-            $value = $tidy->value;
+            $value = $tidy;
         }
 
         return $value;
