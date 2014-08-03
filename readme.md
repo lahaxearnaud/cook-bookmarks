@@ -2,7 +2,8 @@
 [![Build Status](https://travis-ci.org/lahaxearnaud/cook-bookmarks.svg)](https://travis-ci.org/lahaxearnaud/cook-bookmarks)
 [![License](https://poser.pugx.org/leaphly/cart-bundle/license.svg)](https://github.com/lahaxearnaud/cook-bookmarks)
 [![Stories in Ready](https://badge.waffle.io/lahaxearnaud/cook-bookmarks.png?label=ready&title=Ready)](http://waffle.io/lahaxearnaud/cook-bookmarks)
-[![Coverage Status](https://coveralls.io/repos/lahaxearnaud/cook-bookmarks/badge.png?branch=%28detached+from+cabc221%29)](https://coveralls.io/r/lahaxearnaud/cook-bookmarks?branch=%28detached+from+cabc221%29)
+[![Code Climate](https://codeclimate.com/github/lahaxearnaud/cook-bookmarks/badges/gpa.svg)](https://codeclimate.com/github/lahaxearnaud/cook-bookmarks)
+[![Test Coverage](https://codeclimate.com/github/lahaxearnaud/cook-bookmarks/badges/coverage.svg)](https://codeclimate.com/github/lahaxearnaud/cook-bookmarks)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/b43e1cb9-d1a5-422d-8dd3-cff6bb99b58b/mini.png)](https://insight.sensiolabs.com/projects/b43e1cb9-d1a5-422d-8dd3-cff6bb99b58b)
 
 # CookBookmark api
