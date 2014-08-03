@@ -42,12 +42,10 @@ class ArticleExtractor
             $request = $client->get();
             $response = $request->send();
             $html = $response->getBody();
-
-            if (function_exists('tidy_parse_string')) {
-                $tidy = tidy_parse_string($html, array(), 'UTF8');
-                $tidy->cleanRepair();
-                $html = $tidy->value;
-            }
+            $html = String::tidy($html, array(
+                'indent'=>true,
+                'show-body-only' => true
+            ), 'UTF8');
 
             return $this->extract($html ,$url);
         } catch(ClientErrorResponseException $e) {
