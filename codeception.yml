@@ -19,12 +19,17 @@ modules:
 coverage:
     enabled: true
     remote: false
-    include:
+    whitelist:
+        include:
             - app/*
-    exclude:
+        exclude:
             - app/storage/*
             - app/database/*
             - app/views/*
             - app/config/*
             - app/lang/*
             - app/commands/*
+    blacklist:
+        include:
+            - c3.php
+            - bootstrap/*
