@@ -26,7 +26,7 @@ class ArticleExtractor
         $content = String::tidy($content, array(
             'indent'=>true,
             'show-body-only' => true
-        ), 'UTF8');
+        ));
 
         return array(
             'title' => $readability->getTitle()->textContent,
@@ -45,7 +45,7 @@ class ArticleExtractor
             $html = String::tidy($html, array(
                 'indent'=>true,
                 'show-body-only' => true
-            ), 'UTF8');
+            ));
 
             return $this->extract($html ,$url);
         } catch(ClientErrorResponseException $e) {

@@ -23,7 +23,7 @@ class StringHelper
      * @internal param $html
      * @return string
      */
-    public static function tidy($value, $options = array(), $encoding = 'UTF-8')
+    public static function tidy($value, $options = array(), $encoding = 'utf8')
     {
         // Check to see if Tidy is available.
         if (class_exists('tidy')) {
