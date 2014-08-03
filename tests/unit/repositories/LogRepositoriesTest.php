@@ -27,7 +27,6 @@ class LogRepositoriesTest extends RepositoryCase
         return 'LogsRepository';
     }
 
-
     /**
      * ============================================
      *  Update
@@ -83,7 +82,7 @@ class LogRepositoriesTest extends RepositoryCase
      *  Search
      * ============================================
      */
-    public function testSearchOk ()
+    public function testSearchOk()
     {
         $results  = $this->repository->search('test');
         $this->assertInstanceOf('\Illuminate\Database\Eloquent\Collection', $results);
@@ -99,11 +98,11 @@ class LogRepositoriesTest extends RepositoryCase
      *  Has
      * ============================================
      */
-    public function testHasOk ()
+    public function testHasOk()
     {
     }
 
-    public function testHasKo ()
+    public function testHasKo()
     {
     }
 }

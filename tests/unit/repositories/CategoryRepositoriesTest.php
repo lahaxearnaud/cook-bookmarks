@@ -32,13 +32,13 @@ class CategoryRepositoriesTest extends RepositoryCase
      *  FindAllBy
      * ============================================
      */
-    public function testHasOk ()
+    public function testHasOk()
     {
         $models = $this->repository->has('user');
         $this->assertInstanceOf('\Illuminate\Database\Eloquent\Collection', $models);
     }
 
-    public function testHasKo ()
+    public function testHasKo()
     {
         $this->setExpectedException('BadMethodCallException');
         $this->repository->has('dummy');
@@ -106,7 +106,7 @@ class CategoryRepositoriesTest extends RepositoryCase
      *  Search
      * ============================================
      */
-    public function testSearchOk ()
+    public function testSearchOk()
     {
         $results  = $this->repository->search('test');
         $this->assertInstanceOf('\Illuminate\Database\Eloquent\Collection', $results);

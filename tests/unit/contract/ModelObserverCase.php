@@ -6,8 +6,8 @@
  * Time: 07:15
  */
 
-abstract class ModelObserverCase extends TestCase {
-
+abstract class ModelObserverCase extends TestCase
+{
     /**
      * @var \Observers\Models\ObserverInterface
      */
@@ -16,7 +16,7 @@ abstract class ModelObserverCase extends TestCase {
     /**
      * @return mixed
      */
-    public function getObserver ()
+    public function getObserver()
     {
         return $this->observer;
     }
@@ -28,13 +28,11 @@ abstract class ModelObserverCase extends TestCase {
         $this->observer = $this->buildObserver();
     }
 
-    abstract function getDatabaseModel();
+    abstract public function getDatabaseModel();
 
-    abstract function getNonSavedModel();
-
+    abstract public function getNonSavedModel();
 
     abstract protected function buildObserver();
-
 
     abstract public function testSavingOk();
 

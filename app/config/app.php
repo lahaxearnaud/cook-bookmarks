@@ -191,7 +191,7 @@ return array(
         'URL'                             => 'Illuminate\Support\Facades\URL',
         'Validator'                       => 'Illuminate\Support\Facades\Validator',
         'View'                            => 'Illuminate\Support\Facades\View',
-		'String'                          => 'StringHelper',
+        'String'                          => 'StringHelper',
         'AuthToken'                       => 'Tappleby\Support\Facades\AuthToken',
         'AuthTokenNotAuthorizedException' => 'Tappleby\AuthToken\Exceptions\NotAuthorizedException'
 

@@ -3,67 +3,67 @@
 class ArticleObserverTest extends ModelObserverCase
 {
 
-    public function testSavingOk ()
+    public function testSavingOk()
     {
         $this->observer->saving($this->getNonSavedModel());
     }
 
-    public function testSavedOk ()
+    public function testSavedOk()
     {
         $this->observer->saved($this->getDatabaseModel());
     }
 
-    public function testUpdatingOk ()
+    public function testUpdatingOk()
     {
         $this->observer->updating($this->getDatabaseModel());
     }
 
-    public function testUpdatedOk ()
+    public function testUpdatedOk()
     {
         $this->observer->updated($this->getDatabaseModel());
     }
 
-    public function testCreatingOk ()
+    public function testCreatingOk()
     {
         $this->observer->saving($this->getNonSavedModel());
     }
 
-    public function testCreatedOk ()
+    public function testCreatedOk()
     {
         $this->observer->created($this->getDatabaseModel());
     }
 
-    public function testDeletingOk ()
+    public function testDeletingOk()
     {
         $this->observer->deleting($this->getDatabaseModel());
     }
 
-    public function testDeletedOk ()
+    public function testDeletedOk()
     {
         $this->observer->deleted($this->getDatabaseModel());
     }
 
-    public function testRestoringOk ()
+    public function testRestoringOk()
     {
         $this->observer->restoring($this->getDatabaseModel());
     }
 
-    public function testRestoredOk ()
+    public function testRestoredOk()
     {
         $this->observer->restored($this->getDatabaseModel());
     }
 
-    protected function buildObserver ()
+    protected function buildObserver()
     {
         return new Observers\Models\ArticleObserver();
     }
 
-    function getDatabaseModel ()
+    public function getDatabaseModel()
     {
         return Article::find(1);
     }
 
-    function getNonSavedModel ()
+    public function getNonSavedModel()
     {
         return new Article(array(
             'title'       => 'Lorem Ipsum',

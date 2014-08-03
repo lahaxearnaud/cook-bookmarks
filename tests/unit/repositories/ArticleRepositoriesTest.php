@@ -22,7 +22,7 @@ class ArticleRepositoriesTest extends RepositoryCase
      *
      * @return string
      */
-    public function getRepositoryName ()
+    public function getRepositoryName()
     {
         return 'ArticlesRepository';
     }
@@ -32,7 +32,7 @@ class ArticleRepositoriesTest extends RepositoryCase
      *  Has
      * ============================================
      */
-    public function testHasOk ()
+    public function testHasOk()
     {
         $models = $this->repository->has('author');
         $this->assertInstanceOf('\Illuminate\Database\Eloquent\Collection', $models);
@@ -41,7 +41,7 @@ class ArticleRepositoriesTest extends RepositoryCase
         $this->assertInstanceOf('\Illuminate\Database\Eloquent\Collection', $models);
     }
 
-    public function testHasKo ()
+    public function testHasKo()
     {
         $this->setExpectedException('BadMethodCallException');
         $this->repository->has('dummy');
@@ -52,7 +52,7 @@ class ArticleRepositoriesTest extends RepositoryCase
      *  Update
      * ============================================
      */
-    public function testUpdateOk ()
+    public function testUpdateOk()
     {
         $result = $this->repository->update(1, array(
             'title' => 'Lorem Ipsum'
@@ -70,7 +70,7 @@ class ArticleRepositoriesTest extends RepositoryCase
         $this->assertInstanceOf(get_class($this->model), $result);
     }
 
-    public function testUpdateKo ()
+    public function testUpdateKo()
     {
         $result = $this->repository->update(1, array(
             'title' => 'Lo'
@@ -78,7 +78,7 @@ class ArticleRepositoriesTest extends RepositoryCase
         $this->assertEquals(1, count($result));
     }
 
-    public function testUpdateKoArticleNotFound ()
+    public function testUpdateKoArticleNotFound()
     {
         $this->setExpectedException('Illuminate\Database\Eloquent\ModelNotFoundException');
 
@@ -87,8 +87,7 @@ class ArticleRepositoriesTest extends RepositoryCase
         ));
     }
 
-
-    public function testUpdateKoAuthorNotFound ()
+    public function testUpdateKoAuthorNotFound()
     {
         $this->setExpectedException('Illuminate\Database\QueryException');
 
@@ -103,7 +102,7 @@ class ArticleRepositoriesTest extends RepositoryCase
      *  Create
      * ============================================
      */
-    public function testCreateOk ()
+    public function testCreateOk()
     {
         $model = $this->repository->create(array(
             'title'       => 'Lorem Ipsum',
@@ -128,7 +127,7 @@ class ArticleRepositoriesTest extends RepositoryCase
         $this->assertInstanceOf(get_class($this->model), $model);
     }
 
-    public function testCreateKo ()
+    public function testCreateKo()
     {
         $model = $this->repository->create(array(
             'title'       => 'L',
@@ -169,13 +168,13 @@ class ArticleRepositoriesTest extends RepositoryCase
      *  Search
      * ============================================
      */
-    public function testSearchOk ()
+    public function testSearchOk()
     {
         $results = $this->repository->search('test');
         $this->assertInstanceOf('\Illuminate\Database\Eloquent\Collection', $results);
     }
 
-    public function testSearchKo ()
+    public function testSearchKo()
     {
         // TODO: Implement testSearchKo() method.
     }
