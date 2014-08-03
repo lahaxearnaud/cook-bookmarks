@@ -23,17 +23,10 @@ class ArticleExtractor
         }
 
         $content = $readability->getContent()->innerHTML;
-
-        if (function_exists('tidy_parse_string')) {
-
-            $tidy = tidy_parse_string($content, array(
-                    'indent'=>true,
-                    'show-body-only' => true
-                ), 'UTF8');
-
-            $tidy->cleanRepair();
-            $content = $tidy->value;
-        }
+        $content = String::tidy($content, array(
+            'indent'=>true,
+            'show-body-only' => true
+        ), 'UTF8');
 
         return array(
             'title' => $readability->getTitle()->textContent,

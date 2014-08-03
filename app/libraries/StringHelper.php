@@ -17,18 +17,20 @@ class StringHelper
 
     /**
      * @param $value
+     * @param $option
+     * @param $encoding
      *
      * @internal param $html
      * @return string
      */
-    public static function tidy($value)
+    public static function tidy($value, $options = array(), $encoding = 'UTF-8')
     {
         // Check to see if Tidy is available.
         if (class_exists('tidy')) {
             $tidy = new tidy();
-            $tidy->parseString($value);
+            $tidy->parseString($value, $options, $encoding);
             $tidy->cleanRepair();
-            $value = $tidy;
+            $value = $tidy->value;
         }
 
         return $value;
