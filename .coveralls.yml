@@ -1,4 +1,0 @@
-service_name: Travis
-coverage_clover: tests/_log/coverage.xml
-src_dir: app
-json_path: tests/_log/coveralls-upload.json
