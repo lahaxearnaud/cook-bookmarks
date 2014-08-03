@@ -38,7 +38,7 @@
         "bobthecow/faker": "1.0.*@dev",
         "crada/php-apidoc": "@dev",
         "doctrine/dbal": "~2.3",
-        "satooshi/php-coveralls": "dev-master"
+        "codeclimate/php-test-reporter": "0.1.*@dev"
     },
 	"scripts": {
 		"post-install-cmd": [
