@@ -7,9 +7,6 @@ php:
 addons:
   hosts:
     - cuisine.dev
-  code_climate:
-    repo_token: 222f6b907fed2dce854442dde1f73ad32ee748766f96f80c3f3ee9250bb05e8b
-
 
 before_script:
   - mkdir tests/_log
@@ -25,4 +22,6 @@ before_script:
 script: php artisan qa:test --coverage=xml
 
 after_script:
-  - vendor/bin/test-reporter --coverage-report=tests/_log/coverage.xml
+  - export CODECLIMATE_REPO_TOKEN=222f6b907fed2dce854442dde1f73ad32ee748766f96f80c3f3ee9250bb05e8b
+  - vendor/bin/test-reporter --coverage-report=tests/_log/coverage.xml --stdout > codeclimate.json
+  - "curl -X POST -d @codeclimate.json -H 'Content-Type: application/json' -H 'User-Agent: Code Climate (PHP Test Reporter v0.1.1)' https://codeclimate.com/test_reports -k -v"
