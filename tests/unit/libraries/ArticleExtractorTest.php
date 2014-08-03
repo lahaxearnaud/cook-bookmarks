@@ -48,7 +48,13 @@ EOF;
 
     public function testExtractFromUrlBadUrl()
     {
-        $this->setExpectedException('Guzzle\Http\Exception\CurlException');
-        $this->articleExtractor->extractFromRemote('');
+        $result = $this->articleExtractor->extractFromRemote('');
+        $this->assertFalse($result['success']);
+    }
+
+    public function testExtractFromUrlBadUrl404()
+    {
+        $result = $this->articleExtractor->extractFromRemote('https://github.com/DUMMYDUMMY/DUMMYDUMMY');
+        $this->assertFalse($result['success']);
     }
 }
