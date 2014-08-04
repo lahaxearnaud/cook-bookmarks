@@ -11,11 +11,11 @@
 |
 */
 
-App::before(function ($request) {
+App::before(function (\Illuminate\Http\Request $request) {
     //
 });
 
-App::after(function ($request, $response) {
+App::after(function (\Illuminate\Http\Request $request, \Illuminate\Http\Response $response) {
     Event::fire('apiLog', array($response->getStatusCode()));
 });
 

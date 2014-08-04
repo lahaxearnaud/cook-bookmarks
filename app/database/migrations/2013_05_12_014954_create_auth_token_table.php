@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
+use \Illuminate\Database\Schema\Blueprint;
 
 class CreateAuthTokenTable extends Migration
 {
@@ -11,7 +12,7 @@ class CreateAuthTokenTable extends Migration
 	 */
     public function up()
     {
-    Schema::create('ta_auth_tokens', function ($table) {
+    Schema::create('ta_auth_tokens', function (Blueprint $table) {
       $table->integer('auth_identifier');
       $table->string('public_key', 96);
       $table->string('private_key', 96);
