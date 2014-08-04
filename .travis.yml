@@ -19,7 +19,7 @@ before_script:
   - php artisan env
   - travis_retry php artisan migrate --force --seed
 
-script: php artisan qa:test --coverage=xml
+script: php artisan qa:test 
 
 after_script:
   - export CODECLIMATE_REPO_TOKEN=222f6b907fed2dce854442dde1f73ad32ee748766f96f80c3f3ee9250bb05e8b
