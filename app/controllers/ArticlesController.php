@@ -1,11 +1,31 @@
 <?php
 
+use \Repositories\RepositoryInterface;
+
 /**
  * @ApiRoute(name="/articles")
  * @ApiSector(name="Articles")
  */
 class ArticlesController extends \BaseController
 {
+
+    /**
+     * @var ArticleExtractor
+     */
+    protected $articleExtractor;
+
+    /**
+     * @var Html2Markdown
+     */
+    protected $html2markdown;
+
+    public function __construct(RepositoryInterface $repository, ArticleExtractor $articleExtractor, Html2Markdown $html2Markdown)
+    {
+        $this->repository = $repository;
+        $this->articleExtractor = $articleExtractor;
+        $this->html2markdown = $html2Markdown;
+    }
+
     /**
      * @ApiDescription(description="Create a new article")
      * @ApiRoute(name="/create")
@@ -32,14 +52,37 @@ class ArticlesController extends \BaseController
     }
 
     /**
-     * @ApiDescription(description="Update an article")
+     * @ApiDescription(description="Get content of an article from a website")
      * @ApiParams(name="url", type="string", nullable=false, description="Url of the article")
-     * @ApiRoute(name="/url/{url}")
+     * @ApiRoute(name="/extractFromUrl")
      * @ApiMethod(type="post")
      */
-    public function url()
+    public function extractFromUrl()
     {
-        return array();
+
+        $validator = Validator::make(Input::all(), [
+            'url' => 'required|url',
+        ]);
+        if ($validator->fails()) {
+            $validator->getMessageBag()->add('success', false);
+            $messages = $validator->messages()->toArray();
+            array_walk($messages, function(&$item) {
+                $item = current($item);
+            });
+            return Response::json($messages, 400);
+        }
+
+        $result = $this->articleExtractor->extractFromRemote(Input::get('url'));
+
+        if(!$result['success']) {
+            return Response::json($result, 400);
+        }
+
+        if(Input::get('markdown')) {
+            $result['body'] = $this->html2markdown->convert($result['body']);
+        }
+
+        return Response::json($result);
     }
 
     /**

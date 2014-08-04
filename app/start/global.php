@@ -113,7 +113,9 @@ App::bind('NotesRepository', function ($app) {
 
 App::bind('ArticlesController', function ($app) {
     return new ArticlesController(
-        App::make('ArticlesRepository')
+        App::make('ArticlesRepository'),
+        new ArticleExtractor(),
+        new Html2Markdown()
     );
 });
 

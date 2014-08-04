@@ -11,11 +11,11 @@
 |
 */
 
-App::before(function (\Illuminate\Http\Request $request) {
+App::before(function (Symfony\Component\HttpFoundation\Request $request) {
     //
 });
 
-App::after(function (\Illuminate\Http\Request $request, \Illuminate\Http\Response $response) {
+App::after(function (Symfony\Component\HttpFoundation\Request $request, Symfony\Component\HttpFoundation\Response $response) {
     Event::fire('apiLog', array($response->getStatusCode()));
 });
 
