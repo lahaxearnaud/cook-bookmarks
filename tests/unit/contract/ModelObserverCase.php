@@ -28,29 +28,53 @@ abstract class ModelObserverCase extends TestCase
         $this->observer = $this->buildObserver();
     }
 
-    abstract public function getDatabaseModel();
+    public function testSavingOk()
+    {
+        $this->observer->saving($this->getNonSavedModel());
+    }
 
-    abstract public function getNonSavedModel();
+    public function testSavedOk()
+    {
+        $this->observer->saved($this->getDatabaseModel());
+    }
 
-    abstract protected function buildObserver();
+    public function testUpdatingOk()
+    {
+        $this->observer->updating($this->getDatabaseModel());
+    }
 
-    abstract public function testSavingOk();
+    public function testUpdatedOk()
+    {
+        $this->observer->updated($this->getDatabaseModel());
+    }
 
-    abstract public function testSavedOk();
+    public function testCreatingOk()
+    {
+        $this->observer->saving($this->getNonSavedModel());
+    }
 
-    abstract public function testUpdatingOk();
+    public function testCreatedOk()
+    {
+        $this->observer->created($this->getDatabaseModel());
+    }
 
-    abstract public function testUpdatedOk();
+    public function testDeletingOk()
+    {
+        $this->observer->deleting($this->getDatabaseModel());
+    }
 
-    abstract public function testCreatingOk();
+    public function testDeletedOk()
+    {
+        $this->observer->deleted($this->getDatabaseModel());
+    }
 
-    abstract public function testCreatedOk();
+    public function testRestoringOk()
+    {
+        $this->observer->restoring($this->getDatabaseModel());
+    }
 
-    abstract public function testDeletingOk();
-
-    abstract public function testDeletedOk();
-
-    abstract public function testRestoringOk();
-
-    abstract public function testRestoredOk();
+    public function testRestoredOk()
+    {
+        $this->observer->restored($this->getDatabaseModel());
+    }
 }
