@@ -16,7 +16,7 @@ $I->validateResponseWithClosure(function (Codeception\Module\NinjaHelper $api, $
     $api->isType('success', 'BOOLEAN', $response['success']);
     $api->isEquals('success', $response['success'], TRUE);
 
-    $api->isType('title', 'STRING', $response['title']);
+    $api->isType('title', 'STRING', $response['title'], '', true);
     $api->isEquals('title', $response['title'], 'laravel/laravel · GitHub');
 
     $api->isType('body', 'STRING', $response['body']);
@@ -32,7 +32,7 @@ $I->validateResponseWithClosure(function (Codeception\Module\NinjaHelper $api, $
     $api->isType('success', 'BOOLEAN', $response['success']);
     $api->isEquals('success', $response['success'], TRUE);
 
-    $api->isType('title', 'STRING', $response['title']);
+    $api->isType('title', 'STRING', $response['title'], '', true);
     $api->isEquals('title', $response['title'], 'laravel/laravel · GitHub');
 
     $api->isType('body', 'STRING', $response['body']);
