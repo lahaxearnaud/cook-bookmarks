@@ -137,6 +137,6 @@ App::bind('NotesController', function ($app) {
 |--------------------------------------------------------------------------
 */
 
-Article::observe(new Observers\Models\ArticleObserver);
-Category::observe(new Observers\Models\CategoryObserver);
-Note::observe(new Observers\Models\NoteObserver);
+Article::observe(new Observers\Models\ArticleObserver(new ArticleIndexer()));
+Category::observe(new Observers\Models\CategoryObserver(new ArticleIndexer()));
+Note::observe(new Observers\Models\NoteObserver(new ArticleIndexer()));

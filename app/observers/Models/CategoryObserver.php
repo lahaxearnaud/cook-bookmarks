@@ -13,11 +13,17 @@ class CategoryObserver extends Observer
     public function updated(Model $model)
     {
         \Log::info("Category updated " . $model->id);
+        foreach($model->articles as $article) {
+            $this->indexer->update($article);
+        }
     }
 
     public function deleted(Model $model)
     {
         \Log::info("Category  deleted " . $model->id);
+        foreach($model->articles as $article) {
+            $this->indexer->update($article);
+        }
     }
 
     public function restored(Model $model)

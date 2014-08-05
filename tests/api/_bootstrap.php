@@ -9,4 +9,6 @@ $app->boot();
 Artisan::call('migrate:reset');
 Artisan::call('migrate');
 Artisan::call('db:seed');
+Artisan::call('es:uninstall');
+Artisan::call('es:install');
 Mail::pretend(true);

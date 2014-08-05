@@ -6,7 +6,7 @@ class ArticleObserverTest extends ModelObserverCase
 
     protected function buildObserver()
     {
-        return new Observers\Models\ArticleObserver();
+        return new Observers\Models\ArticleObserver(new ArticleIndexerMock);
     }
 
     public function getDatabaseModel()

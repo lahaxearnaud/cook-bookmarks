@@ -23,8 +23,8 @@
 			"app/repositories",
 			"app/database/migrations",
 			"app/database/seeds",
-
-            "tests/unit/contract"
+            "tests/unit/contract",
+            "tests/unit/mocks"
 		]
 	},
 	"require-dev": {

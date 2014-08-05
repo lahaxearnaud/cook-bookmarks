@@ -5,7 +5,7 @@ class CategoryObserverTest extends ModelObserverCase
 
     protected function buildObserver()
     {
-        return new Observers\Models\CategoryObserver();
+        return new Observers\Models\CategoryObserver(new ArticleIndexerMock);
     }
 
     public function getDatabaseModel()
