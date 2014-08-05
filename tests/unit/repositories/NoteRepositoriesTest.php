@@ -53,12 +53,12 @@ class NoteRepositoriesTest extends RepositoryCase
      */
     public function testUpdateOk()
     {
-        $result = $this->repository->update(1, array(
+        $result = $this->repository->update(2, array(
             'body' => 'Lorem Ipsum dolore'
         ));
         $this->assertInstanceOf(get_class($this->model), $result);
 
-        $result = $this->repository->update(1, array(
+        $result = $this->repository->update(2, array(
             'user_id' => 1
         ));
         $this->assertInstanceOf(get_class($this->model), $result);
@@ -81,14 +81,14 @@ class NoteRepositoriesTest extends RepositoryCase
     public function testCreateOk()
     {
         $model = $this->repository->create(array(
-            'article_id' => 1,
+            'article_id' => 2,
             'user_id' => 1,
             'body' => 'Lorem Ipsum Dolore...'
         ));
         $this->assertInstanceOf(get_class($this->model), $model);
 
         $model = $this->repository->create(array(
-            'article' => Article::find(1),
+            'article' => Article::find(2),
             'user' => User::find(1),
             'body' => 'Lorem Ipsum Dolore...'
         ));
@@ -98,7 +98,7 @@ class NoteRepositoriesTest extends RepositoryCase
     public function testCreateKo()
     {
         $model = $this->repository->create(array(
-            'article_id' => 1,
+            'article_id' => 2,
             'user_id' => 1,
             'body' => 'L'
         ));
@@ -106,7 +106,7 @@ class NoteRepositoriesTest extends RepositoryCase
         $this->assertNotEmpty($model->errors());
 
         $model = $this->repository->create(array(
-            'article' => Article::find(1),
+            'article' => Article::find(2),
             'user' => User::find(1),
             'body' => 'L'
         ));
@@ -128,7 +128,7 @@ class NoteRepositoriesTest extends RepositoryCase
     {
         $this->setExpectedException('Illuminate\Database\Eloquent\ModelNotFoundException');
         $this->repository->create(array(
-            'article_id' => 1,
+            'article_id' => 2,
             'user_id' => -1,
             'body' => 'Lorem Ipsum Dolore'
         ));
