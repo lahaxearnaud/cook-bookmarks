@@ -8,6 +8,9 @@ addons:
   hosts:
     - cuisine.dev
 
+services:
+  - elasticsearch
+
 before_script:
   - mkdir tests/_log
   - mkdir app/storage/logs
