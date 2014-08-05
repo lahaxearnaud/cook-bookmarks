@@ -125,6 +125,7 @@ return array(
         'Way\Generators\GeneratorsServiceProvider',
         'Tappleby\AuthToken\AuthTokenServiceProvider',
         'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
+        'Shift31\LaravelElasticsearch\LaravelElasticsearchServiceProvider'
     ),
 
     /*
@@ -197,4 +198,6 @@ return array(
 
     ),
 
+
+    'index' => 'cook'
 );

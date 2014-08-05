@@ -4,7 +4,7 @@ class NoteObserverTest extends ModelObserverCase
 {
     protected function buildObserver()
     {
-        return new Observers\Models\NoteObserver();
+        return new Observers\Models\NoteObserver(new ArticleIndexerMock);
     }
 
     public function getDatabaseModel()

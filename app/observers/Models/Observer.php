@@ -5,6 +5,17 @@ use Illuminate\Database\Eloquent\Model;
 
 abstract class Observer implements ObserverInterface
 {
+
+    /**
+     * @var \ArticleIndexer
+     */
+    protected $indexer;
+
+    public function __construct(\ArticleIndexer $articleIndexer)
+    {
+        $this->indexer = $articleIndexer;
+    }
+
     /**
 	 * @param  Model  $model
 	 */

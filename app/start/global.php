@@ -95,8 +95,12 @@ require app_path().'/filters.php';
 |--------------------------------------------------------------------------
 */
 
+App::bind('ArticleSeeker', function ($app) {
+    return new \Repositories\Seekers\ArticleSeeker(new Article());
+});
+
 App::bind('ArticlesRepository', function ($app) {
-    return new Repositories\ArticlesRepository(new Article(), array('author', 'category'));
+    return new Repositories\ArticlesRepository(new Article(), array('author', 'category'), App::make('ArticleSeeker'));
 });
 
 App::bind('LogsRepository', function ($app) {
@@ -137,6 +141,6 @@ App::bind('NotesController', function ($app) {
 |--------------------------------------------------------------------------
 */
 
-Article::observe(new Observers\Models\ArticleObserver);
-Category::observe(new Observers\Models\CategoryObserver);
-Note::observe(new Observers\Models\NoteObserver);
+Article::observe(new Observers\Models\ArticleObserver(new ArticleIndexer()));
+Category::observe(new Observers\Models\CategoryObserver(new ArticleIndexer()));
+Note::observe(new Observers\Models\NoteObserver(new ArticleIndexer()));

@@ -15,6 +15,8 @@ class TestCase extends \PHPUnit_Framework_TestCase
         Artisan::call('migrate:reset');
         Artisan::call('migrate');
         Artisan::call('db:seed');
+        Artisan::call('es:uninstall');
+        Artisan::call('es:install');
     }
 
 }

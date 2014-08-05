@@ -40,4 +40,13 @@ class Category extends BaseModel implements HyperMediaInterface
     {
         return $this->belongsTo('User', 'user_id');
     }
+
+    /**
+     * @author LAHAXE Arnaud <lahaxe.arnaud@gmail.com>
+     * @return array
+     */
+    public function articles()
+    {
+        return $this->hasMany('Article', 'category_id');
+    }
 }

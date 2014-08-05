@@ -3,15 +3,18 @@
 namespace Repositories\Seekers;
 
 use Illuminate\Database\Eloquent\Collection;
-use Repositories\RepositoryInterface;
+use Illuminate\Database\Eloquent\Model;
 
 abstract class ElasticSearchSeeker implements SeekerInterface
 {
-    protected $repository;
+    /**
+     * @var Model
+     */
+    protected $model;
 
-    public function __construct(RepositoryInterface $repository)
+    public function __construct($model)
     {
-        $this->repository = $repository;
+        $this->model = $model;
     }
 
     /**
@@ -21,17 +24,4 @@ abstract class ElasticSearchSeeker implements SeekerInterface
 	 * @return Collection
 	 */
     abstract public function query($query, array $parameters = array());
-
-    /**
-	 * @param  array  $ids
-	 * @return Collection
-	 */
-    public function getModelsFromId(array $ids)
-    {
-        if(empty($ids)) {
-            return new Collection();
-        }
-
-        return $this->repository->in($ids);
-    }
 }
