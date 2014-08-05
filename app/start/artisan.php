@@ -21,3 +21,9 @@ Artisan::add(new QualityTestCommand);
 Artisan::add(new QualityComposerSecurityCommand);
 Artisan::add(new CopyPastDetectorCommand);
 Artisan::add(new DocsGenerateCommand);
+
+// ES
+
+Artisan::add(new ElascticSearchInstallCommand);
+Artisan::add(new ElascticSearchUninstallCommand);
+
