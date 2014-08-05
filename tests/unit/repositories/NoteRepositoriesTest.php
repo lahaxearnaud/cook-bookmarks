@@ -81,14 +81,14 @@ class NoteRepositoriesTest extends RepositoryCase
     public function testCreateOk()
     {
         $model = $this->repository->create(array(
-            'article_id' => 2,
+            'article_id' => 3,
             'user_id' => 1,
             'body' => 'Lorem Ipsum Dolore...'
         ));
         $this->assertInstanceOf(get_class($this->model), $model);
 
         $model = $this->repository->create(array(
-            'article' => Article::find(2),
+            'article' => Article::find(3),
             'user' => User::find(1),
             'body' => 'Lorem Ipsum Dolore...'
         ));
@@ -98,7 +98,7 @@ class NoteRepositoriesTest extends RepositoryCase
     public function testCreateKo()
     {
         $model = $this->repository->create(array(
-            'article_id' => 2,
+            'article_id' => 3,
             'user_id' => 1,
             'body' => 'L'
         ));
@@ -106,7 +106,7 @@ class NoteRepositoriesTest extends RepositoryCase
         $this->assertNotEmpty($model->errors());
 
         $model = $this->repository->create(array(
-            'article' => Article::find(2),
+            'article' => Article::find(3),
             'user' => User::find(1),
             'body' => 'L'
         ));
