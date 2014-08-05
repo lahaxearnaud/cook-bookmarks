@@ -26,8 +26,6 @@ class ElascticSearchInstallCommand extends Command
      */
     public function fire()
     {
-        $this->call('es:uninstall');
-
         $params['index'] = Config::get('app.index');
 
         Es::indices()->create($params);
@@ -56,9 +54,9 @@ class ElascticSearchInstallCommand extends Command
                 'notes'   => array(
                     'type'     => 'string',
                     'analyzer' => 'standard',
-                    'boost'    => 0.8
+                    'boost'    => 2.0
                 ),
-                'categories' => array(
+                'category' => array(
                     'type'     => 'string',
                     'analyzer' => 'standard',
                     'boost'    => 1
@@ -66,7 +64,7 @@ class ElascticSearchInstallCommand extends Command
                 'indexable'  => array(
                     'type'     => 'string',
                     'analyzer' => 'standard',
-                    'boost'    => 2.0
+                    'boost'    => 3.0
                 )
             )
         );
@@ -75,6 +73,13 @@ class ElascticSearchInstallCommand extends Command
         // Update the index mapping
         Es::indices()->putMapping($params);
         $this->info('Create type ' . $params['type']);
+
+        $articles = App::make('ArticlesRepository')->all();
+        $indexer = new ArticleIndexer();
+
+        foreach($articles as $article) {
+            $indexer->add($article);
+        }
     }
 
     /**
