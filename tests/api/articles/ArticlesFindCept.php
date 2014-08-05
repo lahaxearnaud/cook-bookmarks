@@ -10,7 +10,7 @@ $I = new Ninja($scenario);
 $I->wantTo('get an article');
 
 $I->amGoingTo('Get an article with a good id');
-$I->call('articles/1');
+$I->call('articles/2');
 $I->validateResponseWithClosure(function (Codeception\Module\NinjaHelper $api, $response) {
     $api->isType('id', 'INTEGER', $response['id']);
     $api->isType('author', 'ARRAY', $response['author']);

@@ -12,7 +12,7 @@ $I = new Ninja($scenario);
 $I->wantTo('Create an note');
 $I->call('notes', 'POST', array(
     'user_id'   => 1,
-    'article_id'   => 1,
+    'article_id'   => 2,
     'body'        => $body,
 ), 201);
 
