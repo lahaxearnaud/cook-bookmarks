@@ -7,9 +7,8 @@
  */
 use \Illuminate\Database\Eloquent\Model;
 
-class ArticleIndexer {
-
-
+class ArticleIndexer
+{
     protected function getTypeByObject(Model $model)
     {
         return strtolower(get_class($model));
@@ -23,8 +22,7 @@ class ArticleIndexer {
         $data['category'] = $article->category->name;
 
         $notes = array();
-        foreach($article->notes as $note)
-        {
+        foreach($article->notes as $note) {
             $notes[] = $note->body;
         }
 
@@ -62,4 +60,4 @@ class ArticleIndexer {
 
         \Es::delete($params);
     }
-} 
+}

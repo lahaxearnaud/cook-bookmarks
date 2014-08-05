@@ -30,7 +30,7 @@ Route::group(array('prefix' => 'api/v1'), function () {
 
     Route::post('articles/extractFromUrl', [ 'as' => 'articles.extractFromUrl', 'uses' => 'ArticlesController@extractFromUrl']);
     Route::get('articles/user/{user}', [ 'as' => 'articles.user', 'uses' => 'ArticlesController@user']);
-    Route::get('articles/search/{query}', [ 'as' => 'articles.search', 'uses' => 'ArticlesController@search']);
+    Route::get('articles/search', [ 'as' => 'articles.search', 'uses' => 'ArticlesController@search']);
     Route::resource('articles', 'ArticlesController');
 
 

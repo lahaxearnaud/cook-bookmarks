@@ -50,14 +50,12 @@ class ArticleExtractor
 
             return $this->extract($html ,$url);
         } catch(ClientErrorResponseException $e) {
-
             return array(
                 'title' => '',
                 'body' => $e->getMessage(),
                 'success' => false
             );
         } catch(CurlException $e) {
-
             return array(
                 'title' => '',
                 'body' => $e->getMessage(),

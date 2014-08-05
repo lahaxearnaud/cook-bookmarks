@@ -11,7 +11,8 @@ abstract class Observer implements ObserverInterface
      */
     protected $indexer;
 
-    public function __construct(\ArticleIndexer $articleIndexer) {
+    public function __construct(\ArticleIndexer $articleIndexer)
+    {
         $this->indexer = $articleIndexer;
     }
 

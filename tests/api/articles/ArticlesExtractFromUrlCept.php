@@ -22,7 +22,6 @@ $I->validateResponseWithClosure(function (Codeception\Module\NinjaHelper $api, $
     $api->isType('body', 'STRING', $response['body']);
 });
 
-
 $I->wantTo('Extract article from an url in markdown');
 $I->call('articles/extractFromUrl', 'POST', array(
     'url'   => 'https://github.com/laravel/laravel',

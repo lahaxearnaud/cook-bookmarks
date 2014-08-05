@@ -95,8 +95,12 @@ require app_path().'/filters.php';
 |--------------------------------------------------------------------------
 */
 
+App::bind('ArticleSeeker', function ($app) {
+    return new \Repositories\Seekers\ArticleSeeker(new Article());
+});
+
 App::bind('ArticlesRepository', function ($app) {
-    return new Repositories\ArticlesRepository(new Article(), array('author', 'category'));
+    return new Repositories\ArticlesRepository(new Article(), array('author', 'category'), App::make('ArticleSeeker'));
 });
 
 App::bind('LogsRepository', function ($app) {

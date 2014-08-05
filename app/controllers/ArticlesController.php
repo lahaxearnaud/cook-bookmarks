@@ -66,9 +66,10 @@ class ArticlesController extends \BaseController
         if ($validator->fails()) {
             $validator->getMessageBag()->add('success', false);
             $messages = $validator->messages()->toArray();
-            array_walk($messages, function(&$item) {
+            array_walk($messages, function (&$item) {
                 $item = current($item);
             });
+
             return Response::json($messages, 400);
         }
 

@@ -4,9 +4,22 @@ namespace Repositories;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Repositories\Seekers\ElasticSearchSeeker;
 
 class ArticlesRepository extends EloquentRepository
 {
+    /**
+     * @var ElasticSearchSeeker
+     */
+    protected $seeker;
+
+    public function __construct(Model $model, $with = array(), ElasticSearchSeeker $elasticSearchSeeker)
+    {
+        $this->model = $model;
+        $this->with = $with;
+        $this->seeker = $elasticSearchSeeker;
+    }
+
     /**
 	 * @param  string $query
 	 * @param  array  $where
@@ -14,7 +27,22 @@ class ArticlesRepository extends EloquentRepository
 	 */
     public function search($query, array $where = array())
     {
-        return new Collection();
+        $arrayIds = $this->seeker->query($query, $where);
+
+        if(count($arrayIds) === 0) {
+            return new Collection();
+        }
+
+        $articles =  $this->in($arrayIds);
+
+        // sort post in the ES order
+        $sorted = array_flip($arrayIds);
+        foreach ($articles as $article) {
+            $sorted[$article->id] = $article;
+        }
+
+        // rebuild a collection for the pagination
+        return Collection::make(array_values($sorted));
     }
 
     /**

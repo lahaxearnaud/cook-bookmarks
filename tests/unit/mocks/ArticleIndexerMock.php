@@ -6,8 +6,8 @@
  * Time: 11:57
  */
 
-class ArticleIndexerMock extends ArticleIndexer {
-
+class ArticleIndexerMock extends ArticleIndexer
+{
     public function add(Article $article)
     {
     }
@@ -19,4 +19,4 @@ class ArticleIndexerMock extends ArticleIndexer {
     public function delete(Article $article)
     {
     }
-} 
+}

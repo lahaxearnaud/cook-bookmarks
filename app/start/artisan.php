@@ -26,4 +26,3 @@ Artisan::add(new DocsGenerateCommand);
 
 Artisan::add(new ElascticSearchInstallCommand);
 Artisan::add(new ElascticSearchUninstallCommand);
-
