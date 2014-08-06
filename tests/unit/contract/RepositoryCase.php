@@ -38,7 +38,7 @@ abstract class RepositoryCase extends TestCase
 
     public function testFindOk()
     {
-        $model = $this->repository->find(1);
+        $model = $this->repository->find(3);
         $this->assertInstanceOf(get_class($this->model), $model);
     }
 
@@ -68,14 +68,14 @@ abstract class RepositoryCase extends TestCase
 
     public function testFindFirstByOk()
     {
-        $model = $this->repository->findFirstBy('id', 1, '=');
+        $model = $this->repository->findFirstBy('id', 3, '=');
         $this->assertInstanceOf(get_class($this->model), $model);
     }
 
     public function testFindFirstByKoBadKey()
     {
         $this->setExpectedException('Illuminate\Database\QueryException');
-        $this->repository->findFirstBy('dummy', 1, '=');
+        $this->repository->findFirstBy('dummy', 3, '=');
     }
 
     public function testFindFirstByKoBadValue()
@@ -87,7 +87,7 @@ abstract class RepositoryCase extends TestCase
     public function testFindFirstByKoBadOperator()
     {
         $this->setExpectedException('Illuminate\Database\Eloquent\ModelNotFoundException');
-        $this->repository->findFirstBy('id', 1, 'dummy');
+        $this->repository->findFirstBy('id', 3, 'dummy');
     }
 
     /**
