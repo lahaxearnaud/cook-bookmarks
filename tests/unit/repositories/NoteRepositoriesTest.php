@@ -29,7 +29,7 @@ class NoteRepositoriesTest extends RepositoryCase
 
     /**
      * ============================================
-     *  Hass
+     *  Has
      * ============================================
      */
     public function testHasOk()

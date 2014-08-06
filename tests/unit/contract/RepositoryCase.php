@@ -187,7 +187,7 @@ abstract class RepositoryCase extends TestCase
 
     public function testDeleteOk()
     {
-        $result = $this->repository->delete(1);
+        $result = $this->repository->delete(7);
         $this->assertTrue($result);
     }
 
