@@ -34,7 +34,6 @@ class ArticlesRepository extends EloquentRepository
         }
 
         $articles =  $this->in($arrayIds);
-\Log::info($articles);
         // sort post in the ES order
         $sorted = array_flip($arrayIds);
         foreach ($articles as $article) {

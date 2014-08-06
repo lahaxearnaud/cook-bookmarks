@@ -7,7 +7,7 @@ class ArticleObserver extends Observer
 {
     public function created(Model $model)
     {
-        \Log::info("Article saved " . $model->id);
+        \Log::info("Article created " . $model->id);
         $this->indexer->add($model);
     }
 

@@ -189,6 +189,10 @@ abstract class RepositoryCase extends TestCase
     {
         $result = $this->repository->delete(7);
         $this->assertTrue($result);
+        
+        Artisan::call('db:seed');
+        Artisan::call('es:uninstall');
+        Artisan::call('es:install');
     }
 
     public function testDeleteKo()
