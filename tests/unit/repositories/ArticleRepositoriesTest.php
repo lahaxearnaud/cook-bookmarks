@@ -180,7 +180,6 @@ class ArticleRepositoriesTest extends RepositoryCase
         $results = $this->repository->search('test');
         $this->assertInstanceOf('\Illuminate\Database\Eloquent\Collection', $results);
 
-
         $uniqwordTitle = uniqid();
         $title = 'This is a text with an uniq id '.$uniqwordTitle;
 
