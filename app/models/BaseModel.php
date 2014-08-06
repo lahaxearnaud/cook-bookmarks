@@ -38,18 +38,6 @@ abstract class BaseModel extends Ardent implements UrlApiInterface, HyperMediaIn
      * @author LAHAXE Arnaud <lahaxe.arnaud@gmail.com>
      * @return string
      */
-    public function createUrl()
-    {
-        return array(
-            'url'    => $this->generateRoute('store'),
-            'method' => 'POST'
-        );
-    }
-
-    /**
-     * @author LAHAXE Arnaud <lahaxe.arnaud@gmail.com>
-     * @return string
-     */
     public function deleteUrl()
     {
         return array(

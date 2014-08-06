@@ -60,17 +60,6 @@ abstract class BaseController extends Controller
     }
 
     /**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-    public function edit($id)
-    {
-        return $this->repository->find($id);
-    }
-
-    /**
 	 * Update the specified resource in storage.
 	 * @author LAHAXE Arnaud
 	 * @param  int  $id

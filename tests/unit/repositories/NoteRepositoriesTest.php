@@ -62,6 +62,7 @@ class NoteRepositoriesTest extends RepositoryCase
             'user_id' => 1
         ));
         $this->assertInstanceOf(get_class($this->model), $result);
+        $this->assertEquals(1, $result->author->id);
     }
 
     public function testUpdateKo()
