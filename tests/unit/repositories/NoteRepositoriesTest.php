@@ -53,12 +53,12 @@ class NoteRepositoriesTest extends RepositoryCase
      */
     public function testUpdateOk()
     {
-        $result = $this->repository->update(2, array(
+        $result = $this->repository->update(5, array(
             'body' => 'Lorem Ipsum dolore'
         ));
         $this->assertInstanceOf(get_class($this->model), $result);
 
-        $result = $this->repository->update(2, array(
+        $result = $this->repository->update(5, array(
             'user_id' => 1
         ));
         $this->assertInstanceOf(get_class($this->model), $result);
