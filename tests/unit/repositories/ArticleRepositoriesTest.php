@@ -110,10 +110,12 @@ class ArticleRepositoriesTest extends RepositoryCase
             'indexable'   => 'Lorem Ipsum dolore...',
             'url'         => 'http://google.com',
             'author_id'   => 1,
-            'category_id' => 1
+            'category_id' => 1,
+            'slug'        => uniqid('1-')
 
         ));
         $this->assertInstanceOf(get_class($this->model), $model);
+        $this->assertEmpty($model->errors()->toArray());
 
         $model = $this->repository->create(array(
             'title'     => 'Lorem Ipsum',
@@ -121,9 +123,11 @@ class ArticleRepositoriesTest extends RepositoryCase
             'indexable' => 'Lorem Ipsum dolore...',
             'url'       => 'http://google.com',
             'author'    => User::find(1),
-            'category'  => Category::find(1)
-
+            'category'  => Category::find(1),
+            'slug'        => uniqid('2-')
         ));
+        $this->assertEmpty($model->errors()->toArray());
+
         $this->assertInstanceOf(get_class($this->model), $model);
     }
 
@@ -170,12 +174,37 @@ class ArticleRepositoriesTest extends RepositoryCase
      */
     public function testSearchOk()
     {
+        Artisan::call('es:uninstall');
+        Artisan::call('es:install');
+
         $results = $this->repository->search('test');
         $this->assertInstanceOf('\Illuminate\Database\Eloquent\Collection', $results);
+
+
+        $uniqwordTitle = uniqid();
+        $title = 'This is a text with an uniq id '.$uniqwordTitle;
+
+        $uniqwordBody = uniqid();
+        $body = 'This word '.$uniqwordBody.' is an uniq id ';
+
+        $model = $this->repository->create(array(
+            'title'       => $title,
+            'body'        => $body,
+            'indexable'   => $body,
+            'url'         => 'http://google.com',
+            'author_id'   => 1,
+            'category_id' => 1,
+            'slug'        => uniqid('3-')
+        ));
+        $this->assertEmpty($model->errors()->toArray());
+        sleep(3);// time for ES to index
+
+        $this->assertEquals(1, $this->repository->search($uniqwordTitle)->count());
+        $this->assertEquals(1, $this->repository->search($uniqwordBody)->count());
     }
 
     public function testSearchKo()
     {
-        // TODO: Implement testSearchKo() method.
+        $this->assertEquals(0, count($this->repository->search(uniqid(uniqid()))));
     }
 }
