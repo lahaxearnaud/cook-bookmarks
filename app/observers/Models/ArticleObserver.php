@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ArticleObserver extends Observer
 {
-    public function saved(Model $model)
+    public function created(Model $model)
     {
         \Log::info("Article saved " . $model->id);
         $this->indexer->add($model);

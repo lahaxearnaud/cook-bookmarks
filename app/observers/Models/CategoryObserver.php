@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class CategoryObserver extends Observer
 {
-    public function saved(Model $model)
+    public function created(Model $model)
     {
         \Log::info("Category saved " . $model->id);
     }

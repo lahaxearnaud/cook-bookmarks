@@ -25,12 +25,6 @@ interface UrlApiInterface
      * @author LAHAXE Arnaud <lahaxe.arnaud@gmail.com>
      * @return string
      */
-    public function createUrl();
-
-    /**
-     * @author LAHAXE Arnaud <lahaxe.arnaud@gmail.com>
-     * @return string
-     */
     public function deleteUrl();
 
     /**

@@ -26,7 +26,9 @@ abstract class Observer implements ObserverInterface
     /**
 	 * @param  Model  $model
 	 */
-    public abstract function saved(Model $model);
+    public function saved(Model $model)
+    {
+    }
 
     /**
 	 * @param  Model  $model
