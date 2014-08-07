@@ -15,16 +15,16 @@ interface ObserverInterface
     public function beforeDelete($event);
     public function beforeCreate($event);
 
-    public function afterAll($event);
-    public function afterFind($event);
-    public function afterFindFirstBy($event);
-    public function afterFindAllBy($event);
-    public function afterHas($event);
-    public function afterPaginate($event);
-    public function afterPaginateWhere($event);
-    public function afterUpdate($event);
-    public function afterDelete($event);
-    public function afterCreate($event);
+    public function afterAll($params, $data);
+    public function afterFind($params, $data);
+    public function afterFindFirstBy($params, $data);
+    public function afterFindAllBy($params, $data);
+    public function afterHas($params, $data);
+    public function afterPaginate($params, $data);
+    public function afterPaginateWhere($params, $data);
+    public function afterUpdate($params, $data);
+    public function afterDelete($params, $data);
+    public function afterCreate($params, $data);
 
     /**
      * Register the listeners for the subscriber.

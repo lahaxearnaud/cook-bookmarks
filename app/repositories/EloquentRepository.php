@@ -5,6 +5,7 @@ namespace Repositories;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Event;
 
 abstract class EloquentRepository implements RepositoryInterface
 {
@@ -33,7 +34,11 @@ abstract class EloquentRepository implements RepositoryInterface
 	 */
     public function all()
     {
-        return $this->model->all();
+
+        return $this->cacheWrapper('all', function() {
+
+            return $this->model->all();
+        });
     }
 
     /**
@@ -43,7 +48,11 @@ abstract class EloquentRepository implements RepositoryInterface
 	 */
     public function in($ids)
     {
-        return $this->model->whereIn('id', $ids)->get();
+
+        return $this->cacheWrapper('in', function() use ($ids) {
+
+            return $this->model->whereIn('id', $ids)->get();
+        }, [$ids]);
     }
 
     /**
@@ -54,9 +63,12 @@ abstract class EloquentRepository implements RepositoryInterface
 	 */
     public function find($id)
     {
-        $query = $this->make();
 
-        return $query->findOrFail($id);
+        return $this->cacheWrapper('find', function() use ($id) {
+            $query = $this->make();
+
+            return $query->findOrFail($id);
+        }, [$id]);
     }
 
     /**
@@ -82,9 +94,12 @@ abstract class EloquentRepository implements RepositoryInterface
 	 */
     public function findFirstBy($key, $value, $operator = '=')
     {
-        $query = $this->make();
 
-        return $query->where($key, $operator, $value)->firstOrFail();
+        return $this->cacheWrapper('findFirstBy', function() use ($key, $value, $operator){
+            $query = $this->make();
+
+            return $query->where($key, $operator, $value)->firstOrFail();
+        }, [$key, $value, $operator]);
     }
 
     /**
@@ -97,9 +112,12 @@ abstract class EloquentRepository implements RepositoryInterface
 	 */
     public function findAllBy($key, $value, $operator = '=')
     {
-        $query = $this->make();
 
-        return $query->where($key, $operator, $value)->get();
+        return $this->cacheWrapper('findAllBy', function() use ($key, $value, $operator){
+            $query = $this->make();
+
+            return $query->where($key, $operator, $value)->get();
+        }, [$key, $value, $operator]);
     }
 
     /**
@@ -110,9 +128,12 @@ abstract class EloquentRepository implements RepositoryInterface
 	 */
     public function has($relation)
     {
-        $query = $this->make();
 
-        return $query->has($relation)->get();
+        return $this->cacheWrapper('has', function() use ($relation){
+            $query = $this->make();
+
+            return $query->has($relation)->get();
+        }, [$relation]);
     }
 
     /**
@@ -148,13 +169,15 @@ abstract class EloquentRepository implements RepositoryInterface
 	 */
     public function update($id, array $data)
     {
-        $model = $this->find($id);
-        foreach ($data as $key => $value) {
-            $model->{$key} =  $value;
-        }
-        $model->updateUniques();
+        return $this->cacheWrapper('has', function() use ($id, $data){
+            $model = $this->find($id);
+            foreach ($data as $key => $value) {
+                $model->{$key} =  $value;
+            }
+            $model->updateUniques();
 
-        return $model;
+            return $model;
+        }, [$id, $data]);
     }
 
     /**
@@ -163,9 +186,12 @@ abstract class EloquentRepository implements RepositoryInterface
 	 */
     public function delete($id)
     {
-        $model = $this->find($id);
 
-        return $model->delete();
+        return $this->cacheWrapper('has', function() use ($id){
+            $model = $this->find($id);
+
+            return $model->delete();
+        }, [$id]);
     }
 
     /**
@@ -174,12 +200,14 @@ abstract class EloquentRepository implements RepositoryInterface
 	 */
     public function create(array $data)
     {
-        $class = get_class($this->model);
-        $model = new $class($data);
+        return $this->cacheWrapper('has', function() use ($data){
+            $class = get_class($this->model);
+            $model = new $class($data);
 
-        $model->save();
+            $model->save();
 
-        return $model;
+            return $model;
+        }, [$data]);
     }
 
     /**
@@ -205,5 +233,20 @@ abstract class EloquentRepository implements RepositoryInterface
     public function getModel()
     {
         return $this->model;
+    }
+
+
+    protected function cacheWrapper($eventName, \Closure $action, array $parametersToObserver = array())
+    {
+        $results = \Event::fire('article.'.$eventName . '.before', [$parametersToObserver]);
+        if($results) {
+
+            return current($results);
+        }
+
+        $results =  $action();
+
+        \Event::fire($eventName . '.after', [$parametersToObserver, $results]);
+        return $results;
     }
 }

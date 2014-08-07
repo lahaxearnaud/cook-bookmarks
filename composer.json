@@ -38,7 +38,8 @@
         "bobthecow/faker": "1.0.*@dev",
         "crada/php-apidoc": "@dev",
         "doctrine/dbal": "~2.3",
-        "codeclimate/php-test-reporter": "0.1.*@dev"
+        "codeclimate/php-test-reporter": "0.1.*@dev",
+        "nesbot/carbon": "1.10.0"
     },
 	"scripts": {
 		"post-install-cmd": [
