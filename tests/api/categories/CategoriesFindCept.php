@@ -8,7 +8,7 @@
 
 $I = new Ninja($scenario);
 $I->wantTo('get an category');
-
+$I->login('admin', 'admin');
 $I->amGoingTo('Get an article with a good id');
 $I->call('categories/2');
 $I->validateResponseWithClosure(function (Codeception\Module\NinjaHelper $api, $response) {

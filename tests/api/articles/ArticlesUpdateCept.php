@@ -9,6 +9,7 @@
 $title = uniqid('title-');
 
 $I = new Ninja($scenario);
+$I->login('admin', 'admin');
 $I->wantTo('update an article');
 $I->call('articles/2', 'PUT', array(
     'title' => $title,

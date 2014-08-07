@@ -7,6 +7,7 @@
  */
 
 $I = new Ninja($scenario);
+$I->login('admin', 'admin');
 $I->wantTo('list all categories for user 1');
 $I->call('categories/user/1');
 $I->validateResponseWithClosure(function (Codeception\Module\NinjaHelper $api, $response) {

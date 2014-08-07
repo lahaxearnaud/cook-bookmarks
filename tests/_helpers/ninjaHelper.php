@@ -16,7 +16,7 @@ class NinjaHelper extends \Codeception\Module
 
         $rest->haveHttpHeader('Content-Type', 'application/x-www-form-urlencoded');
 
-        $rest->sendPost('auth', array(
+        $rest->sendPost($this->path.'auth', array(
             'username' => $username,
             'password' => $password
         ));

@@ -7,6 +7,7 @@
  */
 
 $I = new Ninja($scenario);
+$I->login('admin', 'admin');
 $I->wantTo('Extract article from an url');
 $I->call('articles/extractFromUrl', 'POST', array(
     'url'   => 'https://github.com/laravel/laravel',

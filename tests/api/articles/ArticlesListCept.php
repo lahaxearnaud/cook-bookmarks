@@ -7,6 +7,7 @@
  */
 
 $I = new Ninja($scenario);
+$I->login('admin', 'admin');
 $I->wantTo('list all articles');
 $I->call('articles');
 $I->validateResponseWithClosure(function (Codeception\Module\NinjaHelper $api, $response) {

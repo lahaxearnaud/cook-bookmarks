@@ -7,6 +7,7 @@
  */
 
 $I = new Ninja($scenario);
+$I->login('admin', 'admin');
 $I->wantTo('delete an category');
 $I->call('categories/1', 'DELETE', [], 200);
 $I->validateResponseWithClosure(function (Codeception\Module\NinjaHelper $api, $response) {

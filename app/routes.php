@@ -16,29 +16,29 @@ Route::model('article', 'Article');
 Route::model('category', 'Category');
 Route::model('note', 'Note');
 
-
-
-
 Route::group(array('prefix' => 'api/v1'), function () {
-
-    Route::get('auth', [ 'as' => 'api.v1.users.get', 'uses' => 'Tappleby\AuthToken\AuthTokenController@index']);
     Route::post('auth', [ 'as' => 'api.v1.users.login', 'uses' => 'Tappleby\AuthToken\AuthTokenController@store']);
-    Route::delete('auth', [ 'as' => 'api.v1.users.logout', 'uses' => 'Tappleby\AuthToken\AuthTokenController@destroy']);
 
-    Route::get('users/{user}', [ 'as' => 'api.v1.users.show', 'uses' => 'Tappleby\AuthToken\AuthTokenController@index']);
+    Route::group(array('before' => 'auth.token'), function () {
 
-
-    Route::post('articles/extractFromUrl', [ 'as' => 'articles.extractFromUrl', 'uses' => 'ArticlesController@extractFromUrl']);
-    Route::get('articles/user/{user}', [ 'as' => 'articles.user', 'uses' => 'ArticlesController@user']);
-    Route::get('articles/search', [ 'as' => 'articles.search', 'uses' => 'ArticlesController@search']);
-    Route::resource('articles', 'ArticlesController');
+        Route::get('auth', [ 'as' => 'api.v1.users.get', 'uses' => 'Tappleby\AuthToken\AuthTokenController@index']);
+        Route::delete('auth', [ 'as' => 'api.v1.users.logout', 'uses' => 'Tappleby\AuthToken\AuthTokenController@destroy']);
+        Route::get('users/{user}', [ 'as' => 'api.v1.users.show', 'uses' => 'Tappleby\AuthToken\AuthTokenController@index']);
 
 
-    Route::resource('categories', 'CategoriesController');
-    Route::get('categories/user/{user}', [ 'as' => 'categories.user', 'uses' => 'CategoriesController@user']);
-    Route::get('categories/search/{query}', [ 'as' => 'categories.search', 'uses' => 'CategoriesController@search']);
+        Route::post('articles/extractFromUrl', [ 'as' => 'articles.extractFromUrl', 'uses' => 'ArticlesController@extractFromUrl']);
+        Route::get('articles/user/{user}', [ 'as' => 'articles.user', 'uses' => 'ArticlesController@user']);
+        Route::get('articles/search', [ 'as' => 'articles.search', 'uses' => 'ArticlesController@search']);
+        Route::resource('articles', 'ArticlesController');
 
 
-    Route::resource('notes', 'NotesController');
+        Route::resource('categories', 'CategoriesController');
+        Route::get('categories/user/{user}', [ 'as' => 'categories.user', 'uses' => 'CategoriesController@user']);
+        Route::get('categories/search/{query}', [ 'as' => 'categories.search', 'uses' => 'CategoriesController@search']);
 
+
+        Route::resource('notes', 'NotesController');
+
+    });
 });
+

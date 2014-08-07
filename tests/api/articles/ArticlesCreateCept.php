@@ -10,6 +10,7 @@ $body  = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in dolor s
 $title = 'Lorem ipsum dolor sit amet';
 
 $I = new Ninja($scenario);
+$I->login('admin', 'admin');
 $I->wantTo('Create an article');
 $I->call('articles', 'POST', array(
     'author_id'   => 1,
