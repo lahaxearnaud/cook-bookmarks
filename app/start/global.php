@@ -135,8 +135,6 @@ App::bind('NotesController', function ($app) {
     );
 });
 
-
-
 /*
 |--------------------------------------------------------------------------
 | Observers
@@ -148,3 +146,5 @@ Category::observe(new Observers\Models\CategoryObserver(new ArticleIndexer()));
 Note::observe(new Observers\Models\NoteObserver(new ArticleIndexer()));
 
 Event::subscribe(new Observers\Repositories\ArticlesRepositoryObserver);
+Event::subscribe(new Observers\Repositories\CategoriesRepositoryObserver);
+Event::subscribe(new Observers\Repositories\NotesRepositoryObserver);

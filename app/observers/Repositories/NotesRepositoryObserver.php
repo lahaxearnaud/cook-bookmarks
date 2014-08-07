@@ -8,10 +8,10 @@
 
 namespace Observers\Repositories;
 
-class ArticlesRepositoryObserver extends Observer
+class NotesRepositoryObserver extends Observer
 {
     protected function getCacheTag()
     {
-        return 'article';
+        return 'note';
     }
 }

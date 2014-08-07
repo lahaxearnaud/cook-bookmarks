@@ -40,7 +40,7 @@ abstract class Observer implements ObserverInterface
     /**
 	 * @param  Model  $model
 	 */
-    public abstract function updated(Model $model);
+    abstract public function updated(Model $model);
 
     /**
 	 * @param  Model  $model
@@ -52,7 +52,7 @@ abstract class Observer implements ObserverInterface
     /**
 	 * @param  Model  $model
 	 */
-    public abstract function created(Model $model);
+    abstract public function created(Model $model);
 
     /**
 	 * @param  Model  $model
@@ -64,7 +64,7 @@ abstract class Observer implements ObserverInterface
     /**
 	 * @param  Model  $model
 	 */
-    public abstract function deleted(Model $model);
+    abstract public function deleted(Model $model);
 
     /**
 	 * @param  Model  $model
@@ -76,6 +76,6 @@ abstract class Observer implements ObserverInterface
     /**
 	 * @param  Model  $model
 	 */
-    public abstract function restored(Model $model);
+    abstract public function restored(Model $model);
 
 }

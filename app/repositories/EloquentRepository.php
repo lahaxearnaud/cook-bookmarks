@@ -34,8 +34,7 @@ abstract class EloquentRepository implements RepositoryInterface
 	 */
     public function all()
     {
-
-        return $this->cacheWrapper('all', function() {
+        return $this->cacheWrapper('all', function () {
 
             return $this->model->all();
         });
@@ -48,8 +47,7 @@ abstract class EloquentRepository implements RepositoryInterface
 	 */
     public function in($ids)
     {
-
-        return $this->cacheWrapper('in', function() use ($ids) {
+        return $this->cacheWrapper('in', function () use ($ids) {
 
             return $this->model->whereIn('id', $ids)->get();
         }, [$ids]);
@@ -63,8 +61,7 @@ abstract class EloquentRepository implements RepositoryInterface
 	 */
     public function find($id)
     {
-
-        return $this->cacheWrapper('find', function() use ($id) {
+        return $this->cacheWrapper('find', function () use ($id) {
             $query = $this->make();
 
             return $query->findOrFail($id);
@@ -94,8 +91,7 @@ abstract class EloquentRepository implements RepositoryInterface
 	 */
     public function findFirstBy($key, $value, $operator = '=')
     {
-
-        return $this->cacheWrapper('findFirstBy', function() use ($key, $value, $operator){
+        return $this->cacheWrapper('findFirstBy', function () use ($key, $value, $operator) {
             $query = $this->make();
 
             return $query->where($key, $operator, $value)->firstOrFail();
@@ -112,8 +108,7 @@ abstract class EloquentRepository implements RepositoryInterface
 	 */
     public function findAllBy($key, $value, $operator = '=')
     {
-
-        return $this->cacheWrapper('findAllBy', function() use ($key, $value, $operator){
+        return $this->cacheWrapper('findAllBy', function () use ($key, $value, $operator) {
             $query = $this->make();
 
             return $query->where($key, $operator, $value)->get();
@@ -128,8 +123,7 @@ abstract class EloquentRepository implements RepositoryInterface
 	 */
     public function has($relation)
     {
-
-        return $this->cacheWrapper('has', function() use ($relation){
+        return $this->cacheWrapper('has', function () use ($relation) {
             $query = $this->make();
 
             return $query->has($relation)->get();
@@ -169,7 +163,7 @@ abstract class EloquentRepository implements RepositoryInterface
 	 */
     public function update($id, array $data)
     {
-        return $this->cacheWrapper('has', function() use ($id, $data){
+        return $this->cacheWrapper('has', function () use ($id, $data) {
             $model = $this->find($id);
             foreach ($data as $key => $value) {
                 $model->{$key} =  $value;
@@ -186,8 +180,7 @@ abstract class EloquentRepository implements RepositoryInterface
 	 */
     public function delete($id)
     {
-
-        return $this->cacheWrapper('has', function() use ($id){
+        return $this->cacheWrapper('has', function () use ($id) {
             $model = $this->find($id);
 
             return $model->delete();
@@ -200,7 +193,7 @@ abstract class EloquentRepository implements RepositoryInterface
 	 */
     public function create(array $data)
     {
-        return $this->cacheWrapper('has', function() use ($data){
+        return $this->cacheWrapper('has', function () use ($data) {
             $class = get_class($this->model);
             $model = new $class($data);
 
@@ -235,18 +228,17 @@ abstract class EloquentRepository implements RepositoryInterface
         return $this->model;
     }
 
-
     protected function cacheWrapper($eventName, \Closure $action, array $parametersToObserver = array())
     {
         $results = \Event::fire('article.'.$eventName . '.before', [$parametersToObserver]);
         if($results) {
-
             return current($results);
         }
 
         $results =  $action();
 
         \Event::fire($eventName . '.after', [$parametersToObserver, $results]);
+
         return $results;
     }
 }
