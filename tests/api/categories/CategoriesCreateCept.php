@@ -9,6 +9,7 @@
 $title = 'Dummy title';
 
 $I = new Ninja($scenario);
+$I->login('admin', 'admin');
 $I->wantTo('Create an category');
 $I->call('categories', 'POST', array(
     'user_id'   => 1,

@@ -9,6 +9,7 @@
 $title = uniqid('title-');
 
 $I = new Ninja($scenario);
+$I->login('admin', 'admin');
 $I->wantTo('update an category');
 $I->call('categories/2', 'PUT', array(
     'name' => $title,

@@ -13,6 +13,7 @@ $body  = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '.$specialWor
 $title = 'Lorem ipsum dolor sit amet '.rand(1, 100000);
 
 $I = new Ninja($scenario);
+$I->login('admin', 'admin');
 $I->wantTo('Create an article');
 $I->call('articles', 'POST', array(
     'author_id'   => 1,

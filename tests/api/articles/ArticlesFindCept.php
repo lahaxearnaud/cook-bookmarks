@@ -7,6 +7,7 @@
  */
 
 $I = new Ninja($scenario);
+$I->login('admin', 'admin');
 $I->wantTo('get an article');
 
 $I->amGoingTo('Get an article with a good id');

@@ -9,6 +9,7 @@
 $body = 'Dummy title';
 
 $I = new Ninja($scenario);
+$I->login('admin', 'admin');
 $I->wantTo('Create an note');
 $I->call('notes', 'POST', array(
     'user_id'   => 1,
