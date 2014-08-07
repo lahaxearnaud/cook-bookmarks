@@ -51,27 +51,27 @@ class ArticlesRepositoryObserver extends Observer {
 
     public function beforePaginate ($event)
     {
-        // TODO: Implement beforePaginate() method.
+        return false;
     }
 
     public function beforePaginateWhere ($event)
     {
-        // TODO: Implement beforePaginateWhere() method.
+        return false;
     }
 
     public function beforeUpdate ($event)
     {
-        // TODO: Implement beforeUpdate() method.
+        return false;
     }
 
     public function beforeDelete ($event)
     {
-        // TODO: Implement beforeDelete() method.
+        return false;
     }
 
     public function beforeCreate ($event)
     {
-        // TODO: Implement beforeCreate() method.
+        return false;
     }
 
 

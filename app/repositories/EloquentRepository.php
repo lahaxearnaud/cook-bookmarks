@@ -169,13 +169,15 @@ abstract class EloquentRepository implements RepositoryInterface
 	 */
     public function update($id, array $data)
     {
-        $model = $this->find($id);
-        foreach ($data as $key => $value) {
-            $model->{$key} =  $value;
-        }
-        $model->updateUniques();
+        return $this->cacheWrapper('has', function() use ($id, $data){
+            $model = $this->find($id);
+            foreach ($data as $key => $value) {
+                $model->{$key} =  $value;
+            }
+            $model->updateUniques();
 
-        return $model;
+            return $model;
+        }, [$id, $data]);
     }
 
     /**
@@ -184,9 +186,12 @@ abstract class EloquentRepository implements RepositoryInterface
 	 */
     public function delete($id)
     {
-        $model = $this->find($id);
 
-        return $model->delete();
+        return $this->cacheWrapper('has', function() use ($id){
+            $model = $this->find($id);
+
+            return $model->delete();
+        }, [$id]);
     }
 
     /**
@@ -195,12 +200,14 @@ abstract class EloquentRepository implements RepositoryInterface
 	 */
     public function create(array $data)
     {
-        $class = get_class($this->model);
-        $model = new $class($data);
+        return $this->cacheWrapper('has', function() use ($data){
+            $class = get_class($this->model);
+            $model = new $class($data);
 
-        $model->save();
+            $model->save();
 
-        return $model;
+            return $model;
+        }, [$data]);
     }
 
     /**
