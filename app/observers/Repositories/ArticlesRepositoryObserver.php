@@ -85,32 +85,32 @@ class ArticlesRepositoryObserver extends Observer {
 
     public function afterFind ($params, $data)
     {
-        Cache::tags($this->getCacheTag())->put('find.'.$this->paramToString($params), $data, $expiresAt = Carbon::now()->addMinutes(10));
+        Cache::tags($this->getCacheTag())->put('find.'.$this->paramToString($params), $data, Carbon::now()->addMinutes(10));
     }
 
     public function afterFindFirstBy ($params, $data)
     {
-        Cache::tags($this->getCacheTag())->put('findFirstBy.'.$this->paramToString($params), $data, $expiresAt = Carbon::now()->addMinutes(10));
+        Cache::tags($this->getCacheTag())->put('findFirstBy.'.$this->paramToString($params), $data, Carbon::now()->addMinutes(10));
     }
 
     public function afterFindAllBy ($params, $data)
     {
-        Cache::tags($this->getCacheTag())->put('findAllBy.'.$this->paramToString($params), $data, $expiresAt = Carbon::now()->addMinutes(10));
+        Cache::tags($this->getCacheTag())->put('findAllBy.'.$this->paramToString($params), $data, Carbon::now()->addMinutes(10));
     }
 
     public function afterHas ($params, $data)
     {
-        Cache::tags($this->getCacheTag())->put('has.'.$this->paramToString($params), $data, $expiresAt = Carbon::now()->addMinutes(10));
+        Cache::tags($this->getCacheTag())->put('has.'.$this->paramToString($params), $data, Carbon::now()->addMinutes(10));
     }
 
     public function afterPaginate ($params, $data)
     {
-        // TODO: Implement afterPaginate() method.
+        return false;
     }
 
     public function afterPaginateWhere ($params, $data)
     {
-        // TODO: Implement afterPaginateWhere() method.
+        return false;
     }
 
     public function afterUpdate ($params, $data)
