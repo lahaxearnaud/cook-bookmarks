@@ -238,7 +238,7 @@ abstract class EloquentRepository implements RepositoryInterface
 
     protected function cacheWrapper($eventName, \Closure $action, array $parametersToObserver = array())
     {
-        $results = \Event::fire($eventName . '.before', [$parametersToObserver]);
+        $results = \Event::fire('article.'.$eventName . '.before', [$parametersToObserver]);
         if($results) {
 
             return current($results);

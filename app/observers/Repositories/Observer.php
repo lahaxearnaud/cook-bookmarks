@@ -4,6 +4,8 @@ namespace Observers\Repositories;
 abstract class Observer implements ObserverInterface
 {
 
+    protected abstract function getCacheTag();
+
     /**
      * Register the listeners for the subscriber.
      *
@@ -14,27 +16,27 @@ abstract class Observer implements ObserverInterface
     {
         $className = get_class($this);
 
-        $events->listen('all.before', $className . '@beforeAll');
-        $events->listen('find.before', $className . '@beforeFind');
-        $events->listen('findFirstBy.before', $className . '@beforeFindFirstBy');
-        $events->listen('findAllBy.before', $className . '@beforeFindAllBy');
-        $events->listen('has.before', $className . '@beforeHas');
-        $events->listen('paginate.before', $className . '@beforePaginate');
-        $events->listen('paginateWhere.before', $className . '@beforePaginateWhere');
-        $events->listen('update.before', $className . '@beforeUpdate');
-        $events->listen('delete.before', $className . '@beforeDelete');
-        $events->listen('create.before', $className . '@beforeCreate');
+        $events->listen($this->getCacheTag().'.all.before', $className . '@beforeAll');
+        $events->listen($this->getCacheTag().'.find.before', $className . '@beforeFind');
+        $events->listen($this->getCacheTag().'.findFirstBy.before', $className . '@beforeFindFirstBy');
+        $events->listen($this->getCacheTag().'.findAllBy.before', $className . '@beforeFindAllBy');
+        $events->listen($this->getCacheTag().'.has.before', $className . '@beforeHas');
+        $events->listen($this->getCacheTag().'.paginate.before', $className . '@beforePaginate');
+        $events->listen($this->getCacheTag().'.paginateWhere.before', $className . '@beforePaginateWhere');
+        $events->listen($this->getCacheTag().'.update.before', $className . '@beforeUpdate');
+        $events->listen($this->getCacheTag().'.delete.before', $className . '@beforeDelete');
+        $events->listen($this->getCacheTag().'.create.before', $className . '@beforeCreate');
 
-        $events->listen('all.after', $className . '@afterAll');
-        $events->listen('find.after', $className . '@afterFind');
-        $events->listen('findFirstBy.after', $className . '@afterFindFirstBy');
-        $events->listen('findAllBy.after', $className . '@afterFindAllBy');
-        $events->listen('has.after', $className . '@afterHas');
-        $events->listen('paginate.after', $className . '@afterPaginate');
-        $events->listen('paginateWhere.after', $className . '@afterPaginateWhere');
-        $events->listen('update.after', $className . '@afterUpdate');
-        $events->listen('delete.after', $className . '@afterDelete');
-        $events->listen('create.after', $className . '@afterCreate');
+        $events->listen($this->getCacheTag().'.all.after', $className . '@afterAll');
+        $events->listen($this->getCacheTag().'.find.after', $className . '@afterFind');
+        $events->listen($this->getCacheTag().'.findFirstBy.after', $className . '@afterFindFirstBy');
+        $events->listen($this->getCacheTag().'.findAllBy.after', $className . '@afterFindAllBy');
+        $events->listen($this->getCacheTag().'.has.after', $className . '@afterHas');
+        $events->listen($this->getCacheTag().'.paginate.after', $className . '@afterPaginate');
+        $events->listen($this->getCacheTag().'.paginateWhere.after', $className . '@afterPaginateWhere');
+        $events->listen($this->getCacheTag().'.update.after', $className . '@afterUpdate');
+        $events->listen($this->getCacheTag().'.delete.after', $className . '@afterDelete');
+        $events->listen($this->getCacheTag().'.create.after', $className . '@afterCreate');
 
     }
 }
