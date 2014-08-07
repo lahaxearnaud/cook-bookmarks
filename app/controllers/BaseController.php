@@ -33,7 +33,7 @@ abstract class BaseController extends Controller
      */
     public function index()
     {
-        return $this->repository->paginate(20);
+        return $this->repository->all();
     }
 
     /**

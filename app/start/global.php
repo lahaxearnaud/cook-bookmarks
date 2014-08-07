@@ -99,19 +99,19 @@ App::bind('ArticleSeeker', function ($app) {
     return new \Repositories\Seekers\ArticleSeeker(new Article());
 });
 
-App::bind('ArticlesRepository', function ($app) {
+App::singleton('ArticlesRepository', function ($app) {
     return new Repositories\ArticlesRepository(new Article(), array('author', 'category'), App::make('ArticleSeeker'));
 });
 
-App::bind('LogsRepository', function ($app) {
+App::singleton('LogsRepository', function ($app) {
     return new Repositories\LogsRepository(new ApiLog());
 });
 
-App::bind('CategoriesRepository', function ($app) {
+App::singleton('CategoriesRepository', function ($app) {
     return new Repositories\CategoriesRepository(new Category(), array('user'));
 });
 
-App::bind('NotesRepository', function ($app) {
+App::singleton('NotesRepository', function ($app) {
     return new Repositories\NotesRepository(new Note(), array('user'));
 });
 
@@ -135,6 +135,8 @@ App::bind('NotesController', function ($app) {
     );
 });
 
+
+
 /*
 |--------------------------------------------------------------------------
 | Observers
@@ -144,3 +146,5 @@ App::bind('NotesController', function ($app) {
 Article::observe(new Observers\Models\ArticleObserver(new ArticleIndexer()));
 Category::observe(new Observers\Models\CategoryObserver(new ArticleIndexer()));
 Note::observe(new Observers\Models\NoteObserver(new ArticleIndexer()));
+
+Event::subscribe(new Observers\Repositories\ArticlesRepositoryObserver);

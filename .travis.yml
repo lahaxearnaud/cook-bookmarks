@@ -10,6 +10,7 @@ addons:
 
 services:
   - elasticsearch
+  - redis-server
 
 before_script:
   - mkdir tests/_log
