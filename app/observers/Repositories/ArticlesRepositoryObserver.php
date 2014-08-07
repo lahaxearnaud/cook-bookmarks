@@ -80,7 +80,7 @@ class ArticlesRepositoryObserver extends Observer {
 
     public function afterAll ($params, $data)
     {
-        Cache::tags($this->getCacheTag())->put('all', $data, $expiresAt = Carbon::now()->addMinutes(10));
+        Cache::tags($this->getCacheTag())->put('all', $data, Carbon::now()->addMinutes(10));
     }
 
     public function afterFind ($params, $data)
