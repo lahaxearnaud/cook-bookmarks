@@ -6,7 +6,19 @@
  * Time: 12:28
  */
 
+use \Repositories\RepositoryInterface;
+
 abstract class RessourceController extends BaseController{
+
+    /**
+     * @var RepositoryInterface
+     */
+    protected $repository;
+
+    public function __construct(RepositoryInterface $repository)
+    {
+        $this->repository = $repository;
+    }
 
     /**
      * Display a listing of the resource.
