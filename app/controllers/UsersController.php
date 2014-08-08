@@ -8,6 +8,15 @@ use \Repositories\RepositoryInterface;
  */
 class UsersController  extends BaseController
 {
+    /**
+     * @var RepositoryInterface
+     */
+    protected $repository;
+
+    public function __construct(RepositoryInterface $repository)
+    {
+        $this->repository = $repository;
+    }
 
     /**
      * @ApiDescription(description="Create a new user")
