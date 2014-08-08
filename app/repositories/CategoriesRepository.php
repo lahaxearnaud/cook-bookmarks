@@ -23,18 +23,21 @@ class CategoriesRepository extends EloquentRepository
 	 */
     public function create(array $data)
     {
-        $author = null;
-        if(isset($data['user_id'])) {
-            $author = \User::findOrFail($data['user_id']);
-        }else {
-            $author = $data['user'];
-            unset($data['user']);
-        }
+        return $this->cacheWrapper('create', function () use ($data) {
 
-        $model = new \Category($data);
-        $model->user()->associate($author);
-        $model->save();
+            $author = NULL;
+            if (isset($data['user_id'])) {
+                $author = \User::findOrFail($data['user_id']);
+            } else {
+                $author = $data['user'];
+                unset($data['user']);
+            }
 
-        return $model;
+            $model = new \Category($data);
+            $model->user()->associate($author);
+            $model->save();
+
+            return $model;
+        });
     }
 }

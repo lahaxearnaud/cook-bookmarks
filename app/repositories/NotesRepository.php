@@ -23,28 +23,31 @@ class NotesRepository extends EloquentRepository
 	 */
     public function create(array $data)
     {
-        $user = null;
-        if(isset($data['user_id'])) {
-            $user = \User::findOrFail($data['user_id']);
-        }else {
-            $user = $data['user'];
-            unset($data['user']);
-        }
+        return $this->cacheWrapper('create', function () use ($data) {
 
-        $article = null;
-        if(isset($data['article_id'])) {
-            $article = \Article::findOrFail($data['article_id']);
-        }else {
-            $article = $data['article'];
-            unset($data['article']);
-        }
+            $user = NULL;
+            if (isset($data['user_id'])) {
+                $user = \User::findOrFail($data['user_id']);
+            } else {
+                $user = $data['user'];
+                unset($data['user']);
+            }
 
-        $model = new \Note($data);
-        $model->user()->associate($user);
-        $model->article()->associate($article);
+            $article = NULL;
+            if (isset($data['article_id'])) {
+                $article = \Article::findOrFail($data['article_id']);
+            } else {
+                $article = $data['article'];
+                unset($data['article']);
+            }
 
-        $model->save();
+            $model = new \Note($data);
+            $model->user()->associate($user);
+            $model->article()->associate($article);
 
-        return $model;
+            $model->save();
+
+            return $model;
+        });
     }
 }

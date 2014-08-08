@@ -6,7 +6,7 @@ use \Repositories\RepositoryInterface;
  * @ApiRoute(name="/articles")
  * @ApiSector(name="Articles")
  */
-class ArticlesController extends \BaseController
+class ArticlesController extends \RessourceController
 {
 
     /**

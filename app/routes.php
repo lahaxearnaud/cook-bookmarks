@@ -16,8 +16,10 @@ Route::model('article', 'Article');
 Route::model('category', 'Category');
 Route::model('note', 'Note');
 
+
 Route::group(array('prefix' => 'api/v1'), function () {
     Route::post('auth', [ 'as' => 'api.v1.users.login', 'uses' => 'Tappleby\AuthToken\AuthTokenController@store']);
+    Route::post('users/subscribe', [ 'as' => 'user.subscribe', 'uses' => 'UsersController@subscribe']);
 
     Route::group(array('before' => 'auth.token'), function () {
 
@@ -38,6 +40,8 @@ Route::group(array('prefix' => 'api/v1'), function () {
 
 
         Route::resource('notes', 'NotesController');
+
+        Route::post('users/password', [ 'as' => 'user.password', 'uses' => 'UsersController@changePassword']);
 
     });
 });

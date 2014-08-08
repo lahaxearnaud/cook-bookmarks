@@ -41,11 +41,7 @@ class User extends BaseModel implements UserInterface, RemindableInterface, Hype
 	 */
     protected $hidden = array('password', 'remember_token', 'created_at', 'updated_at');
 
-    public function getLinksAttribute()
-    {
-        return array(
-            'show'   => $this->findUrl(),
-        );
-    }
+    protected $guarded = array();
 
+    protected $appends = array();
 }

@@ -50,28 +50,30 @@ class ArticlesRepository extends EloquentRepository
 	 */
     public function create(array $data)
     {
-        $author = null;
-        if(isset($data['author_id'])) {
-            $author = \User::findOrFail($data['author_id']);
-        }else {
-            $author = $data['author'];
-            unset($data['author']);
-        }
+        return $this->cacheWrapper('create', function () use ($data) {
+            $author = NULL;
+            if (isset($data['author_id'])) {
+                $author = \User::findOrFail($data['author_id']);
+            } else {
+                $author = $data['author'];
+                unset($data['author']);
+            }
 
-        $category = null;
-        if(isset($data['category_id'])) {
-            $category = \Category::findOrFail($data['category_id']);
-        }else {
-            $category = $data['category'];
-            unset($data['category']);
-        }
+            $category = NULL;
+            if (isset($data['category_id'])) {
+                $category = \Category::findOrFail($data['category_id']);
+            } else {
+                $category = $data['category'];
+                unset($data['category']);
+            }
 
-        $model = new \Article($data);
-        $model->author()->associate($author);
-        $model->category()->associate($category);
+            $model = new \Article($data);
+            $model->author()->associate($author);
+            $model->category()->associate($category);
 
-        $model->save();
+            $model->save();
 
-        return $model;
+            return $model;
+        });
     }
 }

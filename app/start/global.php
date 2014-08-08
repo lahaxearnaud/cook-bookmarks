@@ -115,6 +115,10 @@ App::singleton('NotesRepository', function ($app) {
     return new Repositories\NotesRepository(new Note(), array('user'));
 });
 
+App::singleton('UsersRepository', function ($app) {
+    return new Repositories\UsersRepository(new User());
+});
+
 App::bind('ArticlesController', function ($app) {
     return new ArticlesController(
         App::make('ArticlesRepository'),
@@ -132,6 +136,12 @@ App::bind('CategoriesController', function ($app) {
 App::bind('NotesController', function ($app) {
     return new NotesController(
         App::make('NotesRepository')
+    );
+});
+
+App::bind('UsersController', function ($app) {
+    return new UsersController(
+        App::make('UsersRepository')
     );
 });
 

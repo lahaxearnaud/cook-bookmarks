@@ -4,7 +4,7 @@
  * @ApiRoute(name="/categories")
  * @ApiSector(name="Categories")
  */
-class CategoriesController extends \BaseController
+class CategoriesController extends \RessourceController
 {
     /**
      * @ApiDescription(description="Create a new category")

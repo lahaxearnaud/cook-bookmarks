@@ -4,7 +4,7 @@
  * @ApiRoute(name="/notes")
  * @ApiSector(name="Notes")
  */
-class NotesController extends \BaseController
+class NotesController extends \RessourceController
 {
     /**
      * @ApiDescription(description="Create a new note")
