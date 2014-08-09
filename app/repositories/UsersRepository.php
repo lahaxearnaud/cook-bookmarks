@@ -3,8 +3,7 @@
 namespace Repositories;
 
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
-use Repositories\Seekers\ElasticSearchSeeker;
+
 
 class UsersRepository extends EloquentRepository
 {
@@ -20,20 +19,20 @@ class UsersRepository extends EloquentRepository
         return new Collection();
     }
 
-    public function create(array $data)
+    public function create (array $data)
     {
         $data['password'] = \Hash::make($data['password']);
-        $user = new \User($data);
+        $user             = new \User($data);
         $user->save();
 
         return $user;
     }
 
-    public function update($id, array $data)
+    public function update ($id, array $data)
     {
-        $user = $this->find($id);
+        $user           = $this->find($id);
         $user->password = \Hash::make($data['password']);
-        if(isset($data['email'])) {
+        if (isset($data['email'])) {
             $user->email = $data['email'];
         }
         $user->save();

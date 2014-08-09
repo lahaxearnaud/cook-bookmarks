@@ -1,6 +1,5 @@
 <?php
 
-use Repositories\RepositoryInterface;
 use \Illuminate\Database\Eloquent\Model;
 
 abstract class BaseController extends Controller
