@@ -65,6 +65,10 @@ class ElascticSearchInstallCommand extends Command
                     'type'     => 'string',
                     'analyzer' => 'standard',
                     'boost'    => 3.0
+                ),
+                'user'  => array(
+                    'type'     => 'integer',
+                    'analyzer' => 'standard'
                 )
             )
         );

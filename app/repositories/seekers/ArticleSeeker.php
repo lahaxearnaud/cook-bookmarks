@@ -28,7 +28,12 @@ class ArticleSeeker extends ElasticSearchSeeker
         // query ElasticSearch
         $params['index']                                  = \Config::get('app.index');
         $params['type']                                   = strtolower(get_class($this->model));
-        $params['body']['query']['query_string']['query'] = $query;
+        if(isset($parameters['user'])) {
+            $params['body']['query']['bool']['must'][]['term'][$params['type'].'.user']  = $parameters['user'];
+            $params['body']['query']['bool']['must'][]['query_string']['query'] = $query;
+        }else{
+            $params['body']['query']['query_string']['query'] = $query;
+        }
         $result = \Es::search($params);
 
         // handle no result
