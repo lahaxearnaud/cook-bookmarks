@@ -54,6 +54,7 @@ App::error(function (AuthTokenNotAuthorizedException $exception) {
 
 Event::listen('auth.token.valid', function($user)
 {
+    dd($user);
     //Token is valid, set the user on auth system.
     Auth::setUser($user);
 });
