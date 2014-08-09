@@ -52,9 +52,9 @@ App::error(function (AuthTokenNotAuthorizedException $exception) {
     return Response::json(array('error' => $exception->getMessage()), $exception->getCode());
 });
 
+
 Event::listen('auth.token.valid', function($user)
 {
-    dd($user);
     //Token is valid, set the user on auth system.
     Auth::setUser($user);
 });
