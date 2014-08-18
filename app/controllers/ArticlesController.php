@@ -35,7 +35,7 @@ class ArticlesController extends \RessourceController
     {
         $model = $this->repository->create(Input::all());
 
-        return $this->generateResponse($model->errors(), $this->generateLocation($model), 201);
+        return $this->generateResponse($model, $model->errors(), $this->generateLocation($model), 201);
     }
 
     /**
@@ -48,7 +48,7 @@ class ArticlesController extends \RessourceController
     {
         $model = $this->repository->update($id, Input::all());
 
-        return $this->generateResponse($model->errors(), $this->generateLocation($model), 200);
+        return $this->generateResponse($model, $model->errors(), $this->generateLocation($model), 200);
     }
 
     /**

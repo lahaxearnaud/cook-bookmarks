@@ -44,7 +44,7 @@ class ElascticSearchInstallCommand extends Command
                 'title'      => array(
                     'type'     => 'string',
                     'analyzer' => 'standard',
-                    'boost'    => 4.0
+                    'boost'    => 10.0
                 ),
                 'author'     => array(
                     'type'     => 'string',
@@ -54,21 +54,35 @@ class ElascticSearchInstallCommand extends Command
                 'notes'   => array(
                     'type'     => 'string',
                     'analyzer' => 'standard',
-                    'boost'    => 2.0
+                    'boost'    => 6.0
                 ),
                 'category' => array(
                     'type'     => 'string',
                     'analyzer' => 'standard',
                     'boost'    => 1
                 ),
+                'category_id' => array(
+                    'type'     => 'integer',
+                    'analyzer' => 'standard',
+                    'boost'    => 1
+                ),
                 'indexable'  => array(
                     'type'     => 'string',
                     'analyzer' => 'standard',
-                    'boost'    => 3.0
+                    'boost'    => 8.0
                 ),
                 'user'  => array(
                     'type'     => 'integer',
-                    'analyzer' => 'standard'
+                    'analyzer' => 'standard',
+                    'boost'    => 3
+                ),
+                'autocomplete'  => array(
+                    'type'     => 'completion',
+                    "index_analyzer" => "standard",
+                    "search_analyzer" => "standard",
+                    "preserve_position_increments" => false,
+                    "preserve_separators" => false,
+                    "payloads" => true
                 )
             )
         );

@@ -30,7 +30,7 @@ class Article extends BaseModel implements HyperMediaInterface
 {
     public static $rules = array(
         'title'     => 'required|min:5',
-        'url'       => 'required|active_url',
+        'url'       => 'required|url',
         'slug'      => 'required|unique:articles',
         'indexable' => 'required',
         'body'      => 'required|min:5',

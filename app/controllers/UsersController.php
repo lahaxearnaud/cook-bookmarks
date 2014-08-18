@@ -46,7 +46,7 @@ class UsersController  extends BaseController
 
         $user = $this->repository->create(Input::all());
 
-        return $this->generateResponse($user->errors(), [], 200);
+        return $this->generateResponse($user, $user->errors(), [], 200);
     }
 
     /**
@@ -82,7 +82,7 @@ class UsersController  extends BaseController
             'password' => Input::get('newPassword')
         ));
 
-        return $this->generateResponse($user->errors());
+        return $this->generateResponse($user, $user->errors());
     }
 
 }

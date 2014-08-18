@@ -67,6 +67,14 @@ class ArticlesRepository extends EloquentRepository
                 unset($data['category']);
             }
 
+            if(!isset($data['slug'])) {
+                $data['slug'] = \Str::slug($data['title']).'-'.uniqid();
+            }
+
+            if(!isset($data['indexable'])) {
+                $data['indexable'] = $data['body'];
+            }
+
             $model = new \Article($data);
             $model->author()->associate($author);
             $model->category()->associate($category);

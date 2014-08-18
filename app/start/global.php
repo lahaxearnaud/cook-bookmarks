@@ -129,7 +129,8 @@ App::bind('ArticlesController', function ($app) {
 
 App::bind('CategoriesController', function ($app) {
     return new CategoriesController(
-        App::make('CategoriesRepository')
+        App::make('CategoriesRepository'),
+        App::make('ArticlesRepository')
     );
 });
 
@@ -142,6 +143,12 @@ App::bind('NotesController', function ($app) {
 App::bind('UsersController', function ($app) {
     return new UsersController(
         App::make('UsersRepository')
+    );
+});
+
+App::bind('AutocompleteController', function ($app) {
+    return new AutocompleteController(
+        App::make('ArticleSeeker')
     );
 });
 

@@ -5,12 +5,13 @@ use \Illuminate\Database\Eloquent\Model;
 abstract class BaseController extends Controller
 {
 
-    protected function generateResponse($errors, $headers = array(), $httpCode = 200)
+    protected function generateResponse(Model $model, $errors, $headers = array(), $httpCode = 200)
     {
         if(count($errors) === 0) {
 
             $response = Response::json(array(
-                'success' => true
+                'success' => true,
+                'id' => $model->id,
             ), $httpCode);
 
             if(!empty($headers)) {
@@ -27,9 +28,10 @@ abstract class BaseController extends Controller
         $routeName = 'api.v1.'.$model->getTable().'.show';
 
         return array(
-             "location" =>  route($routeName, array(
+            "Location" =>  route($routeName, array(
                 'id' => $model->id
-            ))
+            )),
+            'Id' => $model->id
         );
     }
 }

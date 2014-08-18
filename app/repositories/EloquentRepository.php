@@ -48,8 +48,9 @@ abstract class EloquentRepository implements RepositoryInterface
     public function in($ids)
     {
         return $this->cacheWrapper('in', function () use ($ids) {
+            $query = $this->make();
 
-            return $this->model->whereIn('id', $ids)->get();
+            return $query->whereIn('id', $ids)->get();
         }, [$ids]);
     }
 
@@ -163,7 +164,7 @@ abstract class EloquentRepository implements RepositoryInterface
 	 */
     public function update($id, array $data)
     {
-        return $this->cacheWrapper('has', function () use ($id, $data) {
+        return $this->cacheWrapper('update', function () use ($id, $data) {
             $model = $this->find($id);
             foreach ($data as $key => $value) {
                 $model->{$key} =  $value;
@@ -180,7 +181,7 @@ abstract class EloquentRepository implements RepositoryInterface
 	 */
     public function delete($id)
     {
-        return $this->cacheWrapper('has', function () use ($id) {
+        return $this->cacheWrapper('delete', function () use ($id) {
             $model = $this->find($id);
 
             return $model->delete();
@@ -193,7 +194,7 @@ abstract class EloquentRepository implements RepositoryInterface
 	 */
     public function create(array $data)
     {
-        return $this->cacheWrapper('has', function () use ($data) {
+        return $this->cacheWrapper('create', function () use ($data) {
             $class = get_class($this->model);
             $model = new $class($data);
 

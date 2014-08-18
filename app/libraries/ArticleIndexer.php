@@ -21,7 +21,12 @@ class ArticleIndexer
         $data['indexable'] = $article->indexable;
         $data['author']    = $article->author->username;
         $data['category']  = $article->category->name;
+        $data['category_id']  = $article->category->id;
         $data['user']      = $article->author->id;
+        $data['autocomplete'] = [
+            'input' => $article->title,
+            'payload' => [ 'id' => $article->id ]
+        ];
 
         $notes = array();
         foreach ($article->notes as $note) {
