@@ -24,7 +24,8 @@ class ArticleIndexer
         $data['category_id']  = $article->category->id;
         $data['user']      = $article->author->id;
         $data['autocomplete'] = [
-            'input' => $article->title,
+            'input' => preg_split("/[\s,-:.]+/", $article->title),
+            'output' => $article->title,
             'payload' => [ 'id' => $article->id ]
         ];
 

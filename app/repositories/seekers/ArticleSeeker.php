@@ -20,6 +20,11 @@ class ArticleSeeker extends ElasticSearchSeeker
      */
     public function query ($query, array $parameters = array())
     {
+        $parameters = array_merge(array(
+            'max'    => 10,
+            'offset' => 0
+        ), $parameters);
+
         // query ElasticSearch
         $params['index']                                  = \Config::get('app.index');
         $params['type']                                   = strtolower(get_class($this->model));
