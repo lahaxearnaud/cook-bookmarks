@@ -14,6 +14,7 @@ class AddSourceDataToArticles extends Migration
     {
         Schema::table('articles', function (Blueprint $table) {
             $table->string('image');
+            $table->string('imageMiniature');
             $table->string('sourceSite');
             $table->string('sourceFavicon');
         });
@@ -28,6 +29,7 @@ class AddSourceDataToArticles extends Migration
     {
         Schema::table('articles', function (Blueprint $table) {
             $table->dropColumn('image');
+            $table->dropColumn('imageMiniature');
             $table->dropColumn('sourceSite');
             $table->dropColumn('sourceFavicon');
         });

@@ -11,6 +11,8 @@
 		"nickcernis/html-to-markdown": "2.1.*",
 		"maxhoffmann/parsedown-laravel": "dev-master",
         "fivefilters/php-readability": "dev-master",
+        "pda/pheanstalk": "2.0.*",
+        "intervention/image": "2.*",
         "tappleby/laravel-auth-token": "0.3.*"
 	},
 	"autoload": {
@@ -20,6 +22,7 @@
 			"app/models",
 			"app/libraries",
 			"app/observers",
+			"app/handlers",
 			"app/repositories",
 			"app/database/migrations",
 			"app/database/seeds",

@@ -26,7 +26,10 @@ class ArticleIndexer
         $data['autocomplete'] = [
             'input' => preg_split("/[\s,-:.]+/", $article->title),
             'output' => $article->title,
-            'payload' => [ 'id' => $article->id ]
+            'payload' => [
+                'id' => $article->id,
+                'image' => $article->imageMiniature
+            ]
         ];
 
         $notes = array();

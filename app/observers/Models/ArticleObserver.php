@@ -9,12 +9,14 @@ class ArticleObserver extends Observer
     {
         \Log::info("Article created " . $model->id);
         $this->indexer->add($model);
+        \Queue::push('UrlInformationsHandler', array('id' => $model->id));
     }
 
     public function updated(Model $model)
     {
         \Log::info("Article updated " . $model->id);
         $this->indexer->update($model);
+        \Queue::push('UrlInformationsHandler', array('id' => $model->id));
     }
 
     public function deleted(Model $model)

@@ -91,6 +91,7 @@ class ArticleSeeker extends ElasticSearchSeeker
         foreach ($result as $element) {
             $searchResults[] = [
                 'id' => $element['payload']['id'],
+                'image' => $element['payload']['image'],
                 'title' => $element['text']
             ];
         }

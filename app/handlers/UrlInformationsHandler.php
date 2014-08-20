@@ -1,4 +1,5 @@
 <?php
+use Intervention\Image\ImageManagerStatic as Image;
 
 require dirname(__FILE__).'/simple_html_dom.php';
 
@@ -14,13 +15,43 @@ class UrlInformationsHandler
             return;
         }
 
-        $articleId = $data['id'];
-        $article = Article::findOrFail($articleId);
+        $article = Article::findOrFail($data['id']);
+        $imageUrl = $this->getImage($article->url, Config::get('extractor.stopword'));
 
-        $article->image = $this->getImage($article->url, array('blank', 'header', 'social', 'facebook', 'twitter', 'logo', '1px', 'star', 'rating', 'email', 'footer', 'ytimg', 'outil', 'tool', 'ad.', 'adserv', 'pinterest', 'google', 'encart', 'reddit'));
+        Image::configure(array('driver' => 'imagick'));
+
+        $publicPath = public_path('i/'.$data['id']);
+        if(File::isDirectory($publicPath)) {
+            File::deleteDirectory($publicPath);
+        }
+
+        File::makeDirectory($publicPath, 0777, true);
+
+        $original = Image::make($imageUrl);
+        $original->save($publicPath . '/original.png');
+
+        $image = $original;
+        $image->resize(200, 200);
+        $image->save($publicPath . '/200x200.png');
+
+        $image = $original;
+        $image->resize(200, 200);
+        $image->save($publicPath . '/100x100.png');
+
+        $image = $original;
+        $image->resize(200, 200);
+        $image->save($publicPath . '/150x150.png');
+
+        $image = $original;
+        $image->resize(32, 32);
+        $image->save($publicPath . '/32x32.png');
+
+        $article->image = asset('i/'.$data['id'].'/200x200.png');
+        $article->imageMiniature = asset('i/'.$data['id'].'/32x32.png');
         $article->sourceSite = $this->getDomain($article->url);
         $article->sourceFavicon = $this->getFavicon($article->url);
-        $article->save();
+        $article->updateUniques();
+
 
         $job->delete();
     }
@@ -131,13 +162,13 @@ class UrlInformationsHandler
         return true;
     }
 
-    public function getContext() {
+    protected function getContext() {
         $context = stream_context_create();
         $context  = stream_context_create(array(
               'http'=>array(
                 'method'=>"GET",
                 'header'=>"Accept-language: en\r\n" .
-                  "Cookie: foo=bar\r\n" .  
+                  "Cookie: foo=bar\r\n" .
                   "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.93 Safari/537.36\r\n" // i.e. An iPad 
                   )
               ));

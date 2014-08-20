@@ -125,7 +125,8 @@ return array(
         'Way\Generators\GeneratorsServiceProvider',
         'Tappleby\AuthToken\AuthTokenServiceProvider',
         'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
-        'Shift31\LaravelElasticsearch\LaravelElasticsearchServiceProvider'
+        'Shift31\LaravelElasticsearch\LaravelElasticsearchServiceProvider',
+        'Intervention\Image\ImageServiceProvider'
     ),
 
     /*
@@ -194,8 +195,8 @@ return array(
         'View'                            => 'Illuminate\Support\Facades\View',
         'String'                          => 'StringHelper',
         'AuthToken'                       => 'Tappleby\Support\Facades\AuthToken',
-        'AuthTokenNotAuthorizedException' => 'Tappleby\AuthToken\Exceptions\NotAuthorizedException'
-
+        'AuthTokenNotAuthorizedException' => 'Tappleby\AuthToken\Exceptions\NotAuthorizedException',
+        'Image'                           => 'Intervention\Image\Facades\Image'
     ),
 
 
