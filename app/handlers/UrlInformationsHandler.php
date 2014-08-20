@@ -1,0 +1,147 @@
+<?php
+
+require dirname(__FILE__).'/simple_html_dom.php';
+
+class UrlInformationsHandler
+{
+    public function fire($job, $data)
+    {
+        echo 'handler...';
+        if ($job->attempts() > 3) {
+            Log::error('Fail to handle job '.$job->getJobId().' '.print_r($data, true));
+            $job->delete();
+
+            return;
+        }
+
+        $articleId = $data['id'];
+        $article = Article::findOrFail($articleId);
+
+        $article->image = $this->getImage($article->url, array('blank', 'header', 'social', 'facebook', 'twitter', 'logo', '1px', 'star', 'rating', 'email', 'footer', 'ytimg', 'outil', 'tool', 'ad.', 'adserv', 'pinterest', 'google', 'encart', 'reddit'));
+        $article->sourceSite = $this->getDomain($article->url);
+        $article->sourceFavicon = $this->getFavicon($article->url);
+        $article->save();
+
+        $job->delete();
+    }
+
+    protected function getHtmlDom($url) {
+        return file_get_html($url, 0, $this->getContext());
+    }
+
+    protected function getImage($url, $stopwords) {
+        $html = $this->getHtmlDom($url);
+
+        foreach($html->find('meta') as $element) {
+            if($element->property == "og:image") {
+                return $element->content;
+            }
+        }
+
+        $ration = 0;
+        $srcBiggest = false;
+
+        foreach($html->find('img') as $element) {
+            if(!(strpos($element->src, "?")=== false)) {
+                continue;
+            }
+
+
+            if(!(strpos($element->src, "timestamp")=== false)) {
+                continue;
+            }
+
+
+            if(!pathSeamsGood($element->src, $stopwords)) {
+                continue;
+            }
+
+            $sizePrecise = false;
+            $path = $this->urlRel2abs($element->src, $url);
+
+            if(!isset($element->width) || empty($element->height)) {
+            $size = getimagesize($path);
+            }else{
+            $size = array($element->height, $element->width);
+            $sizePrecise = true;
+            }
+
+            if(is_array($size)) {
+                if($sizePrecise) {
+                    $tmpRatio = $size[0] * $size[1];
+                } else {
+                    $tmpRatio = $size[0] * $size[1] * 0.7;
+                }
+
+                if($tmpRatio > $ration && $tmpRatio < 500 * 500) {
+                    $ration = $tmpRatio;
+                    $srcBiggest = $path;
+                }
+            }
+        }
+
+        return $srcBiggest;
+    }
+
+    protected function getFavicon($url) {
+
+        $html = $this->getHtmlDom($url);
+        foreach($html->find('link') as $element) {
+            if($element->rel == "shortcut icon" || $element->rel == "icon")
+                return $this->urlRel2abs($element->href, $url);
+        }
+
+        return '';
+    }
+
+
+    protected function getDomain($url) {
+        $urlData = parse_url($url);
+
+        return $urlData['host'];
+    }
+
+
+    protected function urlRel2abs($rel, $base)
+    {
+        if (parse_url($rel, PHP_URL_SCHEME) != '') return $rel;
+        if ($rel[0]=='#' || $rel[0]=='?') return $base.$rel;
+        extract(parse_url($base));
+        $path = preg_replace('#/[^/]*$#', '', $path);
+        if ($rel[0] == '/') $path = '';
+        if (parse_url($base, PHP_URL_PORT) != ''){
+            $abs = "$host:".parse_url($base, PHP_URL_PORT)."$path/$rel";
+        }else{
+            $abs = "$host$path/$rel";
+        }
+        $re = array('#(/\.?/)#', '#/(?!\.\.)[^/]+/\.\./#');
+        for($n=1; $n>0; $abs=preg_replace($re, '/', $abs, -1, $n)) {}
+
+        return $scheme.'://'.$abs;
+    }
+
+    protected function pathSeamsGood($url, $stopwords) {
+        $url = strtolower($url);
+        foreach($stopwords as $stopword) {
+            if (strpos($url, strtolower($stopword)) !== false) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public function getContext() {
+        $context = stream_context_create();
+        $context  = stream_context_create(array(
+              'http'=>array(
+                'method'=>"GET",
+                'header'=>"Accept-language: en\r\n" .
+                  "Cookie: foo=bar\r\n" .  
+                  "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.93 Safari/537.36\r\n" // i.e. An iPad 
+                  )
+              ));
+
+        return $context;
+    }
+}
