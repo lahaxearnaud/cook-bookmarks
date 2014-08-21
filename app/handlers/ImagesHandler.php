@@ -1,10 +1,10 @@
 <?php
 use Intervention\Image\ImageManagerStatic as Image;
-
+use Illuminate\Queue\Jobs\Job;
 
 class ImagesHandler
 {
-    public function fire($job, $data)
+    public function fire(Job $job, $data)
     {
         echo 'handler...';
         if ($job->attempts() > 3) {

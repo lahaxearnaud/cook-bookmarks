@@ -1,11 +1,12 @@
 <?php
 use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Queue\Jobs\Job;
 
 require $app['path.base'].'/../vendor/simplehtmldom/simplehtmldom/simple_html_dom.php';
 
 class UrlInformationsHandler
 {
-    public function fire($job, $data)
+    public function fire(Job $job, $data)
     {
         echo 'handler...';
         if ($job->attempts() > 3) {
