@@ -1,7 +1,7 @@
 <?php
 use Intervention\Image\ImageManagerStatic as Image;
 
-require dirname(__FILE__).'/simple_html_dom.php';
+require $app['path.base'].'/../vendor/simplehtmldom/simplehtmldom/simple_html_dom.php';
 
 class UrlInformationsHandler
 {
@@ -30,27 +30,12 @@ class UrlInformationsHandler
         $original = Image::make($imageUrl);
         $original->save($publicPath . '/original.png');
 
-        $image = $original;
-        $image->resize(200, 200);
-        $image->save($publicPath . '/200x200.png');
-
-        $image = $original;
-        $image->resize(200, 200);
-        $image->save($publicPath . '/100x100.png');
-
-        $image = $original;
-        $image->resize(200, 200);
-        $image->save($publicPath . '/150x150.png');
-
-        $image = $original;
-        $image->resize(32, 32);
-        $image->save($publicPath . '/32x32.png');
-
-        $article->image = asset('i/'.$data['id'].'/200x200.png');
-        $article->imageMiniature = asset('i/'.$data['id'].'/32x32.png');
+        $article->image = asset('i/'.$data['id'].'/original.png');
         $article->sourceSite = $this->getDomain($article->url);
         $article->sourceFavicon = $this->getFavicon($article->url);
         $article->updateUniques();
+
+        \Queue::push('ImagesHandler', array('id' => $data['id']));
 
 
         $job->delete();

@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c9b59f3bc3fbf440f23f6faae5ac5644",
+    "hash": "e861bcfc7b71992749842b015eb33d8f",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -1357,6 +1357,17 @@
             ],
             "description": "A Laravel 4 Service Provider for the Elasticsearch API client",
             "time": "2014-03-12 01:00:35"
+        },
+        {
+            "name": "simplehtmldom/simplehtmldom",
+            "version": "1.0.0",
+            "dist": {
+                "type": "file",
+                "url": "https://raw.githubusercontent.com/jjanyan/Simple-HTML-DOM/master/simple_html_dom.php",
+                "reference": null,
+                "shasum": null
+            },
+            "type": "library"
         },
         {
             "name": "stack/builder",
@@ -2914,9 +2925,9 @@
                     "email": "kontakt@beberlei.de"
                 },
                 {
-                    "name": "Johannes M. Schmitt",
+                    "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -3057,9 +3068,9 @@
                     "email": "kontakt@beberlei.de"
                 },
                 {
-                    "name": "Johannes M. Schmitt",
+                    "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -3242,9 +3253,9 @@
                     "email": "roman@code-factory.org"
                 },
                 {
-                    "name": "Johannes M. Schmitt",
+                    "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -4474,7 +4485,9 @@
             "time": "2014-05-27 14:21:26"
         }
     ],
-    "aliases": [],
+    "aliases": [
+
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "sensiolabs/security-checker": 20,
@@ -4485,6 +4498,10 @@
         "crada/php-apidoc": 20,
         "codeclimate/php-test-reporter": 20
     },
-    "platform": [],
-    "platform-dev": []
+    "platform": [
+
+    ],
+    "platform-dev": [
+
+    ]
 }

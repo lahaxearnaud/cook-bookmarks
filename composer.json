@@ -13,7 +13,8 @@
         "fivefilters/php-readability": "dev-master",
         "pda/pheanstalk": "2.0.*",
         "intervention/image": "2.*",
-        "tappleby/laravel-auth-token": "0.3.*"
+        "tappleby/laravel-auth-token": "0.3.*",
+        "simplehtmldom/simplehtmldom": "1.0.0"
 	},
 	"autoload": {
 		"classmap": [
@@ -62,5 +63,18 @@
 	"config": {
 		"preferred-install": "dist"
 	},
-	"minimum-stability": "stable"
+	"minimum-stability": "stable",
+	"repositories": [
+		{
+		    "type": "package",
+	        "package": {
+	            "name": "simplehtmldom/simplehtmldom",
+	            "version": "1.0.0",
+	            "dist": {
+	                "url": "https://raw.githubusercontent.com/jjanyan/Simple-HTML-DOM/master/simple_html_dom.php",
+	                "type": "file"
+	            }
+	        }
+		}
+	]
 }
