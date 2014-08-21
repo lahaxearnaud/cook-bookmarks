@@ -6,7 +6,7 @@ class ImagesHandler
 {
     public function fire(Job $job, $data)
     {
-        echo 'handler...';
+        echo 'handler...' . $data['id'] . "\n";
         if ($job->attempts() > 3) {
             Log::error('Fail to handle job '.$job->getJobId().' '.print_r($data, true));
             $job->delete();

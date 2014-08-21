@@ -2,6 +2,7 @@
 namespace Observers\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class ArticleObserver extends Observer
 {
@@ -16,7 +17,6 @@ class ArticleObserver extends Observer
     {
         \Log::info("Article updated " . $model->id);
         $this->indexer->update($model);
-        \Queue::push('UrlInformationsHandler', array('id' => $model->id));
     }
 
     public function deleted(Model $model)
@@ -30,4 +30,14 @@ class ArticleObserver extends Observer
         \Log::info("Article restored " . $model->id);
     }
 
+    /**
+     * @param  Model  $model
+     */
+    public function saving(Model $model)
+    {
+        $date = Carbon::now()->addMinutes(1);
+        if($model->getOriginal('url') !== $model->url) {
+            \Queue::later($date, 'UrlInformationsHandler', array('id' => $model->id));
+        }
+    }
 }

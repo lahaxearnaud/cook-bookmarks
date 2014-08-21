@@ -29,7 +29,7 @@ class ArticlesTableSeeder extends Seeder
             'http://www.cuisineaz.com/recettes/spaghetti-meatballs-67007.aspx'
         ];
 
-        for ($i = 0; $i < 30; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             $title      = Lorem::sentence(6);
             $body       = Lorem::paragraph(10);
             $articles[] = array(
@@ -47,7 +47,7 @@ class ArticlesTableSeeder extends Seeder
 
         DB::table('articles')->insert($articles);
 
-        for ($i = 1; $i < 31; $i++) {
+        for ($i = 1; $i < 11; $i++) {
             \Queue::push('UrlInformationsHandler', array('id' => $i));
         }
 

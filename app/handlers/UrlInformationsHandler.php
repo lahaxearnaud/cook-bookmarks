@@ -2,13 +2,13 @@
 use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Queue\Jobs\Job;
 
-require $app['path.base'].'/../vendor/simplehtmldom/simplehtmldom/simple_html_dom.php';
+require public_path().'/../vendor/simplehtmldom/simplehtmldom/simple_html_dom.php';
 
 class UrlInformationsHandler
 {
     public function fire(Job $job, $data)
     {
-        echo 'handler...';
+        echo 'handler... ' . $data['id'] . "\n";
         if ($job->attempts() > 3) {
             Log::error('Fail to handle job '.$job->getJobId().' '.print_r($data, true));
             $job->delete();
