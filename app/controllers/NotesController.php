@@ -31,4 +31,11 @@ class NotesController extends \RessourceController
         return $this->generateResponse($model, $model->errors(), $this->generateLocation($model), 200);
     }
 
+
+    public function article($article) {
+
+        return $this->repository->paginateWhere(array(
+            'article_id' => $article->id
+        ), 20);
+    }
 }

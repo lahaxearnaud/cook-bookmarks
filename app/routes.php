@@ -31,6 +31,7 @@ Route::group(array('prefix' => 'api/v1'), function () {
 
         Route::post('articles/extractFromUrl', [ 'as' => 'articles.extractFromUrl', 'uses' => 'ArticlesController@extractFromUrl']);
         Route::get('articles/user/{user}', [ 'as' => 'articles.user', 'uses' => 'ArticlesController@user']);
+
         Route::get('articles/search', [ 'as' => 'articles.search', 'uses' => 'ArticlesController@search']);
         Route::resource('articles', 'ArticlesController');
 
@@ -39,6 +40,8 @@ Route::group(array('prefix' => 'api/v1'), function () {
         Route::get('categories/user/{user}', [ 'as' => 'categories.user', 'uses' => 'CategoriesController@user']);
 
         Route::resource('notes', 'NotesController');
+        Route::get('articles/{article}/notes', [ 'as' => 'notes.article', 'uses' => 'NotesController@article']);
+
         Route::post('users/password', [ 'as' => 'user.password', 'uses' => 'UsersController@changePassword']);
 
     });
