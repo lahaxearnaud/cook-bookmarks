@@ -16,7 +16,7 @@ class NotesTableSeeder extends Seeder
         $dateNow  = $dt->toDateTimeString();
         $notes = array();
 
-        for ($i = 0; $i < 200; $i++) {
+        for ($i = 0; $i < 400; $i++) {
             $body      = Lorem::sentence(6);
             $notes[] = array(
                 'user_id'  => round(rand(1, 2)),

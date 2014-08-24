@@ -8,34 +8,6 @@ use Guzzle\Http\Exception\CurlException;
  */
 class ArticleExtractor
 {
-    public function extract($html, $url = '')
-    {
-        $readability = new Readability($html, $url);
-        $readability->debug = false;
-        $readability->convertLinksToFootnotes = true;
-        $result = $readability->init();
-
-        if(!$result) {
-            return array(
-                'title' => '',
-                'body' => 'Unable to fetch content',
-                'success' => false
-            );
-        }
-
-        $content = $readability->getContent()->innerHTML;
-        $content = String::tidy($content, array(
-            'indent'=>true,
-            'show-body-only' => true
-        ));
-
-        return array(
-            'title' => $readability->getTitle()->textContent,
-            'body' => $content,
-            'success' => true
-        );
-    }
-
     public function extractFromRemote($url)
     {
         try {
@@ -47,7 +19,7 @@ class ArticleExtractor
                 'indent'=>true,
                 'show-body-only' => true
             ));
-
+/** FETCH EXTRACTOR */
             return $this->extract($html ,$url);
         } catch(ClientErrorResponseException $e) {
             return array(
