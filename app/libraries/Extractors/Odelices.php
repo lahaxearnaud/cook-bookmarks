@@ -11,6 +11,14 @@ class Odelices extends ArticleExtractor{
 		$ingredients = $html->find('#recipe-ingredients');
 		$preparations = $html->find('#recipe-instructions');
 
+		if(is_null($ingredients) || is_null($title) || is_null($preparations)) {
+			return array(
+	            'title' => '',
+	            'body' => '',
+	            'success' => false
+	        );
+		}
+
 		return array(
 	            'title' => is_null($title)?'':$title->plaintext,
 	            'body' => (is_null($ingredients)?'':$ingredients->innertext) .'<br/>' . (is_null($preparations)?'':$preparations->innertext),
