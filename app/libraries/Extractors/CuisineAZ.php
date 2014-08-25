@@ -11,8 +11,9 @@ class CuisineAZ extends \ArticleExtractor
         $html = str_get_html($html);
 
     $title = $html->find('.recetteH1', 0);
-    $ingredients = $html->find('div[id=ingredients]', 0);
-    $preparations = $html->find('div[id=preparation]', 0);
+    $ingredients = $html->find('div[id=ingredients] ul', 0);
+    $preparations = $html->find('div[id=preparation] p');
+    $ingredientsNbPers = $html->find('span[id=ctl00_ContentPlaceHolder_LblRecetteNombre]', 0);
 
     if(is_null($ingredients) || is_null($title) || is_null($preparations)) {
         return array(
@@ -22,9 +23,14 @@ class CuisineAZ extends \ArticleExtractor
         );
     }
 
+    $body = '';
+    foreach ($preparations as $preparation) {
+        $body .= ' - ' . $preparation->innertext . '<br/>';
+    }
+
     return array(
-            'title' => is_null($title)?'':trim($title->plaintext),
-            'body' => (is_null($ingredients)?'':$ingredients->outertext) .'<br/>' . (is_null($preparations)?'':$preparations->outertext),
+            'title' => $this->tidyTile($title->plaintext),
+            'body' => '<h2>Ingrédients ('.$ingredientsNbPers->innertext.')</h2> <br/> ' . $ingredients->outertext .'<br/><h2>Preparations:</h2>' . $body,
             'success' => true
         );
     }

@@ -74,7 +74,6 @@ class ArticlesController extends \RessourceController
         }
 
         $result = $this->articleExtractor->extractFromRemote(Input::get('url'));
-
         if(!$result['success']) {
             return Response::json($result, 400);
         }

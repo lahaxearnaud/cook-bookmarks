@@ -8,11 +8,11 @@ class g750 extends \ArticleExtractor
 {
     public function extract($html, $url = '')
     {
-        //echo $html;die;
         $html = str_get_html($html);
 
         $title = $html->find('h1', 0);
         $ingredients = $html->find('div.main > div.row > div.hrecipe > div.row > ul', 0);
+        $nbPersonne = $html->find('div.main > div.row > div.hrecipe > div p .yield', 0);
         $preparations = $html->find('.instructions', 0);
 
         if(is_null($ingredients) || is_null($title) || is_null($preparations)) {
@@ -24,8 +24,8 @@ class g750 extends \ArticleExtractor
         }
 
         return array(
-                'title' => trim($title->plaintext),
-                'body' => '<h2>Ingrédients</h2><br/>'.$ingredients->innertext .'<br/><h2>Instructions</h2><br/>' . $preparations->innertext,
+                'title' => $this->tidyTile($title->plaintext),
+                'body' => '<h2>Ingrédients (Pour '.$nbPersonne->innertext.' personnes):</h2><br/> '.($ingredients->outertext) .'<br/><h2>Instructions</h2><br/>' . ($preparations->innertext),
                 'success' => true
             );
     }

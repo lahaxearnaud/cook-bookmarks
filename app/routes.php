@@ -21,7 +21,7 @@ Route::group(array('prefix' => 'api/v1'), function () {
     Route::post('users/subscribe', [ 'as' => 'user.subscribe', 'uses' => 'UsersController@subscribe']);
 
     Route::get('autocomplete', [ 'as' => 'autocomplete.query', 'uses' => 'AutocompleteController@query']);
-    Route::get('articles/extractFromUrl', [ 'as' => 'articles.extractFromUrl', 'uses' => 'ArticlesController@extractFromUrl']);
+    Route::post('articles/extractFromUrl', [ 'as' => 'articles.extractFromUrl', 'uses' => 'ArticlesController@extractFromUrl']);
 
     Route::group(array('before' => 'auth.token'), function () {
 

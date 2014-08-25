@@ -47,4 +47,8 @@ class ArticleExtractor
         }
 
     }
+
+    public function tidyTile($title) {
+        return preg_replace('/[\s]+/mu', ' ', trim($title));
+    }
 }

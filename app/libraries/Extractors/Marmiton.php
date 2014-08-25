@@ -21,9 +21,13 @@ class Marmiton extends \ArticleExtractor
             );
         }
 
+    $body = $body->innertext;
+    $body = preg_replace( '/Ingrédients(\s)?(\(pour\s[0-9]+\spersonne(s)?\))\s:/', '<h2>${0}</h2><br/>', $body );
+    $body = str_replace(['<h4>', '</h4>'], ['<h2>', '</h2>'], $body);
+
     return array(
-            'title' => is_null($title)?'':$title->plaintext,
-            'body' => is_null($body)?'':$body->innertext,
+            'title' => $this->tidyTile($title->plaintext),
+            'body' => $body,
             'success' => true
         );
     }
