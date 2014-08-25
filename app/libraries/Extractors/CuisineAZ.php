@@ -11,9 +11,9 @@ class CuisineAZ extends ArticleExtractor{
     	$ingredients = $html->find('#ingredients');
     	$preparations = $html->find('#preparation');
 
-    	return array(
-            'title' => (is_null($title)?'':$title->plaintext,
-            'body' => ((is_null($ingredients)?'':$ingredients->outertext) .'<br/>' . (is_null($preparations)?'':$preparations->outertext),
+	return array(
+            'title' => is_null($title)?'':$title->plaintext,
+            'body' => (is_null($ingredients)?'':$ingredients->outertext) .'<br/>' . (is_null($preparations)?'':$preparations->outertext),
             'success' => true
         );
     }

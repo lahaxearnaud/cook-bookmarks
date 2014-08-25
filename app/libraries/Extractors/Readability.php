@@ -2,7 +2,7 @@
 
 namespace Extractors;
 
-class Default extends ArticleExtractor{
+class Readability extends ArticleExtractor{
 
     public function extract($html, $url = '')
     {

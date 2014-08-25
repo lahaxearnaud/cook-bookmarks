@@ -13,9 +13,9 @@ class Marmiton extends ArticleExtractor{
     	$title = $html->find('title', 0);
     	$body = $html->find('.m_content_recette_main', 0);
 
-    	return array(
-            'title' => (is_null($title)?'':$title->plaintext,
-            'body' => (is_null($body)?'':$body->innertext,
+	return array(
+            'title' => is_null($title)?'':$title->plaintext,
+            'body' => is_null($body)?'':$body->innertext,
             'success' => true
         );
     }

@@ -3,6 +3,7 @@
 use Guzzle\Http\Client;
 use Guzzle\Http\Exception\ClientErrorResponseException;
 use Guzzle\Http\Exception\CurlException;
+
 /**
  * @author Arnaud LAHAXE <lahaxe.arnaud@gmail.com>
  */
@@ -19,22 +20,18 @@ class ArticleExtractor
                 'indent'=>true,
                 'show-body-only' => true
             ));
-/** FETCH EXTRACTOR */
-            $extractor = false;
 
+            $extractor = Config::get('extractor.defaultExtractor');
             $extractorsConfig = Config::get('extractor.extractors');
-            foreach ($$extractorsConfig as $pattern => $className) {
-                if(preg_match($pattern, $url)) {
-                    $extractor = new $className;
+            foreach ($extractorsConfig as $pattern => $className) {
+                if(preg_match('/^'.$pattern.'$/', $url)) {
+                    $extractor = $className;
                     break;
                 }
             }
+            $extractor = new $extractor;
 
-            if(!$extractor) {
-                $extractor = new Extractors\Default();
-            }
-
-            return $this->extract($html ,$url);
+            return $extractor->extract($html ,$url);
         } catch(ClientErrorResponseException $e) {
             return array(
                 'title' => '',
