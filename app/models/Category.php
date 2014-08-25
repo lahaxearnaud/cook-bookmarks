@@ -28,7 +28,6 @@ class Category extends BaseModel implements HyperMediaInterface
      */
     protected $hidden = array('created_at', 'updated_at');
 
-
     protected $guarded = array();
 
     /**

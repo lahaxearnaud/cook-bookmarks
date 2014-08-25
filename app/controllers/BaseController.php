@@ -17,6 +17,7 @@ abstract class BaseController extends Controller
             if(!empty($headers)) {
                 $response->headers->add($headers);
             }
+
             return $response;
         }
 

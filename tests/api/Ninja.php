@@ -337,7 +337,6 @@ class Ninja extends \Codeception\AbstractGuy
         return new Maybe();
     }
 
-
     /**
      * This method is generated.
      * Documentation taken from corresponding module.
@@ -426,7 +425,6 @@ class Ninja extends \Codeception\AbstractGuy
         return new Maybe();
     }
 
-
     /**
      * This method is generated.
      * Documentation taken from corresponding module.
@@ -450,7 +448,6 @@ class Ninja extends \Codeception\AbstractGuy
 
         return new Maybe();
     }
-
 
     /**
      * This method is generated.
@@ -495,7 +492,6 @@ class Ninja extends \Codeception\AbstractGuy
 
         return new Maybe();
     }
-
 
     /**
      * This method is generated.
@@ -631,7 +627,6 @@ class Ninja extends \Codeception\AbstractGuy
         return new Maybe();
     }
 
-
     /**
      * This method is generated.
      * Documentation taken from corresponding module.
@@ -654,7 +649,6 @@ class Ninja extends \Codeception\AbstractGuy
 
         return new Maybe();
     }
-
 
     /**
      * This method is generated.
@@ -691,7 +685,6 @@ class Ninja extends \Codeception\AbstractGuy
 
         return new Maybe();
     }
-
 
     /**
      * This method is generated.
@@ -810,7 +803,6 @@ class Ninja extends \Codeception\AbstractGuy
 
         return new Maybe();
     }
-
 
     /**
      * This method is generated.
@@ -946,7 +938,6 @@ class Ninja extends \Codeception\AbstractGuy
         return new Maybe();
     }
 
-
     /**
      * This method is generated.
      * Documentation taken from corresponding module.
@@ -1052,7 +1043,6 @@ class Ninja extends \Codeception\AbstractGuy
 
         return new Maybe();
     }
-
 
     /**
      * This method is generated.
@@ -1380,7 +1370,6 @@ class Ninja extends \Codeception\AbstractGuy
         return new Maybe();
     }
 
-
     /**
      * This method is generated.
      * Documentation taken from corresponding module.
@@ -1500,7 +1489,6 @@ class Ninja extends \Codeception\AbstractGuy
 
         return new Maybe();
     }
-
 
     /**
      * This method is generated.
@@ -1624,7 +1612,6 @@ class Ninja extends \Codeception\AbstractGuy
         return new Maybe();
     }
 
-
     /**
      * This method is generated.
      * Documentation taken from corresponding module.
@@ -1732,7 +1719,6 @@ class Ninja extends \Codeception\AbstractGuy
 
         return new Maybe();
     }
-
 
     /**
      * This method is generated.
@@ -1983,7 +1969,6 @@ class Ninja extends \Codeception\AbstractGuy
         return new Maybe();
     }
 
-
     /**
      * This method is generated.
      * Documentation taken from corresponding module.
@@ -2119,7 +2104,6 @@ class Ninja extends \Codeception\AbstractGuy
 
         return new Maybe();
     }
-
 
     /**
      * This method is generated.
@@ -2263,7 +2247,6 @@ class Ninja extends \Codeception\AbstractGuy
         return new Maybe();
     }
 
-
     /**
      * This method is generated.
      * Documentation taken from corresponding module.
@@ -2372,7 +2355,6 @@ class Ninja extends \Codeception\AbstractGuy
         return new Maybe();
     }
 
-
     /**
      * This method is generated.
      * Documentation taken from corresponding module.
@@ -2396,7 +2378,6 @@ class Ninja extends \Codeception\AbstractGuy
 
         return new Maybe();
     }
-
 
     /**
      * This method is generated.
@@ -2497,7 +2478,6 @@ class Ninja extends \Codeception\AbstractGuy
 
         return new Maybe();
     }
-
 
     /**
      * This method is generated.
@@ -2887,7 +2867,6 @@ class Ninja extends \Codeception\AbstractGuy
         return new Maybe();
     }
 
-
     /**
      * This method is generated.
      * Documentation taken from corresponding module.
@@ -2979,7 +2958,6 @@ class Ninja extends \Codeception\AbstractGuy
 
         return new Maybe();
     }
-
 
     /**
      * This method is generated.
@@ -3109,7 +3087,6 @@ class Ninja extends \Codeception\AbstractGuy
         return new Maybe();
     }
 
-
     /**
      * This method is generated.
      * Documentation taken from corresponding module.
@@ -3142,7 +3119,6 @@ class Ninja extends \Codeception\AbstractGuy
 
         return new Maybe();
     }
-
 
     /**
      * This method is generated.
@@ -3181,7 +3157,6 @@ class Ninja extends \Codeception\AbstractGuy
 
         return new Maybe();
     }
-
 
     /**
      * This method is generated.
@@ -3274,7 +3249,6 @@ class Ninja extends \Codeception\AbstractGuy
 
         return new Maybe();
     }
-
 
     /**
      * This method is generated.

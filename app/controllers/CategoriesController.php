@@ -2,7 +2,6 @@
 
 use \Repositories\RepositoryInterface;
 
-
 /**
  * @ApiRoute(name="/categories")
  * @ApiSector(name="Categories")
@@ -97,7 +96,7 @@ class CategoriesController extends \RessourceController
      *  'to':'integer',
      * }")
      */
-    public function articles ($category)
+    public function articles($category)
     {
         return $this->articleRepository->paginateWhere([
             'category_id' => $category->id

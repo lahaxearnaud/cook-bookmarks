@@ -199,6 +199,5 @@ return array(
         'Image'                           => 'Intervention\Image\Facades\Image'
     ),
 
-
     'index' => 'cook'
 );

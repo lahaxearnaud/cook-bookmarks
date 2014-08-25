@@ -54,7 +54,6 @@ class ArticleSeeker extends ElasticSearchSeeker
         return array_slice($arrayIds, $parameters['offset'], $parameters['max']);
     }
 
-
     /**
      *
      * @param string $query

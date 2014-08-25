@@ -9,12 +9,12 @@ use \Illuminate\Database\Eloquent\Model;
 
 class ArticleIndexer
 {
-    protected function getTypeByObject (Model $model)
+    protected function getTypeByObject(Model $model)
     {
         return strtolower(get_class($model));
     }
 
-    protected function getDataToIndex (Article $article)
+    protected function getDataToIndex(Article $article)
     {
         $data              = array();
         $data['title']     = $article->title;
@@ -42,7 +42,7 @@ class ArticleIndexer
         return $data;
     }
 
-    public function add (Article $article)
+    public function add(Article $article)
     {
         // add in elastic search
         $params          = array();
@@ -53,7 +53,7 @@ class ArticleIndexer
         \Es::index($params);
     }
 
-    public function update (Article $article)
+    public function update(Article $article)
     {
         $params['index']       = \Config::get('app.index');
         $params['type']        = $this->getTypeByObject($article);
@@ -63,7 +63,7 @@ class ArticleIndexer
         \Es::update($params);
     }
 
-    public function delete (Article $article)
+    public function delete(Article $article)
     {
         $params['index'] = \Config::get('app.index');
         $params['type']  = $this->getTypeByObject($article);

@@ -16,13 +16,13 @@ class AutocompleteController  extends BaseController
 
     public function query()
     {
-    	$query = Input::get('query');
-    	$category_id = Input::get('category_id');
-    	$user_id = Input::get('user_id');
+        $query = Input::get('query');
+        $category_id = Input::get('category_id');
+        $user_id = Input::get('user_id');
 
         return $this->seeker->autocomplete($query, [
-        	'category_id' => $category_id,
-			'user_id' => $user_id
+            'category_id' => $category_id,
+            'user_id' => $user_id
         ]);
     }
 

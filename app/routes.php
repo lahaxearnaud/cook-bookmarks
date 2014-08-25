@@ -16,12 +16,12 @@ Route::model('article', 'Article');
 Route::model('category', 'Category');
 Route::model('note', 'Note');
 
-
 Route::group(array('prefix' => 'api/v1'), function () {
     Route::post('auth', [ 'as' => 'api.v1.users.login', 'uses' => 'Tappleby\AuthToken\AuthTokenController@store']);
     Route::post('users/subscribe', [ 'as' => 'user.subscribe', 'uses' => 'UsersController@subscribe']);
 
     Route::get('autocomplete', [ 'as' => 'autocomplete.query', 'uses' => 'AutocompleteController@query']);
+    Route::get('articles/extractFromUrl', [ 'as' => 'articles.extractFromUrl', 'uses' => 'ArticlesController@extractFromUrl']);
 
     Route::group(array('before' => 'auth.token'), function () {
 
@@ -29,7 +29,6 @@ Route::group(array('prefix' => 'api/v1'), function () {
         Route::delete('auth', [ 'as' => 'api.v1.users.logout', 'uses' => 'Tappleby\AuthToken\AuthTokenController@destroy']);
         Route::get('users/{user}', [ 'as' => 'api.v1.users.show', 'uses' => 'Tappleby\AuthToken\AuthTokenController@index']);
 
-        Route::post('articles/extractFromUrl', [ 'as' => 'articles.extractFromUrl', 'uses' => 'ArticlesController@extractFromUrl']);
         Route::get('articles/user/{user}', [ 'as' => 'articles.user', 'uses' => 'ArticlesController@user']);
 
         Route::get('articles/search', [ 'as' => 'articles.search', 'uses' => 'ArticlesController@search']);

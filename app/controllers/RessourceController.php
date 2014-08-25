@@ -8,8 +8,8 @@
 
 use \Repositories\RepositoryInterface;
 
-abstract class RessourceController extends BaseController{
-
+abstract class RessourceController extends BaseController
+{
     /**
      * @var RepositoryInterface
      */
@@ -54,7 +54,7 @@ abstract class RessourceController extends BaseController{
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int      $id
      * @return Response
      *
      * @ApiDescription(description="Find an article")
@@ -70,7 +70,7 @@ abstract class RessourceController extends BaseController{
     /**
      * Update the specified resource in storage.
      * @author LAHAXE Arnaud
-     * @param  int  $id
+     * @param  int      $id
      * @return Response
      */
     abstract public function update($id);
@@ -78,7 +78,7 @@ abstract class RessourceController extends BaseController{
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int      $id
      * @return Response
      *
      * @ApiDescription(description="Delete an article")

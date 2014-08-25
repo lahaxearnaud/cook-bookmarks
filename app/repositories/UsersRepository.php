@@ -4,13 +4,12 @@ namespace Repositories;
 
 use Illuminate\Database\Eloquent\Collection;
 
-
 class UsersRepository extends EloquentRepository
 {
 
     /**
-     * @param  string $query
-     * @param  array $where
+     * @param string $query
+     * @param array  $where
      *
      * @return Collection
      */
@@ -19,7 +18,7 @@ class UsersRepository extends EloquentRepository
         return new Collection();
     }
 
-    public function create (array $data)
+    public function create(array $data)
     {
         $data['password'] = \Hash::make($data['password']);
         $user             = new \User($data);
@@ -28,7 +27,7 @@ class UsersRepository extends EloquentRepository
         return $user;
     }
 
-    public function update ($id, array $data)
+    public function update($id, array $data)
     {
         $user           = $this->find($id);
         $user->password = \Hash::make($data['password']);

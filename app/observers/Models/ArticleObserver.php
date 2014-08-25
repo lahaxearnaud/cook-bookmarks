@@ -31,7 +31,7 @@ class ArticleObserver extends Observer
     }
 
     /**
-     * @param  Model  $model
+     * @param Model $model
      */
     public function saving(Model $model)
     {

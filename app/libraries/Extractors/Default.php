@@ -2,8 +2,8 @@
 
 namespace Extractors;
 
-class Readability extends \ArticleExtractor
-{
+class Default extends ArticleExtractor{
+
     public function extract($html, $url = '')
     {
         $readability = new Readability($html, $url);

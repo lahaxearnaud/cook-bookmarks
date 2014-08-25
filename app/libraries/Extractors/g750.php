@@ -2,27 +2,31 @@
 
 namespace Extractors;
 
-class CuisineAZ extends ArticleExtractor{
+require public_path().'/../vendor/simplehtmldom/simplehtmldom/simple_html_dom.php';
 
-    public function extract($html, $url = '') {
-		$html = str_get_html($html);
+class g750 extends \ArticleExtractor
+{
+    public function extract($html, $url = '')
+    {
+        //echo $html;die;
+        $html = str_get_html($html);
 
-		$title = $html->find('.recetteH1', 0);
-		$ingredients = $html->find('.recette_ingredients columns', 0);
-		$preparations = $html->find('.recette_preparation', 0);
+        $title = $html->find('h1', 0);
+        $ingredients = $html->find('div.main > div.row > div.hrecipe > div.row > ul', 0);
+        $preparations = $html->find('.instructions', 0);
 
-		if(is_null($ingredients) || is_null($title) || is_null($preparations)) {
-			return array(
-	            'title' => '',
-	            'body' => '',
-	            'success' => false
-	        );
-		}
+        if(is_null($ingredients) || is_null($title) || is_null($preparations)) {
+            return array(
+                'title' => '',
+                'body' => '',
+                'success' => false
+            );
+        }
 
-		return array(
-	            'title' => is_null($title)?'':$title->plaintext,
-	            'body' => $ingredients->innertext .'<br/>' . $preparations->innertext),
-	            'success' => true
-	        );
-	}
+        return array(
+                'title' => trim($title->plaintext),
+                'body' => '<h2>Ingrédients</h2><br/>'.$ingredients->innertext .'<br/><h2>Instructions</h2><br/>' . $preparations->innertext,
+                'success' => true
+            );
+    }
 };

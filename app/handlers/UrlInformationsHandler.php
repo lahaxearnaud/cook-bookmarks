@@ -38,15 +38,16 @@ class UrlInformationsHandler
 
         \Queue::push('ImagesHandler', array('id' => $data['id']));
 
-
         $job->delete();
     }
 
-    protected function getHtmlDom($url) {
+    protected function getHtmlDom($url)
+    {
         return file_get_html($url, 0, $this->getContext());
     }
 
-    protected function getImage($url, $stopwords) {
+    protected function getImage($url, $stopwords)
+    {
         $html = $this->getHtmlDom($url);
 
         foreach($html->find('meta') as $element) {
@@ -63,11 +64,9 @@ class UrlInformationsHandler
                 continue;
             }
 
-
             if(!(strpos($element->src, "timestamp")=== false)) {
                 continue;
             }
-
 
             if(!pathSeamsGood($element->src, $stopwords)) {
                 continue;
@@ -100,24 +99,24 @@ class UrlInformationsHandler
         return $srcBiggest;
     }
 
-    protected function getFavicon($url) {
-
+    protected function getFavicon($url)
+    {
         $html = $this->getHtmlDom($url);
         foreach($html->find('link') as $element) {
             if($element->rel == "shortcut icon" || $element->rel == "icon")
+
                 return $this->urlRel2abs($element->href, $url);
         }
 
         return '';
     }
 
-
-    protected function getDomain($url) {
+    protected function getDomain($url)
+    {
         $urlData = parse_url($url);
 
         return $urlData['host'];
     }
-
 
     protected function urlRel2abs($rel, $base)
     {
@@ -137,7 +136,8 @@ class UrlInformationsHandler
         return $scheme.'://'.$abs;
     }
 
-    protected function pathSeamsGood($url, $stopwords) {
+    protected function pathSeamsGood($url, $stopwords)
+    {
         $url = strtolower($url);
         foreach($stopwords as $stopword) {
             if (strpos($url, strtolower($stopword)) !== false) {
@@ -148,14 +148,15 @@ class UrlInformationsHandler
         return true;
     }
 
-    protected function getContext() {
+    protected function getContext()
+    {
         $context = stream_context_create();
         $context  = stream_context_create(array(
               'http'=>array(
                 'method'=>"GET",
                 'header'=>"Accept-language: en\r\n" .
                   "Cookie: foo=bar\r\n" .
-                  "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.93 Safari/537.36\r\n" // i.e. An iPad 
+                  "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.93 Safari/537.36\r\n" // i.e. An iPad
                   )
               ));
 
