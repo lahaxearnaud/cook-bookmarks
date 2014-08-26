@@ -5,7 +5,6 @@
  * Date: 08/08/14
  * Time: 21:46
  */
-Artisan::call('db:seed');
 
 
 $I = new Ninja($scenario);

@@ -8,7 +8,6 @@ class Odelices extends \ArticleExtractor
 {
     public function extract($html, $url = '')
     {
-       // echo $html;die;
         $html = str_get_html($html);
 
         $title = $html->find('h1 a span.fn', 0);

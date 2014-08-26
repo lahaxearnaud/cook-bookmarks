@@ -12,10 +12,10 @@
 */
 
 App::before(function (Symfony\Component\HttpFoundation\Request $request) {
-    //header('Access-Control-Allow-Origin: *');
-    //header('Access-Control-Allow-Credentials: true');
-    //header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
-    //header('Access-Control-Allow-Headers: Origin, Content-Type, Accept, Authorization, X-Auth-Token, Location, Id');
+    header('Access-Control-Allow-Origin: *');
+    header('Access-Control-Allow-Credentials: true');
+    header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+    header('Access-Control-Allow-Headers: Origin, Content-Type, Accept, Authorization, X-Auth-Token, Location, Id');
 });
 
 App::after(function (Symfony\Component\HttpFoundation\Request $request, Symfony\Component\HttpFoundation\Response $response) {
@@ -32,6 +32,11 @@ App::after(function (Symfony\Component\HttpFoundation\Request $request, Symfony\
 | integrates HTTP Basic authentication for quick, simple checking.
 |
 */
+
+Event::listen('auth.token.valid', function ($user) {
+    //Token is valid, set the user on auth system.
+    Auth::setUser($user);
+});
 
 Route::filter('auth', function () {
     if (Auth::guest()) {
@@ -55,10 +60,7 @@ App::error(function (AuthTokenNotAuthorizedException $exception) {
     return Response::json(array('error' => $exception->getMessage()), $exception->getCode());
 });
 
-Event::listen('auth.token.valid', function ($user) {
-    //Token is valid, set the user on auth system.
-    Auth::setUser($user);
-});
+
 /*
 |--------------------------------------------------------------------------
 | Guest Filter
