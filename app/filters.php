@@ -58,6 +58,7 @@ App::error(function (AuthTokenNotAuthorizedException $exception) {
 Event::listen('auth.token.valid', function ($user) {
     //Token is valid, set the user on auth system.
     Auth::setUser($user);
+    echo "JE S APPEL GROODS";die();
 });
 /*
 |--------------------------------------------------------------------------
