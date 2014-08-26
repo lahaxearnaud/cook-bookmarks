@@ -35,7 +35,7 @@ class NinjaHelper extends \Codeception\Module
 
         $rest->haveHttpHeader('X-Auth-Token', $this->token);
         $rest->haveHttpHeader('Content-Type', 'application/x-www-form-urlencoded');
-        Debug:debug('X-Auth-Token : ' . $this->token);
+        Debug::debug('X-Auth-Token : ' . $this->token);
 
         $rest->{$method}($this->path . $path, $params);
         $rest->seeResponseCodeIs($httpCode);
