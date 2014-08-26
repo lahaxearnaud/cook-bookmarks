@@ -100,7 +100,7 @@ abstract class RessourceController extends BaseController
             $errors[] = 'Error during delete';
         }
 
-        return $this->generateResponse($model, $result, $errors, array(), 200);
+        return $this->generateResponse($model, $errors, array(), 200);
     }
 
     /**
