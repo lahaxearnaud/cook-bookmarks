@@ -14,6 +14,8 @@
  * @method static \Illuminate\Database\Query\Builder|\Category whereName($value)
  * @method static \Illuminate\Database\Query\Builder|\Category whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Category whereUpdatedAt($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Article[] $articles
+ * @property-read mixed $links
  */
 class Category extends BaseModel implements HyperMediaInterface
 {

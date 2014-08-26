@@ -22,6 +22,7 @@ use Illuminate\Auth\Reminders\RemindableInterface;
  * @method static \Illuminate\Database\Query\Builder|\User whereRememberToken($value)
  * @method static \Illuminate\Database\Query\Builder|\User whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\User whereUpdatedAt($value)
+ * @property-read mixed $links
  */
 class User extends BaseModel implements UserInterface, RemindableInterface, HyperMediaInterface
 {

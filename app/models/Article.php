@@ -25,6 +25,16 @@
  * @method static \Illuminate\Database\Query\Builder|\Article whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Article whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Article whereCategoryId($value)
+ * @property string $image
+ * @property string $imageMiniature
+ * @property string $sourceSite
+ * @property string $sourceFavicon
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Note[] $notes
+ * @property-read mixed $links
+ * @method static \Illuminate\Database\Query\Builder|\Article whereImage($value) 
+ * @method static \Illuminate\Database\Query\Builder|\Article whereImageMiniature($value) 
+ * @method static \Illuminate\Database\Query\Builder|\Article whereSourceSite($value) 
+ * @method static \Illuminate\Database\Query\Builder|\Article whereSourceFavicon($value) 
  */
 class Article extends BaseModel implements HyperMediaInterface
 {

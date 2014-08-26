@@ -24,6 +24,7 @@
  * @method static \Illuminate\Database\Query\Builder|\ApiLog whereIp($value)
  * @method static \Illuminate\Database\Query\Builder|\ApiLog whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\ApiLog whereUpdatedAt($value)
+ * @property-read mixed $links
  */
 class ApiLog extends BaseModel
 {

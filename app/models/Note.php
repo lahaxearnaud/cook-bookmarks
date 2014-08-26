@@ -1,5 +1,24 @@
 <?php
 
+/**
+ * Note
+ *
+ * @property integer $id
+ * @property string $body
+ * @property integer $user_id
+ * @property integer $article_id
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @property-read \User $user
+ * @property-read \Article $article
+ * @property-read mixed $links
+ * @method static \Illuminate\Database\Query\Builder|\Note whereId($value) 
+ * @method static \Illuminate\Database\Query\Builder|\Note whereBody($value) 
+ * @method static \Illuminate\Database\Query\Builder|\Note whereUserId($value) 
+ * @method static \Illuminate\Database\Query\Builder|\Note whereArticleId($value) 
+ * @method static \Illuminate\Database\Query\Builder|\Note whereCreatedAt($value) 
+ * @method static \Illuminate\Database\Query\Builder|\Note whereUpdatedAt($value) 
+ */
 class Note extends BaseModel implements HyperMediaInterface
 {
     public static $rules = array(
