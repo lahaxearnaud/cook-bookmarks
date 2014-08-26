@@ -12,10 +12,10 @@
 */
 
 App::before(function (Symfony\Component\HttpFoundation\Request $request) {
-    header('Access-Control-Allow-Origin: *');
-    header('Access-Control-Allow-Credentials: true');
-    header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
-    header('Access-Control-Allow-Headers: Origin, Content-Type, Accept, Authorization, X-Auth-Token, Location, Id');
+    //header('Access-Control-Allow-Origin: *');
+    //header('Access-Control-Allow-Credentials: true');
+    //header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+    //header('Access-Control-Allow-Headers: Origin, Content-Type, Accept, Authorization, X-Auth-Token, Location, Id');
 });
 
 App::after(function (Symfony\Component\HttpFoundation\Request $request, Symfony\Component\HttpFoundation\Response $response) {
@@ -58,7 +58,6 @@ App::error(function (AuthTokenNotAuthorizedException $exception) {
 Event::listen('auth.token.valid', function ($user) {
     //Token is valid, set the user on auth system.
     Auth::setUser($user);
-    echo "JE S APPEL GROODS";die();
 });
 /*
 |--------------------------------------------------------------------------
