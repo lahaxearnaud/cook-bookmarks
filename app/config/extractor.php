@@ -11,5 +11,5 @@ return array(
         '.*odelices.*' => '\Extractors\Odelices',
     ),
 
-    'defaultExtractor' => '\Extractors\Readability'
+    'defaultExtractor' => '\Extractors\ReadabilityExtractor'
 );

@@ -2,11 +2,11 @@
 
 namespace Extractors;
 
-class Readability extends \ArticleExtractor
+class ReadabilityExtractor extends \ArticleExtractor
 {
     public function extract($html, $url = '')
     {
-        $readability = new Readability($html, $url);
+        $readability = new \Readability($html, $url);
         $readability->debug = false;
         $readability->convertLinksToFootnotes = false;
         $result = $readability->init();
@@ -20,7 +20,7 @@ class Readability extends \ArticleExtractor
         }
 
         $content = $readability->getContent()->innerHTML;
-        $content = String::tidy($content, array(
+        $content = \String::tidy($content, array(
             'indent'=>true,
             'show-body-only' => true
         ));

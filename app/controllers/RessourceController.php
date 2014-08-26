@@ -91,6 +91,7 @@ abstract class RessourceController extends BaseController
      */
     public function destroy($id)
     {
+        $model = $this->repository->find($id);
         $result = $this->repository->delete($id);
 
         $errors = [];
@@ -99,7 +100,7 @@ abstract class RessourceController extends BaseController
             $errors[] = 'Error during delete';
         }
 
-        return $this->generateResponse($result, $errors, array(), 200);
+        return $this->generateResponse($model, $result, $errors, array(), 200);
     }
 
     /**
