@@ -10,7 +10,9 @@ class ArticleObserver extends Observer
     {
         \Log::info("Article created " . $model->id);
         $this->indexer->add($model);
-        \Queue::push('UrlInformationsHandler', array('id' => $model->id));
+        if(!App::environment('testing')) {
+            \Queue::push('UrlInformationsHandler', array('id' => $model->id));
+        }
     }
 
     public function updated(Model $model)
@@ -36,7 +38,7 @@ class ArticleObserver extends Observer
     public function saving(Model $model)
     {
         $date = Carbon::now()->addMinutes(1);
-        if($model->getOriginal('url') !== $model->url) {
+        if($model->getOriginal('url') !== $model->url && !App::environment('testing')) {
             \Queue::later($date, 'UrlInformationsHandler', array('id' => $model->id));
         }
     }
