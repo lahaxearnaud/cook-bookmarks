@@ -10,7 +10,7 @@ class ArticleObserver extends Observer
     {
         \Log::info("Article created " . $model->id);
         $this->indexer->add($model);
-        if(!App::environment('testing')) {
+        if(!\App::environment('testing')) {
             \Queue::push('UrlInformationsHandler', array('id' => $model->id));
         }
     }
