@@ -38,7 +38,7 @@ class ArticleObserver extends Observer
     public function saving(Model $model)
     {
         $date = Carbon::now()->addMinutes(1);
-        if($model->getOriginal('url') !== $model->url && !App::environment('testing')) {
+        if($model->getOriginal('url') !== $model->url && !\App::environment('testing')) {
             \Queue::later($date, 'UrlInformationsHandler', array('id' => $model->id));
         }
     }
