@@ -29,7 +29,7 @@ class ElascticSearchUninstallCommand extends Command
         $params['index'] = Config::get('app.index');
         try {
             Es::indices()->delete($params);
-            $this->info('Delete index ' . $params['index']);
+            $this->info('Delete index ');
         } catch (Exception $e) {
             $this->error('Unable to find or delete index ' . $params['index']);
         }
