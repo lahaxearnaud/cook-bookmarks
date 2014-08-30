@@ -17,6 +17,7 @@ class AutocompleteController  extends BaseController
     public function query()
     {
         $query = Input::get('query');
+        $query = str_replace('+', ' ', $query);
         $category_id = Input::get('category_id');
         $user_id = Input::get('user_id');
 

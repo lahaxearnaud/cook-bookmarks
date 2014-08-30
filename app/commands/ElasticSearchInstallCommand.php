@@ -46,6 +46,10 @@ class ElascticSearchInstallCommand extends Command
                     'analyzer' => 'standard',
                     'boost'    => 10.0
                 ),
+                'image'      => array(
+                    'type'     => 'string',
+                    'boost'    => 0
+                ),
                 'author'     => array(
                     'type'     => 'string',
                     'analyzer' => 'standard',

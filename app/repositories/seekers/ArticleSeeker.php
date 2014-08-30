@@ -69,29 +69,29 @@ class ArticleSeeker extends ElasticSearchSeeker
         ), $parameters);
 
         $params['index'] = \Config::get('app.index');
-
-        // query ElasticSearch
-        $params['body'][strtolower(get_class($this->model))] = array(
-            "text" => $query,
-            "completion" => array(
-                "field" => "autocomplete"
-            )
+        $params['type']                                   = strtolower(get_class($this->model));
+        $params['body']['query']['match']['autocomplete'] = array(
+            "query" =>  $query,
+            "fuzziness" =>  3
         );
+        $params['body']['size'] = 8;
+        $params['body']['fields'] = array("title", "image");
 
-        $result = \Es::suggest($params);
-        $result = current($result[strtolower(get_class($this->model))]);
-        $result  = $result['options'];
+        $result = \Es::search($params);
+        $result  = $result['hits'];
 
         // handle no result
         if (count($result) == 0) {
             return array();
         }
 
-        foreach ($result as $element) {
+        $searchResults = [];
+
+        foreach ($result['hits'] as $element) {
             $searchResults[] = [
-                'id' => $element['payload']['id'],
-                'image' => $element['payload']['image'],
-                'title' => $element['text']
+                'id' => $element['_id'],
+                'image' => current($element['fields']['image']),
+                'title' => current($element['fields']['title'])
             ];
         }
 

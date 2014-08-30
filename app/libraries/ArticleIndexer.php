@@ -23,14 +23,8 @@ class ArticleIndexer
         $data['category']  = $article->category->name;
         $data['category_id']  = $article->category->id;
         $data['user']      = $article->author->id;
-        $data['autocomplete'] = [
-            'input' => preg_split("/[\s,-:.]+/", $article->title),
-            'output' => $article->title,
-            'payload' => [
-                'id' => $article->id,
-                'image' => $article->imageMiniature
-            ]
-        ];
+        $data['image']      = $article->imageMiniature;
+        $data['autocomplete'] = preg_split("/[\s,-:.]+/", $article->title);
 
         $notes = array();
         foreach ($article->notes as $note) {
