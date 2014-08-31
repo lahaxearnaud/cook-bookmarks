@@ -30,7 +30,7 @@ class AllRecipes extends \ArticleExtractor
 
     $ingredientsBody = '<br/>';
     foreach ($ingredients as $ingredient) {
-        $ingredientsBody .= ' - ' . $ingredient->innertext . '<br/>';
+        $ingredientsBody .= ' - ' . $ingredient->find('.ingredient-amount', 0)->innertext . ' ' . $ingredient->find('.ingredient-name', 0)->innertext . '<br/>';
     }
 
 
