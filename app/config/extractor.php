@@ -9,6 +9,13 @@ return array(
         '.*cuisineaz.*' => '\Extractors\CuisineAZ',
         '.*750g.*' => '\Extractors\g750',
         '.*odelices.*' => '\Extractors\Odelices',
+        '.*foodnetwork.*' => '\Extractors\FoodNetwork',
+        '.*food.*' => '\Extractors\Food',
+        '.*1001cocktails.*' => '\Extractors\Cocktail1001',
+        '.*lacuisinedannie.*' => '\Extractors\LaCuisineDAnnie',
+        '.*lefigaro.*' => '\Extractors\MadameLeFigaro',
+        '.*allrecipes.*' => '\Extractors\AllRecipes',
+        '.*femina.*' => '\Extractors\Femina',
     ),
 
     'defaultExtractor' => '\Extractors\ReadabilityExtractor'

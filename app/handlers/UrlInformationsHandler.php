@@ -17,26 +17,29 @@ class UrlInformationsHandler
         }
 
         $article = Article::findOrFail($data['id']);
-        $imageUrl = $this->getImage($article->url, Config::get('extractor.stopword'));
 
-        Image::configure(array('driver' => 'imagick'));
+        if(filter_var($article->url, FILTER_VALIDATE_URL) !== FALSE) {
+            $imageUrl = $this->getImage($article->url, Config::get('extractor.stopword'));
 
-        $publicPath = public_path('i/'.$data['id']);
-        if(File::isDirectory($publicPath)) {
-            File::deleteDirectory($publicPath);
+            Image::configure(array('driver' => 'imagick'));
+
+            $publicPath = public_path('i/'.$data['id']);
+            if(File::isDirectory($publicPath)) {
+                File::deleteDirectory($publicPath);
+            }
+
+            File::makeDirectory($publicPath, 0777, true);
+
+            $original = Image::make($imageUrl);
+            $original->save($publicPath . '/original.png');
+
+            $article->image = asset('i/'.$data['id'].'/original.png');
+            $article->sourceSite = $this->getDomain($article->url);
+            $article->sourceFavicon = $this->getFavicon($article->url);
+            $article->updateUniques();
+
+            \Queue::push('ImagesHandler', array('id' => $data['id']));
         }
-
-        File::makeDirectory($publicPath, 0777, true);
-
-        $original = Image::make($imageUrl);
-        $original->save($publicPath . '/original.png');
-
-        $article->image = asset('i/'.$data['id'].'/original.png');
-        $article->sourceSite = $this->getDomain($article->url);
-        $article->sourceFavicon = $this->getFavicon($article->url);
-        $article->updateUniques();
-
-        \Queue::push('ImagesHandler', array('id' => $data['id']));
 
         $job->delete();
     }
@@ -68,7 +71,7 @@ class UrlInformationsHandler
                 continue;
             }
 
-            if(!pathSeamsGood($element->src, $stopwords)) {
+            if(!$this->pathSeamsGood($element->src, $stopwords)) {
                 continue;
             }
 
@@ -76,10 +79,10 @@ class UrlInformationsHandler
             $path = $this->urlRel2abs($element->src, $url);
 
             if(!isset($element->width) || empty($element->height)) {
-            $size = getimagesize($path);
+                $size = getimagesize($path);
             }else{
-            $size = array($element->height, $element->width);
-            $sizePrecise = true;
+                $size = array($element->height, $element->width);
+                $sizePrecise = true;
             }
 
             if(is_array($size)) {

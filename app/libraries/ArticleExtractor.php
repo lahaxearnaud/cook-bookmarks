@@ -13,7 +13,7 @@ class ArticleExtractor
     {
         try {
             $client = new Client($url);
-            $request = $client->get();
+            $request = $client->get('', array('Content-Type' => 'text/xml; charset=UTF8'));
             $response = $request->send();
             $html = $response->getBody();
             $html = String::tidy($html, array(
@@ -29,6 +29,7 @@ class ArticleExtractor
                     break;
                 }
             }
+
             $extractor = new $extractor;
 
             return $extractor->extract($html ,$url);
