@@ -16,6 +16,7 @@ return array(
         '.*lefigaro.*' => '\Extractors\MadameLeFigaro',
         '.*allrecipes.*' => '\Extractors\AllRecipes',
         '.*femina.*' => '\Extractors\Femina',
+        '.*jamieoliver.*' => '\Extractors\JamieOliver',
     ),
 
     'defaultExtractor' => '\Extractors\ReadabilityExtractor'
