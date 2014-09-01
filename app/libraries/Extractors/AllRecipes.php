@@ -2,43 +2,37 @@
 
 namespace Extractors;
 
-require public_path().'/../vendor/simplehtmldom/simplehtmldom/simple_html_dom.php';
-
-class AllRecipes extends \ArticleExtractor
+class AllRecipes extends AbstractExtractor
 {
-    public function extract($html, $url = '')
+
+
+    public function getTitleCssSelector()
     {
-        $html = str_get_html($html);
-
-    $title = $html->find('h1[id=itemTitle]', 0);
-    $ingredients = $html->find('ul.ingredient-wrap li .fl-ing');
-    $preparations = $html->find('div[itemprop=recipeInstructions] ol li');
-    $ingredientsNbPers = $html->find('span[id=lblYield]', 0);
-
-    if(is_null($ingredients) || is_null($title) || is_null($preparations)) {
-        return array(
-            'title' => '',
-            'body' => '',
-            'success' => false
-        );
+        return 'h1[id=itemTitle]';
     }
 
-    $body = '';
-    foreach ($preparations as $preparation) {
-        $body .= ' - ' . $preparation->innertext . '<br/>';
+    public function getYieldCssSelector()
+    {
+        return 'span[id=lblYield]';
     }
 
-    $ingredientsBody = '<br/>';
-    foreach ($ingredients as $ingredient) {
-        $ingredientsBody .= ' - ' . $ingredient->find('.ingredient-amount', 0)->innertext . ' ' . $ingredient->find('.ingredient-name', 0)->innertext . '<br/>';
+    public function getIngredientsCssSelector()
+    {
+        return 'ul.ingredient-wrap li .fl-ing';
     }
 
-
-    return array(
-            'title' => $this->tidyTile($title->plaintext),
-            'body' => '<h2>Ingrédients (' . $ingredientsNbPers->innertext . ')</h2> <br/> ' . $ingredientsBody . '<br/><h2>Preparations:</h2>' . $body,
-            'success' => true
-        );
+    public function getPreparationsCssSelector()
+    {
+        return 'div[itemprop=recipeInstructions] ol li';
     }
 
-};
+    public function getPreparations($domHtml) {
+        $preparations = $domHtml->find($this->getPreparationsCssSelector(), 0);
+        $preparationList = '<br/>';
+        foreach ($preparations as $preparation) {
+            $preparationList .= ' - ' . $ingredient->find('.ingredient-amount', 0)->innertext . ' ' . $ingredient->find('.ingredient-name', 0)->innertext . '<br/>';
+        }
+
+        return $preparationList;
+    }
+}
