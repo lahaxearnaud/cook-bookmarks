@@ -2,7 +2,6 @@
 
 namespace Extractors;
 
-
 class LaCuisineDAnnie extends AbstractExtractor
 {
 

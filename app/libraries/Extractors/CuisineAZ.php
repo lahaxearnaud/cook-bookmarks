@@ -24,7 +24,6 @@ class CuisineAZ extends AbstractExtractor
         return 'div[id=preparation] p';
     }
 
-
     public function getIngredients($domHtml)
     {
         return $domHtml->find($this->getIngredientsCssSelector(), 0)->outertext;

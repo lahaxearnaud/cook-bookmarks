@@ -32,7 +32,6 @@ class AllRecipes extends AbstractExtractor
             $amount = $ingredient->find('.ingredient-amount', 0);
             $name = $ingredient->find('.ingredient-name', 0);
 
-
             $ingredientsList .= ' - ' . (is_null($amount)?'':$amount->innertext) . ' ' . (is_null($name)?'':$name->innertext) . '<br/>';
         }
 

@@ -60,7 +60,6 @@ App::error(function (AuthTokenNotAuthorizedException $exception) {
     return Response::json(array('error' => $exception->getMessage()), $exception->getCode());
 });
 
-
 /*
 |--------------------------------------------------------------------------
 | Guest Filter

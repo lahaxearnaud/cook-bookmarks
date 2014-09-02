@@ -1,17 +1,17 @@
 <?php
 namespace Extractors;
 
-interface ExtractorInterface {
+interface ExtractorInterface
+{
+    public function getDomElement($html);
 
-	public function getDomElement($html);
+    public function getTitle($domHtml);
 
-	public function getTitle($domHtml);
+    public function getIngredients($domHtml);
 
-	public function getIngredients($domHtml);
+    public function getYield($domHtml);
 
-	public function getYield($domHtml);
+    public function getPreparations($domHtml);
 
-	public function getPreparations($domHtml);
-
-	public function extract($html);
+    public function extract($html);
 }

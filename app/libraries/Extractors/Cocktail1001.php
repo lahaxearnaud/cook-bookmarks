@@ -2,7 +2,6 @@
 
 namespace Extractors;
 
-
 class Cocktail1001 extends AbstractExtractor
 {
 

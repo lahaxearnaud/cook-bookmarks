@@ -1,6 +1,5 @@
 <?php
 
-use \Faker\Lorem;
 use Carbon\Carbon;
 
 class CategoriesTableSeeder extends Seeder

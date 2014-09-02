@@ -2,7 +2,6 @@
 
 namespace Extractors;
 
-
 class Odelices extends AbstractExtractor
 {
 

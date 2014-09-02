@@ -25,7 +25,8 @@ class Femina extends AbstractExtractor
         return '.preparation > .cnt';
     }
 
-    public function getPreparations($domHtml) {
+    public function getPreparations($domHtml)
+    {
         return $domHtml->find($this->getPreparationsCssSelector(), 0)->__toString();
     }
 }
