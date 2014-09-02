@@ -4,8 +4,6 @@ namespace Extractors;
 
 class AllRecipes extends AbstractExtractor
 {
-
-
     public function getTitleCssSelector()
     {
         return 'h1[id=itemTitle]';
@@ -26,13 +24,18 @@ class AllRecipes extends AbstractExtractor
         return 'div[itemprop=recipeInstructions] ol li';
     }
 
-    public function getPreparations($domHtml) {
-        $preparations = $domHtml->find($this->getPreparationsCssSelector(), 0);
-        $preparationList = '<br/>';
-        foreach ($preparations as $preparation) {
-            $preparationList .= ' - ' . $ingredient->find('.ingredient-amount', 0)->innertext . ' ' . $ingredient->find('.ingredient-name', 0)->innertext . '<br/>';
+    public function getIngredients($domHtml)
+    {
+        $ingredients = $domHtml->find($this->getIngredientsCssSelector());
+        $ingredientsList = '<br/>';
+        foreach ($ingredients as $ingredient) {
+            $amount = $ingredient->find('.ingredient-amount', 0);
+            $name = $ingredient->find('.ingredient-name', 0);
+
+
+            $ingredientsList .= ' - ' . (is_null($amount)?'':$amount->innertext) . ' ' . (is_null($name)?'':$name->innertext) . '<br/>';
         }
 
-        return $preparationList;
+        return $ingredientsList;
     }
 }

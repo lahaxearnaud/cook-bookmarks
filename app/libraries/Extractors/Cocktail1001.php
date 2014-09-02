@@ -2,35 +2,52 @@
 
 namespace Extractors;
 
-require public_path().'/../vendor/simplehtmldom/simplehtmldom/simple_html_dom.php';
 
-class Cocktail1001 extends \ArticleExtractor
+class Cocktail1001 extends AbstractExtractor
 {
-    public function extract($html, $url = '')
+
+    public function getTitleCssSelector()
     {
-        $html = str_get_html($html);
+        return 'h1';
+    }
 
-        $title = $html->find('h1', 0);
-        $ingredients = $html->find('a[itemprop=ingredients]');
-        $preparations = $html->find('span[itemprop=recipeInstructions]', 0);
+    public function getYieldCssSelector()
+    {
+        return '';
+    }
 
-        $ingredientsList = "<br>";
+    public function getIngredientsCssSelector()
+    {
+        return 'a[itemprop=ingredients]';
+    }
+
+    public function getPreparationsCssSelector()
+    {
+        return 'span[itemprop=recipeInstructions]';
+    }
+
+    public function extract($html)
+    {
+        $dom = $this->getDomElement($html);
+
+        return  array(
+            'title' => $this->tidy($this->getTitle($dom)),
+            'body' => '<h2>Ingrédients</h2> <br/> ' .
+            $this->tidy($this->getIngredients($dom)) . '<br/>
+            <h2>Preparations:</h2>' . $this->tidy($this->getPreparations($dom)),
+            'success' => true
+        );
+    }
+
+    public function getIngredients($domHtml)
+    {
+        $ingredients = $domHtml->find($this->getIngredientsCssSelector());
+
+        $ingredientsList = "<br/>";
         foreach ($ingredients as $ingredient) {
             $ingredientsList .= ' - ' . strip_tags($ingredient->parent()->innertext)."<br/>";
         }
 
-        if(is_null($ingredients) || is_null($title) || is_null($preparations)) {
-            return array(
-                'title' => '',
-                'body' => '',
-                'success' => false
-            );
-        }
-
-        return array(
-                'title' => $this->tidyTile($title->plaintext),
-                'body' => '<h2>Ingrédients:</h2><br/> '. $ingredientsList .'<br/><h2>Instructions</h2><br/>' . ($preparations->innertext),
-                'success' => true
-            );
+        return $ingredientsList;
     }
-};
+}

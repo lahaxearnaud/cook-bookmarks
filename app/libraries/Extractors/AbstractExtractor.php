@@ -3,7 +3,7 @@ namespace Extractors;
 
 require public_path().'/../vendor/simplehtmldom/simplehtmldom/simple_html_dom.php';
 
-class AbstractExtractor implements ExtractorInterface {
+abstract class AbstractExtractor implements ExtractorInterface {
 
 	abstract public function getTitleCssSelector();
     abstract public function getYieldCssSelector();
@@ -20,10 +20,10 @@ class AbstractExtractor implements ExtractorInterface {
 		$dom = $this->getDomElement($html);
 
 		return  array(
-            'title' => $this->tidyTile($title->getTitle($dom)),
-            'body' => '<h2>Ingrédients (' . $this->getYield($dom) . ')</h2> <br/> ' .
-            $this->getIngredients($dom) . '<br/>
-            <h2>Preparations:</h2>' . $this->getPreparations($dom),
+            'title' => $this->tidy($this->getTitle($dom)),
+            'body' => '<h2>Ingrédients (' . $this->tidy($this->getYield($dom)) . ')</h2> <br/> ' .
+            $this->tidy($this->getIngredients($dom)) . '<br/>
+            <h2>Preparations:</h2>' . $this->tidy($this->getPreparations($dom)),
             'success' => true
         );
     }
@@ -44,7 +44,7 @@ class AbstractExtractor implements ExtractorInterface {
 
 		$ingredientsList = "<br/>";
         foreach ($ingredients as $ingredient) {
-            $ingredientsList .= ' - ' . strip_tags($ingredient->parent()->innertext)."<br/>";
+            $ingredientsList .= ' - ' . strip_tags($ingredient->innertext)."<br/>";
         }
 
         return $ingredientsList;
@@ -52,17 +52,18 @@ class AbstractExtractor implements ExtractorInterface {
 
 	public function getYield($domHtml)
 	{
-		$title = $domHtml->find($this->getYieldCssSelector(), 0);
-        if(is_null($title)) {
+		$yield = $domHtml->find($this->getYieldCssSelector(), 0);
+
+        if(is_null($yield)) {
         	return '';
         }
 
-        return $title->innerText;
+        return $yield->innertext;
 	}
 
 	public function getPreparations($domHtml)
 	{
-		$preparations = $domHtml->find($this->getPreparationsCssSelector(), 0);
+		$preparations = $domHtml->find($this->getPreparationsCssSelector());
 		$preparationList = '<br/>';
 	    foreach ($preparations as $preparation) {
 	        $preparationList .= ' - ' . $preparation->innertext . '<br/>';
@@ -71,7 +72,7 @@ class AbstractExtractor implements ExtractorInterface {
 	    return $preparationList;
 	}
 
-	public function tidyTile($title) {
+	public function tidy($title) {
         return preg_replace('/[\s]+/mu', ' ', trim($title));
     }
 }

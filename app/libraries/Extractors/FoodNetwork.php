@@ -2,42 +2,26 @@
 
 namespace Extractors;
 
-require public_path().'/../vendor/simplehtmldom/simplehtmldom/simple_html_dom.php';
-
-class FoodNetwork extends \ArticleExtractor
+class FoodNetwork extends AbstractExtractor
 {
-    public function extract($html, $url = '')
+
+    public function getTitleCssSelector()
     {
-        $html = str_get_html($html);
-    $title = $html->find('h1', 0);
-    $ingredients = $html->find('.ingredients ul li');
-    $preparations = $html->find('div[itemprop=recipeInstructions] p');
-    $ingredientsNbPers = $html->find('dd[itemprop=recipeYield]', 0);
-
-    if(is_null($ingredients) || is_null($title) || is_null($preparations)) {
-        return array(
-            'title' => '',
-            'body' => '',
-            'success' => false
-        );
+        return 'h1';
     }
 
-    $body = '';
-    foreach ($preparations as $preparation) {
-        $body .= ' - ' . $preparation->innertext . '<br/>';
+    public function getYieldCssSelector()
+    {
+        return 'dd[itemprop=recipeYield]';
     }
 
-    $ingredientsBody = '<br/>';
-    foreach ($ingredients as $ingredient) {
-        $ingredientsBody .= ' - ' . $ingredient->innertext . '<br/>';
+    public function getIngredientsCssSelector()
+    {
+        return '.ingredients ul li';
     }
 
-
-    return array(
-            'title' => $this->tidyTile($title->plaintext),
-            'body' => '<h2>Ingrédients (' . $ingredientsNbPers->innertext . ')</h2> <br/> ' . $ingredientsBody . '<br/><h2>Preparations:</h2>' . $body,
-            'success' => true
-        );
+    public function getPreparationsCssSelector()
+    {
+        return 'div[itemprop=recipeInstructions] p';
     }
-
-};
+}

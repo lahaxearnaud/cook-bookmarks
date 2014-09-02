@@ -32,7 +32,7 @@ class ArticleExtractor
 
             $extractor = new $extractor;
 
-            return $extractor->extract($html ,$url);
+            return $extractor->extract($html);
         } catch(ClientErrorResponseException $e) {
             return array(
                 'title' => '',
@@ -47,9 +47,5 @@ class ArticleExtractor
             );
         }
 
-    }
-
-    public function tidyTile($title) {
-        return preg_replace('/[\s]+/mu', ' ', trim($title));
     }
 }

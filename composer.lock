@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d102ecd67849620680820840e2d929fb",
+    "hash": "4d27c8b019e69489d0cfef689375b7e1",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -381,16 +381,16 @@
         },
         {
             "name": "intervention/image",
-            "version": "2.0.7",
+            "version": "2.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Intervention/image.git",
-                "reference": "2fb5e286e4210cd55151e8e8d2ce0ac2bd20fec2"
+                "reference": "28f156432e774b31a53c5fe08d164edd111f9482"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Intervention/image/zipball/2fb5e286e4210cd55151e8e8d2ce0ac2bd20fec2",
-                "reference": "2fb5e286e4210cd55151e8e8d2ce0ac2bd20fec2",
+                "url": "https://api.github.com/repos/Intervention/image/zipball/28f156432e774b31a53c5fe08d164edd111f9482",
+                "reference": "28f156432e774b31a53c5fe08d164edd111f9482",
                 "shasum": ""
             },
             "require": {
@@ -433,7 +433,7 @@
                 "thumbnail",
                 "watermark"
             ],
-            "time": "2014-08-06 18:37:17"
+            "time": "2014-08-23 15:47:12"
         },
         {
             "name": "ircmaxell/password-compat",
@@ -808,6 +808,40 @@
                 "psr-3"
             ],
             "time": "2014-06-04 16:30:04"
+        },
+        {
+            "name": "neitanod/forceutf8",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/neitanod/forceutf8.git",
+                "reference": "8d0fbb286c841d8b54dec6d3f4579dd106eba0f6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/neitanod/forceutf8/zipball/8d0fbb286c841d8b54dec6d3f4579dd106eba0f6",
+                "reference": "8d0fbb286c841d8b54dec6d3f4579dd106eba0f6",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "ForceUTF8\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Sebastián Grignoli",
+                    "email": "grignoli@gmail.com"
+                }
+            ],
+            "description": "PHP Class Encoding featuring popular Encoding::toUTF8() function --formerly known as forceUTF8()-- that fixes mixed encoded strings.",
+            "homepage": "https://github.com/neitanod/forceutf8",
+            "time": "2014-08-14 16:43:47"
         },
         {
             "name": "nesbot/carbon",
@@ -2292,16 +2326,16 @@
     "packages-dev": [
         {
             "name": "barryvdh/laravel-ide-helper",
-            "version": "v1.11.2",
+            "version": "v1.11.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/barryvdh/laravel-ide-helper.git",
-                "reference": "19aa77ac49ab4ea859196c692618c56de3bb7e01"
+                "reference": "9a67d9132f0e2b9ed5d668aaa8a2ebc7d4dd6d49"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-ide-helper/zipball/19aa77ac49ab4ea859196c692618c56de3bb7e01",
-                "reference": "19aa77ac49ab4ea859196c692618c56de3bb7e01",
+                "url": "https://api.github.com/repos/barryvdh/laravel-ide-helper/zipball/9a67d9132f0e2b9ed5d668aaa8a2ebc7d4dd6d49",
+                "reference": "9a67d9132f0e2b9ed5d668aaa8a2ebc7d4dd6d49",
                 "shasum": ""
             },
             "require": {
@@ -2351,7 +2385,7 @@
                 "phpstorm",
                 "sublime"
             ],
-            "time": "2014-08-12 12:34:30"
+            "time": "2014-08-26 08:54:34"
         },
         {
             "name": "behat/mink",
@@ -2742,12 +2776,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/calinrada/php-apidoc.git",
-                "reference": "ed38d22b672dd3ce9456d6d874b32f81ae99a81f"
+                "reference": "f84d63b59ce0381e16ca7b40f46490f2cdda1482"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/calinrada/php-apidoc/zipball/ed38d22b672dd3ce9456d6d874b32f81ae99a81f",
-                "reference": "ed38d22b672dd3ce9456d6d874b32f81ae99a81f",
+                "url": "https://api.github.com/repos/calinrada/php-apidoc/zipball/f84d63b59ce0381e16ca7b40f46490f2cdda1482",
+                "reference": "f84d63b59ce0381e16ca7b40f46490f2cdda1482",
                 "shasum": ""
             },
             "require": {
@@ -2790,7 +2824,7 @@
                 "generator",
                 "php"
             ],
-            "time": "2014-07-24 12:49:03"
+            "time": "2014-08-23 11:38:30"
         },
         {
             "name": "doctrine/annotations",
@@ -3716,45 +3750,44 @@
         },
         {
             "name": "phpunit/php-token-stream",
-            "version": "1.2.2",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-token-stream.git",
-                "reference": "ad4e1e23ae01b483c16f600ff1bebec184588e32"
+                "reference": "f8d5d08c56de5cfd592b3340424a81733259a876"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/ad4e1e23ae01b483c16f600ff1bebec184588e32",
-                "reference": "ad4e1e23ae01b483c16f600ff1bebec184588e32",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/f8d5d08c56de5cfd592b3340424a81733259a876",
+                "reference": "f8d5d08c56de5cfd592b3340424a81733259a876",
                 "shasum": ""
             },
             "require": {
                 "ext-tokenizer": "*",
                 "php": ">=5.3.3"
             },
+            "require-dev": {
+                "phpunit/phpunit": "~4.2"
+            },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.2-dev"
+                    "dev-master": "1.3-dev"
                 }
             },
             "autoload": {
                 "classmap": [
-                    "PHP/"
+                    "src/"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "include-path": [
-                ""
-            ],
             "license": [
                 "BSD-3-Clause"
             ],
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "sb@sebastian-bergmann.de",
-                    "role": "lead"
+                    "email": "sebastian@phpunit.de"
                 }
             ],
             "description": "Wrapper around PHP's tokenizer extension.",
@@ -3762,7 +3795,7 @@
             "keywords": [
                 "tokenizer"
             ],
-            "time": "2014-03-03 05:10:30"
+            "time": "2014-08-31 06:12:13"
         },
         {
             "name": "phpunit/phpunit",
@@ -4492,6 +4525,7 @@
         "shift31/laravel-elasticsearch": 20,
         "maxhoffmann/parsedown-laravel": 20,
         "fivefilters/php-readability": 20,
+        "neitanod/forceutf8": 20,
         "bobthecow/faker": 20,
         "crada/php-apidoc": 20,
         "codeclimate/php-test-reporter": 20

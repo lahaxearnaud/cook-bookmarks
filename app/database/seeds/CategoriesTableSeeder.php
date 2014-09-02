@@ -16,14 +16,47 @@ class CategoriesTableSeeder extends Seeder
         $dateNow = $dt->toDateTimeString();
         $categories = array();
 
-        foreach (range(1, 10) as $index) {
-            $categories[] = [
-                'user_id'    => round(rand(1, 2)),
-                'name'       => Lorem::word(rand(1, 4)),
-                'created_at' => $dateNow,
-                'updated_at' => $dateNow,
-            ];
-        }
+        $categories[] = [
+            'user_id'    => 1,
+            'name'       => 'Plat',
+            'created_at' => $dateNow,
+            'updated_at' => $dateNow,
+        ];
+
+        $categories[] = [
+            'user_id'    => 1,
+            'name'       => 'Dessert',
+            'created_at' => $dateNow,
+            'updated_at' => $dateNow,
+        ];
+
+        $categories[] = [
+            'user_id'    => 1,
+            'name'       => 'Soupe',
+            'created_at' => $dateNow,
+            'updated_at' => $dateNow,
+        ];
+
+        $categories[] = [
+            'user_id'    => 1,
+            'name'       => 'Pâte',
+            'created_at' => $dateNow,
+            'updated_at' => $dateNow,
+        ];
+
+        $categories[] = [
+            'user_id'    => 1,
+            'name'       => 'Boisson',
+            'created_at' => $dateNow,
+            'updated_at' => $dateNow,
+        ];
+
+        $categories[] = [
+            'user_id'    => 1,
+            'name'       => 'Sauce',
+            'created_at' => $dateNow,
+            'updated_at' => $dateNow,
+        ];
 
         DB::table('categories')->insert($categories);
     }
