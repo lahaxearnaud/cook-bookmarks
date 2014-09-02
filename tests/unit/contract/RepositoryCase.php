@@ -15,7 +15,7 @@ abstract class RepositoryCase extends TestCase
         parent::setUp();
 
         $this->repository = App::make($this->getRepositoryName());
-        $this->model = $this->repository->getModel();
+        $this->model      = $this->repository->getModel();
     }
 
     /**
@@ -150,8 +150,8 @@ abstract class RepositoryCase extends TestCase
     public function testPaginateWhereOk()
     {
         $paginate = $this->repository->paginateWhere(array(
-            'id' => 1
-        ));
+                'id' => 1,
+            ));
         $this->assertInstanceOf('\Illuminate\Pagination\Paginator', $paginate);
     }
 
@@ -159,15 +159,15 @@ abstract class RepositoryCase extends TestCase
     {
         $this->setExpectedException('Illuminate\Database\QueryException');
         $this->repository->paginateWhere(array(
-            'dummy' => '3'
-        ));
+                'dummy' => '3',
+            ));
     }
 
     public function testPaginateWhereKoBadValue()
     {
         $paginate = $this->repository->paginateWhere(array(
-            'id' => 'dummy'
-        ));
+                'id' => 'dummy',
+            ));
         $this->assertInstanceOf('\Illuminate\Pagination\Paginator', $paginate);
     }
 
@@ -175,8 +175,8 @@ abstract class RepositoryCase extends TestCase
     {
         $this->setExpectedException('Illuminate\Database\QueryException');
         $this->repository->paginateWhere(array(
-            'id' => 1
-        ), -10);
+                'id' => 1,
+            ), -10);
     }
 
     /**
@@ -187,7 +187,7 @@ abstract class RepositoryCase extends TestCase
 
     public function testDeleteOk()
     {
-        $result = $this->repository->delete(7);
+        $result = $this->repository->delete(6);
         $this->assertTrue($result);
 
         Artisan::call('db:seed');
