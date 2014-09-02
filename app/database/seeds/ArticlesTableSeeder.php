@@ -42,7 +42,7 @@ class ArticlesTableSeeder extends Seeder
                     'body'        => $body,
                     'created_at'  => $dateNow,
                     'updated_at'  => $dateNow,
-                    'category_id' => round(rand(1, 9)),
+                    'category_id' => round(rand(1, 6)),
                 );
             }
         } else {
