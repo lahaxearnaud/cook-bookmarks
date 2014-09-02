@@ -1,7 +1,7 @@
 <?php
 namespace Extractors;
 
-require public_path().'/../vendor/simplehtmldom/simplehtmldom/simple_html_dom.php';
+\File::requireOnce(public_path() . '/../vendor/simplehtmldom/simplehtmldom/simple_html_dom.php');
 
 abstract class AbstractExtractor implements ExtractorInterface {
 

@@ -66,7 +66,7 @@ class QualitySynthaxCommand extends Command
     {
         return array(
             array('file', null, InputArgument::OPTIONAL,  'app workbench', 'File(s)/Folder(s) to test',)
-           );
+        );
     }
 
     /**
