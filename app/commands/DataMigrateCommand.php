@@ -43,9 +43,9 @@ class DataMigrateCommand extends Command
         }
         $this->info('Extract from ' . $this->argument('source'));
 
-        $data    = File::get($this->argument('source'));
-        $data    = explode("\n", $data);
-        $nbItems = count($data);
+        $articles = File::get($this->argument('source'));
+        $articles = explode("\n", $articles);
+        $nbItems  = count($articles);
         if ($nbItems === 0) {
             $this->info('Rows must be separe by \n and fields bu \t');
             throw new Exception("No data in " . $this->argument('source'), 1);
@@ -58,45 +58,45 @@ class DataMigrateCommand extends Command
         $markdown  = new HTML_To_Markdown();
         $markdown->set_option('strip_tags', true);
 
-        $dt      = Carbon::now();
-        $dateNow = $dt->toDateTimeString();
-        $results = [];
-        foreach ($data as $key => $value) {
-            $tmp = explode("\t", $value);
+        $dt          = Carbon::now();
+        $currentDate = $dt->toDateTimeString();
+        $seeds       = [];
+        foreach ($articles as $key => $article) {
+            $article = explode("\t", $article);
 
-            if (!empty($tmp[8])) {
-                $tmp[8] = 'http://' . $tmp[8];
+            if (!empty($article[8])) {
+                $article[8] = 'http://' . $article[8];
             }
 
-            if (!empty($tmp[8]) && filter_var($tmp[8], FILTER_VALIDATE_URL) !== false && empty($tmp[2])) {
-                $result = $extractor->extractFromRemote($tmp[8]);
-                $tmp[2] = $markdown->convert($result['body']);
-            } elseif (!empty($tmp[2])) {
-                $tmp[2] = str_replace('↵', '', $markdown->convert(html_entity_decode($tmp[2])));
+            if (!empty($article[8]) && filter_var($article[8], FILTER_VALIDATE_URL) !== false && empty($article[2])) {
+                $result     = $extractor->extractFromRemote($article[8]);
+                $article[2] = $markdown->convert($result['body']);
+            } elseif (!empty($article[2])) {
+                $article[2] = str_replace('↵', '', $markdown->convert(html_entity_decode($article[2])));
             }
 
-            $results[$key] = [
-                'title'       => $tmp[1],
-                'slug'        => Str::slug($tmp[1]),
-                'image'       => $tmp[10],
-                'body'        => $tmp[2],
+            $seeds[$key] = [
+                'title'       => $article[1],
+                'slug'        => Str::slug($article[1]),
+                'image'       => $article[10],
+                'body'        => $article[2],
                 'author_id'   => 1,
-                'indexable'   => $tmp[2],
-                'url'         => $tmp[8],
+                'indexable'   => $article[2],
+                'url'         => $article[8],
                 'author_id'   => 1,
-                'category_id' => $tmp[6]-$this->argument('category-delta'),
-                'created_at'  => $dateNow,
-                'updated_at'  => $dateNow,
+                'category_id' => $article[6]-$this->argument('category-delta'),
+                'created_at'  => $currentDate,
+                'updated_at'  => $currentDate,
             ];
 
             $progress->advance();
-            unset($data[$key]);
+            unset($articles[$key]);
         }
 
         $progress->finish();
         $this->info('');
         $this->info('Write extract to ' . $this->argument('output'));
-        File::put($this->argument('output'), '<?php $articles = ' . var_export($result, true) . ';');
+        File::put($this->argument('output'), '<?php $articles = ' . var_export($seeds, true) . ';');
     }
 
     /**
