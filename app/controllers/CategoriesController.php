@@ -74,7 +74,7 @@ class CategoriesController extends \RessourceController
     {
         return $this->repository->paginateWhere(array(
             'user_id' => $user->id
-        ), 20);
+        ), 20, Input::get('page'));
     }
 
         /**
@@ -100,6 +100,6 @@ class CategoriesController extends \RessourceController
     {
         return $this->articleRepository->paginateWhere([
             'category_id' => $category->id
-        ], 20);
+        ], 20, Input::get('page'));
     }
 }

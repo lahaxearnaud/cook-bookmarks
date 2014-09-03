@@ -41,7 +41,7 @@ abstract class RessourceController extends BaseController
      */
     public function index()
     {
-        return $this->repository->paginate(20);
+        return $this->repository->paginate(20, Input::get('page'));
     }
 
     /**

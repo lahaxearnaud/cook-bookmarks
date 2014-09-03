@@ -95,6 +95,6 @@ class ArticlesController extends \RessourceController
     {
         return $this->repository->paginateWhere(array(
             'author_id' => $user->id
-        ), 20);
+        ), 20, Input::get('page'));
     }
 }

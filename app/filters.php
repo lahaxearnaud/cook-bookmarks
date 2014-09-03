@@ -10,7 +10,6 @@
 | application. Here you may also register your custom route filters.
 |
 */
-
 App::before(function (Symfony\Component\HttpFoundation\Request $request) {
     header('Access-Control-Allow-Origin: *');
     header('Access-Control-Allow-Credentials: true');

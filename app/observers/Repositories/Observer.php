@@ -74,12 +74,12 @@ abstract class Observer implements ObserverInterface
 
     public function beforePaginate($event)
     {
-        return false;
+        return Cache::tags($this->getCacheTag())->get('paginate.'.$this->paramToString($event), false);
     }
 
     public function beforePaginateWhere($event)
     {
-        return false;
+        return Cache::tags($this->getCacheTag())->get('paginateWhere.'.$this->paramToString($event), false);
     }
 
     public function beforeUpdate($event)
@@ -124,12 +124,12 @@ abstract class Observer implements ObserverInterface
 
     public function afterPaginate($params, $data)
     {
-        return false;
+        Cache::tags($this->getCacheTag())->put('paginate.'.$this->paramToString($params), $data, Carbon::now()->addMinutes(10));
     }
 
     public function afterPaginateWhere($params, $data)
     {
-        return false;
+        Cache::tags($this->getCacheTag())->put('paginateWhere.'.$this->paramToString($params), $data, Carbon::now()->addMinutes(10));
     }
 
     public function afterUpdate($params, $data)

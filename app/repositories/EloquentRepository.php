@@ -137,11 +137,17 @@ abstract class EloquentRepository implements RepositoryInterface
 	 * @param int $limit
 	 * @return Collection
 	 */
-    public function paginate($nbByPage = 10)
+    public function paginate($nbByPage = 10, $page = 1)
     {
-        $query = $this->make();
+        $paginationData =  $this->cacheWrapper('paginate', function () use ($nbByPage, $page) {
+            $query = $this->make();
 
-        return $query->paginate($nbByPage);
+            $pagination = $query->paginate($nbByPage);
+
+            return ['items' => $pagination->getItems(), 'total' => $pagination->getTotal()];
+        });
+
+        return \Paginator::make($paginationData['items'], $paginationData['total'], $nbByPage);
     }
 
     /**
@@ -152,9 +158,14 @@ abstract class EloquentRepository implements RepositoryInterface
 	 */
     public function paginateWhere(array $where, $nbByPage = 1)
     {
-        $query = $this->make();
 
-        return $query->where($where)->paginate($nbByPage);
+        $paginationData =  $this->cacheWrapper('paginateWhere', function () use ($nbByPage, $where, $page) {
+            $query = $this->make();
+
+            $pagination = $query->where($where)->paginate($nbByPage);
+
+            return ['items' => $pagination->getItems(), 'total' => $pagination->getTotal()];
+        });
     }
 
     /**
@@ -231,14 +242,16 @@ abstract class EloquentRepository implements RepositoryInterface
 
     protected function cacheWrapper($eventName, \Closure $action, array $parametersToObserver = array())
     {
-        $results = \Event::fire('article.'.$eventName . '.before', [$parametersToObserver]);
+        $modelClass = strtolower(get_class($this->model));
+
+        $results = \Event::fire($modelClass . '.' . $eventName . '.before', [$parametersToObserver]);
         if($results) {
             return current($results);
         }
 
         $results =  $action();
 
-        \Event::fire($eventName . '.after', [$parametersToObserver, $results]);
+        \Event::fire($modelClass . '.' . $eventName . '.after', [$parametersToObserver, $results]);
 
         return $results;
     }
