@@ -145,7 +145,7 @@ abstract class EloquentRepository implements RepositoryInterface
             $pagination = $query->paginate($nbByPage);
 
             return ['items' => $pagination->getItems(), 'total' => $pagination->getTotal()];
-        });
+        }, [$nbByPage, $page]);
 
         return \Paginator::make($paginationData['items'], $paginationData['total'], $nbByPage);
     }
@@ -156,7 +156,7 @@ abstract class EloquentRepository implements RepositoryInterface
 	 * @param int $limit
 	 * @return PaginatedInterface
 	 */
-    public function paginateWhere(array $where, $nbByPage = 1)
+    public function paginateWhere(array $where, $nbByPage = 1, $page = 1)
     {
 
         $paginationData =  $this->cacheWrapper('paginateWhere', function () use ($nbByPage, $where, $page) {
@@ -165,7 +165,9 @@ abstract class EloquentRepository implements RepositoryInterface
             $pagination = $query->where($where)->paginate($nbByPage);
 
             return ['items' => $pagination->getItems(), 'total' => $pagination->getTotal()];
-        });
+        }, [$nbByPage, $page, $where]);
+
+        return \Paginator::make($paginationData['items'], $paginationData['total'], $nbByPage);
     }
 
     /**
