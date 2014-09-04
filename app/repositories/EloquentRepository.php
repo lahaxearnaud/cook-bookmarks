@@ -139,7 +139,7 @@ abstract class EloquentRepository implements RepositoryInterface
 	 */
     public function paginate($nbByPage = 10, $page = 1)
     {
-        $paginationData =  $this->cacheWrapper('paginate', function () use ($nbByPage, $page) {
+        $paginationData =  $this->cacheWrapper('paginate', function () use ($nbByPage) {
             $query = $this->make();
 
             $pagination = $query->paginate($nbByPage);
@@ -159,7 +159,7 @@ abstract class EloquentRepository implements RepositoryInterface
     public function paginateWhere(array $where, $nbByPage = 1, $page = 1)
     {
 
-        $paginationData =  $this->cacheWrapper('paginateWhere', function () use ($nbByPage, $where, $page) {
+        $paginationData =  $this->cacheWrapper('paginateWhere', function () use ($nbByPage, $where) {
             $query = $this->make();
 
             $pagination = $query->where($where)->paginate($nbByPage);
