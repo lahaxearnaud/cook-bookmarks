@@ -15,8 +15,7 @@
         "intervention/image": "2.*",
         "nesbot/Carbon": "1.10.*",
         "tappleby/laravel-auth-token": "0.3.*",
-        "simplehtmldom/simplehtmldom": "1.0.0",
-        "neitanod/forceutf8": "dev-master"
+        "simplehtmldom/simplehtmldom": "1.0.0"
 	},
 	"autoload": {
 		"classmap": [
