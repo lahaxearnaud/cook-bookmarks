@@ -17,37 +17,35 @@
  * @property-read \Illuminate\Database\Eloquent\Collection|\Article[] $articles
  * @property-read mixed $links
  */
-class Category extends BaseModel implements HyperMediaInterface
-{
-    public static $rules = array(
-        'name'     => 'required|min:3',
-    );
+class Category extends BaseModel implements HyperMediaInterface {
+	public static $rules = array(
+		'name'  => 'required|min:3',
+		'color' => 'required',
+	);
 
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = array('created_at', 'updated_at');
+	/**
+	 * The attributes excluded from the model's JSON form.
+	 *
+	 * @var array
+	 */
+	protected $hidden = array('created_at', 'updated_at');
 
-    protected $guarded = array();
+	protected $guarded = array();
 
-    /**
-     * Get the post's author.
-     *
-     * @return User
-     */
-    public function user()
-    {
-        return $this->belongsTo('User', 'user_id');
-    }
+	/**
+	 * Get the post's author.
+	 *
+	 * @return User
+	 */
+	public function user() {
+		return $this->belongsTo('User', 'user_id');
+	}
 
-    /**
-     * @author LAHAXE Arnaud <lahaxe.arnaud@gmail.com>
-     * @return array
-     */
-    public function articles()
-    {
-        return $this->hasMany('Article', 'category_id');
-    }
+	/**
+	 * @author LAHAXE Arnaud <lahaxe.arnaud@gmail.com>
+	 * @return array
+	 */
+	public function articles() {
+		return $this->hasMany('Article', 'category_id');
+	}
 }
