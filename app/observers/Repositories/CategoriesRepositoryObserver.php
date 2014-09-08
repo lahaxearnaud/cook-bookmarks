@@ -8,6 +8,8 @@
 
 namespace Observers\Repositories;
 
+use \Cache as Cache;
+
 class CategoriesRepositoryObserver extends Observer
 {
     protected function getCacheTag()
