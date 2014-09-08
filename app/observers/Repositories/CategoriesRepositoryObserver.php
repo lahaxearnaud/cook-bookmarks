@@ -14,4 +14,16 @@ class CategoriesRepositoryObserver extends Observer
     {
         return 'category';
     }
+
+    public function afterDelete($params, $data)
+    {
+    	parent::afterDelete($params, $data);
+        Cache::tags('article')->flush();
+    }
+
+    public function afterUpdate($params, $data)
+    {
+    	parent::afterUpdate($params, $data);
+        Cache::tags('article')->flush();
+    }
 }
