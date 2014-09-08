@@ -40,6 +40,11 @@ abstract class EloquentRepository implements RepositoryInterface
         });
     }
 
+    public function count($where)
+    {
+        return $this->model->where($where)->count();
+    }
+
     /**
 	 * returns a collection of all models
 	 *
@@ -180,7 +185,7 @@ abstract class EloquentRepository implements RepositoryInterface
         return $this->cacheWrapper('update', function () use ($id, $data) {
             $model = $this->find($id);
             foreach ($data as $key => $value) {
-                $model->{$key} =  $value;
+                $model->{$key} = $value;
             }
             $model->updateUniques();
 

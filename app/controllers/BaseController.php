@@ -29,7 +29,7 @@ abstract class BaseController extends Controller
         $routeName = 'api.v1.'.$model->getTable().'.show';
 
         return array(
-            "Location" =>  route($routeName, array(
+            "Url" =>  route($routeName, array(
                 'id' => $model->id
             )),
             'Id' => $model->id

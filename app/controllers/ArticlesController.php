@@ -97,4 +97,33 @@ class ArticlesController extends \RessourceController
             'author_id' => $user->id
         ), 20, Input::get('page'));
     }
+
+    /**
+     * @ApiDescription(description="Get user article (paginated)")
+     * @ApiRoute(name="/existNoCategory")
+     * @ApiMethod(type="get")
+     */
+    public function existsWithNoCategory()
+    {
+        $nb =  $this->repository->count(array(
+            'category_id' => null
+        ));
+
+        return Response::json([
+            'exist' => $nb > 0,
+            'count' => $nb
+        ]);
+    }
+
+    /**
+     * @ApiDescription(description="Get user article (paginated)")
+     * @ApiRoute(name="/noCategory")
+     * @ApiMethod(type="get")
+     */
+    public function noCategory()
+    {
+        return $this->repository->paginateWhere(array(
+            'category_id' => null
+        ), 20, Input::get('page'));
+    }
 }
