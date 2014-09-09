@@ -18,7 +18,7 @@ class UrlInformationsHandler
 
         $article = Article::findOrFail($data['id']);
 
-        if(filter_var($article->url, FILTER_VALIDATE_URL) !== FALSE) {
+        if(filter_var($article->url, FILTER_VALIDATE_URL) !== false) {
             $imageUrl = $this->getImage($article->url, Config::get('extractor.stopword'));
 
             Image::configure(array('driver' => 'imagick'));
@@ -38,6 +38,9 @@ class UrlInformationsHandler
             $article->sourceFavicon = $this->getFavicon($article->url);
             $article->updateUniques();
 
+        }
+
+        if(filter_var($article->image, FILTER_VALIDATE_URL) !== false) {
             \Queue::push('ImagesHandler', array('id' => $data['id']));
         }
 
