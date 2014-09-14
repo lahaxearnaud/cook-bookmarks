@@ -36,43 +36,39 @@
  * @method static \Illuminate\Database\Query\Builder|\Article whereSourceSite($value)
  * @method static \Illuminate\Database\Query\Builder|\Article whereSourceFavicon($value)
  */
-class Article extends BaseModel implements HyperMediaInterface
-{
-    public static $rules = array(
-        'title'     => 'required|min:5',
-        'url'       => 'required|url',
-        'slug'      => 'required|unique:articles',
-        'indexable' => 'required',
-        'body'      => 'required|min:5',
-    );
+class Article extends BaseModel implements HyperMediaInterface {
+	public static $rules = array(
+		'title'     => 'required|min:5',
+		'url'       => 'url',
+		'slug'      => 'required|unique:articles',
+		'indexable' => 'required',
+		'body'      => 'required|min:5',
+	);
 
-    protected $guarded = array();
+	protected $guarded = array();
 
-     /**
-     * Get the post's author.
-     *
-     * @return User
-     */
-    public function author()
-    {
-        return $this->belongsTo('User', 'author_id');
-    }
+	/**
+	 * Get the post's author.
+	 *
+	 * @return User
+	 */
+	public function author() {
+		return $this->belongsTo('User', 'author_id');
+	}
 
-    /**
-     * @author LAHAXE Arnaud <lahaxe.arnaud@gmail.com>
-     * @return Category|null
-     */
-    public function category()
-    {
-        return $this->belongsTo('Category', 'category_id');
-    }
+	/**
+	 * @author LAHAXE Arnaud <lahaxe.arnaud@gmail.com>
+	 * @return Category|null
+	 */
+	public function category() {
+		return $this->belongsTo('Category', 'category_id');
+	}
 
-    /**
-     * @author LAHAXE Arnaud <lahaxe.arnaud@gmail.com>
-     * @return array
-     */
-    public function notes()
-    {
-        return $this->hasMany('Note', 'article_id');
-    }
+	/**
+	 * @author LAHAXE Arnaud <lahaxe.arnaud@gmail.com>
+	 * @return array
+	 */
+	public function notes() {
+		return $this->hasMany('Note', 'article_id');
+	}
 }

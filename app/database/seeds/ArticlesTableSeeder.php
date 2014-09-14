@@ -44,16 +44,13 @@ class ArticlesTableSeeder extends Seeder {
 				);
 			}
 		} else {
-			echo app_path('../seeder.php');
 			include (app_path('../seeder.php'));
 		}
 
 		DB::table('articles')->insert($articles);
 
-		for ($i = 1; $i < 31; $i++) {
-			\Queue::push('UrlInformationsHandler', array('id' => $i));
+		for ($i = 0; $i < count($articles); $i++) {
+			\Queue::push('UrlInformationsHandler', array('id' => $i + 1));
 		}
-
 	}
-
 }

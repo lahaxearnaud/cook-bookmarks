@@ -1,171 +1,178 @@
 <?php
-use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Queue\Jobs\Job;
+use Intervention\Image\ImageManagerStatic as Image;
 
-require public_path().'/../vendor/simplehtmldom/simplehtmldom/simple_html_dom.php';
+require public_path() . '/../vendor/simplehtmldom/simplehtmldom/simple_html_dom.php';
 
-class UrlInformationsHandler
-{
-    public function fire(Job $job, $data)
-    {
-        echo 'handler... ' . $data['id'] . "\n";
-        if ($job->attempts() > 3) {
-            Log::error('Fail to handle job '.$job->getJobId().' '.print_r($data, true));
-            $job->delete();
+class UrlInformationsHandler {
+	public function fire(Job $job, $data) {
+		echo 'handler... ' . $data['id'] . "\n";
+		if ($job->attempts() > 3) {
+			Log::error('Fail to handle job ' . $job->getJobId() . ' ' . print_r($data, true));
+			$job->delete();
 
-            return;
-        }
+			return;
+		}
 
-        $article = Article::findOrFail($data['id']);
+		$article = Article::findOrFail($data['id']);
 
-        if(filter_var($article->url, FILTER_VALIDATE_URL) !== false) {
-            $imageUrl = $this->getImage($article->url, Config::get('extractor.stopword'));
+		$imageUrl = '';
 
-            Image::configure(array('driver' => 'imagick'));
+		if (filter_var($article->url, FILTER_VALIDATE_URL) !== false) {
+			$imageUrl = $this->getImage($article->url, Config::get('extractor.stopword'));
+		} else {
+			$imageUrl = $article->image;
+		}
 
-            $publicPath = public_path('i/'.$data['id']);
-            if(File::isDirectory($publicPath)) {
-                File::deleteDirectory($publicPath);
-            }
+		if (filter_var($imageUrl, FILTER_VALIDATE_URL) !== false) {
 
-            File::makeDirectory($publicPath, 0777, true);
+			Image::configure(array('driver' => 'imagick'));
 
-            $original = Image::make($imageUrl);
-            $original->save($publicPath . '/original.png');
+			$publicPath = public_path('i/' . $data['id']);
+			if (File::isDirectory($publicPath)) {
+				File::deleteDirectory($publicPath);
+			}
 
-            $article->image = asset('i/'.$data['id'].'/original.png');
-            $article->sourceSite = $this->getDomain($article->url);
-            $article->sourceFavicon = $this->getFavicon($article->url);
-            $article->updateUniques();
+			File::makeDirectory($publicPath, 0777, true);
 
-        }
+			$original = Image::make($imageUrl);
+			$original->save($publicPath . '/original.png');
+			$article->image = asset('i/' . $data['id'] . '/original.png');
+		}
 
-        if(filter_var($article->image, FILTER_VALIDATE_URL) !== false) {
-            \Queue::push('ImagesHandler', array('id' => $data['id']));
-        }
+		if (!empty($article->url)) {
+			$article->sourceSite    = $this->getDomain($article->url);
+			$article->sourceFavicon = $this->getFavicon($article->url);
+		}
 
-        $job->delete();
-    }
+		$article->updateUniques();
 
-    protected function getHtmlDom($url)
-    {
-        return file_get_html($url, 0, $this->getContext());
-    }
+		if (filter_var($article->image, FILTER_VALIDATE_URL) !== false) {
+			\Queue::push('ImagesHandler', array('id' => $data['id']));
+		}
 
-    protected function getImage($url, $stopwords)
-    {
-        $html = $this->getHtmlDom($url);
+		$job->delete();
+	}
 
-        foreach($html->find('meta') as $element) {
-            if($element->property == "og:image") {
-                return $element->content;
-            }
-        }
+	protected function getHtmlDom($url) {
+		return file_get_html($url, 0, $this->getContext());
+	}
 
-        $ration = 0;
-        $srcBiggest = false;
+	protected function getImage($url, $stopwords) {
+		$html = $this->getHtmlDom($url);
 
-        foreach($html->find('img') as $element) {
-            if(!(strpos($element->src, "?")=== false)) {
-                continue;
-            }
+		foreach ($html->find('meta') as $element) {
+			if ($element->property == "og:image") {
+				return $element->content;
+			}
+		}
 
-            if(!(strpos($element->src, "timestamp")=== false)) {
-                continue;
-            }
+		$ration     = 0;
+		$srcBiggest = false;
 
-            if(!$this->pathSeamsGood($element->src, $stopwords)) {
-                continue;
-            }
+		foreach ($html->find('img') as $element) {
+			if (!(strpos($element->src, "?") === false)) {
+				continue;
+			}
 
-            $sizePrecise = false;
-            $path = $this->urlRel2abs($element->src, $url);
+			if (!(strpos($element->src, "timestamp") === false)) {
+				continue;
+			}
 
-            if(!isset($element->width) || empty($element->height)) {
-                $size = getimagesize($path);
-            }else{
-                $size = array($element->height, $element->width);
-                $sizePrecise = true;
-            }
+			if (!$this->pathSeamsGood($element->src, $stopwords)) {
+				continue;
+			}
 
-            if(is_array($size)) {
-                if($sizePrecise) {
-                    $tmpRatio = $size[0] * $size[1];
-                } else {
-                    $tmpRatio = $size[0] * $size[1] * 0.7;
-                }
+			$sizePrecise = false;
+			$path        = $this->urlRel2abs($element->src, $url);
 
-                if($tmpRatio > $ration && $tmpRatio < 500 * 500) {
-                    $ration = $tmpRatio;
-                    $srcBiggest = $path;
-                }
-            }
-        }
+			if (!isset($element->width) || empty($element->height)) {
+				$size = getimagesize($path);
+			} else {
+				$size        = array($element->height, $element->width);
+				$sizePrecise = true;
+			}
 
-        return $srcBiggest;
-    }
+			if (is_array($size)) {
+				if ($sizePrecise) {
+					$tmpRatio = $size[0] * $size[1];
+				} else {
+					$tmpRatio = $size[0] * $size[1] * 0.7;
+				}
 
-    protected function getFavicon($url)
-    {
-        $html = $this->getHtmlDom($url);
-        foreach($html->find('link') as $element) {
-            if($element->rel == "shortcut icon" || $element->rel == "icon")
+				if ($tmpRatio > $ration && $tmpRatio < 500 * 500) {
+					$ration     = $tmpRatio;
+					$srcBiggest = $path;
+				}
+			}
+		}
 
-                return $this->urlRel2abs($element->href, $url);
-        }
+		return $srcBiggest;
+	}
 
-        return '';
-    }
+	protected function getFavicon($url) {
+		$html = $this->getHtmlDom($url);
+		foreach ($html->find('link') as $element) {
+			if ($element->rel == "shortcut icon" || $element->rel == "icon") {
 
-    protected function getDomain($url)
-    {
-        $urlData = parse_url($url);
+				return $this->urlRel2abs($element->href, $url);
+			}
+		}
 
-        return $urlData['host'];
-    }
+		return '';
+	}
 
-    protected function urlRel2abs($rel, $base)
-    {
-        if (parse_url($rel, PHP_URL_SCHEME) != '') return $rel;
-        if ($rel[0]=='#' || $rel[0]=='?') return $base.$rel;
-        extract(parse_url($base));
-        $path = preg_replace('#/[^/]*$#', '', $path);
-        if ($rel[0] == '/') $path = '';
-        if (parse_url($base, PHP_URL_PORT) != ''){
-            $abs = "$host:".parse_url($base, PHP_URL_PORT)."$path/$rel";
-        }else{
-            $abs = "$host$path/$rel";
-        }
-        $re = array('#(/\.?/)#', '#/(?!\.\.)[^/]+/\.\./#');
-        for($n=1; $n>0; $abs=preg_replace($re, '/', $abs, -1, $n)) {}
+	protected function getDomain($url) {
+		$urlData = parse_url($url);
 
-        return $scheme.'://'.$abs;
-    }
+		return $urlData['host'];
+	}
 
-    protected function pathSeamsGood($url, $stopwords)
-    {
-        $url = strtolower($url);
-        foreach($stopwords as $stopword) {
-            if (strpos($url, strtolower($stopword)) !== false) {
-                return false;
-            }
-        }
+	protected function urlRel2abs($rel, $base) {
+		if (parse_url($rel, PHP_URL_SCHEME) != '') {return $rel;
+		}
 
-        return true;
-    }
+		if ($rel[0] == '#' || $rel[0] == '?') {return $base . $rel;
+		}
 
-    protected function getContext()
-    {
-        $context = stream_context_create();
-        $context  = stream_context_create(array(
-              'http'=>array(
-                'method'=>"GET",
-                'header'=>"Accept-language: en\r\n" .
-                  "Cookie: foo=bar\r\n" .
-                  "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.93 Safari/537.36\r\n" // i.e. An iPad
-                  )
-              ));
+		extract(parse_url($base));
+		$path                      = preg_replace('#/[^/]*$#', '', $path);
+		if ($rel[0] == '/') {$path = '';
+		}
 
-        return $context;
-    }
+		if (parse_url($base, PHP_URL_PORT) != '') {
+			$abs = "$host:" . parse_url($base, PHP_URL_PORT) . "$path/$rel";
+		} else {
+			$abs = "$host$path/$rel";
+		}
+		$re = array('#(/\.?/)#', '#/(?!\.\.)[^/]+/\.\./#');
+		for ($n = 1; $n > 0; $abs = preg_replace($re, '/', $abs, -1, $n)) {}
+
+		return $scheme . '://' . $abs;
+	}
+
+	protected function pathSeamsGood($url, $stopwords) {
+		$url = strtolower($url);
+		foreach ($stopwords as $stopword) {
+			if (strpos($url, strtolower($stopword)) !== false) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	protected function getContext() {
+		$context = stream_context_create();
+		$context = stream_context_create(array(
+				'http' => array(
+					'method' => "GET",
+					'header' => "Accept-language: en\r\n" .
+					"Cookie: foo=bar\r\n" .
+					"User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.93 Safari/537.36\r\n"// i.e. An iPad
+				)
+			));
+
+		return $context;
+	}
 }

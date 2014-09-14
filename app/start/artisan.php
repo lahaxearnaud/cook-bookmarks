@@ -9,11 +9,12 @@
 | that it is available to be called. We'll register every command so
 | the console gets access to each of the command object instances.
 |
-*/
+ */
 
 Artisan::add(new DatabaseResetCommand);
 Artisan::add(new TailDayCommand);
 Artisan::add(new DataMigrateCommand);
+Artisan::add(new QueueAddCommand);
 
 // QA
 Artisan::add(new QualitySynthaxCommand);
