@@ -7,12 +7,6 @@ require public_path() . '/../vendor/simplehtmldom/simplehtmldom/simple_html_dom.
 class UrlInformationsHandler {
 	public function fire(Job $job, $data) {
 		echo 'handler... ' . $data['id'] . "\n";
-		if ($job->attempts() > 3) {
-			Log::error('Fail to handle job ' . $job->getJobId() . ' ' . print_r($data, true));
-			$job->delete();
-
-			return;
-		}
 
 		$article = Article::findOrFail($data['id']);
 
@@ -24,31 +18,32 @@ class UrlInformationsHandler {
 			$imageUrl = $article->image;
 		}
 
+		Image::configure(array('driver' => 'imagick'));
+
+		$publicPath = public_path('i/' . $data['id']);
+
 		if (filter_var($imageUrl, FILTER_VALIDATE_URL) !== false) {
 
-			Image::configure(array('driver' => 'imagick'));
-
-			$publicPath = public_path('i/' . $data['id']);
 			if (File::isDirectory($publicPath)) {
 				File::deleteDirectory($publicPath);
 			}
 
 			File::makeDirectory($publicPath, 0777, true);
 
-			$original = Image::make($imageUrl);
-			$original->save($publicPath . '/original.png');
-			$article->image = asset('i/' . $data['id'] . '/original.png');
+			if ($this->downloadImg($imageUrl, $publicPath . '/original.png')) {
+				$article->image = asset('i/' . $data['id'] . '/original.png');
+			}
 		}
 
 		if (!empty($article->url)) {
 			$article->sourceSite    = $this->getDomain($article->url);
-			$article->sourceFavicon = $this->getFavicon($article->url);
+			$article->sourceFavicon = $this->getFavicon($article->url, $publicPath, $data['id']);
 		}
 
 		$article->updateUniques();
 
 		if (filter_var($article->image, FILTER_VALIDATE_URL) !== false) {
-			\Queue::push('ImagesHandler', array('id' => $data['id']));
+			Queue::push('ImagesHandler', array('id' => $data['id']));
 		}
 
 		$job->delete();
@@ -110,16 +105,30 @@ class UrlInformationsHandler {
 		return $srcBiggest;
 	}
 
-	protected function getFavicon($url) {
+	protected function getFavicon($url, $outputFolder, $id) {
 		$html = $this->getHtmlDom($url);
 		foreach ($html->find('link') as $element) {
 			if ($element->rel == "shortcut icon" || $element->rel == "icon") {
-
-				return $this->urlRel2abs($element->href, $url);
+				if ($this->downloadImg($this->urlRel2abs($element->href, $url), $outputFolder . '/favicon.png')) {
+					return asset('i/' . $id . '/favicon.png');
+				}
 			}
 		}
 
 		return '';
+	}
+
+	protected function downloadImg($url, $output) {
+		try {
+			$original = Image::make($url);
+			$original->save($output);
+
+			return true;
+		} catch (Exception $e) {
+			Log::info('Impossible to download ' . $url);
+
+			return false;
+		}
 	}
 
 	protected function getDomain($url) {
@@ -129,15 +138,22 @@ class UrlInformationsHandler {
 	}
 
 	protected function urlRel2abs($rel, $base) {
-		if (parse_url($rel, PHP_URL_SCHEME) != '') {return $rel;
+		if (parse_url($rel, PHP_URL_SCHEME) != '') {
+			return $rel;
 		}
 
-		if ($rel[0] == '#' || $rel[0] == '?') {return $base . $rel;
+		if (substr($rel, 0, 2) == '//') {
+			return 'http:' . $rel;
+		}
+
+		if ($rel[0] == '#' || $rel[0] == '?') {
+			return $base . $rel;
 		}
 
 		extract(parse_url($base));
-		$path                      = preg_replace('#/[^/]*$#', '', $path);
-		if ($rel[0] == '/') {$path = '';
+		$path = preg_replace('#/[^/]*$#', '', $path);
+		if ($rel[0] == '/') {
+			$path = '';
 		}
 
 		if (parse_url($base, PHP_URL_PORT) != '') {
@@ -145,6 +161,7 @@ class UrlInformationsHandler {
 		} else {
 			$abs = "$host$path/$rel";
 		}
+
 		$re = array('#(/\.?/)#', '#/(?!\.\.)[^/]+/\.\./#');
 		for ($n = 1; $n > 0; $abs = preg_replace($re, '/', $abs, -1, $n)) {}
 

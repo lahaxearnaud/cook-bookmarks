@@ -2,55 +2,41 @@
 
 namespace Extractors;
 
-class Marmiton extends AbstractExtractor
-{
-    public function getTitleCssSelector()
-    {
-        return '.m_title  .item  .fn';
-    }
+class Marmiton extends AbstractExtractor {
 
-    public function getYieldCssSelector()
-    {
-        return '';
-    }
+	public function getTitleCssSelector() {
+		return '.m_title  .item  .fn';
+	}
 
-    public function getIngredientsCssSelector()
-    {
-        return '';
-    }
+	public function getYieldCssSelector() {
+		return 'div.m_content_recette_main > p.m_content_recette_ingredients > span';
+	}
 
-    public function getPreparationsCssSelector()
-    {
-        return '.m_content_recette_main';
-    }
+	public function getIngredientsCssSelector() {
+		return '.m_content_recette_main .m_content_recette_ingredients';
+	}
 
-    public function getIngredients($domHtml)
-    {
-        return '';
-    }
+	public function getPreparationsCssSelector() {
+		return '.m_content_recette_todo';
+	}
 
-    public function getYield($domHtml)
-    {
-        return '';
-    }
+	public function getIngredients($domHtml) {
 
-    public function getPreparations($domHtml)
-    {
-        $body = $domHtml->find($this->getPreparationsCssSelector(), 0)->innertext;
-        $body = preg_replace('/Ingrédients(\s)?(\(pour\s[0-9]+\spersonne(s)?\))\s:/', '<h2>${0}</h2><br/>', $body);
-        $body = str_replace(['<h4>', '</h4>'], ['<h2>', '</h2>'], $body);
+		$ingredients                             = $domHtml->find($this->getIngredientsCssSelector(), 0);
+		$ingredients->find('span', 0)->innertext = '';
 
-        return $body;
-    }
+		return $ingredients->innertext;
+	}
 
-    public function extract($html)
-    {
-        $dom = $this->getDomElement($html);
+	public function getPreparations($domHtml) {
+		$preparation                                              = $domHtml->find($this->getPreparationsCssSelector(), 0);
+		$preparation->find('h4', 0)->innertext                    = '';
+		$preparation->find('.m_content_recette_ps', 0)->innertext = '';
 
-        return array(
-            'title'   => $this->tidy($this->getTitle($dom)),
-            'body'    => $this->tidy($this->getPreparations($dom)),
-            'success' => true
-        );
-    }
+		$body = $preparation->innertext;
+		$body = preg_replace('/[\s]+/mu', ' ', $body);
+		$body = preg_replace("/(<br>\s){2}/", "<br/> - ", $body);
+
+		return $body;
+	}
 }
