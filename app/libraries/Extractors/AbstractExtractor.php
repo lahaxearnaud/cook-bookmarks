@@ -68,6 +68,6 @@ abstract class AbstractExtractor implements ExtractorInterface {
 	}
 
 	public function tidy($title) {
-		return strip_tags(preg_replace('/[\s]+/mu', ' ', trim($title)));
+		return (preg_replace('/[\s]+/mu', ' ', trim($title)));
 	}
 }

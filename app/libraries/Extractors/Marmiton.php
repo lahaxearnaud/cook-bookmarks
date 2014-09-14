@@ -33,10 +33,15 @@ class Marmiton extends AbstractExtractor {
 		$preparation->find('h4', 0)->innertext                    = '';
 		$preparation->find('.m_content_recette_ps', 0)->innertext = '';
 
-		$body = $preparation->innertext;
-		$body = preg_replace('/[\s]+/mu', ' ', $body);
-		$body = preg_replace("/(<br>\s){2}/", "<br/> - ", $body);
+		$body         = $preparation->innertext;
+		$body         = preg_replace('/[\s]+/mu', ' ', $body);
+		$preparations = preg_split("/(<br>\s){2}/", $body);
 
-		return $body;
+		$preparationList = '<br/>';
+		foreach ($preparations as $preparation) {
+			$preparationList .= ' - ' . $preparation . '<br/>';
+		}
+
+		return $preparationList;
 	}
 }
