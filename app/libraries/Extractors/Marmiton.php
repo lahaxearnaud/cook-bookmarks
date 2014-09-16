@@ -25,7 +25,7 @@ class Marmiton extends AbstractExtractor {
 		$ingredients                             = $domHtml->find($this->getIngredientsCssSelector(), 0);
 		$ingredients->find('span', 0)->innertext = '';
 
-		return $ingredients->innertext;
+		return $this->addMarker(($ingredients->innertext));
 	}
 
 	public function getPreparations($domHtml) {

@@ -31,7 +31,7 @@ abstract class AbstractExtractor implements ExtractorInterface {
 			return '';
 		}
 
-		return $title->outertext;
+		return strip_tags($title->outertext);
 	}
 
 	public function getIngredients($domHtml) {
@@ -39,7 +39,7 @@ abstract class AbstractExtractor implements ExtractorInterface {
 
 		$ingredientsList = "<br/>";
 		foreach ($ingredients as $ingredient) {
-			$ingredientsList .= ' - ' . strip_tags($ingredient->innertext) . "<br/>";
+			$ingredientsList .= ' - ' . $this->addMarker(strip_tags($ingredient->innertext)) . "<br/>";
 		}
 
 		return $ingredientsList;
@@ -54,7 +54,7 @@ abstract class AbstractExtractor implements ExtractorInterface {
 
 		$yield->innertext = preg_replace("/[^0-9]/", "", $yield->innertext);
 
-		return $yield->innertext . ' personnes';
+		return '<b>' . $yield->innertext . '</b>' . ' personnes';
 	}
 
 	public function getPreparations($domHtml) {
@@ -68,6 +68,12 @@ abstract class AbstractExtractor implements ExtractorInterface {
 	}
 
 	public function tidy($title) {
-		return (preg_replace('/[\s]+/mu', ' ', trim($title)));
+		return preg_replace('/[\s]+/mu', ' ', trim($title));
+	}
+
+	public function addMarker($content) {
+		$content = preg_replace("/[0-9.,]/", "_$0_", $content);
+
+		return preg_replace("/_([0-9]+),([0-9]+)_/", "<em>$1.$2</em>", $content);
 	}
 }

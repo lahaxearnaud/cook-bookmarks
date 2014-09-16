@@ -8,6 +8,13 @@ class UrlInformationsHandler {
 	public function fire(Job $job, $data) {
 		echo 'handler... ' . $data['id'] . "\n";
 
+		if ($job->attempts() > 3) {
+			Log::error('Fail to handle job ' . $job->getJobId() . ' ' . print_r($data, true));
+			$job->delete();
+
+			return;
+		}
+
 		$article = Article::findOrFail($data['id']);
 
 		$imageUrl = '';
