@@ -72,7 +72,7 @@ abstract class AbstractExtractor implements ExtractorInterface {
 	}
 
 	public function addMarker($content) {
-		$content = preg_replace("/[0-9.,]/", "_$0_", $content);
+		$content = preg_replace("/[0-9.,]+/", "_$0_", $content);
 
 		return preg_replace("/_([0-9]+),([0-9]+)_/", "<em>$1.$2</em>", $content);
 	}

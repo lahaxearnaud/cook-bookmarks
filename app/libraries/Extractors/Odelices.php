@@ -21,7 +21,7 @@ class Odelices extends AbstractExtractor {
 	}
 
 	public function getIngredients($domHtml) {
-		return $domHtml->find($this->getIngredientsCssSelector(), 0)->innertext;
+		return $this->addMarker($domHtml->find($this->getIngredientsCssSelector(), 0)->innertext);
 	}
 
 	public function getPreparations($domHtml) {

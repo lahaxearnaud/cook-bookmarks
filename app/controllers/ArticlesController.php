@@ -6,124 +6,117 @@ use \Repositories\RepositoryInterface;
  * @ApiRoute(name="/articles")
  * @ApiSector(name="Articles")
  */
-class ArticlesController extends \RessourceController
-{
 
-    /**
-     * @var ArticleExtractor
-     */
-    protected $articleExtractor;
+class ArticlesController extends \RessourceController {
 
-    /**
-     * @var Html2Markdown
-     */
-    protected $html2markdown;
+	/**
+	 * @var ArticleExtractor
+	 */
+	protected $articleExtractor;
 
-    public function __construct(RepositoryInterface $repository, ArticleExtractor $articleExtractor, Html2Markdown $html2Markdown)
-    {
-        $this->repository = $repository;
-        $this->articleExtractor = $articleExtractor;
-        $this->html2markdown = $html2Markdown;
-    }
+	/**
+	 * @var Html2Markdown
+	 */
+	protected $html2markdown;
 
-    /**
-     * @ApiDescription(description="Create a new article")
-     * @ApiRoute(name="/create")
-     * @ApiMethod(type="post")
-     */
-    public function store()
-    {
-        $model = $this->repository->create(Input::all());
+	public function __construct(RepositoryInterface $repository, ArticleExtractor $articleExtractor, Html2Markdown $html2Markdown) {
+		$this->repository       = $repository;
+		$this->articleExtractor = $articleExtractor;
+		$this->html2markdown    = $html2Markdown;
+	}
 
-        return $this->generateResponse($model, $model->errors(), $this->generateLocation($model), 201);
-    }
+	/**
+	 * @ApiDescription(description="Create a new article")
+	 * @ApiRoute(name="/create")
+	 * @ApiMethod(type="post")
+	 */
+	public function store() {
+		$model = $this->repository->create(Input::all());
 
-    /**
-     * @ApiDescription(description="Update an article")
-     * @ApiParams(name="id", type="integer", nullable=false, description="Article id")
-     * @ApiRoute(name="/{id}")
-     * @ApiMethod(type="put")
-     */
-    public function update($id)
-    {
-        $model = $this->repository->update($id, Input::all());
+		return $this->generateResponse($model, $model->errors(), $this->generateLocation($model), 201);
+	}
 
-        return $this->generateResponse($model, $model->errors(), $this->generateLocation($model), 200);
-    }
+	/**
+	 * @ApiDescription(description="Update an article")
+	 * @ApiParams(name="id", type="integer", nullable=false, description="Article id")
+	 * @ApiRoute(name="/{id}")
+	 * @ApiMethod(type="put")
+	 */
+	public function update($id) {
+		$model = $this->repository->update($id, Input::all());
 
-    /**
-     * @ApiDescription(description="Get content of an article from a website")
-     * @ApiParams(name="url", type="string", nullable=false, description="Url of the article")
-     * @ApiRoute(name="/extractFromUrl")
-     * @ApiMethod(type="post")
-     */
-    public function extractFromUrl()
-    {
+		return $this->generateResponse($model, $model->errors(), $this->generateLocation($model), 200);
+	}
 
-        $validator = Validator::make(Input::all(), [
-            'url' => 'required|url',
-        ]);
-        if ($validator->fails()) {
-            $validator->getMessageBag()->add('success', false);
-            $messages = $validator->messages()->toArray();
-            array_walk($messages, function (&$item) {
-                $item = current($item);
-            });
+	/**
+	 * @ApiDescription(description="Get content of an article from a website")
+	 * @ApiParams(name="url", type="string", nullable=false, description="Url of the article")
+	 * @ApiRoute(name="/extractFromUrl")
+	 * @ApiMethod(type="post")
+	 */
+	public function extractFromUrl() {
 
-            return Response::json($messages, 400);
-        }
+		$validator = Validator::make(Input::all(), [
+				'url' => 'required|url',
+			]);
+		if ($validator->fails()) {
+			$validator->getMessageBag()->add('success', false);
+			$messages = $validator->messages()->toArray();
+			array_walk($messages, function (&$item) {
+				$item = current($item);
+			});
 
-        $result = $this->articleExtractor->extractFromRemote(Input::get('url'));
-        if(!$result['success']) {
-            return Response::json($result, 400);
-        }
+			return Response::json($messages, 400);
+		}
 
-        if(Input::get('markdown')) {
-            $result['body'] = $this->html2markdown->convert($result['body']);
-        }
+		$result = $this->articleExtractor->extractFromRemote(Input::get('url'));
+		if (!$result['success']) {
+			return Response::json($result, 400);
+		}
 
-        return Response::json($result);
-    }
+		if (Input::get('markdown')) {
+			$result['body'] = $this->html2markdown->convert($result['body']);
+		}
 
-    /**
-     * @ApiDescription(description="Get user article (paginated)")
-     * @ApiParams(name="id", type="integer", nullable=false, description="User id")
-     * @ApiRoute(name="/user/{id}")
-     * @ApiMethod(type="get")
-     */
-    public function user($user)
-    {
-        return $this->repository->paginateWhere(array(
-            'author_id' => $user->id
-        ), 20, Input::get('page'));
-    }
+		return Response::json($result);
+	}
 
-    /**
-     * @ApiDescription(description="Get user article (paginated)")
-     * @ApiRoute(name="/existNoCategory")
-     * @ApiMethod(type="get")
-     */
-    public function existsWithNoCategory()
-    {
-        $nb =  $this->repository->count(array(
-            'category_id' => null
-        ));
+	/**
+	 * @ApiDescription(description="Get user article (paginated)")
+	 * @ApiParams(name="id", type="integer", nullable=false, description="User id")
+	 * @ApiRoute(name="/user/{id}")
+	 * @ApiMethod(type="get")
+	 */
+	public function user($user) {
+		return $this->repository->paginateWhere(array(
+				'author_id' => $user->id
+			), 20, Input::get('page'));
+	}
 
-        return Response::json([
-            'exist' => $nb > 0,
-            'count' => $nb
-        ]);
-    }
+	/**
+	 * @ApiDescription(description="Get user article (paginated)")
+	 * @ApiRoute(name="/existNoCategory")
+	 * @ApiMethod(type="get")
+	 */
+	public function existsWithNoCategory() {
+		$nb = $this->repository->count(array(
+				'category_id' => null
+			));
 
-    /**
-     * @ApiDescription(description="Get user article (paginated)")
-     * @ApiRoute(name="/noCategory")
-     * @ApiMethod(type="get")
-     */
-    public function noCategory()
-    {
-        return $this->repository->paginateWhere(array(
-            'category_id' => null
-        ), 20, Input::get('page'));
-    }
+		return Response::json([
+				'exist' => $nb > 0,
+				'count' => $nb
+			]);
+	}
+
+	/**
+	 * @ApiDescription(description="Get user article (paginated)")
+	 * @ApiRoute(name="/noCategory")
+	 * @ApiMethod(type="get")
+	 */
+	public function noCategory() {
+		return $this->repository->paginateWhere(array(
+				'category_id' => null
+			), 20, Input::get('page'));
+	}
 }
