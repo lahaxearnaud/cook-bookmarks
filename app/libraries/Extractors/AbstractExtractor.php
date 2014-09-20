@@ -72,8 +72,15 @@ abstract class AbstractExtractor implements ExtractorInterface {
 	}
 
 	public function addMarker($content) {
-		$content = preg_replace("/[0-9.,]+/", "_$0_", $content);
+		/**
+		 * ([0-9,.]+)/([0-9,.]+) => detect divison 1/3, 34/27 1.82/193.287
+		 * ([0-9.,]+) => detect simple interger or float
+		 */
+		$content = preg_replace("#([0-9,.]+)/([0-9,.]+)|([0-9.,]+)#", "_$0_", $content);
 
+		/**
+		 * replace comma by point 1,4 => 1.4
+		 */
 		return preg_replace("/_([0-9]+),([0-9]+)_/", "<em>$1.$2</em>", $content);
 	}
 }
