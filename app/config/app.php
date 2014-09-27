@@ -13,7 +13,7 @@ return array(
 	|
 	*/
 
-    'debug' => false,
+    'debug'           => FALSE,
 
     /*
 	|--------------------------------------------------------------------------
@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-    'url' => 'http://api-cuisine.lahaxe.fr',
+    'url'             => 'http://api-cuisine.lahaxe.fr',
 
     /*
 	|--------------------------------------------------------------------------
@@ -39,7 +39,7 @@ return array(
 	|
 	*/
 
-    'timezone' => 'UTC',
+    'timezone'        => 'UTC',
 
     /*
 	|--------------------------------------------------------------------------
@@ -52,7 +52,7 @@ return array(
 	|
 	*/
 
-    'locale' => 'en',
+    'locale'          => 'en',
 
     /*
 	|--------------------------------------------------------------------------
@@ -78,9 +78,9 @@ return array(
 	|
 	*/
 
-    'key' => 'QHOUDR2VVEcx7OXsvkx1QhulEd9iXttd',
+    'key'             => 'QHOUDR2VVEcx7OXsvkx1QhulEd9iXttd',
 
-    'cipher' => MCRYPT_RIJNDAEL_128,
+    'cipher'          => MCRYPT_RIJNDAEL_128,
 
     /*
 	|--------------------------------------------------------------------------
@@ -93,7 +93,7 @@ return array(
 	|
 	*/
 
-    'providers' => array(
+    'providers'       => array(
 
         'Illuminate\Foundation\Providers\ArtisanServiceProvider',
         'Illuminate\Auth\AuthServiceProvider',
@@ -126,7 +126,8 @@ return array(
         'Tappleby\AuthToken\AuthTokenServiceProvider',
         'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
         'Shift31\LaravelElasticsearch\LaravelElasticsearchServiceProvider',
-        'Intervention\Image\ImageServiceProvider'
+        'Intervention\Image\ImageServiceProvider',
+        'Barryvdh\DomPDF\ServiceProvider',
     ),
 
     /*
@@ -140,7 +141,7 @@ return array(
 	|
 	*/
 
-    'manifest' => storage_path().'/meta',
+    'manifest'        => storage_path() . '/meta',
 
     /*
 	|--------------------------------------------------------------------------
@@ -153,7 +154,7 @@ return array(
 	|
 	*/
 
-    'aliases' => array(
+    'aliases'         => array(
 
         'App'                             => 'Illuminate\Support\Facades\App',
         'Artisan'                         => 'Illuminate\Support\Facades\Artisan',
@@ -196,8 +197,9 @@ return array(
         'String'                          => 'StringHelper',
         'AuthToken'                       => 'Tappleby\Support\Facades\AuthToken',
         'AuthTokenNotAuthorizedException' => 'Tappleby\AuthToken\Exceptions\NotAuthorizedException',
-        'Image'                           => 'Intervention\Image\Facades\Image'
+        'Image'                           => 'Intervention\Image\Facades\Image',
+        'PDF'                             => 'Barryvdh\DomPDF\Facade',
     ),
 
-    'index' => 'cook'
+    'index'           => 'cook'
 );

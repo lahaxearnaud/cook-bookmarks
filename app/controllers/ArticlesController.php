@@ -1,6 +1,7 @@
 <?php
 
 use \Repositories\RepositoryInterface;
+use \Michelf\Markdown;
 
 /**
  * @ApiRoute(name="/articles")
@@ -119,4 +120,17 @@ class ArticlesController extends \RessourceController {
 				'category_id' => null
 			), 20, Input::get('page'));
 	}
+
+    /**
+     * @ApiDescription(description="Export article in PDF")
+     * @ApiRoute(name="/export")
+     * @ApiMethod(type="get")
+     */
+    public function export($article)
+    {
+        $article->body = Markdown::defaultTransform($article->body);
+        $pdf = PDF::loadView('export', ['article' => $article]);
+
+        return $pdf->download($article->slug . '.pdf');
+    }
 }

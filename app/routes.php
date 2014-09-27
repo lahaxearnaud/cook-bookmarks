@@ -33,6 +33,7 @@ Route::group(array('prefix' => 'api/v1'), function () {
         Route::get('articles/user/{user}', [ 'as' => 'articles.user', 'uses' => 'ArticlesController@user']);
         Route::get('articles/existNoCategory', [ 'as' => 'articles.existNoCategory', 'uses' => 'ArticlesController@existsWithNoCategory']);
         Route::get('articles/noCategory', [ 'as' => 'articles.noCategory', 'uses' => 'ArticlesController@noCategory']);
+        Route::get('articles/export/{article}', [ 'as' => 'articles.export', 'uses' => 'ArticlesController@export']);
 
         Route::get('articles/search', [ 'as' => 'articles.search', 'uses' => 'ArticlesController@search']);
         Route::resource('articles', 'ArticlesController');
