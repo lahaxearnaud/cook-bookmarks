@@ -270,6 +270,11 @@ abstract class EloquentRepository implements RepositoryInterface
     {
         $modelClass = strtolower(get_class($this->model));
 
+        $parametersToObserver['user'] = '';
+        if(!is_null($this->user)) {
+            $parametersToObserver['user'] = $this->user->id;
+        }
+
         $results = \Event::fire($modelClass . '.' . $eventName . '.before', [$parametersToObserver]);
         if($results) {
             return current($results);
