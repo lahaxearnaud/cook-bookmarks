@@ -31,7 +31,7 @@ class ArticlesRepository extends EloquentRepository
         if(!is_null($this->user)) {
             $where['user'] = $this->user->id;
         }
-        
+
         $arrayIds = $this->seeker->query($query, $where);
 
         if(count($arrayIds) === 0) {

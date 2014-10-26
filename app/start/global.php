@@ -108,11 +108,11 @@ App::singleton('LogsRepository', function ($app) {
 });
 
 App::singleton('CategoriesRepository', function ($app) {
-    return new Repositories\CategoriesRepository(new Category(), array('user'));
+    return new Repositories\CategoriesRepository(new Category(), array('user'), Auth::User());
 });
 
 App::singleton('NotesRepository', function ($app) {
-    return new Repositories\NotesRepository(new Note(), array('user'));
+    return new Repositories\NotesRepository(new Note(), array('user'), Auth::User());
 });
 
 App::singleton('UsersRepository', function ($app) {
