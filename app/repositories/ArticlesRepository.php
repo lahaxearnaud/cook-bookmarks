@@ -28,7 +28,10 @@ class ArticlesRepository extends EloquentRepository
 	 */
     public function search($query, array $where = array())
     {
-        $where['user'] = $this->user->id;
+        if(!is_null($this->user)) {
+            $where['user'] = $this->user->id;
+        }
+        
         $arrayIds = $this->seeker->query($query, $where);
 
         if(count($arrayIds) === 0) {

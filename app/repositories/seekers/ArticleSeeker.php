@@ -31,7 +31,7 @@ class ArticleSeeker extends ElasticSearchSeeker
 
         $params['body']['query']['bool']['must'][]['query_string']['query'] = $query;
 
-        if(isset($parameters['user_id']) && !empty($parameters['user_id'])) {
+        if(isset($parameters['user']) && !empty($parameters['user'])) {
             $params['body']['query']['bool']['must'][]['term'][$params['type'].'.user']  = $parameters['user'];
         }
 
