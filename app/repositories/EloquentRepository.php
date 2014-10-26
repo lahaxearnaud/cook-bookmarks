@@ -252,8 +252,10 @@ abstract class EloquentRepository implements RepositoryInterface
 
         if($this->model instanceof UserFilterableInterface) {
 
-            return $query->ofUser($this->user->id);
+            $query = $query->ofUser($this->user->id);
         }
+
+        return $query;
     }
 
     /**
