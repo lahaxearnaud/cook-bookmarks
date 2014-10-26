@@ -13,7 +13,7 @@ class ArticlesRepository extends EloquentRepository
      */
     protected $seeker;
 
-    public function __construct(Model $model, $with = array(), \User $user, ElasticSearchSeeker $elasticSearchSeeker)
+    public function __construct(Model $model, $with = array(), \User $user = null, ElasticSearchSeeker $elasticSearchSeeker)
     {
         $this->model = $model;
         $this->with = $with;

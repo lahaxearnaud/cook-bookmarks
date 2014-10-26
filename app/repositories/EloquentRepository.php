@@ -39,7 +39,7 @@ abstract class EloquentRepository implements RepositoryInterface
     public function all()
     {
         return $this->cacheWrapper('all', function () {
-            if($this->model instanceof UserFilterableInterface) {
+            if($this->model instanceof UserFilterableInterface && !is_null($this->user)) {
                 return $this->model->all();
             } else {
                 return $this->model->ofUser($this->user->id)->get();
@@ -50,7 +50,7 @@ abstract class EloquentRepository implements RepositoryInterface
     public function count($where)
     {
         $query = $this->model->where($where);
-        if($this->model instanceof UserFilterableInterface) {
+        if($this->model instanceof UserFilterableInterface && !is_null($this->user)) {
             $query->ofUser($this->user->id);
         }
 

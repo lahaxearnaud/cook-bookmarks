@@ -30,6 +30,7 @@ class ArticleSeeker extends ElasticSearchSeeker
         $params['type']                                   = strtolower(get_class($this->model));
 
         $params['body']['query']['bool']['must'][]['query_string']['query'] = $query;
+
         if(isset($parameters['user_id']) && !empty($parameters['user_id'])) {
             $params['body']['query']['bool']['must'][]['term'][$params['type'].'.user']  = $parameters['user'];
         }
@@ -74,7 +75,10 @@ class ArticleSeeker extends ElasticSearchSeeker
             "query" =>  $query,
             "fuzziness" =>  3
         );
-        $params['body']['query']['bool']['must'][]['term'][$params['type'].'.user']  = $parameters['user'];
+
+        if(isset($parameters['user']) && !empty($parameters['user'])) {
+            $params['body']['query']['bool']['must'][]['term'][$params['type'] . '.user'] = $parameters['user'];
+        }
 
         $params['body']['size'] = 8;
         $params['body']['fields'] = array("title", "image");
