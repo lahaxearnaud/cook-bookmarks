@@ -250,7 +250,7 @@ abstract class EloquentRepository implements RepositoryInterface
     {
         $query = $this->model->with($this->with);
 
-        if($this->model instanceof UserFilterableInterface) {
+        if($this->model instanceof UserFilterableInterface && !is_null($this->user)) {
 
             $query = $query->ofUser($this->user->id);
         }
