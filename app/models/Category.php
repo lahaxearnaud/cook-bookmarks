@@ -17,7 +17,7 @@
  * @property-read \Illuminate\Database\Eloquent\Collection|\Article[] $articles
  * @property-read mixed $links
  */
-class Category extends BaseModel implements HyperMediaInterface {
+class Category extends BaseModel implements HyperMediaInterface, UserFilterableInterface {
 	public static $rules = array(
 		'name'  => 'required|min:3',
 		'color' => 'required',
@@ -48,4 +48,18 @@ class Category extends BaseModel implements HyperMediaInterface {
 	public function articles() {
 		return $this->hasMany('Article', 'category_id');
 	}
+
+    public function scopeOfUser ($query, $userId)
+    {
+        return $query->where($this->getUserField(), $userId);
+    }
+
+    /**
+     * @author LAHAXE Arnaud <arnaud.lahaxe@versusmind.eu>
+     * @return string
+     */
+    public function getUserField ()
+    {
+        return 'user_id';
+    }
 }

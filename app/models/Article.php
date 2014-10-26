@@ -36,7 +36,7 @@
  * @method static \Illuminate\Database\Query\Builder|\Article whereSourceSite($value)
  * @method static \Illuminate\Database\Query\Builder|\Article whereSourceFavicon($value)
  */
-class Article extends BaseModel implements HyperMediaInterface {
+class Article extends BaseModel implements HyperMediaInterface, UserFilterableInterface {
 	public static $rules = array(
 		'title'     => 'required|min:5',
 		'url'       => 'url',
@@ -71,4 +71,18 @@ class Article extends BaseModel implements HyperMediaInterface {
 	public function notes() {
 		return $this->hasMany('Note', 'article_id');
 	}
+
+    public function scopeOfUser ($query, $userId)
+    {
+        return $query->where($this->getUserField(), $userId);
+    }
+
+    /**
+     * @author LAHAXE Arnaud <arnaud.lahaxe@versusmind.eu>
+     * @return string
+     */
+    public function getUserField ()
+    {
+        return 'author_id';
+    }
 }

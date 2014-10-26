@@ -70,10 +70,12 @@ class ArticleSeeker extends ElasticSearchSeeker
 
         $params['index'] = \Config::get('app.index');
         $params['type']                                   = strtolower(get_class($this->model));
-        $params['body']['query']['match']['autocomplete'] = array(
+        $params['body']['query']['bool']['must'][]['match']['autocomplete'] = array(
             "query" =>  $query,
             "fuzziness" =>  3
         );
+        $params['body']['query']['bool']['must'][]['term'][$params['type'].'.user']  = $parameters['user'];
+
         $params['body']['size'] = 8;
         $params['body']['fields'] = array("title", "image");
 

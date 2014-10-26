@@ -100,11 +100,11 @@ App::bind('ArticleSeeker', function ($app) {
 });
 
 App::singleton('ArticlesRepository', function ($app) {
-    return new Repositories\ArticlesRepository(new Article(), array('author', 'category'), App::make('ArticleSeeker'));
+    return new Repositories\ArticlesRepository(new Article(), array('author', 'category'), Auth::User(), App::make('ArticleSeeker'));
 });
 
 App::singleton('LogsRepository', function ($app) {
-    return new Repositories\LogsRepository(new ApiLog());
+    return new Repositories\LogsRepository(new ApiLog(), []);
 });
 
 App::singleton('CategoriesRepository', function ($app) {
@@ -116,7 +116,7 @@ App::singleton('NotesRepository', function ($app) {
 });
 
 App::singleton('UsersRepository', function ($app) {
-    return new Repositories\UsersRepository(new User());
+    return new Repositories\UsersRepository(new User(), []);
 });
 
 App::bind('ArticlesController', function ($app) {

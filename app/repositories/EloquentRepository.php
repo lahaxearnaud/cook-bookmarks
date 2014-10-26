@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Event;
+use \UserFilterableInterface;
 
 abstract class EloquentRepository implements RepositoryInterface
 {
@@ -14,6 +15,8 @@ abstract class EloquentRepository implements RepositoryInterface
 	 */
     protected $model;
 
+    protected $user = null;
+
     /**
 	 * with eager loadings
 	 *
@@ -21,10 +24,11 @@ abstract class EloquentRepository implements RepositoryInterface
 	 */
     protected $with = array();
 
-    public function __construct(Model $model, $with = array())
+    public function __construct(Model $model, $with = array(), \User $user = null)
     {
         $this->model = $model;
         $this->with = $with;
+        $this->user = $user;
     }
 
     /**
@@ -35,14 +39,22 @@ abstract class EloquentRepository implements RepositoryInterface
     public function all()
     {
         return $this->cacheWrapper('all', function () {
-
-            return $this->model->all();
+            if($this->model instanceof UserFilterableInterface) {
+                return $this->model->all();
+            } else {
+                return $this->model->ofUser($this->user->id)->get();
+            }
         });
     }
 
     public function count($where)
     {
-        return $this->model->where($where)->count();
+        $query = $this->model->where($where);
+        if($this->model instanceof UserFilterableInterface) {
+            $query->ofUser($this->user->id);
+        }
+
+        return $query->count();
     }
 
     /**
@@ -236,7 +248,12 @@ abstract class EloquentRepository implements RepositoryInterface
 	 */
     public function make()
     {
-        return $this->model->with($this->with);
+        $query = $this->model->with($this->with);
+
+        if($this->model instanceof UserFilterableInterface) {
+
+            return $query->ofUser($this->user->id);
+        }
     }
 
     /**

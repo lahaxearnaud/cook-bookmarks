@@ -19,7 +19,7 @@
  * @method static \Illuminate\Database\Query\Builder|\Note whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Note whereUpdatedAt($value)
  */
-class Note extends BaseModel implements HyperMediaInterface
+class Note extends BaseModel implements HyperMediaInterface, UserFilterableInterface
 {
     public static $rules = array(
         'body'     => 'required|min:3',
@@ -57,5 +57,19 @@ class Note extends BaseModel implements HyperMediaInterface
     public function article()
     {
         return $this->belongsTo('Article', 'article_id');
+    }
+
+    public function scopeOfUser ($query, $userId)
+    {
+        return $query->where($this->getUserField(), $userId);
+    }
+
+    /**
+     * @author LAHAXE Arnaud <arnaud.lahaxe@versusmind.eu>
+     * @return string
+     */
+    public function getUserField ()
+    {
+        return 'user_id';
     }
 }
