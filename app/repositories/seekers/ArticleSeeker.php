@@ -8,13 +8,18 @@
 
 namespace Repositories\Seekers;
 
-class ArticleSeeker extends ElasticSearchSeeker
+/**
+ * Class ArticleSeeker
+ *
+ * @package Repositories\Seekers
+ */
+class ArticleSeeker extends ElasticSearchSeeker implements AutoCompleteInterface
 {
 
     /**
      *
      * @param string $query
-     * @param array  $parameters
+     * @param array $parameters
      *
      * @return array
      */
@@ -26,17 +31,17 @@ class ArticleSeeker extends ElasticSearchSeeker
         ), $parameters);
 
         // query ElasticSearch
-        $params['index']                                  = \Config::get('app.index');
-        $params['type']                                   = strtolower(get_class($this->model));
+        $params['index'] = \Config::get('app.index');
+        $params['type']  = strtolower(get_class($this->model));
 
         $params['body']['query']['bool']['must'][]['query_string']['query'] = $query;
 
-        if(isset($parameters['user']) && !empty($parameters['user'])) {
-            $params['body']['query']['bool']['must'][]['term'][$params['type'].'.user']  = $parameters['user'];
+        if (isset($parameters['user']) && !empty($parameters['user'])) {
+            $params['body']['query']['bool']['must'][]['term'][$params['type'] . '.user'] = $parameters['user'];
         }
 
-        if(isset($parameters['category_id']) && !empty($parameters['category_id'])) {
-            $params['body']['query']['bool']['must'][]['term'][$params['type'].'.category_id']  = $parameters['category_id'];
+        if (isset($parameters['category_id']) && !empty($parameters['category_id'])) {
+            $params['body']['query']['bool']['must'][]['term'][$params['type'] . '.category_id'] = $parameters['category_id'];
         }
 
         $result = \Es::search($params);
@@ -58,7 +63,7 @@ class ArticleSeeker extends ElasticSearchSeeker
     /**
      *
      * @param string $query
-     * @param array  $parameters
+     * @param array $parameters
      *
      * @return array
      */
@@ -69,22 +74,22 @@ class ArticleSeeker extends ElasticSearchSeeker
             'offset' => 0
         ), $parameters);
 
-        $params['index'] = \Config::get('app.index');
-        $params['type']                                   = strtolower(get_class($this->model));
+        $params['index']                                                    = \Config::get('app.index');
+        $params['type']                                                     = strtolower(get_class($this->model));
         $params['body']['query']['bool']['must'][]['match']['autocomplete'] = array(
-            "query" =>  $query,
-            "fuzziness" =>  3
+            "query"     => $query,
+            "fuzziness" => 3
         );
 
-        if(isset($parameters['user']) && !empty($parameters['user'])) {
+        if (isset($parameters['user']) && !empty($parameters['user'])) {
             $params['body']['query']['bool']['must'][]['term'][$params['type'] . '.user'] = $parameters['user'];
         }
 
-        $params['body']['size'] = 8;
+        $params['body']['size']   = 8;
         $params['body']['fields'] = array("title", "image");
 
         $result = \Es::search($params);
-        $result  = $result['hits'];
+        $result = $result['hits'];
 
         // handle no result
         if (count($result) == 0) {
@@ -95,7 +100,7 @@ class ArticleSeeker extends ElasticSearchSeeker
 
         foreach ($result['hits'] as $element) {
             $searchResults[] = [
-                'id' => $element['_id'],
+                'id'    => $element['_id'],
                 'image' => current($element['fields']['image']),
                 'title' => current($element['fields']['title'])
             ];

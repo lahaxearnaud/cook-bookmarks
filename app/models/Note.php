@@ -59,13 +59,19 @@ class Note extends BaseModel implements HyperMediaInterface, UserFilterableInter
         return $this->belongsTo('Article', 'article_id');
     }
 
+    /**
+     * @param $query
+     * @param $userId
+     *
+     * @return mixed
+     */
     public function scopeOfUser ($query, $userId)
     {
         return $query->where($this->getUserField(), $userId);
     }
 
     /**
-     * @author LAHAXE Arnaud <arnaud.lahaxe@versusmind.eu>
+     * @author LAHAXE Arnaud <lahaxe.arnaud@gmail.com>
      * @return string
      */
     public function getUserField ()

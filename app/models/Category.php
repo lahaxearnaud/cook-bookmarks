@@ -49,13 +49,19 @@ class Category extends BaseModel implements HyperMediaInterface, UserFilterableI
 		return $this->hasMany('Article', 'category_id');
 	}
 
+    /**
+     * @param $query
+     * @param $userId
+     *
+     * @return mixed
+     */
     public function scopeOfUser ($query, $userId)
     {
         return $query->where($this->getUserField(), $userId);
     }
 
     /**
-     * @author LAHAXE Arnaud <arnaud.lahaxe@versusmind.eu>
+     * @author LAHAXE Arnaud <lahaxe.arnaud@gmail.com>
      * @return string
      */
     public function getUserField ()
