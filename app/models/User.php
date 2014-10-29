@@ -35,6 +35,11 @@ class User extends BaseModel implements UserInterface, RemindableInterface, Hype
 	 */
     protected $table = 'users';
 
+    public static $rules = array(
+        'username'    => 'required|min:5|unique:users',
+        'email'       => 'required|email|unique:users'
+    );
+
     /**
 	 * The attributes excluded from the model's JSON form.
 	 *

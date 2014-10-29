@@ -8,11 +8,14 @@ class AuthObserver
 
     protected $categoryRepository;
 
-    function __construct (CategoriesRepository $categoryRepository)
+    function __construct (CategoriesRepository $categoryRepository = null)
     {
+        if(is_null($categoryRepository)) {
+            $categoryRepository = \App::make('CategoriesRepository');
+        }
+
         $this->categoryRepository = $categoryRepository;
     }
-
 
     /**
      * Register the listeners for the subscriber.
@@ -23,13 +26,21 @@ class AuthObserver
      */
     public function subscribe ($events)
     {
-        $events->listen('user.subscribe', 'AuthObserver@credated');
+        $className = get_class($this);
+
+        $events->listen('user.subscribe', $className . '@created');
     }
 
 
-    public function credated (\User $user)
+    public function created ($user)
     {
+
+        if(!$user instanceof \User) {
+            throw new \LogicException('Event user.subscribe needs an user as parameters ' . get_class($params[0]) . ' given');
+        }
+
         \Log::info('User ' . $user->id . ' credated');
+
         $this->categoryRepository->create([
             'name' => 'Entrée',
             'color' => '#000000',

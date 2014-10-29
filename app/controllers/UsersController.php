@@ -47,7 +47,7 @@ class UsersController  extends BaseController
         $user = $this->repository->create(Input::all());
 
         if(count($user->errors()) === 0) {
-            Event::fire('user.subscribe', [$user]);
+            Event::fire('user.subscribe', ['user' => $user]);
         }
 
         return $this->generateResponse($user, $user->errors(), [], 200);

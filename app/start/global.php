@@ -165,4 +165,4 @@ Note::observe(new Observers\Models\NoteObserver(new ArticleIndexer()));
 Event::subscribe(new Observers\Repositories\ArticlesRepositoryObserver);
 Event::subscribe(new Observers\Repositories\CategoriesRepositoryObserver);
 Event::subscribe(new Observers\Repositories\NotesRepositoryObserver);
-Event::subscribe(new \Observers\AuthObserver(App::make('CategoriesRepository')));
+Event::subscribe(new Observers\AuthObserver);
