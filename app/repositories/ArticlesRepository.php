@@ -13,12 +13,11 @@ class ArticlesRepository extends EloquentRepository
      */
     protected $seeker;
 
-    public function __construct(Model $model, $with = array(), \User $user = null, ElasticSearchSeeker $elasticSearchSeeker)
+    public function __construct(Model $model, $with = array(), ElasticSearchSeeker $elasticSearchSeeker)
     {
         $this->model = $model;
         $this->with = $with;
         $this->seeker = $elasticSearchSeeker;
-        $this->user = $user;
     }
 
     /**
@@ -28,8 +27,8 @@ class ArticlesRepository extends EloquentRepository
 	 */
     public function search($query, array $where = array())
     {
-        if(!is_null($this->user)) {
-            $where['user'] = $this->user->id;
+        if(!is_null($this->currentUser())) {
+            $where['user'] = $this->currentUser()->id;
         }
 
         $arrayIds = $this->seeker->query($query, $where);

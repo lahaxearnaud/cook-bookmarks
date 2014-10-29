@@ -24,11 +24,10 @@ abstract class EloquentRepository implements RepositoryInterface
 	 */
     protected $with = array();
 
-    public function __construct(Model $model, $with = array(), \User $user = null)
+    public function __construct(Model $model, $with = array())
     {
         $this->model = $model;
         $this->with = $with;
-        $this->user = $user;
     }
 
     /**
@@ -38,9 +37,11 @@ abstract class EloquentRepository implements RepositoryInterface
 	 */
     public function all()
     {
+
         return $this->cacheWrapper('all', function () {
-            if($this->model instanceof UserFilterableInterface && !is_null($this->user)) {
-                return $this->model->ofUser($this->user->id)->get();
+            if($this->model instanceof UserFilterableInterface && !is_null($this->currentUser())) {
+
+                return $this->model->ofUser($this->currentUser()->id)->get();
             } else {
                 return $this->model->all();
             }
@@ -50,8 +51,8 @@ abstract class EloquentRepository implements RepositoryInterface
     public function count($where)
     {
         $query = $this->model->where($where);
-        if($this->model instanceof UserFilterableInterface && !is_null($this->user)) {
-            $query->ofUser($this->user->id);
+        if($this->model instanceof UserFilterableInterface && !is_null($this->currentUser())) {
+            $query->ofUser($this->currentUser()->id);
         }
 
         return $query->count();
@@ -250,9 +251,9 @@ abstract class EloquentRepository implements RepositoryInterface
     {
         $query = $this->model->with($this->with);
 
-        if($this->model instanceof UserFilterableInterface && !is_null($this->user)) {
+        if($this->model instanceof UserFilterableInterface && !is_null($this->currentUser())) {
 
-            $query = $query->ofUser($this->user->id);
+            $query = $query->ofUser($this->currentUser()->id);
         }
 
         return $query;
@@ -271,8 +272,8 @@ abstract class EloquentRepository implements RepositoryInterface
         $modelClass = strtolower(get_class($this->model));
 
         $parametersToObserver['user'] = '';
-        if(!is_null($this->user)) {
-            $parametersToObserver['user'] = $this->user->id;
+        if(!is_null($this->currentUser())) {
+            $parametersToObserver['user'] = $this->currentUser()->id;
         }
 
         $results = \Event::fire($modelClass . '.' . $eventName . '.before', [$parametersToObserver]);
@@ -285,5 +286,10 @@ abstract class EloquentRepository implements RepositoryInterface
         \Event::fire($modelClass . '.' . $eventName . '.after', [$parametersToObserver, $results]);
 
         return $results;
+    }
+
+    public function currentUser() {
+
+        return \Auth::user();
     }
 }
