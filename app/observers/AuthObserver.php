@@ -36,7 +36,7 @@ class AuthObserver
     {
 
         if(!$user instanceof \User) {
-            throw new \LogicException('Event user.subscribe needs an user as parameters ' . get_class($params[0]) . ' given');
+            throw new \LogicException('Event user.subscribe needs an user as parameters ' . get_class($user) . ' given');
         }
 
         \Log::info('User ' . $user->id . ' credated');
@@ -64,5 +64,9 @@ class AuthObserver
             'color' => '#000000',
             'user' => $user
         ]);
+
+        \Mail::queue('emails.auth.subscribe', ['username' => $user->username], function($message) use ($user) {
+            $message->to($user->email, $user->username)->subject('Welcome!');
+        });
     }
 }

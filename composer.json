@@ -17,7 +17,8 @@
         "tappleby/laravel-auth-token": "0.3.*",
         "simplehtmldom/simplehtmldom": "1.0.0",
         "barryvdh/laravel-dompdf": "0.4.*",
-        "michelf/php-markdown": "1.4.1"
+        "michelf/php-markdown": "1.4.1",
+        "guzzlehttp/guzzle": "~4.0"
 	},
 	"autoload": {
 		"classmap": [
