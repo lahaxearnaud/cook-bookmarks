@@ -12,7 +12,6 @@
  */
 
 Artisan::add(new DatabaseResetCommand);
-Artisan::add(new TailDayCommand);
 Artisan::add(new DataMigrateCommand);
 Artisan::add(new QueueAddCommand);
 
