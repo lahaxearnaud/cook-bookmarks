@@ -16,6 +16,9 @@
  * @method static \Illuminate\Database\Query\Builder|\Category whereUpdatedAt($value)
  * @property-read \Illuminate\Database\Eloquent\Collection|\Article[] $articles
  * @property-read mixed $links
+ * @property string $color
+ * @method static \Illuminate\Database\Query\Builder|\Category whereColor($value)
+ * @method static \Category ofUser($userId)
  */
 class Category extends BaseModel implements HyperMediaInterface, UserFilterableInterface {
 	public static $rules = array(

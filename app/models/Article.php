@@ -35,6 +35,7 @@
  * @method static \Illuminate\Database\Query\Builder|\Article whereImageMiniature($value)
  * @method static \Illuminate\Database\Query\Builder|\Article whereSourceSite($value)
  * @method static \Illuminate\Database\Query\Builder|\Article whereSourceFavicon($value)
+ * @method static \Article ofUser($userId)
  */
 class Article extends BaseModel implements HyperMediaInterface, UserFilterableInterface {
 	public static $rules = array(

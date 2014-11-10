@@ -18,6 +18,7 @@
  * @method static \Illuminate\Database\Query\Builder|\Note whereArticleId($value)
  * @method static \Illuminate\Database\Query\Builder|\Note whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Note whereUpdatedAt($value)
+ * @method static \Note ofUser($userId)
  */
 class Note extends BaseModel implements HyperMediaInterface, UserFilterableInterface
 {
