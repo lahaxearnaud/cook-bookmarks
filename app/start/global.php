@@ -124,7 +124,7 @@ App::singleton('TokenRepository', function ($app) {
 });
 
 App::singleton('TokenManager', function ($app) {
-    return new TokenRepository(
+    return new TokenManager(
         App::make('TokenRepository')
     );
 });
