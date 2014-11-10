@@ -29,13 +29,4 @@ class Token extends Model {
     {
 		return $this->belongsTo('User', 'user_id');
 	}
-
-    /**
-     * check if the token is valid
-     * @return bool
-     */
-    public function isValid()
-    {
-        return $this->expire_at->diffInMinutes(Carbon::now()) < 0;
-    }
 }

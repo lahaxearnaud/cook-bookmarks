@@ -19,6 +19,8 @@ Route::model('note', 'Note');
 Route::group(array('prefix' => 'api/v1'), function () {
     Route::post('auth', [ 'as' => 'api.v1.users.login', 'uses' => 'Tappleby\AuthToken\AuthTokenController@store']);
     Route::post('users/subscribe', [ 'as' => 'user.subscribe', 'uses' => 'UsersController@subscribe']);
+    Route::post('users/password/lost', [ 'as' => 'user.password.lost', 'uses' => 'UsersController@askNewPasswordToken']);
+    Route::post('users/password/change', [ 'as' => 'user.password.change', 'uses' => 'UsersController@changeLostPassword']);
 
     Route::get('articles/extractFromUrl', [ 'as' => 'articles.extractFromUrl', 'uses' => 'ArticlesController@extractFromUrl']);
     Route::post('articles/extractFromUrl', [ 'as' => 'articles.extractFromUrl', 'uses' => 'ArticlesController@extractFromUrl']);
@@ -30,6 +32,8 @@ Route::group(array('prefix' => 'api/v1'), function () {
         Route::get('auth', [ 'as' => 'api.v1.users.get', 'uses' => 'Tappleby\AuthToken\AuthTokenController@index']);
         Route::delete('auth', [ 'as' => 'api.v1.users.logout', 'uses' => 'Tappleby\AuthToken\AuthTokenController@destroy']);
         Route::get('users/{user}', [ 'as' => 'api.v1.users.show', 'uses' => 'Tappleby\AuthToken\AuthTokenController@index']);
+        Route::post('users/password', [ 'as' => 'user.password', 'uses' => 'UsersController@changePassword']);
+
 
         Route::get('articles/user/{user}', [ 'as' => 'articles.user', 'uses' => 'ArticlesController@user']);
         Route::get('articles/existNoCategory', [ 'as' => 'articles.existNoCategory', 'uses' => 'ArticlesController@existsWithNoCategory']);
@@ -46,7 +50,6 @@ Route::group(array('prefix' => 'api/v1'), function () {
         Route::resource('notes', 'NotesController');
         Route::get('articles/{article}/notes', [ 'as' => 'notes.article', 'uses' => 'NotesController@article']);
 
-        Route::post('users/password', [ 'as' => 'user.password', 'uses' => 'UsersController@changePassword']);
 
     });
 });

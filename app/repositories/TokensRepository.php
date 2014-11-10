@@ -28,6 +28,6 @@ class TokensRepository extends EloquentRepository
 
         return $query->where('token', $token)
                      ->where('user_id', $user->id)
-                     ->get();
+                     ->firstOrFail();
     }
 }

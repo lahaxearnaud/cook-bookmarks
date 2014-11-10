@@ -119,6 +119,16 @@ App::singleton('UsersRepository', function ($app) {
     return new Repositories\UsersRepository(new User(), []);
 });
 
+App::singleton('TokenRepository', function ($app) {
+    return new Repositories\TokenRepository(new Token(), ['user']);
+});
+
+App::singleton('TokenManager', function ($app) {
+    return new TokenRepository(
+        App::make('TokenRepository')
+    );
+});
+
 App::bind('ArticlesController', function ($app) {
     return new ArticlesController(
         App::make('ArticlesRepository'),
@@ -142,7 +152,8 @@ App::bind('NotesController', function ($app) {
 
 App::bind('UsersController', function ($app) {
     return new UsersController(
-        App::make('UsersRepository')
+        App::make('UsersRepository'),
+        App::make('TokenManager')
     );
 });
 

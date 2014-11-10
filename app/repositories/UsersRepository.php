@@ -38,4 +38,9 @@ class UsersRepository extends EloquentRepository
 
         return $user;
     }
+
+    public function findByEmail($email)
+    {
+        return $this->findFirstBy('email', $email);
+    }
 }
