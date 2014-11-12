@@ -89,7 +89,7 @@ class AuthObserver
         });
     }
 
-    public function changePassword ($user, $token)
+    public function changePassword ($user)
     {
         if(!$user instanceof \User) {
             throw new \LogicException('Event user.changePassword needs an user as parameters ' . get_class($user) . ' given');

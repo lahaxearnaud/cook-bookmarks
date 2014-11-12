@@ -2,7 +2,7 @@
 use \User as User;
 use \Token as Token;
 use \Carbon\Carbon;
-
+use \Repositories\TokensRepository;
 
 class TokenManager implements TokenManagerInterface {
 
@@ -11,7 +11,12 @@ class TokenManager implements TokenManagerInterface {
 	 */
 	protected $repository;
 
-	/**
+    function __construct (TokensRepository $repository)
+    {
+        $this->repository = $repository;
+    }
+
+    /**
 	 * Get the token instance by the token value and the user instance
 	 * @param  User   $user
 	 * @param  string $token
@@ -29,7 +34,7 @@ class TokenManager implements TokenManagerInterface {
 	 */
 	public function isValid(Token $token)
 	{
-		return $token->expire_at->diffInMinutes(Carbon::now()) < 0;
+		return $token->expire_at->diffInMinutes(Carbon::now()) > 0;
 	}
 
 	/**

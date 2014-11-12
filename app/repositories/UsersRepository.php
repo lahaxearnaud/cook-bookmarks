@@ -34,7 +34,7 @@ class UsersRepository extends EloquentRepository
         if (isset($data['email'])) {
             $user->email = $data['email'];
         }
-        $user->save();
+        $user->updateUniques();
 
         return $user;
     }

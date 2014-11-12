@@ -126,6 +126,7 @@ class UsersController  extends BaseController
      */
     public function changeLostPassword()
     {
+        var_dump(Input::all());
         $user = $this->userRepository->findByEmail(Input::get('email'));
         $token = $this->tokenManager->get($user, Input::get('token'));
 
@@ -151,7 +152,7 @@ class UsersController  extends BaseController
             'password' => Input::get('newPassword')
         ));
 
-        if(count($user->errors()) > 0) {
+        if(count($user->errors()) == 0) {
             $this->tokenManager->burn($token);
             Event::fire('user.changePassword', ['user' => $user]);
         }

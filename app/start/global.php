@@ -120,7 +120,7 @@ App::singleton('UsersRepository', function ($app) {
 });
 
 App::singleton('TokenRepository', function ($app) {
-    return new Repositories\TokenRepository(new Token(), ['user']);
+    return new Repositories\TokensRepository(new Token(), ['user']);
 });
 
 App::singleton('TokenManager', function ($app) {

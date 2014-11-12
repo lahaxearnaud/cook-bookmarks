@@ -25,8 +25,14 @@ class Token extends Model {
 	 *
 	 * @return User
 	 */
-	public function author()
+	public function user()
     {
 		return $this->belongsTo('User', 'user_id');
 	}
+
+
+    public function getDates()
+    {
+        return array_merge(parent::getDates(), ['expire_at']);
+    }
 }

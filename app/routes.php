@@ -19,8 +19,8 @@ Route::model('note', 'Note');
 Route::group(array('prefix' => 'api/v1'), function () {
     Route::post('auth', [ 'as' => 'api.v1.users.login', 'uses' => 'Tappleby\AuthToken\AuthTokenController@store']);
     Route::post('users/subscribe', [ 'as' => 'user.subscribe', 'uses' => 'UsersController@subscribe']);
-    Route::post('users/password/lost', [ 'as' => 'user.password.lost', 'uses' => 'UsersController@askNewPasswordToken']);
-    Route::post('users/password/change', [ 'as' => 'user.password.change', 'uses' => 'UsersController@changeLostPassword']);
+    Route::post('users/passwordlost', [ 'as' => 'user.password.lost', 'uses' => 'UsersController@askNewPasswordToken']);
+    Route::post('users/passwordchange', [ 'as' => 'user.password.change', 'uses' => 'UsersController@changeLostPassword']);
 
     Route::get('articles/extractFromUrl', [ 'as' => 'articles.extractFromUrl', 'uses' => 'ArticlesController@extractFromUrl']);
     Route::post('articles/extractFromUrl', [ 'as' => 'articles.extractFromUrl', 'uses' => 'ArticlesController@extractFromUrl']);
