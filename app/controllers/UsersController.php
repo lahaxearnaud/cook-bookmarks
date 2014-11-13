@@ -126,7 +126,6 @@ class UsersController  extends BaseController
      */
     public function changeLostPassword()
     {
-        var_dump(Input::all());
         $user = $this->userRepository->findByEmail(Input::get('email'));
         $token = $this->tokenManager->get($user, $this->tokenManager->decryptTokenValue(Input::get('token')));
 
