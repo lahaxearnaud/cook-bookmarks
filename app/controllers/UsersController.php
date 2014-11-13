@@ -110,7 +110,7 @@ class UsersController  extends BaseController
         $user = $this->userRepository->findByEmail(Input::get('email'));
         $token = $this->tokenManager->generate($user);
 
-        Event::fire('user.lostPassword', ['user' => $user, 'token' => $token]);
+        Event::fire('user.lostPassword', ['user' => $user, 'token' => $this->tokenManager->getCryptTokenValue($token)]);
 
         return Response::json(['success' => true], 200);
     }
@@ -128,7 +128,7 @@ class UsersController  extends BaseController
     {
         var_dump(Input::all());
         $user = $this->userRepository->findByEmail(Input::get('email'));
-        $token = $this->tokenManager->get($user, Input::get('token'));
+        $token = $this->tokenManager->get($user, $this->tokenManager->decryptTokenValue(Input::get('token')));
 
         if(!$this->tokenManager->isValid($token)) {
             return Response::json(['success' => false], 400);

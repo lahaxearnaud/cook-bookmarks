@@ -78,13 +78,13 @@ class AuthObserver
             throw new \LogicException('Event user.lostPassword needs an user as parameters ' . get_class($user) . ' given');
         }
 
-        if(!$token instanceof \Token) {
-            throw new \LogicException('Event user.lostPassword needs a token as parameters ' . get_class($token) . ' given');
+        if(!is_string($token)) {
+            throw new \LogicException('Event user.lostPassword needs a string as parameters ' . $token . ' given');
         }
 
         \Log::info('User ' . $user->id . ' lost his password');
 
-        \Mail::queue('emails.auth.lostPassword', ['username' => $user->username, 'email' => $user->email, 'token' => $token->token], function($message) use ($user) {
+        \Mail::queue('emails.auth.lostPassword', ['username' => $user->username, 'email' => $user->email, 'token' => $token], function($message) use ($user) {
             $message->to($user->email, $user->username)->subject('Lost password');
         });
     }

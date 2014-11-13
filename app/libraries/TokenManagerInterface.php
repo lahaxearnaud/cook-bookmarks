@@ -41,4 +41,20 @@ interface TokenManagerInterface {
 	 * @return Token
 	 */
 	public function generate(User $user, $lifetime = 3600);
+
+
+	/**
+	 * Get the crypt value of the token
+	 *
+	 * @param  Token  $token [description]
+	 * @return [type]        [description]
+	 */
+	public function getCryptTokenValue(Token $token);
+
+	/**
+	 * Get the decrypt value of the token
+	 * @param  [type] $token [description]
+	 * @return [type]        [description]
+	 */
+	public function decryptTokenValue($token);
 }

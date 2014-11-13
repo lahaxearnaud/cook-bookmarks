@@ -3,6 +3,7 @@ use \User as User;
 use \Token as Token;
 use \Carbon\Carbon;
 use \Repositories\TokensRepository;
+use \Crypt as Crypt;
 
 class TokenManager implements TokenManagerInterface {
 
@@ -60,5 +61,15 @@ class TokenManager implements TokenManagerInterface {
 			'user_id' => $user->id,
 			'expire_at' => Carbon::now()->addSeconds($lifetime)
 		]);
+	}
+
+	public function getCryptTokenValue(Token $token)
+	{
+		return Crypt::encrypt($token->token);
+	}
+
+	public function decryptTokenValue($token)
+	{
+		return Crypt::decrypt($token);
 	}
 }
