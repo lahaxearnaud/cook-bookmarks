@@ -39,7 +39,8 @@ class QueueAddCommand extends Command
         $id   = $this->argument('id');
         $type = $this->argument('type');
 
-        $article = Article::findOrFail($id);
+        // check if the article exists
+        Article::findOrFail($id);
 
         if ($type === 'img' || $type === 'both') {
             Queue::push('ImagesHandler', array('id' => $id));

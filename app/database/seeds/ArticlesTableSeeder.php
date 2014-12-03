@@ -51,7 +51,8 @@ class ArticlesTableSeeder extends Seeder
 
         DB::table('articles')->insert($articles);
 
-        for ($i = 0; $i < count($articles); $i++) {
+        $nb = count($articles);
+        for ($i = 0; $i < $nb; $i++) {
             \Queue::push('UrlInformationsHandler', array('id' => $i + 1));
         }
     }

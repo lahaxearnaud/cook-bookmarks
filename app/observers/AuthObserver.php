@@ -2,6 +2,7 @@
 namespace Observers;
 
 use Repositories\CategoriesRepository;
+use \Illuminate\Events\Dispatcher;
 
 class AuthObserver
 {
@@ -20,11 +21,11 @@ class AuthObserver
     /**
      * Register the listeners for the subscriber.
      *
-     * @param  Illuminate\Events\Dispatcher $events
+     * @param  \Illuminate\Events\Dispatcher $events
      *
      * @return array
      */
-    public function subscribe($events)
+    public function subscribe(Dispatcher $events)
     {
         $className = get_class($this);
 
@@ -34,12 +35,8 @@ class AuthObserver
     }
 
 
-    public function created($user)
+    public function created(\User $user)
     {
-
-        if (!$user instanceof \User) {
-            throw new \LogicException('Event user.subscribe needs an user as parameters ' . get_class($user) . ' given');
-        }
 
         \Log::info('User ' . $user->id . ' created');
 
@@ -72,12 +69,8 @@ class AuthObserver
         });
     }
 
-    public function lostPassword($user, $token)
+    public function lostPassword(\User $user, $token)
     {
-        if (!$user instanceof \User) {
-            throw new \LogicException('Event user.lostPassword needs an user as parameters ' . get_class($user) . ' given');
-        }
-
         if (!is_string($token)) {
             throw new \LogicException('Event user.lostPassword needs a string as parameters ' . $token . ' given');
         }
@@ -89,11 +82,8 @@ class AuthObserver
         });
     }
 
-    public function changePassword($user)
+    public function changePassword(\User $user)
     {
-        if (!$user instanceof \User) {
-            throw new \LogicException('Event user.changePassword needs an user as parameters ' . get_class($user) . ' given');
-        }
 
         \Log::info('User ' . $user->id . ' change his password');
 
