@@ -8,7 +8,7 @@
 
 namespace Observers\Repositories;
 
-use \Cache as Cache;
+use Cache as Cache;
 
 class CategoriesRepositoryObserver extends Observer
 {
@@ -19,13 +19,13 @@ class CategoriesRepositoryObserver extends Observer
 
     public function afterDelete($params, $data)
     {
-    	parent::afterDelete($params, $data);
+        parent::afterDelete($params, $data);
         Cache::tags('article')->flush();
     }
 
     public function afterUpdate($params, $data)
     {
-    	parent::afterUpdate($params, $data);
+        parent::afterUpdate($params, $data);
         Cache::tags('article')->flush();
     }
 }

@@ -19,11 +19,11 @@ class ArticleSeeker extends ElasticSearchSeeker implements AutoCompleteInterface
     /**
      *
      * @param string $query
-     * @param array $parameters
+     * @param array  $parameters
      *
      * @return array
      */
-    public function query ($query, array $parameters = array())
+    public function query($query, array $parameters = array())
     {
         $parameters = array_merge(array(
             'max'    => 10,
@@ -63,11 +63,11 @@ class ArticleSeeker extends ElasticSearchSeeker implements AutoCompleteInterface
     /**
      *
      * @param string $query
-     * @param array $parameters
+     * @param array  $parameters
      *
      * @return array
      */
-    public function autocomplete ($query, array $parameters = array())
+    public function autocomplete($query, array $parameters = array())
     {
         $parameters = array_merge(array(
             'max'    => 10,

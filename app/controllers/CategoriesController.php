@@ -1,6 +1,6 @@
 <?php
 
-use \Repositories\RepositoryInterface;
+use Repositories\RepositoryInterface;
 
 /**
  * @ApiRoute(name="/categories")
@@ -11,12 +11,13 @@ class CategoriesController extends \RessourceController
 
     public function __construct(RepositoryInterface $repository, RepositoryInterface $articleRepository)
     {
-        $this->repository = $repository;
+        $this->repository        = $repository;
         $this->articleRepository = $articleRepository;
     }
 
     /**
      * Display a listing of the resource.
+     *
      * @return Response
      *
      *
@@ -77,8 +78,9 @@ class CategoriesController extends \RessourceController
         ), 20, Input::get('page'));
     }
 
-        /**
+    /**
      * Display a listing of the resource.
+     *
      * @return Response
      *
      *

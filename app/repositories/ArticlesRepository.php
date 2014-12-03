@@ -15,29 +15,30 @@ class ArticlesRepository extends EloquentRepository
 
     public function __construct(Model $model, $with = array(), ElasticSearchSeeker $elasticSearchSeeker)
     {
-        $this->model = $model;
-        $this->with = $with;
+        $this->model  = $model;
+        $this->with   = $with;
         $this->seeker = $elasticSearchSeeker;
     }
 
     /**
-	 * @param  string $query
-	 * @param  array  $where
-	 * @return Collection
-	 */
+     * @param  string $query
+     * @param  array  $where
+     *
+     * @return Collection
+     */
     public function search($query, array $where = array())
     {
-        if(!is_null($this->currentUser())) {
+        if (!is_null($this->currentUser())) {
             $where['user'] = $this->currentUser()->id;
         }
 
         $arrayIds = $this->seeker->query($query, $where);
 
-        if(count($arrayIds) === 0) {
+        if (count($arrayIds) === 0) {
             return new Collection();
         }
 
-        $articles =  $this->in($arrayIds);
+        $articles = $this->in($arrayIds);
         // sort post in the ES order
         $sorted = array_flip($arrayIds);
         foreach ($articles as $article) {
@@ -49,13 +50,14 @@ class ArticlesRepository extends EloquentRepository
     }
 
     /**
-	 * @param  array  $data
-	 * @return Model
-	 */
+     * @param  array $data
+     *
+     * @return Model
+     */
     public function create(array $data)
     {
         return $this->cacheWrapper('create', function () use ($data) {
-            $author = NULL;
+            $author = null;
             if (isset($data['author_id'])) {
                 $author = \User::findOrFail($data['author_id']);
             } else {
@@ -63,7 +65,7 @@ class ArticlesRepository extends EloquentRepository
                 unset($data['author']);
             }
 
-            $category = NULL;
+            $category = null;
             if (isset($data['category_id'])) {
                 $category = \Category::findOrFail($data['category_id']);
             } else {
@@ -71,11 +73,11 @@ class ArticlesRepository extends EloquentRepository
                 unset($data['category']);
             }
 
-            if(!isset($data['slug'])) {
-                $data['slug'] = \Str::slug($data['title']).'-'.uniqid();
+            if (!isset($data['slug'])) {
+                $data['slug'] = \Str::slug($data['title']) . '-' . uniqid();
             }
 
-            if(!isset($data['indexable'])) {
+            if (!isset($data['indexable'])) {
                 $data['indexable'] = $data['body'];
             }
 

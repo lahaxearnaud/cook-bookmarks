@@ -13,7 +13,7 @@ class UsersRepository extends EloquentRepository
      *
      * @return Collection
      */
-    public function search ($query, array $where = array())
+    public function search($query, array $where = array())
     {
         return new Collection();
     }

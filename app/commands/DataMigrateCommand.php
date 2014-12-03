@@ -83,7 +83,7 @@ class DataMigrateCommand extends Command
                 'author_id'   => 4,
                 'indexable'   => $article[2],
                 'url'         => $article[8],
-                'category_id' => $article[6]-$this->argument('category-delta'),
+                'category_id' => $article[6] - $this->argument('category-delta'),
                 'created_at'  => $currentDate,
                 'updated_at'  => $currentDate,
             ];

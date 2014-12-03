@@ -5,10 +5,10 @@ use Illuminate\Database\Migrations\Migration;
 class CreateUserTable extends Migration
 {
     /**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
+     * Run the migrations.
+     *
+     * @return void
+     */
     public function up()
     {
         // Creates the users table
@@ -24,10 +24,10 @@ class CreateUserTable extends Migration
     }
 
     /**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
+     * Reverse the migrations.
+     *
+     * @return void
+     */
     public function down()
     {
         Schema::drop('users');

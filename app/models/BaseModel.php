@@ -6,7 +6,7 @@
  * Time: 17:56
  */
 
-use \LaravelBook\Ardent\Ardent;
+use LaravelBook\Ardent\Ardent;
 
 abstract class BaseModel extends Ardent implements UrlApiInterface, HyperMediaInterface
 {

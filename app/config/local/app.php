@@ -14,6 +14,6 @@ return array(
 	*/
 
     'debug' => true,
-    'url' => 'http://cuisine.dev',
+    'url'   => 'http://cuisine.dev',
 
 );

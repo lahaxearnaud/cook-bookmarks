@@ -6,7 +6,7 @@
  * Time: 12:28
  */
 
-use \Repositories\RepositoryInterface;
+use Repositories\RepositoryInterface;
 
 abstract class RessourceController extends BaseController
 {
@@ -22,6 +22,7 @@ abstract class RessourceController extends BaseController
 
     /**
      * Display a listing of the resource.
+     *
      * @return Response
      *
      *
@@ -54,7 +55,8 @@ abstract class RessourceController extends BaseController
     /**
      * Display the specified resource.
      *
-     * @param  int      $id
+     * @param  int $id
+     *
      * @return Response
      *
      * @ApiDescription(description="Find an article")
@@ -69,8 +71,11 @@ abstract class RessourceController extends BaseController
 
     /**
      * Update the specified resource in storage.
+     *
      * @author LAHAXE Arnaud
-     * @param  int      $id
+     *
+     * @param  int $id
+     *
      * @return Response
      */
     abstract public function update($id);
@@ -78,7 +83,8 @@ abstract class RessourceController extends BaseController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int      $id
+     * @param  int $id
+     *
      * @return Response
      *
      * @ApiDescription(description="Delete an article")
@@ -91,12 +97,12 @@ abstract class RessourceController extends BaseController
      */
     public function destroy($id)
     {
-        $model = $this->repository->find($id);
+        $model  = $this->repository->find($id);
         $result = $this->repository->delete($id);
 
         $errors = [];
 
-        if(!$result) {
+        if (!$result) {
             $errors[] = 'Error during delete';
         }
 

@@ -1,16 +1,16 @@
 <?php
 namespace Observers;
 
-use \Repositories\CategoriesRepository;
+use Repositories\CategoriesRepository;
 
 class AuthObserver
 {
 
     protected $categoryRepository;
 
-    function __construct (CategoriesRepository $categoryRepository = null)
+    function __construct(CategoriesRepository $categoryRepository = null)
     {
-        if(is_null($categoryRepository)) {
+        if (is_null($categoryRepository)) {
             $categoryRepository = \App::make('CategoriesRepository');
         }
 
@@ -24,7 +24,7 @@ class AuthObserver
      *
      * @return array
      */
-    public function subscribe ($events)
+    public function subscribe($events)
     {
         $className = get_class($this);
 
@@ -34,70 +34,70 @@ class AuthObserver
     }
 
 
-    public function created ($user)
+    public function created($user)
     {
 
-        if(!$user instanceof \User) {
+        if (!$user instanceof \User) {
             throw new \LogicException('Event user.subscribe needs an user as parameters ' . get_class($user) . ' given');
         }
 
         \Log::info('User ' . $user->id . ' created');
 
         $this->categoryRepository->create([
-            'name' => 'Entrée',
+            'name'  => 'Entrée',
             'color' => '#000000',
-            'user' => $user
+            'user'  => $user
         ]);
 
         $this->categoryRepository->create([
-            'name' => 'Plat',
+            'name'  => 'Plat',
             'color' => '#000000',
-            'user' => $user
+            'user'  => $user
         ]);
 
         $this->categoryRepository->create([
-            'name' => 'Dessert',
+            'name'  => 'Dessert',
             'color' => '#000000',
-            'user' => $user
+            'user'  => $user
         ]);
 
         $this->categoryRepository->create([
-            'name' => 'Boisson',
+            'name'  => 'Boisson',
             'color' => '#000000',
-            'user' => $user
+            'user'  => $user
         ]);
 
-        \Mail::queue('emails.auth.subscribe', ['username' => $user->username], function($message) use ($user) {
+        \Mail::queue('emails.auth.subscribe', ['username' => $user->username], function ($message) use ($user) {
             $message->to($user->email, $user->username)->subject('Welcome!');
         });
     }
 
-    public function lostPassword ($user, $token)
+    public function lostPassword($user, $token)
     {
-        if(!$user instanceof \User) {
+        if (!$user instanceof \User) {
             throw new \LogicException('Event user.lostPassword needs an user as parameters ' . get_class($user) . ' given');
         }
 
-        if(!is_string($token)) {
+        if (!is_string($token)) {
             throw new \LogicException('Event user.lostPassword needs a string as parameters ' . $token . ' given');
         }
 
         \Log::info('User ' . $user->id . ' lost his password');
 
-        \Mail::queue('emails.auth.lostPassword', ['username' => $user->username, 'email' => $user->email, 'token' => $token], function($message) use ($user) {
+        \Mail::queue('emails.auth.lostPassword', ['username' => $user->username, 'email' => $user->email, 'token' => $token], function ($message) use ($user) {
             $message->to($user->email, $user->username)->subject('Lost password');
         });
     }
 
-    public function changePassword ($user)
+    public function changePassword($user)
     {
-        if(!$user instanceof \User) {
+        if (!$user instanceof \User) {
             throw new \LogicException('Event user.changePassword needs an user as parameters ' . get_class($user) . ' given');
         }
 
         \Log::info('User ' . $user->id . ' change his password');
 
-        \Mail::queue('emails.auth.changePassword', ['username' => $user->username], function($message) use ($user) {
+        \Mail::queue('emails.auth.changePassword', ['username' => $user->username], function ($message) use ($user) {
             $message->to($user->email, $user->username)->subject('Change password');
         });
     }

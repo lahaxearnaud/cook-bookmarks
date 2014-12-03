@@ -5,7 +5,7 @@
  * Date: 05/08/14
  * Time: 11:57
  */
-use \Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model;
 
 class ArticleIndexer
 {
@@ -16,14 +16,14 @@ class ArticleIndexer
 
     protected function getDataToIndex(Article $article)
     {
-        $data              = array();
-        $data['title']     = $article->title;
-        $data['indexable'] = $article->indexable;
-        $data['author']    = $article->author->username;
-        $data['category']  = $article->category->name;
+        $data                 = array();
+        $data['title']        = $article->title;
+        $data['indexable']    = $article->indexable;
+        $data['author']       = $article->author->username;
+        $data['category']     = $article->category->name;
         $data['category_id']  = $article->category->id;
-        $data['user']      = $article->author->id;
-        $data['image']      = $article->imageMiniature;
+        $data['user']         = $article->author->id;
+        $data['image']        = $article->imageMiniature;
         $data['autocomplete'] = preg_split("/[\s,-:.]+/", $article->title);
 
         $notes = array();

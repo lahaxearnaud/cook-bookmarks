@@ -41,9 +41,9 @@ class CopyPastDetectorCommand extends Command
             if (Process::ERR === $type) {
                 $this->error($buffer);
             } else {
-                if(strlen($buffer) === 1) {
+                if (strlen($buffer) === 1) {
                     echo $buffer;
-                }else{
+                } else {
                     $this->info($buffer);
                 }
             }

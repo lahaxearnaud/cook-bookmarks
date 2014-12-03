@@ -11,7 +11,8 @@
  *
  * @author LAHAXE Arnaud <lahaxe.arnaud@gmail.com>
  */
-interface UserFilterableInterface {
+interface UserFilterableInterface
+{
 
     /**
      * @param $query
@@ -21,7 +22,7 @@ interface UserFilterableInterface {
      *
      * @return mixed
      */
-    public function scopeOfUser ($query, $userId);
+    public function scopeOfUser($query, $userId);
 
     /**
      * @author LAHAXE Arnaud <arnaud.lahaxe@versusmind.eu>
