@@ -64,45 +64,45 @@ interface RepositoryInterface
     public function has($relation);
 
     /**
-     * @param  integer $nbByPage
+     * @param integer $nbByPage
      *
      * @return Collection
      */
     public function paginate($nbByPage = 10);
 
     /**
-     * @param  array   $where
-     * @param  integer $nbByPage
+     * @param array   $where
+     * @param integer $nbByPage
      *
      * @return Collection
      */
     public function paginateWhere(array $where, $nbByPage = 1);
 
     /**
-     * @param  integer $id
-     * @param  array   $data
+     * @param integer $id
+     * @param array   $data
      *
      * @return Model
      */
     public function update($id, array $data);
 
     /**
-     * @param  integer $id
+     * @param integer $id
      *
      * @return bool
      */
     public function delete($id);
 
     /**
-     * @param  array $data
+     * @param array $data
      *
      * @return Model
      */
     public function create(array $data);
 
     /**
-     * @param  string $query
-     * @param  array  $where
+     * @param string $query
+     * @param array  $where
      *
      * @return Collection
      */

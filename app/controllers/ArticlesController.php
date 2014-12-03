@@ -36,6 +36,7 @@ class ArticlesController extends \RessourceController
     {
         $model = $this->repository->create(Input::all());
 
+
         return $this->generateResponse($model, $model->errors(), $this->generateLocation($model), 201);
     }
 
@@ -48,6 +49,7 @@ class ArticlesController extends \RessourceController
     public function update($id)
     {
         $model = $this->repository->update($id, Input::all());
+
 
         return $this->generateResponse($model, $model->errors(), $this->generateLocation($model), 200);
     }
@@ -71,17 +73,20 @@ class ArticlesController extends \RessourceController
                 $item = current($item);
             });
 
+
             return Response::json($messages, 400);
         }
 
         $result = $this->articleExtractor->extractFromRemote(Input::get('url'));
         if (!$result['success']) {
+
             return Response::json($result, 400);
         }
 
         if (Input::get('markdown')) {
             $result['body'] = $this->html2markdown->convert($result['body']);
         }
+
 
         return Response::json($result);
     }
@@ -94,6 +99,7 @@ class ArticlesController extends \RessourceController
      */
     public function user($user)
     {
+
         return $this->repository->paginateWhere(array(
             'author_id' => $user->id
         ), 20, Input::get('page'));
@@ -110,6 +116,7 @@ class ArticlesController extends \RessourceController
             'category_id' => null
         ));
 
+
         return Response::json([
             'exist' => $nb > 0,
             'count' => $nb
@@ -123,6 +130,7 @@ class ArticlesController extends \RessourceController
      */
     public function noCategory()
     {
+
         return $this->repository->paginateWhere(array(
             'category_id' => null
         ), 20, Input::get('page'));
@@ -137,6 +145,7 @@ class ArticlesController extends \RessourceController
     {
         $article->body = Markdown::defaultTransform($article->body);
         $pdf           = PDF::loadView('export', ['article' => $article]);
+
 
         return $pdf->download($article->slug . '.pdf');
     }

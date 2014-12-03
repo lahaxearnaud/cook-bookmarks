@@ -15,6 +15,7 @@ abstract class BaseModel extends Ardent implements UrlApiInterface, HyperMediaIn
 
     public function getLinksAttribute()
     {
+
         return array(
             'show'   => $this->findUrl(),
             'update' => $this->updateUrl(),
@@ -28,6 +29,7 @@ abstract class BaseModel extends Ardent implements UrlApiInterface, HyperMediaIn
      */
     public function findUrl()
     {
+
         return array(
             'url'    => $this->generateRoute('show'),
             'method' => 'GET'
@@ -40,6 +42,7 @@ abstract class BaseModel extends Ardent implements UrlApiInterface, HyperMediaIn
      */
     public function deleteUrl()
     {
+
         return array(
             'url'    => $this->generateRoute('destroy'),
             'method' => 'DELETE'
@@ -52,6 +55,7 @@ abstract class BaseModel extends Ardent implements UrlApiInterface, HyperMediaIn
      */
     public function updateUrl()
     {
+
         return array(
             'url'    => $this->generateRoute('update'),
             'method' => 'PUT'
@@ -60,16 +64,19 @@ abstract class BaseModel extends Ardent implements UrlApiInterface, HyperMediaIn
 
     protected function getBaseUrlName()
     {
+
         return 'api.' . $this->getApiVersion() . '.' . $this->getTable() . '.';
     }
 
     protected function getRouteName($action)
     {
+
         return $this->getBaseUrlName() . $action;
     }
 
     protected function generateRoute($action)
     {
+
         return route($this->getRouteName($action), array(
             'id' => $this->id
         ));
@@ -77,6 +84,7 @@ abstract class BaseModel extends Ardent implements UrlApiInterface, HyperMediaIn
 
     protected function getApiVersion()
     {
+
         return 'v1';
     }
 }

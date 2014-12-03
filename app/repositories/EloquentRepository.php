@@ -37,11 +37,14 @@ abstract class EloquentRepository implements RepositoryInterface
     public function all()
     {
 
+
         return $this->cacheWrapper('all', function () {
             if ($this->model instanceof UserFilterableInterface && !is_null($this->currentUser())) {
 
+
                 return $this->model->ofUser($this->currentUser()->id)->get();
             } else {
+
                 return $this->model->all();
             }
         });
@@ -54,6 +57,7 @@ abstract class EloquentRepository implements RepositoryInterface
             $query->ofUser($this->currentUser()->id);
         }
 
+
         return $query->count();
     }
 
@@ -64,8 +68,10 @@ abstract class EloquentRepository implements RepositoryInterface
      */
     public function in($ids)
     {
+
         return $this->cacheWrapper('in', function () use ($ids) {
             $query = $this->make();
+
 
             return $query->whereIn('id', $ids)->get();
         }, [$ids]);
@@ -80,8 +86,10 @@ abstract class EloquentRepository implements RepositoryInterface
      */
     public function find($id)
     {
+
         return $this->cacheWrapper('find', function () use ($id) {
             $query = $this->make();
+
 
             return $query->findOrFail($id);
         }, [$id]);
@@ -98,6 +106,7 @@ abstract class EloquentRepository implements RepositoryInterface
     {
         $this->with = array_merge($this->with, $with);
 
+
         return $this;
     }
 
@@ -112,8 +121,10 @@ abstract class EloquentRepository implements RepositoryInterface
      */
     public function findFirstBy($key, $value, $operator = '=')
     {
+
         return $this->cacheWrapper('findFirstBy', function () use ($key, $value, $operator) {
             $query = $this->make();
+
 
             return $query->where($key, $operator, $value)->firstOrFail();
         }, [$key, $value, $operator]);
@@ -130,8 +141,10 @@ abstract class EloquentRepository implements RepositoryInterface
      */
     public function findAllBy($key, $value, $operator = '=')
     {
+
         return $this->cacheWrapper('findAllBy', function () use ($key, $value, $operator) {
             $query = $this->make();
+
 
             return $query->where($key, $operator, $value)->get();
         }, [$key, $value, $operator]);
@@ -146,8 +159,10 @@ abstract class EloquentRepository implements RepositoryInterface
      */
     public function has($relation)
     {
+
         return $this->cacheWrapper('has', function () use ($relation) {
             $query = $this->make();
+
 
             return $query->has($relation)->get();
         }, [$relation]);
@@ -167,8 +182,10 @@ abstract class EloquentRepository implements RepositoryInterface
 
             $pagination = $query->paginate($nbByPage);
 
+
             return ['items' => $pagination->getItems(), 'total' => $pagination->getTotal()];
         }, [$nbByPage, $page]);
+
 
         return \Paginator::make($paginationData['items'], $paginationData['total'], $nbByPage);
     }
@@ -188,20 +205,23 @@ abstract class EloquentRepository implements RepositoryInterface
 
             $pagination = $query->where($where)->paginate($nbByPage);
 
+
             return ['items' => $pagination->getItems(), 'total' => $pagination->getTotal()];
         }, [$nbByPage, $page, $where]);
+
 
         return \Paginator::make($paginationData['items'], $paginationData['total'], $nbByPage);
     }
 
     /**
-     * @param  integer $id
-     * @param  array   $data
+     * @param integer $id
+     * @param array   $data
      *
      * @return Model
      */
     public function update($id, array $data)
     {
+
         return $this->cacheWrapper('update', function () use ($id, $data) {
             $model = $this->find($id);
             foreach ($data as $key => $value) {
@@ -209,44 +229,49 @@ abstract class EloquentRepository implements RepositoryInterface
             }
             $model->updateUniques();
 
+
             return $model;
         }, [$id, $data]);
     }
 
     /**
-     * @param  integer $id
+     * @param integer $id
      *
      * @return bool
      */
     public function delete($id)
     {
+
         return $this->cacheWrapper('delete', function () use ($id) {
             $model = $this->find($id);
+
 
             return $model->delete();
         }, [$id]);
     }
 
     /**
-     * @param  array $data
+     * @param array $data
      *
      * @return Model
      */
     public function create(array $data)
     {
+
         return $this->cacheWrapper('create', function () use ($data) {
             $class = get_class($this->model);
             $model = new $class($data);
 
             $model->save();
 
+
             return $model;
         }, [$data]);
     }
 
     /**
-     * @param  string $query
-     * @param  array  $where
+     * @param string $query
+     * @param array  $where
      *
      * @return Collection
      */
@@ -266,6 +291,7 @@ abstract class EloquentRepository implements RepositoryInterface
             $query = $query->ofUser($this->currentUser()->id);
         }
 
+
         return $query;
     }
 
@@ -274,6 +300,7 @@ abstract class EloquentRepository implements RepositoryInterface
      */
     public function getModel()
     {
+
         return $this->model;
     }
 
@@ -288,6 +315,7 @@ abstract class EloquentRepository implements RepositoryInterface
 
         $results = \Event::fire($modelClass . '.' . $eventName . '.before', [$parametersToObserver]);
         if ($results) {
+
             return current($results);
         }
 
@@ -295,11 +323,13 @@ abstract class EloquentRepository implements RepositoryInterface
 
         \Event::fire($modelClass . '.' . $eventName . '.after', [$parametersToObserver, $results]);
 
+
         return $results;
     }
 
     public function currentUser()
     {
+
 
         return \Auth::user();
     }

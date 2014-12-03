@@ -43,6 +43,7 @@ class Category extends BaseModel implements HyperMediaInterface, UserFilterableI
      */
     public function user()
     {
+
         return $this->belongsTo('User', 'user_id');
     }
 
@@ -52,6 +53,7 @@ class Category extends BaseModel implements HyperMediaInterface, UserFilterableI
      */
     public function articles()
     {
+
         return $this->hasMany('Article', 'category_id');
     }
 
@@ -63,6 +65,7 @@ class Category extends BaseModel implements HyperMediaInterface, UserFilterableI
      */
     public function scopeOfUser($query, $userId)
     {
+
         return $query->where($this->getUserField(), $userId);
     }
 
@@ -72,6 +75,7 @@ class Category extends BaseModel implements HyperMediaInterface, UserFilterableI
      */
     public function getUserField()
     {
+
         return 'user_id';
     }
 }

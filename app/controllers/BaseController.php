@@ -18,8 +18,10 @@ abstract class BaseController extends Controller
                 $response->headers->add($headers);
             }
 
+
             return $response;
         }
+
 
         return Response::json($errors);
     }
@@ -27,6 +29,7 @@ abstract class BaseController extends Controller
     protected function generateLocation(Model $model)
     {
         $routeName = 'api.v1.' . $model->getTable() . '.show';
+
 
         return array(
             "Url" => route($routeName, array(

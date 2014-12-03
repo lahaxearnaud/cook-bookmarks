@@ -12,7 +12,7 @@ abstract class Observer implements ObserverInterface
     /**
      * Register the listeners for the subscriber.
      *
-     * @param  Illuminate\Events\Dispatcher $events
+     * @param Illuminate\Events\Dispatcher $events
      *
      * @return array
      */
@@ -46,56 +46,67 @@ abstract class Observer implements ObserverInterface
 
     protected function paramToString($params)
     {
+
         return md5(serialize($params));
     }
 
     public function beforeAll($event)
     {
+
         return Cache::tags($this->getCacheTag())->get('all', false);
     }
 
     public function beforeFind($event)
     {
+
         return Cache::tags($this->getCacheTag())->get('find.' . $this->paramToString($event), false);
     }
 
     public function beforeFindFirstBy($event)
     {
+
         return Cache::tags($this->getCacheTag())->get('findFirstBy.' . $this->paramToString($event), false);
     }
 
     public function beforeFindAllBy($event)
     {
+
         return Cache::tags($this->getCacheTag())->get('findAllBy.' . $this->paramToString($event), false);
     }
 
     public function beforeHas($event)
     {
+
         return Cache::tags($this->getCacheTag())->get('has.' . $this->paramToString($event), false);
     }
 
     public function beforePaginate($event)
     {
+
         return Cache::tags($this->getCacheTag())->get('paginate.' . $this->paramToString($event), false);
     }
 
     public function beforePaginateWhere($event)
     {
+
         return Cache::tags($this->getCacheTag())->get('paginateWhere.' . $this->paramToString($event), false);
     }
 
     public function beforeUpdate($event)
     {
+
         return false;
     }
 
     public function beforeDelete($event)
     {
+
         return false;
     }
 
     public function beforeCreate($event)
     {
+
         return false;
     }
 

@@ -7,27 +7,32 @@ class Cocktail1001 extends AbstractExtractor
 
     public function getTitleCssSelector()
     {
+
         return 'h1';
     }
 
     public function getYieldCssSelector()
     {
+
         return '';
     }
 
     public function getIngredientsCssSelector()
     {
+
         return 'a[itemprop=ingredients]';
     }
 
     public function getPreparationsCssSelector()
     {
+
         return 'span[itemprop=recipeInstructions]';
     }
 
     public function extract($html)
     {
         $dom = $this->getDomElement($html);
+
 
         return array(
             'title'   => $this->tidy($this->getTitle($dom)),
@@ -46,6 +51,7 @@ class Cocktail1001 extends AbstractExtractor
         foreach ($ingredients as $ingredient) {
             $ingredientsList .= ' - ' . $this->addMarker(strip_tags($ingredient->parent()->innertext)) . "<br/>";
         }
+
 
         return $ingredientsList;
     }

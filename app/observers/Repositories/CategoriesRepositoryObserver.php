@@ -14,6 +14,7 @@ class CategoriesRepositoryObserver extends Observer
 {
     protected function getCacheTag()
     {
+
         return 'category';
     }
 

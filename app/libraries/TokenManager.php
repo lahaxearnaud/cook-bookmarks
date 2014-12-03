@@ -11,7 +11,7 @@ class TokenManager implements TokenManagerInterface
      */
     protected $repository;
 
-    function __construct(TokensRepository $repository)
+    public function __construct(TokensRepository $repository)
     {
         $this->repository = $repository;
     }
@@ -19,37 +19,40 @@ class TokenManager implements TokenManagerInterface
     /**
      * Get the token instance by the token value and the user instance
      *
-     * @param  User   $user
-     * @param  string $token
+     * @param User   $user
+     * @param string $token
      *
      * @return Token
      */
     public function get(User $user, $token)
     {
+
         return $this->repository->getByToken($token, $user);
     }
 
     /**
      * Check if the token is still valid
      *
-     * @param  Token $token
+     * @param Token $token
      *
      * @return boolean
      */
     public function isValid(Token $token)
     {
+
         return $token->expire_at->diffInMinutes(Carbon::now()) > 0;
     }
 
     /**
      * Mark the token as used
      *
-     * @param  Token $token
+     * @param Token $token
      *
-     * @return boolean       true if succeed
+     * @return boolean true if succeed
      */
     public function burn(Token $token)
     {
+
         return $this->repository->delete($token->id);
     }
 
@@ -63,6 +66,7 @@ class TokenManager implements TokenManagerInterface
     {
         $tokenValue = sha1(str_random(30) . time() . $user->id);
 
+
         return $this->repository->create([
             'token'     => $tokenValue,
             'user_id'   => $user->id,
@@ -72,11 +76,13 @@ class TokenManager implements TokenManagerInterface
 
     public function getCryptTokenValue(Token $token)
     {
+
         return Crypt::encrypt($token->token);
     }
 
     public function decryptTokenValue($token)
     {
+
         return Crypt::decrypt($token);
     }
 }

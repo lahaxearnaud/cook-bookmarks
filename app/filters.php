@@ -42,19 +42,23 @@ Route::filter('auth', function () {
         if (Request::ajax()) {
             Event::fire('apiLog', array(401));
 
+
             return Response::make('Unauthorized', 401);
         } else {
+
             return Redirect::guest('login');
         }
     }
 });
 
 Route::filter('auth.basic', function () {
+
     return Auth::basic();
 });
 
 App::error(function (AuthTokenNotAuthorizedException $exception) {
     Event::fire('apiLog', array($exception->getCode()));
+
 
     return Response::json(array('error' => $exception->getMessage()), $exception->getCode());
 });

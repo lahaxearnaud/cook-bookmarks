@@ -15,12 +15,14 @@ abstract class AbstractExtractor implements ExtractorInterface
 
     public function getDomElement($html)
     {
+
         return str_get_html($html);
     }
 
     public function extract($html)
     {
         $dom = $this->getDomElement($html);
+
 
         return array(
             'title'   => $this->tidy($this->getTitle($dom)),
@@ -35,8 +37,10 @@ abstract class AbstractExtractor implements ExtractorInterface
     {
         $title = $domHtml->find($this->getTitleCssSelector(), 0);
         if (is_null($title)) {
+
             return '';
         }
+
 
         return strip_tags($title->outertext);
     }
@@ -50,6 +54,7 @@ abstract class AbstractExtractor implements ExtractorInterface
             $ingredientsList .= ' - ' . $this->addMarker(strip_tags($ingredient->innertext)) . "<br/>";
         }
 
+
         return $ingredientsList;
     }
 
@@ -58,10 +63,12 @@ abstract class AbstractExtractor implements ExtractorInterface
         $yield = $domHtml->find($this->getYieldCssSelector(), 0);
 
         if (is_null($yield)) {
+
             return '';
         }
 
         $yield->innertext = preg_replace("/[^0-9]/", "", $yield->innertext);
+
 
         return '<b>' . $yield->innertext . '</b>' . ' personnes';
     }
@@ -74,11 +81,13 @@ abstract class AbstractExtractor implements ExtractorInterface
             $preparationList .= ' - ' . $preparation->innertext . '<br/>';
         }
 
+
         return $preparationList;
     }
 
     public function tidy($title)
     {
+
         return preg_replace('/[\s]+/mu', ' ', trim($title));
     }
 
@@ -93,6 +102,7 @@ abstract class AbstractExtractor implements ExtractorInterface
         /**
          * replace comma by point 1,4 => 1.4
          */
+
 
         return preg_replace("/_([0-9]+),([0-9]+)_/", "<em>$1.$2</em>", $content);
     }

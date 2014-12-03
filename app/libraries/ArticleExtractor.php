@@ -32,14 +32,17 @@ class ArticleExtractor
 
             $extractor = new $extractor;
 
+
             return $extractor->extract($html);
         } catch (ClientErrorResponseException $e) {
+
             return array(
                 'title'   => '',
                 'body'    => $e->getMessage(),
                 'success' => false
             );
         } catch (CurlException $e) {
+
             return array(
                 'title'   => '',
                 'body'    => $e->getMessage(),

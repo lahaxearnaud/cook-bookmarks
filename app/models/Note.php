@@ -37,6 +37,7 @@ class Note extends BaseModel implements HyperMediaInterface, UserFilterableInter
 
     public function author()
     {
+
         return $this->user();
     }
 
@@ -47,6 +48,7 @@ class Note extends BaseModel implements HyperMediaInterface, UserFilterableInter
      */
     public function user()
     {
+
         return $this->belongsTo('User', 'user_id');
     }
 
@@ -57,6 +59,7 @@ class Note extends BaseModel implements HyperMediaInterface, UserFilterableInter
      */
     public function article()
     {
+
         return $this->belongsTo('Article', 'article_id');
     }
 
@@ -68,6 +71,7 @@ class Note extends BaseModel implements HyperMediaInterface, UserFilterableInter
      */
     public function scopeOfUser($query, $userId)
     {
+
         return $query->where($this->getUserField(), $userId);
     }
 
@@ -77,6 +81,7 @@ class Note extends BaseModel implements HyperMediaInterface, UserFilterableInter
      */
     public function getUserField()
     {
+
         return 'user_id';
     }
 }

@@ -21,8 +21,8 @@ class ArticlesRepository extends EloquentRepository
     }
 
     /**
-     * @param  string $query
-     * @param  array  $where
+     * @param string $query
+     * @param array  $where
      *
      * @return Collection
      */
@@ -35,6 +35,7 @@ class ArticlesRepository extends EloquentRepository
         $arrayIds = $this->seeker->query($query, $where);
 
         if (count($arrayIds) === 0) {
+
             return new Collection();
         }
 
@@ -50,12 +51,13 @@ class ArticlesRepository extends EloquentRepository
     }
 
     /**
-     * @param  array $data
+     * @param array $data
      *
      * @return Model
      */
     public function create(array $data)
     {
+
         return $this->cacheWrapper('create', function () use ($data) {
             $author = null;
             if (isset($data['author_id'])) {
@@ -86,6 +88,7 @@ class ArticlesRepository extends EloquentRepository
             $model->category()->associate($category);
 
             $model->save();
+
 
             return $model;
         });

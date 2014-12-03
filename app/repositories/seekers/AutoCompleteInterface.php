@@ -16,5 +16,5 @@ namespace Repositories\Seekers;
 interface AutoCompleteInterface
 {
 
-    function autocomplete($query, array $parameters = array());
-} 
+    public function autocomplete($query, array $parameters = array());
+}

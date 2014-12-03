@@ -11,6 +11,7 @@ class ArticleIndexer
 {
     protected function getTypeByObject(Model $model)
     {
+
         return strtolower(get_class($model));
     }
 
@@ -32,6 +33,7 @@ class ArticleIndexer
         }
 
         $data['notes'] = $notes;
+
 
         return $data;
     }

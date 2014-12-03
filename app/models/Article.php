@@ -56,6 +56,7 @@ class Article extends BaseModel implements HyperMediaInterface, UserFilterableIn
      */
     public function author()
     {
+
         return $this->belongsTo('User', 'author_id');
     }
 
@@ -65,6 +66,7 @@ class Article extends BaseModel implements HyperMediaInterface, UserFilterableIn
      */
     public function category()
     {
+
         return $this->belongsTo('Category', 'category_id');
     }
 
@@ -74,6 +76,7 @@ class Article extends BaseModel implements HyperMediaInterface, UserFilterableIn
      */
     public function notes()
     {
+
         return $this->hasMany('Note', 'article_id');
     }
 
@@ -85,6 +88,7 @@ class Article extends BaseModel implements HyperMediaInterface, UserFilterableIn
      */
     public function scopeOfUser($query, $userId)
     {
+
         return $query->where($this->getUserField(), $userId);
     }
 
@@ -94,6 +98,7 @@ class Article extends BaseModel implements HyperMediaInterface, UserFilterableIn
      */
     public function getUserField()
     {
+
         return 'author_id';
     }
 }

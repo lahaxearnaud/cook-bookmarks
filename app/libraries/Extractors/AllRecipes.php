@@ -6,21 +6,25 @@ class AllRecipes extends AbstractExtractor
 {
     public function getTitleCssSelector()
     {
+
         return 'h1[id=itemTitle]';
     }
 
     public function getYieldCssSelector()
     {
+
         return 'span[id=lblYield]';
     }
 
     public function getIngredientsCssSelector()
     {
+
         return 'ul.ingredient-wrap li .fl-ing';
     }
 
     public function getPreparationsCssSelector()
     {
+
         return 'div[itemprop=recipeInstructions] ol li';
     }
 
@@ -34,6 +38,7 @@ class AllRecipes extends AbstractExtractor
 
             $ingredientsList .= ' - ' . $this->addMarker(is_null($amount) ? '' : $amount->innertext) . ' ' . (is_null($name) ? '' : $name->innertext) . '<br/>';
         }
+
 
         return $ingredientsList;
     }

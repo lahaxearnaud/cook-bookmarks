@@ -15,6 +15,7 @@ class UsersRepository extends EloquentRepository
      */
     public function search($query, array $where = array())
     {
+
         return new Collection();
     }
 
@@ -23,6 +24,7 @@ class UsersRepository extends EloquentRepository
         $data['password'] = \Hash::make($data['password']);
         $user             = new \User($data);
         $user->save();
+
 
         return $user;
     }
@@ -36,11 +38,13 @@ class UsersRepository extends EloquentRepository
         }
         $user->updateUniques();
 
+
         return $user;
     }
 
     public function findByEmail($email)
     {
+
         return $this->findFirstBy('email', $email);
     }
 }

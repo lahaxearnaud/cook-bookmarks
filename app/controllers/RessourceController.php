@@ -42,6 +42,7 @@ abstract class RessourceController extends BaseController
      */
     public function index()
     {
+
         return $this->repository->paginate(20, Input::get('page'));
     }
 
@@ -55,7 +56,7 @@ abstract class RessourceController extends BaseController
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return Response
      *
@@ -66,6 +67,7 @@ abstract class RessourceController extends BaseController
      */
     public function show($id)
     {
+
         return $this->repository->find($id);
     }
 
@@ -74,7 +76,7 @@ abstract class RessourceController extends BaseController
      *
      * @author LAHAXE Arnaud
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return Response
      */
@@ -83,7 +85,7 @@ abstract class RessourceController extends BaseController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return Response
      *
@@ -106,6 +108,7 @@ abstract class RessourceController extends BaseController
             $errors[] = 'Error during delete';
         }
 
+
         return $this->generateResponse($model, $errors, array(), 200);
     }
 
@@ -121,6 +124,7 @@ abstract class RessourceController extends BaseController
     public function search()
     {
         $query = Input::get('query');
+
 
         return $this->repository->search($query);
     }

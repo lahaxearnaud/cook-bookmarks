@@ -47,6 +47,7 @@ class UsersController extends BaseController
                 $item = current($item);
             });
 
+
             return Response::json($messages, 400);
         }
 
@@ -55,6 +56,7 @@ class UsersController extends BaseController
         if (count($user->errors()) === 0) {
             Event::fire('user.subscribe', ['user' => $user]);
         }
+
 
         return $this->generateResponse($user, $user->errors(), [], 200);
     }
@@ -80,11 +82,13 @@ class UsersController extends BaseController
                 $item = current($item);
             });
 
+
             return Response::json($messages, 400);
         }
 
         $user = Auth::user();
         if (!Hash::check(Input::get('oldPassword'), $user->getAuthPassword())) {
+
             return Response::json(['Old password not correct'], 400);
         }
 
@@ -95,6 +99,7 @@ class UsersController extends BaseController
         if (count($user->errors()) > 0) {
             Event::fire('user.changePassword', ['user' => $user]);
         }
+
 
         return $this->generateResponse($user, $user->errors());
     }
@@ -111,6 +116,7 @@ class UsersController extends BaseController
         $token = $this->tokenManager->generate($user);
 
         Event::fire('user.lostPassword', ['user' => $user, 'token' => $this->tokenManager->getCryptTokenValue($token)]);
+
 
         return Response::json(['success' => true], 200);
     }
@@ -130,6 +136,7 @@ class UsersController extends BaseController
         $token = $this->tokenManager->get($user, $this->tokenManager->decryptTokenValue(Input::get('token')));
 
         if (!$this->tokenManager->isValid($token)) {
+
             return Response::json(['success' => false], 400);
         }
 
@@ -144,6 +151,7 @@ class UsersController extends BaseController
                 $item = current($item);
             });
 
+
             return Response::json($messages, 400);
         }
 
@@ -155,6 +163,7 @@ class UsersController extends BaseController
             $this->tokenManager->burn($token);
             Event::fire('user.changePassword', ['user' => $user]);
         }
+
 
         return $this->generateResponse($user, $user->errors());
     }

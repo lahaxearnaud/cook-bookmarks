@@ -58,6 +58,7 @@ class QueueAddCommand extends Command
      */
     protected function getArguments()
     {
+
         return array(
             array('id', null, InputArgument::REQUIRED, 'Id of the article'),
             array('type', null, InputArgument::REQUIRED, 'img or info or both'),
@@ -71,6 +72,7 @@ class QueueAddCommand extends Command
      */
     protected function getOptions()
     {
+
         return array();
     }
 }

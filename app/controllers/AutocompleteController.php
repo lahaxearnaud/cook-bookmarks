@@ -21,6 +21,7 @@ class AutocompleteController extends BaseController
         $category_id = Input::get('category_id');
         $user_id     = Input::get('user_id', Auth::User()->id);
 
+
         return $this->seeker->autocomplete($query, [
             'category_id' => $category_id,
             'user'        => $user_id

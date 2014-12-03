@@ -48,6 +48,7 @@ class ArticleSeeker extends ElasticSearchSeeker implements AutoCompleteInterface
 
         // handle no result
         if ($result['hits']['total'] == 0 || $result['timed_out']) {
+
             return array();
         }
 
@@ -56,6 +57,7 @@ class ArticleSeeker extends ElasticSearchSeeker implements AutoCompleteInterface
         foreach ($result['hits']['hits'] as $element) {
             $arrayIds[] = $element['_id'];
         }
+
 
         return array_slice($arrayIds, $parameters['offset'], $parameters['max']);
     }
@@ -93,6 +95,7 @@ class ArticleSeeker extends ElasticSearchSeeker implements AutoCompleteInterface
 
         // handle no result
         if (count($result) == 0) {
+
             return array();
         }
 
@@ -105,6 +108,7 @@ class ArticleSeeker extends ElasticSearchSeeker implements AutoCompleteInterface
                 'title' => current($element['fields']['title'])
             ];
         }
+
 
         return array_slice($searchResults, $parameters['offset'], $parameters['max']);
     }

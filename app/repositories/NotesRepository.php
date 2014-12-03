@@ -8,23 +8,25 @@ use Illuminate\Database\Eloquent\Model;
 class NotesRepository extends EloquentRepository
 {
     /**
-     * @param  string $query
-     * @param  array  $where
+     * @param string $query
+     * @param array  $where
      *
      * @return Collection
      */
     public function search($query, array $where = array())
     {
+
         return new Collection();
     }
 
     /**
-     * @param  array $data
+     * @param array $data
      *
      * @return Model
      */
     public function create(array $data)
     {
+
         return $this->cacheWrapper('create', function () use ($data) {
 
             $user = null;
@@ -48,6 +50,7 @@ class NotesRepository extends EloquentRepository
             $model->article()->associate($article);
 
             $model->save();
+
 
             return $model;
         });

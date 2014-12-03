@@ -111,6 +111,7 @@ class ElascticSearchInstallCommand extends Command
      */
     protected function getArguments()
     {
+
         return array();
     }
 
@@ -121,6 +122,7 @@ class ElascticSearchInstallCommand extends Command
      */
     protected function getOptions()
     {
+
         return array();
     }
 

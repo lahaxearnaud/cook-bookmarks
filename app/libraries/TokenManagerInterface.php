@@ -11,8 +11,8 @@ interface TokenManagerInterface
     /**
      * Get the token instance by the token value and the user instance
      *
-     * @param  User   $user
-     * @param  string $token
+     * @param User   $user
+     * @param string $token
      *
      * @return Token|null
      */
@@ -21,7 +21,7 @@ interface TokenManagerInterface
     /**
      * Check if the token is still valid
      *
-     * @param  Token $token
+     * @param Token $token
      *
      * @return boolean
      */
@@ -30,9 +30,9 @@ interface TokenManagerInterface
     /**
      * Mark the token as used
      *
-     * @param  Token $token
+     * @param Token $token
      *
-     * @return boolean       true if succeed
+     * @return boolean true if succeed
      */
     public function burn(Token $token);
 
@@ -40,8 +40,8 @@ interface TokenManagerInterface
     /**
      * Create a token and return it
      *
-     * @param  User    $user
-     * @param  integer $lifetime
+     * @param User    $user
+     * @param integer $lifetime
      *
      * @return Token
      */
@@ -51,18 +51,18 @@ interface TokenManagerInterface
     /**
      * Get the crypt value of the token
      *
-     * @param  Token $token [description]
+     * @param Token $token [description]
      *
-     * @return [type]        [description]
+     * @return [type] [description]
      */
     public function getCryptTokenValue(Token $token);
 
     /**
      * Get the decrypt value of the token
      *
-     * @param  [type] $token [description]
+     * @param [type] $token [description]
      *
-     * @return [type]        [description]
+     * @return [type] [description]
      */
     public function decryptTokenValue($token);
 }

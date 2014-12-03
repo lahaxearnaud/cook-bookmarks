@@ -14,6 +14,7 @@ class UrlInformationsHandler
             Log::error('Fail to handle job ' . $job->getJobId() . ' ' . print_r($data, true));
             $job->delete();
 
+
             return;
         }
 
@@ -60,6 +61,7 @@ class UrlInformationsHandler
 
     protected function getHtmlDom($url)
     {
+
         return file_get_html($url, 0, $this->getContext());
     }
 
@@ -69,6 +71,7 @@ class UrlInformationsHandler
 
         foreach ($html->find('meta') as $element) {
             if ($element->property == "og:image") {
+
                 return $element->content;
             }
         }
@@ -113,6 +116,7 @@ class UrlInformationsHandler
             }
         }
 
+
         return $srcBiggest;
     }
 
@@ -122,10 +126,12 @@ class UrlInformationsHandler
         foreach ($html->find('link') as $element) {
             if ($element->rel == "shortcut icon" || $element->rel == "icon") {
                 if ($this->downloadImg($this->urlRel2abs($element->href, $url), $outputFolder . '/favicon.png')) {
+
                     return asset('i/' . $id . '/favicon.png');
                 }
             }
         }
+
 
         return '';
     }
@@ -136,9 +142,11 @@ class UrlInformationsHandler
             $original = Image::make($url);
             $original->save($output);
 
+
             return true;
         } catch (Exception $e) {
             Log::info('Impossible to download ' . $url);
+
 
             return false;
         }
@@ -148,20 +156,24 @@ class UrlInformationsHandler
     {
         $urlData = parse_url($url);
 
+
         return $urlData['host'];
     }
 
     protected function urlRel2abs($rel, $base)
     {
         if (parse_url($rel, PHP_URL_SCHEME) != '') {
+
             return $rel;
         }
 
         if (substr($rel, 0, 2) == '//') {
+
             return 'http:' . $rel;
         }
 
         if ($rel[0] == '#' || $rel[0] == '?') {
+
             return $base . $rel;
         }
 
@@ -181,6 +193,7 @@ class UrlInformationsHandler
         for ($n = 1; $n > 0; $abs = preg_replace($re, '/', $abs, -1, $n)) {
         }
 
+
         return $scheme . '://' . $abs;
     }
 
@@ -189,9 +202,11 @@ class UrlInformationsHandler
         $url = strtolower($url);
         foreach ($stopwords as $stopword) {
             if (strpos($url, strtolower($stopword)) !== false) {
+
                 return false;
             }
         }
+
 
         return true;
     }
@@ -207,6 +222,7 @@ class UrlInformationsHandler
                     "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.93 Safari/537.36\r\n"// i.e. An iPad
             )
         ));
+
 
         return $context;
     }

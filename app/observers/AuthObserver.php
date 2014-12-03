@@ -9,7 +9,7 @@ class AuthObserver
 
     protected $categoryRepository;
 
-    function __construct(CategoriesRepository $categoryRepository = null)
+    public function __construct(CategoriesRepository $categoryRepository = null)
     {
         if (is_null($categoryRepository)) {
             $categoryRepository = \App::make('CategoriesRepository');
@@ -21,7 +21,7 @@ class AuthObserver
     /**
      * Register the listeners for the subscriber.
      *
-     * @param  \Illuminate\Events\Dispatcher $events
+     * @param \Illuminate\Events\Dispatcher $events
      *
      * @return array
      */

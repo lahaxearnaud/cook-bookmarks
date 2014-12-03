@@ -12,6 +12,7 @@ class NotesRepositoryObserver extends Observer
 {
     protected function getCacheTag()
     {
+
         return 'note';
     }
 }
