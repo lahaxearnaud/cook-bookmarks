@@ -51,7 +51,7 @@ abstract class AbstractExtractor implements ExtractorInterface
 
         $ingredientsList = "<br/>";
         foreach ($ingredients as $ingredient) {
-            $ingredientsList .= ' - ' . $this->addMarker(strip_tags($ingredient->innertext)) . "<br/>";
+            $ingredientsList .= '- ' . $this->addMarker(strip_tags($ingredient->innertext)) . "<br/>";
         }
 
 
@@ -78,9 +78,8 @@ abstract class AbstractExtractor implements ExtractorInterface
         $preparations    = $domHtml->find($this->getPreparationsCssSelector());
         $preparationList = '<br/>';
         foreach ($preparations as $preparation) {
-            $preparationList .= ' - ' . $preparation->innertext . '<br/>';
+            $preparationList .= '- ' . $preparation->innertext . '<br/>';
         }
-
 
         return $preparationList;
     }
@@ -95,7 +94,7 @@ abstract class AbstractExtractor implements ExtractorInterface
     {
         /**
          * ([0-9,.]+)/([0-9,.]+) => detect divison 1/3, 34/27 1.82/193.287
-         * ([0-9.,]+) => detect simple interger or float
+         * ([0-9.,]+) => detect simple integer or float
          */
         $content = preg_replace("#([0-9,.]+)/([0-9,.]+)|([0-9.,]+)#", "_$0_", $content);
 
