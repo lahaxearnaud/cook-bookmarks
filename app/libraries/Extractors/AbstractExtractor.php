@@ -26,7 +26,7 @@ abstract class AbstractExtractor implements ExtractorInterface
 
         return array(
             'title'   => $this->tidy($this->getTitle($dom)),
-            'body'    => '<h2>Ingrédients (' . $this->tidy($this->getYield($dom)) . ')</h2><br/>' .
+            'body'    => '<h2>Ingrédients (' . $this->tidy($this->getYield($dom)) . ')</h2>' .
                 $this->tidy($this->getIngredients($dom)) . '<br/>
             <h2>Preparations:</h2>' . $this->tidy($this->getPreparations($dom)),
             'success' => true
@@ -51,11 +51,11 @@ abstract class AbstractExtractor implements ExtractorInterface
 
         $ingredientsList = "<br/>";
         foreach ($ingredients as $ingredient) {
-            $ingredientsList .= '- ' . $this->addMarker(strip_tags($ingredient->innertext)) . "<br/>";
+            $ingredientsList .= 'ITEM-'.'- ' . $this->addMarker(strip_tags($ingredient->innertext)) . "<br/>" . '-ITEM';
         }
 
 
-        return $ingredientsList;
+        return 'getIngredients' . $ingredientsList. 'getIngredients';
     }
 
     public function getYield($domHtml)
@@ -81,7 +81,7 @@ abstract class AbstractExtractor implements ExtractorInterface
             $preparationList .= '- ' . $preparation->innertext . '<br/>';
         }
 
-        return $preparationList;
+        return 'getPreparations-' . $preparationList . '-getPreparations';
     }
 
     public function tidy($title)
@@ -104,6 +104,8 @@ abstract class AbstractExtractor implements ExtractorInterface
          */
 
 
-        return preg_replace("/_([0-9]+),([0-9]+)_/", "<em>$1.$2</em>", $content);
+        $content = preg_replace("/_([0-9]+),([0-9]+)_/", "<em>$1.$2</em>", $content);
+
+        return 'addMarker-' . $content . '-addMarker';
     }
 }
