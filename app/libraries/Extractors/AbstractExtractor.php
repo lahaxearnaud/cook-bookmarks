@@ -72,6 +72,7 @@ abstract class AbstractExtractor implements ExtractorInterface {
 	}
 
 	public function addMarker($content) {
+        $content = trim($content);
 		/**
 		 * ([0-9,.]+)/([0-9,.]+) => detect divison 1/3, 34/27 1.82/193.287
 		 * ([0-9.,]+) => detect simple interger or float
