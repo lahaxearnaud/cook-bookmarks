@@ -36,7 +36,7 @@ class Marmiton extends AbstractExtractor
         $ingredients->find('span', 0)->innertext = '';
 
 
-        return $this->addMarker(trim($ingredients->innertext));
+        return $this->addMarker(strip_tags($ingredients->innertext));
     }
 
     public function getPreparations($domHtml)
