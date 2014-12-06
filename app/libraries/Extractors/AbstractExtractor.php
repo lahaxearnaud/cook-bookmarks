@@ -51,11 +51,11 @@ abstract class AbstractExtractor implements ExtractorInterface
 
         $ingredientsList = "<br/>";
         foreach ($ingredients as $ingredient) {
-            $ingredientsList .= 'ITEM-'.'- ' . $this->addMarker(strip_tags($ingredient->innertext)) . "<br/>" . '-ITEM';
+            $ingredientsList .= '- ' . $this->addMarker(strip_tags($ingredient->innertext)) . "<br/>";
         }
 
 
-        return 'getIngredients' . $ingredientsList. 'getIngredients';
+        return $ingredientsList;
     }
 
     public function getYield($domHtml)
@@ -81,7 +81,7 @@ abstract class AbstractExtractor implements ExtractorInterface
             $preparationList .= '- ' . $preparation->innertext . '<br/>';
         }
 
-        return 'getPreparations-' . $preparationList . '-getPreparations';
+        return $preparationList;
     }
 
     public function tidy($title)
@@ -92,7 +92,6 @@ abstract class AbstractExtractor implements ExtractorInterface
 
     public function addMarker($content)
     {
-        $content = trim($content);
         /**
          * ([0-9,.]+)/([0-9,.]+) => detect divison 1/3, 34/27 1.82/193.287
          * ([0-9.,]+) => detect simple integer or float
@@ -104,8 +103,6 @@ abstract class AbstractExtractor implements ExtractorInterface
          */
 
 
-        $content = preg_replace("/_([0-9]+),([0-9]+)_/", "<em>$1.$2</em>", $content);
-
-        return 'addMarker-' . $content . '-addMarker';
+        return preg_replace("/_([0-9]+),([0-9]+)_/", "<em>$1.$2</em>", $content);
     }
 }
