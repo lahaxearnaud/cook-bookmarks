@@ -18,6 +18,7 @@ abstract class ModelObserverCase extends TestCase
      */
     public function getObserver()
     {
+
         return $this->observer;
     }
 

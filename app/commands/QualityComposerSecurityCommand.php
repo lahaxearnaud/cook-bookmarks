@@ -37,7 +37,7 @@ class QualityComposerSecurityCommand extends Command
     public function fire()
     {
         $checker = new SecurityChecker();
-        $alerts = $checker->check('composer.lock');
+        $alerts  = $checker->check('composer.lock');
 
         $this->displayResults($this->getOutput(), 'composer.log', $alerts);
 
@@ -51,29 +51,29 @@ class QualityComposerSecurityCommand extends Command
 
         if ($count = count($vulnerabilities)) {
             $status = 'CRITICAL';
-            $style = 'error';
+            $style  = 'error';
         } else {
             $status = 'OK';
-            $style = 'bg=green;fg=white';
+            $style  = 'bg=green;fg=white';
         }
 
-        $output->writeln($this->getHelper('formatter')->formatBlock(array('['.$status.']', $count.' packages have known vulnerabilities'), $style, true));
+        $output->writeln($this->getHelper('formatter')->formatBlock(array('[' . $status . ']', $count . ' packages have known vulnerabilities'), $style, true));
         $output->write("\n");
 
         if (0 !== $count) {
             foreach ($vulnerabilities as $dependency => $issues) {
-                $dependencyFullName = $dependency.' ('.$issues['version'].')';
-                $output->writeln('<info>'.$dependencyFullName."\n".str_repeat('-', strlen($dependencyFullName))."</>\n");
+                $dependencyFullName = $dependency . ' (' . $issues['version'] . ')';
+                $output->writeln('<info>' . $dependencyFullName . "\n" . str_repeat('-', strlen($dependencyFullName)) . "</>\n");
 
                 foreach ($issues['advisories'] as $issue => $details) {
                     $output->write(' * ');
                     if ($details['cve']) {
-                        $output->write('<comment>'.$details['cve'].': </comment>');
+                        $output->write('<comment>' . $details['cve'] . ': </comment>');
                     }
                     $output->writeln($details['title']);
 
                     if ('' !== $details['link']) {
-                        $output->writeln('   '.$details['link']);
+                        $output->writeln('   ' . $details['link']);
                     }
 
                     $output->writeln('');

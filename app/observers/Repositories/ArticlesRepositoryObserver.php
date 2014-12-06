@@ -12,6 +12,7 @@ class ArticlesRepositoryObserver extends Observer
 {
     protected function getCacheTag()
     {
+
         return 'article';
     }
 }

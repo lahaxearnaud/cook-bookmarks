@@ -1,6 +1,6 @@
 <?php
 
-use \Repositories\RepositoryInterface;
+use Repositories\RepositoryInterface;
 
 /**
  * @ApiRoute(name="/categories")
@@ -11,12 +11,13 @@ class CategoriesController extends \RessourceController
 
     public function __construct(RepositoryInterface $repository, RepositoryInterface $articleRepository)
     {
-        $this->repository = $repository;
+        $this->repository        = $repository;
         $this->articleRepository = $articleRepository;
     }
 
     /**
      * Display a listing of the resource.
+     *
      * @return Response
      *
      *
@@ -36,6 +37,7 @@ class CategoriesController extends \RessourceController
      */
     public function index()
     {
+
         return $this->repository->all();
     }
 
@@ -47,6 +49,7 @@ class CategoriesController extends \RessourceController
     public function store()
     {
         $model = $this->repository->create(Input::all());
+
 
         return $this->generateResponse($model, $model->errors(), $this->generateLocation($model), 201);
     }
@@ -61,6 +64,7 @@ class CategoriesController extends \RessourceController
     {
         $model = $this->repository->update($id, Input::all());
 
+
         return $this->generateResponse($model, $model->errors(), $this->generateLocation($model), 200);
     }
 
@@ -72,13 +76,15 @@ class CategoriesController extends \RessourceController
      */
     public function user($user)
     {
+
         return $this->repository->paginateWhere(array(
             'user_id' => $user->id
         ), 20, Input::get('page'));
     }
 
-        /**
+    /**
      * Display a listing of the resource.
+     *
      * @return Response
      *
      *
@@ -98,6 +104,7 @@ class CategoriesController extends \RessourceController
      */
     public function articles($category)
     {
+
         return $this->articleRepository->paginateWhere([
             'category_id' => $category->id
         ], 20, Input::get('page'));

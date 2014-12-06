@@ -42,6 +42,7 @@ class ElascticSearchUninstallCommand extends Command
      */
     protected function getArguments()
     {
+
         return array();
     }
 
@@ -52,6 +53,7 @@ class ElascticSearchUninstallCommand extends Command
      */
     protected function getOptions()
     {
+
         return array();
     }
 

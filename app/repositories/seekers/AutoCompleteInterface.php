@@ -13,7 +13,8 @@ namespace Repositories\Seekers;
  *
  * @package Repositories\Seekers
  */
-interface AutoCompleteInterface {
+interface AutoCompleteInterface
+{
 
-    function autocomplete ($query, array $parameters = array());
-} 
+    public function autocomplete($query, array $parameters = array());
+}

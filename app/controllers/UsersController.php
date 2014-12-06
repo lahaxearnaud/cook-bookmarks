@@ -1,12 +1,12 @@
 <?php
 
-use \Repositories\RepositoryInterface;
+use Repositories\RepositoryInterface;
 
 /**
  * @ApiRoute(name="/users")
  * @ApiSector(name="users")
  */
-class UsersController  extends BaseController
+class UsersController extends BaseController
 {
     /**
      * @var RepositoryInterface
@@ -21,7 +21,7 @@ class UsersController  extends BaseController
     public function __construct(RepositoryInterface $userRepository, TokenManagerInterface $tokenManager)
     {
         $this->userRepository = $userRepository;
-        $this->tokenManager = $tokenManager;
+        $this->tokenManager   = $tokenManager;
     }
 
     /**
@@ -35,7 +35,7 @@ class UsersController  extends BaseController
     public function subscribe()
     {
         $validator = Validator::make(Input::all(), [
-            'email' => 'required|email',
+            'email'    => 'required|email',
             'username' => 'required|min:5',
             'password' => 'required|min:5',
         ]);
@@ -47,14 +47,16 @@ class UsersController  extends BaseController
                 $item = current($item);
             });
 
+
             return Response::json($messages, 400);
         }
 
         $user = $this->userRepository->create(Input::all());
 
-        if(count($user->errors()) === 0) {
+        if (count($user->errors()) === 0) {
             Event::fire('user.subscribe', ['user' => $user]);
         }
+
 
         return $this->generateResponse($user, $user->errors(), [], 200);
     }
@@ -80,11 +82,13 @@ class UsersController  extends BaseController
                 $item = current($item);
             });
 
+
             return Response::json($messages, 400);
         }
 
         $user = Auth::user();
-        if (! Hash::check(Input::get('oldPassword'), $user->getAuthPassword())) {
+        if (!Hash::check(Input::get('oldPassword'), $user->getAuthPassword())) {
+
             return Response::json(['Old password not correct'], 400);
         }
 
@@ -92,9 +96,10 @@ class UsersController  extends BaseController
             'password' => Input::get('newPassword')
         ));
 
-        if(count($user->errors()) > 0) {
+        if (count($user->errors()) > 0) {
             Event::fire('user.changePassword', ['user' => $user]);
         }
+
 
         return $this->generateResponse($user, $user->errors());
     }
@@ -107,10 +112,11 @@ class UsersController  extends BaseController
      */
     public function askNewPasswordToken()
     {
-        $user = $this->userRepository->findByEmail(Input::get('email'));
+        $user  = $this->userRepository->findByEmail(Input::get('email'));
         $token = $this->tokenManager->generate($user);
 
         Event::fire('user.lostPassword', ['user' => $user, 'token' => $this->tokenManager->getCryptTokenValue($token)]);
+
 
         return Response::json(['success' => true], 200);
     }
@@ -126,10 +132,11 @@ class UsersController  extends BaseController
      */
     public function changeLostPassword()
     {
-        $user = $this->userRepository->findByEmail(Input::get('email'));
+        $user  = $this->userRepository->findByEmail(Input::get('email'));
         $token = $this->tokenManager->get($user, $this->tokenManager->decryptTokenValue(Input::get('token')));
 
-        if(!$this->tokenManager->isValid($token)) {
+        if (!$this->tokenManager->isValid($token)) {
+
             return Response::json(['success' => false], 400);
         }
 
@@ -144,6 +151,7 @@ class UsersController  extends BaseController
                 $item = current($item);
             });
 
+
             return Response::json($messages, 400);
         }
 
@@ -151,10 +159,11 @@ class UsersController  extends BaseController
             'password' => Input::get('newPassword')
         ));
 
-        if(count($user->errors()) == 0) {
+        if (count($user->errors()) == 0) {
             $this->tokenManager->burn($token);
             Event::fire('user.changePassword', ['user' => $user]);
         }
+
 
         return $this->generateResponse($user, $user->errors());
     }

@@ -24,6 +24,7 @@ class LogRepositoriesTest extends RepositoryCase
      */
     public function getRepositoryName()
     {
+
         return 'LogsRepository';
     }
 

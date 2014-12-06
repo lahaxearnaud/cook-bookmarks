@@ -2,21 +2,30 @@
 
 namespace Extractors;
 
-class CuisineNotreFamille extends AbstractExtractor {
+class CuisineNotreFamille extends AbstractExtractor
+{
 
-	public function getTitleCssSelector() {
-		return 'span[id=ctl00_Main_LabelRecetteNom]';
-	}
+    public function getTitleCssSelector()
+    {
 
-	public function getYieldCssSelector() {
-		return 'span[id=ctl00_Main_Lab_nb_convives] > .yield';
-	}
+        return 'span[id=ctl00_Main_LabelRecetteNom]';
+    }
 
-	public function getIngredientsCssSelector() {
-		return 'div[id=structure-page-recette] > div.item > ul > li';
-	}
+    public function getYieldCssSelector()
+    {
 
-	public function getPreparationsCssSelector() {
-		return '.txt-preparation';
-	}
+        return 'span[id=ctl00_Main_Lab_nb_convives] > .yield';
+    }
+
+    public function getIngredientsCssSelector()
+    {
+
+        return 'div[id=structure-page-recette] > div.item > ul > li';
+    }
+
+    public function getPreparationsCssSelector()
+    {
+
+        return '.txt-preparation';
+    }
 }

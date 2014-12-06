@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Console\Command;
-use Symfony\Component\Process\Process;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Process\Process;
 
 class QualitySynthaxCommand extends Command
 {
@@ -37,20 +37,20 @@ class QualitySynthaxCommand extends Command
      */
     public function fire()
     {
-        $file = $this->argument('file');
-        $process = new Process('vendor/bin/phpcs --extensions=php --ignore=*/tests/*,*/storage/*,*.blade.php --standard=PSR2  -p '.$file);
+        $file    = $this->argument('file');
+        $process = new Process('vendor/bin/phpcs --extensions=php --ignore=*/tests/*,*/storage/*,*.blade.php --standard=PSR2  -p ' . $file);
         $process->run(function ($type, $buffer) {
             if (Process::ERR === $type) {
                 $this->error($buffer);
             } else {
                 $text = trim($buffer);
-                if(strlen($text) == 1) {
-                    if($text != '.') {
-                        $this->output->write("<error>".$text."</error>");
-                    }else{
-                        $this->output->write("<info>".$text."</info>");
+                if (strlen($text) == 1) {
+                    if ($text != '.') {
+                        $this->output->write("<error>" . $text . "</error>");
+                    } else {
+                        $this->output->write("<info>" . $text . "</info>");
                     }
-                }else{
+                } else {
                     $this->output->writeln($buffer);
                 }
             }
@@ -64,8 +64,9 @@ class QualitySynthaxCommand extends Command
      */
     protected function getArguments()
     {
+
         return array(
-            array('file', null, InputArgument::OPTIONAL,  'app workbench', 'File(s)/Folder(s) to test',)
+            array('file', null, InputArgument::OPTIONAL, 'app workbench', 'File(s)/Folder(s) to test',)
         );
     }
 
@@ -76,6 +77,7 @@ class QualitySynthaxCommand extends Command
      */
     protected function getOptions()
     {
+
         return array();
     }
 }

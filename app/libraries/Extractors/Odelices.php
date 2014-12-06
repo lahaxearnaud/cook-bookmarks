@@ -2,29 +2,42 @@
 
 namespace Extractors;
 
-class Odelices extends AbstractExtractor {
+class Odelices extends AbstractExtractor
+{
 
-	public function getTitleCssSelector() {
-		return 'h1 a span.fn';
-	}
+    public function getTitleCssSelector()
+    {
 
-	public function getYieldCssSelector() {
-		return 'div[id=recipe-columns2] h2 .h-second';
-	}
+        return 'h1 a span.fn';
+    }
 
-	public function getIngredientsCssSelector() {
-		return 'div[id=recipe-columns2] .container';
-	}
+    public function getYieldCssSelector()
+    {
 
-	public function getPreparationsCssSelector() {
-		return 'div[id=left-content] .instructions';
-	}
+        return 'div[id=recipe-columns2] h2 .h-second';
+    }
 
-	public function getIngredients($domHtml) {
-		return $this->addMarker($domHtml->find($this->getIngredientsCssSelector(), 0)->innertext);
-	}
+    public function getIngredientsCssSelector()
+    {
 
-	public function getPreparations($domHtml) {
-		return $domHtml->find($this->getPreparationsCssSelector(), 0)->innertext;
-	}
+        return 'div[id=recipe-columns2] .container';
+    }
+
+    public function getPreparationsCssSelector()
+    {
+
+        return 'div[id=left-content] .instructions';
+    }
+
+    public function getIngredients($domHtml)
+    {
+
+        return $this->addMarker($domHtml->find($this->getIngredientsCssSelector(), 0)->innertext);
+    }
+
+    public function getPreparations($domHtml)
+    {
+
+        return $domHtml->find($this->getPreparationsCssSelector(), 0)->innertext;
+    }
 }

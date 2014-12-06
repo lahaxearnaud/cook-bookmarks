@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Console\Command;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Process\Process;
-use \Symfony\Component\Console\Input\InputArgument;
-use \Symfony\Component\Console\Input\InputOption;
 
 class QualityTestCommand extends Command
 {
@@ -38,32 +38,32 @@ class QualityTestCommand extends Command
      */
     public function fire()
     {
-        $verbose = ($this->getOutput()->getVerbosity() > 1)?'-vvv':'';
-        $suite = $this->argument('suite');
-        $test = $this->argument('test');
+        $verbose = ($this->getOutput()->getVerbosity() > 1) ? '-vvv' : '';
+        $suite   = $this->argument('suite');
+        $test    = $this->argument('test');
 
         $process = new Process('php artisan serve --host=cuisine.dev --port=8100');
         $process->start(function ($type, $buffer) {
             $this->info($buffer);
         });
-        $process->setTimeout(60*60*60);// 1H
+        $process->setTimeout(60 * 60 * 60);// 1H
         sleep(3);
 
         $report = '';
-        if($this->option('coverage') !== 'none') {
-            $report = '--coverage --report --'.$this->option('coverage');
+        if ($this->option('coverage') !== 'none') {
+            $report = '--coverage --report --' . $this->option('coverage');
         }
 
-        $codeception = 'vendor/bin/codecept run ' . $suite . ' ' . $test . ' ' . $verbose . ' '. $report .' --no-interaction';
+        $codeception = 'vendor/bin/codecept run ' . $suite . ' ' . $test . ' ' . $verbose . ' ' . $report . ' --no-interaction';
         $processTest = new Process($codeception);
-        $processTest->setTimeout(60*60*60);// 1H
+        $processTest->setTimeout(60 * 60 * 60);// 1H
         $processTest->run(function ($type, $buffer) {
             if (Process::ERR === $type) {
                 $this->error($buffer);
             } else {
-                if(strlen($buffer) === 1) {
+                if (strlen($buffer) === 1) {
                     echo $buffer;
-                }else{
+                } else {
                     $this->output->writeln($buffer);
                 }
             }
@@ -71,7 +71,7 @@ class QualityTestCommand extends Command
 
         $process->stop(0);
 
-        if(!$processTest->isSuccessful()){
+        if (!$processTest->isSuccessful()) {
             throw new Exception('Tests failed.', $processTest->getExitCode());
         }
     }

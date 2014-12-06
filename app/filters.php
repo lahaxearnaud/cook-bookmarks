@@ -42,19 +42,23 @@ Route::filter('auth', function () {
         if (Request::ajax()) {
             Event::fire('apiLog', array(401));
 
+
             return Response::make('Unauthorized', 401);
         } else {
+
             return Redirect::guest('login');
         }
     }
 });
 
 Route::filter('auth.basic', function () {
+
     return Auth::basic();
 });
 
 App::error(function (AuthTokenNotAuthorizedException $exception) {
     Event::fire('apiLog', array($exception->getCode()));
+
 
     return Response::json(array('error' => $exception->getMessage()), $exception->getCode());
 });
@@ -101,7 +105,7 @@ Event::listen('apiLog', function ($httpCode) {
 
     $inputs = array();
 
-    if(!in_array(Route::currentRouteName(), Config::get('api.noParamsLogRoutesNames'))) {
+    if (!in_array(Route::currentRouteName(), Config::get('api.noParamsLogRoutesNames'))) {
         $inputs = Input::all();
     }
 
@@ -111,7 +115,7 @@ Event::listen('apiLog', function ($httpCode) {
         'params'   => json_encode($inputs),
         'method'   => Request::method(),
         'httpCode' => $httpCode,
-        'user_id'  => Auth::guest() ? NULL : Auth::User()->id,
-        'ip' => Request::getClientIp()
+        'user_id'  => Auth::guest() ? null : Auth::User()->id,
+        'ip'       => Request::getClientIp()
     ));
 });

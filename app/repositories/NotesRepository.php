@@ -8,24 +8,28 @@ use Illuminate\Database\Eloquent\Model;
 class NotesRepository extends EloquentRepository
 {
     /**
-	 * @param  string $query
-	 * @param  array  $where
-	 * @return Collection
-	 */
+     * @param string $query
+     * @param array  $where
+     *
+     * @return Collection
+     */
     public function search($query, array $where = array())
     {
+
         return new Collection();
     }
 
     /**
-	 * @param  array  $data
-	 * @return Model
-	 */
+     * @param array $data
+     *
+     * @return Model
+     */
     public function create(array $data)
     {
+
         return $this->cacheWrapper('create', function () use ($data) {
 
-            $user = NULL;
+            $user = null;
             if (isset($data['user_id'])) {
                 $user = \User::findOrFail($data['user_id']);
             } else {
@@ -33,7 +37,7 @@ class NotesRepository extends EloquentRepository
                 unset($data['user']);
             }
 
-            $article = NULL;
+            $article = null;
             if (isset($data['article_id'])) {
                 $article = \Article::findOrFail($data['article_id']);
             } else {
@@ -46,6 +50,7 @@ class NotesRepository extends EloquentRepository
             $model->article()->associate($article);
 
             $model->save();
+
 
             return $model;
         });

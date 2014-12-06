@@ -3,15 +3,15 @@
 /**
  * Note
  *
- * @property integer $id
- * @property string $body
- * @property integer $user_id
- * @property integer $article_id
+ * @property integer        $id
+ * @property string         $body
+ * @property integer        $user_id
+ * @property integer        $article_id
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
- * @property-read \User $user
- * @property-read \Article $article
- * @property-read mixed $links
+ * @property-read \User     $user
+ * @property-read \Article  $article
+ * @property-read mixed     $links
  * @method static \Illuminate\Database\Query\Builder|\Note whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Note whereBody($value)
  * @method static \Illuminate\Database\Query\Builder|\Note whereUserId($value)
@@ -23,7 +23,7 @@
 class Note extends BaseModel implements HyperMediaInterface, UserFilterableInterface
 {
     public static $rules = array(
-        'body'     => 'required|min:3',
+        'body' => 'required|min:3',
     );
 
     /**
@@ -37,6 +37,7 @@ class Note extends BaseModel implements HyperMediaInterface, UserFilterableInter
 
     public function author()
     {
+
         return $this->user();
     }
 
@@ -47,6 +48,7 @@ class Note extends BaseModel implements HyperMediaInterface, UserFilterableInter
      */
     public function user()
     {
+
         return $this->belongsTo('User', 'user_id');
     }
 
@@ -57,6 +59,7 @@ class Note extends BaseModel implements HyperMediaInterface, UserFilterableInter
      */
     public function article()
     {
+
         return $this->belongsTo('Article', 'article_id');
     }
 
@@ -66,8 +69,9 @@ class Note extends BaseModel implements HyperMediaInterface, UserFilterableInter
      *
      * @return mixed
      */
-    public function scopeOfUser ($query, $userId)
+    public function scopeOfUser($query, $userId)
     {
+
         return $query->where($this->getUserField(), $userId);
     }
 
@@ -75,8 +79,9 @@ class Note extends BaseModel implements HyperMediaInterface, UserFilterableInter
      * @author LAHAXE Arnaud <lahaxe.arnaud@gmail.com>
      * @return string
      */
-    public function getUserField ()
+    public function getUserField()
     {
+
         return 'user_id';
     }
 }

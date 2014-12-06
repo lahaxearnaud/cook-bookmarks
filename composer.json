@@ -6,19 +6,19 @@
 	"require": {
 		"laravel/framework": "4.2.*",
 		"laravelbook/ardent": "2.4.*",
-        "sensiolabs/security-checker": "2.0.*@dev",
+		"sensiolabs/security-checker": "2.0.*@dev",
 		"shift31/laravel-elasticsearch": "1.0.*@dev",
 		"nickcernis/html-to-markdown": "2.1.*",
 		"maxhoffmann/parsedown-laravel": "dev-master",
-        "fivefilters/php-readability": "dev-master",
-        "pda/pheanstalk": "2.0.*",
-        "intervention/image": "2.*",
-        "nesbot/Carbon": "1.10.*",
-        "tappleby/laravel-auth-token": "0.3.*",
-        "simplehtmldom/simplehtmldom": "1.0.0",
-        "barryvdh/laravel-dompdf": "0.4.*",
-        "michelf/php-markdown": "1.4.1",
-        "guzzlehttp/guzzle": "~4.0"
+		"fivefilters/php-readability": "dev-master",
+		"pda/pheanstalk": "2.0.*",
+		"intervention/image": "2.*",
+		"nesbot/Carbon": "1.10.*",
+		"tappleby/laravel-auth-token": "0.3.*",
+		"simplehtmldom/simplehtmldom": "1.0.0",
+		"barryvdh/laravel-dompdf": "0.4.*",
+		"michelf/php-markdown": "1.4.1",
+		"guzzlehttp/guzzle": "~4.0"
 	},
 	"autoload": {
 		"classmap": [
@@ -31,23 +31,23 @@
 			"app/repositories",
 			"app/database/migrations",
 			"app/database/seeds",
-            "tests/unit/contract",
-            "tests/unit/mocks"
+			"tests/unit/contract",
+			"tests/unit/mocks"
 		]
 	},
 	"require-dev": {
-        "way/generators": "~2.6",
-        "barryvdh/laravel-ide-helper": "~1.9",
-        "symfony/dom-crawler": "2.*",
-        "codeception/codeception": "1.8.*",
-        "sebastian/phpcpd": "*",
-        "squizlabs/php_codesniffer": "1.*",
-        "fabpot/php-cs-fixer":"0.5.*",
-        "bobthecow/faker": "1.0.*@dev",
-        "crada/php-apidoc": "@dev",
-        "doctrine/dbal": "~2.3",
-        "codeclimate/php-test-reporter": "0.1.*@dev"
-    },
+		"way/generators": "~2.6",
+		"barryvdh/laravel-ide-helper": "~1.9",
+		"symfony/dom-crawler": "2.*",
+		"codeception/codeception": "1.8.*",
+		"sebastian/phpcpd": "*",
+		"squizlabs/php_codesniffer": "1.*",
+		"fabpot/php-cs-fixer":"0.5.*",
+		"bobthecow/faker": "1.0.*@dev",
+		"crada/php-apidoc": "@dev",
+		"doctrine/dbal": "~2.3",
+		"codeclimate/php-test-reporter": "0.1.*@dev"
+	},
 	"scripts": {
 		"post-install-cmd": [
 			"php artisan clear-compiled",
@@ -69,15 +69,19 @@
 	"minimum-stability": "stable",
 	"repositories": [
 		{
-		    "type": "package",
-	        "package": {
-	            "name": "simplehtmldom/simplehtmldom",
-	            "version": "1.0.0",
-	            "dist": {
-	                "url": "https://raw.githubusercontent.com/jjanyan/Simple-HTML-DOM/master/simple_html_dom.php",
-	                "type": "file"
-	            }
-	        }
+			"type": "package",
+			"package": {
+				"name": "simplehtmldom/simplehtmldom",
+				"version": "1.0.0",
+				"dist": {
+					"url": "https://raw.githubusercontent.com/jjanyan/Simple-HTML-DOM/master/simple_html_dom.php",
+					"type": "file"
+				}
+			}
+		},
+		{
+			"type": "vcs",
+			"url": "https://github.com/lahaxearnaud/laravel-auth-token.git"
 		}
 	]
 }

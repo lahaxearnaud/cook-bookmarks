@@ -1,40 +1,40 @@
 <?php
 
-use Illuminate\Console\Command;
 use Crada\Apidoc\Builder;
 use Crada\Apidoc\Exception;
+use Illuminate\Console\Command;
 
 class DocsGenerateCommand extends Command
 {
     /**
-	 * The console command name.
-	 *
-	 * @var string
-	 */
+     * The console command name.
+     *
+     * @var string
+     */
     protected $name = 'doc:gen';
 
     /**
-	 * The console command description.
-	 *
-	 * @var string
-	 */
+     * The console command description.
+     *
+     * @var string
+     */
     protected $description = 'Command description.';
 
     /**
-	 * Create a new command instance.
-	 *
-	 * @return void
-	 */
+     * Create a new command instance.
+     *
+     * @return void
+     */
     public function __construct()
     {
         parent::__construct();
     }
 
     /**
-	 * Execute the console command.
-	 *
-	 * @return mixed
-	 */
+     * Execute the console command.
+     *
+     * @return mixed
+     */
     public function fire()
     {
         $classes = array(
@@ -54,25 +54,23 @@ class DocsGenerateCommand extends Command
     }
 
     /**
-	 * Get the console command arguments.
-	 *
-	 * @return array
-	 */
+     * Get the console command arguments.
+     *
+     * @return array
+     */
     protected function getArguments()
     {
-        return array(
-        );
+        return array();
     }
 
     /**
-	 * Get the console command options.
-	 *
-	 * @return array
-	 */
+     * Get the console command options.
+     *
+     * @return array
+     */
     protected function getOptions()
     {
-        return array(
-        );
+        return array();
     }
 
 }

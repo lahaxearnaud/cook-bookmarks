@@ -14,7 +14,7 @@ return array(
 	|
 	*/
 
-    'mailgun' => array(
+    'mailgun'  => array(
         'domain' => '',
         'secret' => '',
     ),
@@ -23,7 +23,7 @@ return array(
         'secret' => 'EsBUpQ4C5HdJNNE325Qlug',
     ),
 
-    'stripe' => array(
+    'stripe'   => array(
         'model'  => 'User',
         'secret' => '',
     ),

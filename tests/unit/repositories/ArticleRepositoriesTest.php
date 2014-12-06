@@ -24,6 +24,7 @@ class ArticleRepositoriesTest extends RepositoryCase
      */
     public function getRepositoryName()
     {
+
         return 'ArticlesRepository';
     }
 

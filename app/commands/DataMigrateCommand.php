@@ -83,7 +83,7 @@ class DataMigrateCommand extends Command
                 'author_id'   => 4,
                 'indexable'   => $article[2],
                 'url'         => $article[8],
-                'category_id' => $article[6]-$this->argument('category-delta'),
+                'category_id' => $article[6] - $this->argument('category-delta'),
                 'created_at'  => $currentDate,
                 'updated_at'  => $currentDate,
             ];
@@ -105,6 +105,7 @@ class DataMigrateCommand extends Command
      */
     protected function getArguments()
     {
+
         return array(
             array('source', null, InputArgument::OPTIONAL, app_path('../data.txt'), 'Old file in CSV format (\t beetween fields and \n beetween lines)'),
             array('output', null, InputArgument::OPTIONAL, app_path('../seeder.php'), 'Output file'),
@@ -119,6 +120,7 @@ class DataMigrateCommand extends Command
      */
     protected function getOptions()
     {
+
         return array();
     }
 }

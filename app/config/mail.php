@@ -15,7 +15,7 @@ return array(
 	|
 	*/
 
-    'driver' => 'mandrill',
+    'driver'     => 'mandrill',
 
     /*
 	|--------------------------------------------------------------------------
@@ -28,7 +28,7 @@ return array(
 	|
 	*/
 
-    'host' => 'smtp.mandrillapp.com',
+    'host'       => 'smtp.mandrillapp.com',
 
     /*
 	|--------------------------------------------------------------------------
@@ -41,7 +41,7 @@ return array(
 	|
 	*/
 
-    'port' => 587,
+    'port'       => 587,
 
     /*
 	|--------------------------------------------------------------------------
@@ -54,7 +54,7 @@ return array(
 	|
 	*/
 
-    'from' => array('address' => 'no-reply@lahaxe.fr', 'name' => 'LAHAXE Arnaud'),
+    'from'       => array('address' => 'no-reply@lahaxe.fr', 'name' => 'LAHAXE Arnaud'),
 
     /*
 	|--------------------------------------------------------------------------
@@ -80,7 +80,7 @@ return array(
 	|
 	*/
 
-    'username' => 'lahaxe.arnaud@gmail.com',
+    'username'   => 'lahaxe.arnaud@gmail.com',
 
     /*
 	|--------------------------------------------------------------------------
@@ -93,7 +93,7 @@ return array(
 	|
 	*/
 
-    'password' => '',
+    'password'   => '',
 
     /*
 	|--------------------------------------------------------------------------
@@ -106,7 +106,7 @@ return array(
 	|
 	*/
 
-    'sendmail' => '/usr/sbin/sendmail -bs',
+    'sendmail'   => '/usr/sbin/sendmail -bs',
 
     /*
 	|--------------------------------------------------------------------------
@@ -119,6 +119,6 @@ return array(
 	|
 	*/
 
-    'pretend' => false,
+    'pretend'    => false,
 
 );

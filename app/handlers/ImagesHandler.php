@@ -1,6 +1,6 @@
 <?php
-use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Queue\Jobs\Job;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class ImagesHandler
 {
@@ -8,7 +8,7 @@ class ImagesHandler
     {
         echo 'handler...' . $data['id'] . "\n";
         if ($job->attempts() > 3) {
-            Log::error('Fail to handle job '.$job->getJobId().' '.print_r($data, true));
+            Log::error('Fail to handle job ' . $job->getJobId() . ' ' . print_r($data, true));
             $job->delete();
 
             return;
@@ -17,7 +17,7 @@ class ImagesHandler
         $article = Article::findOrFail($data['id']);
         Image::configure(array('driver' => 'imagick'));
 
-        $publicPath = public_path('i/'.$data['id']);
+        $publicPath = public_path('i/' . $data['id']);
 
         $original = Image::make($publicPath . '/original.png');
 
@@ -37,8 +37,8 @@ class ImagesHandler
         $image->resize(32, 32);
         $image->save($publicPath . '/32x32.png');
 
-        $article->image = asset('i/'.$data['id'].'/200x200.png');
-        $article->imageMiniature = asset('i/'.$data['id'].'/32x32.png');
+        $article->image          = asset('i/' . $data['id'] . '/200x200.png');
+        $article->imageMiniature = asset('i/' . $data['id'] . '/32x32.png');
         $article->updateUniques();
 
         $job->delete();

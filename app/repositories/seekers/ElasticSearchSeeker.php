@@ -18,10 +18,11 @@ abstract class ElasticSearchSeeker implements SeekerInterface
     }
 
     /**
-	 *
-	 * @param  string $query
-	 * @param  array  $parameters
-	 * @return Collection
-	 */
+     *
+     * @param string $query
+     * @param array  $parameters
+     *
+     * @return Collection
+     */
     abstract public function query($query, array $parameters = array());
 }

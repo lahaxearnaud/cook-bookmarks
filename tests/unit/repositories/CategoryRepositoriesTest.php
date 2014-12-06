@@ -10,7 +10,8 @@
  * Class CategoryRepositoriesTest
  *
  */
-class CategoryRepositoriesTest extends RepositoryCase {
+class CategoryRepositoriesTest extends RepositoryCase
+{
 	/**
 	 *
 	 * must match with the bind
@@ -21,7 +22,8 @@ class CategoryRepositoriesTest extends RepositoryCase {
 	 *
 	 * @return string
 	 */
-	public function getRepositoryName() {
+	public function getRepositoryName()
+	{
 		return 'CategoriesRepository';
 	}
 
@@ -30,12 +32,14 @@ class CategoryRepositoriesTest extends RepositoryCase {
 	 *  FindAllBy
 	 * ============================================
 	 */
-	public function testHasOk() {
+	public function testHasOk()
+	{
 		$models = $this->repository->has('user');
 		$this->assertInstanceOf('\Illuminate\Database\Eloquent\Collection', $models);
 	}
 
-	public function testHasKo() {
+	public function testHasKo()
+	{
 		$this->setExpectedException('BadMethodCallException');
 		$this->repository->has('dummy');
 	}
@@ -45,7 +49,8 @@ class CategoryRepositoriesTest extends RepositoryCase {
 	 *  Update
 	 * ============================================
 	 */
-	public function testUpdateOk() {
+	public function testUpdateOk()
+	{
 		$result = $this->repository->update(1, array(
 				'name' => 'Lorem Ipsum',
 			));
@@ -57,7 +62,8 @@ class CategoryRepositoriesTest extends RepositoryCase {
 		$this->assertInstanceOf(get_class($this->model), $result);
 	}
 
-	public function testUpdateKo() {
+	public function testUpdateKo()
+	{
 		$this->setExpectedException('Illuminate\Database\Eloquent\ModelNotFoundException');
 		$result = $this->repository->update(-1, array(
 				'user_id' => 1,
@@ -70,7 +76,8 @@ class CategoryRepositoriesTest extends RepositoryCase {
 	 *  Create
 	 * ============================================
 	 */
-	public function testCreateOk() {
+	public function testCreateOk()
+	{
 		$model = $this->repository->create(array(
 				'user_id' => 1,
 				'name'    => 'Lorem Ipsum Dolore',
@@ -87,7 +94,8 @@ class CategoryRepositoriesTest extends RepositoryCase {
 		$this->assertInstanceOf(get_class($this->model), $model);
 	}
 
-	public function testCreateKo() {
+	public function testCreateKo()
+	{
 		$model = $this->repository->create(array(
 				'user_id' => 1,
 				'body'    => 'L',
@@ -101,12 +109,14 @@ class CategoryRepositoriesTest extends RepositoryCase {
 	 *  Search
 	 * ============================================
 	 */
-	public function testSearchOk() {
+	public function testSearchOk()
+	{
 		$results = $this->repository->search('test');
 		$this->assertInstanceOf('\Illuminate\Database\Eloquent\Collection', $results);
 	}
 
-	public function testSearchKo() {
+	public function testSearchKo()
+	{
 		// TODO: Implement testSearchKo() method.
-	}
+    }
 }

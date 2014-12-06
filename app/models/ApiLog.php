@@ -3,15 +3,15 @@
 /**
  * ApiLog
  *
- * @property-read \User $user
- * @property integer $id
- * @property integer $user_id
- * @property string $url
- * @property string $route
- * @property string $params
- * @property string $method
- * @property integer $httpCode
- * @property string $ip
+ * @property-read \User     $user
+ * @property integer        $id
+ * @property integer        $user_id
+ * @property string         $url
+ * @property string         $route
+ * @property string         $params
+ * @property string         $method
+ * @property integer        $httpCode
+ * @property string         $ip
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @method static \Illuminate\Database\Query\Builder|\ApiLog whereId($value)
@@ -24,7 +24,7 @@
  * @method static \Illuminate\Database\Query\Builder|\ApiLog whereIp($value)
  * @method static \Illuminate\Database\Query\Builder|\ApiLog whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\ApiLog whereUpdatedAt($value)
- * @property-read mixed $links
+ * @property-read mixed     $links
  */
 class ApiLog extends BaseModel
 {
@@ -44,6 +44,7 @@ class ApiLog extends BaseModel
      */
     public function user()
     {
+
         return $this->belongsTo('User', 'user_id');
     }
 }

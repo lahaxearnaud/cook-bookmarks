@@ -12,6 +12,7 @@ class StringHelper
      */
     public static function title($value)
     {
+
         return mb_convert_case($value, MB_CASE_TITLE);
     }
 
@@ -30,8 +31,9 @@ class StringHelper
             $tidy = new tidy();
             $tidy->parseString($value, $options, $encoding);
             $tidy->cleanRepair();
-            $value = $tidy."";
+            $value = $tidy . "";
         }
+
 
         return $value;
     }
@@ -40,11 +42,13 @@ class StringHelper
     {
 
         if ($nbWords <= 0) {
+
             return '';
         }
 
         // strip not allowed html tags
         $text = strip_tags($text, $allowedTags);
+
 
         return Str::words($text, $nbWords, $end);
     }

@@ -13,10 +13,10 @@
 
 ClassLoader::addDirectories(array(
 
-    app_path().'/commands',
-    app_path().'/controllers',
-    app_path().'/models',
-    app_path().'/database/seeds',
+    app_path() . '/commands',
+    app_path() . '/controllers',
+    app_path() . '/models',
+    app_path() . '/database/seeds',
 
 ));
 
@@ -31,7 +31,7 @@ ClassLoader::addDirectories(array(
 |
 */
 
-Log::useFiles(storage_path().'/logs/laravel.log');
+Log::useFiles(storage_path() . '/logs/laravel.log');
 
 /*
 |--------------------------------------------------------------------------
@@ -56,6 +56,7 @@ App::error(function (Exception $exception, $code) {
 App::error(function (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
     Event::fire('apiLog', array(404));
 
+
     return Response::make(array(
         'error' => $e->getMessage()
     ), 404);
@@ -73,6 +74,7 @@ App::error(function (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
 */
 
 App::down(function () {
+
     return Response::make("Be right back!", 503);
 });
 
@@ -87,7 +89,7 @@ App::down(function () {
 |
 */
 
-require app_path().'/filters.php';
+require app_path() . '/filters.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -96,40 +98,49 @@ require app_path().'/filters.php';
 */
 
 App::bind('ArticleSeeker', function ($app) {
+
     return new \Repositories\Seekers\ArticleSeeker(new Article());
 });
 
 App::singleton('ArticlesRepository', function ($app) {
+
     return new Repositories\ArticlesRepository(new Article(), array('author', 'category'), App::make('ArticleSeeker'));
 });
 
 App::singleton('LogsRepository', function ($app) {
+
     return new Repositories\LogsRepository(new ApiLog(), []);
 });
 
 App::singleton('CategoriesRepository', function ($app) {
+
     return new Repositories\CategoriesRepository(new Category(), array('user'));
 });
 
 App::singleton('NotesRepository', function ($app) {
+
     return new Repositories\NotesRepository(new Note(), array('user'));
 });
 
 App::singleton('UsersRepository', function ($app) {
+
     return new Repositories\UsersRepository(new User(), []);
 });
 
 App::singleton('TokenRepository', function ($app) {
+
     return new Repositories\TokensRepository(new Token(), ['user']);
 });
 
 App::singleton('TokenManager', function ($app) {
+
     return new TokenManager(
         App::make('TokenRepository')
     );
 });
 
 App::bind('ArticlesController', function ($app) {
+
     return new ArticlesController(
         App::make('ArticlesRepository'),
         new ArticleExtractor(),
@@ -138,6 +149,7 @@ App::bind('ArticlesController', function ($app) {
 });
 
 App::bind('CategoriesController', function ($app) {
+
     return new CategoriesController(
         App::make('CategoriesRepository'),
         App::make('ArticlesRepository')
@@ -145,12 +157,14 @@ App::bind('CategoriesController', function ($app) {
 });
 
 App::bind('NotesController', function ($app) {
+
     return new NotesController(
         App::make('NotesRepository')
     );
 });
 
 App::bind('UsersController', function ($app) {
+
     return new UsersController(
         App::make('UsersRepository'),
         App::make('TokenManager')
@@ -158,6 +172,7 @@ App::bind('UsersController', function ($app) {
 });
 
 App::bind('AutocompleteController', function ($app) {
+
     return new AutocompleteController(
         App::make('ArticleSeeker')
     );

@@ -2,33 +2,44 @@
 
 namespace Extractors;
 
-class AllRecipes extends AbstractExtractor {
-	public function getTitleCssSelector() {
-		return 'h1[id=itemTitle]';
-	}
+class AllRecipes extends AbstractExtractor
+{
+    public function getTitleCssSelector()
+    {
 
-	public function getYieldCssSelector() {
-		return 'span[id=lblYield]';
-	}
+        return 'h1[id=itemTitle]';
+    }
 
-	public function getIngredientsCssSelector() {
-		return 'ul.ingredient-wrap li .fl-ing';
-	}
+    public function getYieldCssSelector()
+    {
 
-	public function getPreparationsCssSelector() {
-		return 'div[itemprop=recipeInstructions] ol li';
-	}
+        return 'span[id=lblYield]';
+    }
 
-	public function getIngredients($domHtml) {
-		$ingredients     = $domHtml->find($this->getIngredientsCssSelector());
-		$ingredientsList = '<br/>';
-		foreach ($ingredients as $ingredient) {
-			$amount = $ingredient->find('.ingredient-amount', 0);
-			$name   = $ingredient->find('.ingredient-name', 0);
+    public function getIngredientsCssSelector()
+    {
 
-			$ingredientsList .= ' - ' . $this->addMarker(is_null($amount) ? '' : $amount->innertext) . ' ' . (is_null($name) ? '' : $name->innertext) . '<br/>';
-		}
+        return 'ul.ingredient-wrap li .fl-ing';
+    }
 
-		return $ingredientsList;
-	}
+    public function getPreparationsCssSelector()
+    {
+
+        return 'div[itemprop=recipeInstructions] ol li';
+    }
+
+    public function getIngredients($domHtml)
+    {
+        $ingredients     = $domHtml->find($this->getIngredientsCssSelector());
+        $ingredientsList = '<br/>';
+        foreach ($ingredients as $ingredient) {
+            $amount = $ingredient->find('.ingredient-amount', 0);
+            $name   = $ingredient->find('.ingredient-name', 0);
+
+            $ingredientsList .= ' - ' . $this->addMarker(is_null($amount) ? '' : $amount->innertext) . ' ' . (is_null($name) ? '' : $name->innertext) . '<br/>';
+        }
+
+
+        return $ingredientsList;
+    }
 }

@@ -1,7 +1,7 @@
 <?php
 
 use Carbon\Carbon;
-use \Faker\Internet;
+use Faker\Internet;
 
 class UsersTableSeeder extends Seeder
 {
@@ -17,20 +17,20 @@ class UsersTableSeeder extends Seeder
 
         $users = array(
             array(
-                'username'          => 'admin',
-                'email'             => Internet::email('admin'),
-                'password'          => Hash::make('admin'),
-                'created_at'        => $dateNow,
-                'updated_at'        => $dateNow,
-                'remember_token'    => 'azerty'
+                'username'       => 'admin',
+                'email'          => Internet::email('admin'),
+                'password'       => Hash::make('admin'),
+                'created_at'     => $dateNow,
+                'updated_at'     => $dateNow,
+                'remember_token' => 'azerty'
             ),
             array(
-                'username'          => 'user',
-                'email'             => Internet::email('user'),
-                'password'          => Hash::make('user'),
-                'created_at'        => $dateNow,
-                'updated_at'        => $dateNow,
-                'remember_token'    => 'azerty'
+                'username'       => 'user',
+                'email'          => Internet::email('user'),
+                'password'       => Hash::make('user'),
+                'created_at'     => $dateNow,
+                'updated_at'     => $dateNow,
+                'remember_token' => 'azerty'
 
             )
         );

@@ -41,52 +41,52 @@ class ElascticSearchInstallCommand extends Command
             ),
 
             'properties' => array(
-                'title'      => array(
+                'title'        => array(
                     'type'     => 'string',
                     'analyzer' => 'standard',
                     'boost'    => 10.0
                 ),
-                'image'      => array(
-                    'type'     => 'string',
-                    'boost'    => 0
+                'image'        => array(
+                    'type'  => 'string',
+                    'boost' => 0
                 ),
-                'author'     => array(
+                'author'       => array(
                     'type'     => 'string',
                     'analyzer' => 'standard',
                     'boost'    => 5.0
                 ),
-                'notes'   => array(
+                'notes'        => array(
                     'type'     => 'string',
                     'analyzer' => 'standard',
                     'boost'    => 6.0
                 ),
-                'category' => array(
+                'category'     => array(
                     'type'     => 'string',
                     'analyzer' => 'standard',
                     'boost'    => 1
                 ),
-                'category_id' => array(
+                'category_id'  => array(
                     'type'     => 'integer',
                     'analyzer' => 'standard',
                     'boost'    => 1
                 ),
-                'indexable'  => array(
+                'indexable'    => array(
                     'type'     => 'string',
                     'analyzer' => 'standard',
                     'boost'    => 8.0
                 ),
-                'user'  => array(
+                'user'         => array(
                     'type'     => 'integer',
                     'analyzer' => 'standard',
                     'boost'    => 3
                 ),
-                'autocomplete'  => array(
-                    'type'     => 'completion',
-                    "index_analyzer" => "standard",
-                    "search_analyzer" => "standard",
+                'autocomplete' => array(
+                    'type'                         => 'completion',
+                    "index_analyzer"               => "standard",
+                    "search_analyzer"              => "standard",
                     "preserve_position_increments" => false,
-                    "preserve_separators" => false,
-                    "payloads" => true
+                    "preserve_separators"          => false,
+                    "payloads"                     => true
                 )
             )
         );
@@ -97,9 +97,9 @@ class ElascticSearchInstallCommand extends Command
         $this->info('Create type ' . $params['type']);
 
         $articles = App::make('ArticlesRepository')->all();
-        $indexer = new ArticleIndexer();
+        $indexer  = new ArticleIndexer();
 
-        foreach($articles as $article) {
+        foreach ($articles as $article) {
             $indexer->add($article);
         }
     }
@@ -111,6 +111,7 @@ class ElascticSearchInstallCommand extends Command
      */
     protected function getArguments()
     {
+
         return array();
     }
 
@@ -121,6 +122,7 @@ class ElascticSearchInstallCommand extends Command
      */
     protected function getOptions()
     {
+
         return array();
     }
 

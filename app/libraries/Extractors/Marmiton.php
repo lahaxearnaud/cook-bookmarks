@@ -2,46 +2,59 @@
 
 namespace Extractors;
 
-class Marmiton extends AbstractExtractor {
+class Marmiton extends AbstractExtractor
+{
 
-	public function getTitleCssSelector() {
-		return '.m_title  .item  .fn';
-	}
+    public function getTitleCssSelector()
+    {
 
-	public function getYieldCssSelector() {
-		return 'div.m_content_recette_main > p.m_content_recette_ingredients > span';
-	}
+        return '.m_title  .item  .fn';
+    }
 
-	public function getIngredientsCssSelector() {
-		return '.m_content_recette_main .m_content_recette_ingredients';
-	}
+    public function getYieldCssSelector()
+    {
 
-	public function getPreparationsCssSelector() {
-		return '.m_content_recette_todo';
-	}
+        return 'div.m_content_recette_main > p.m_content_recette_ingredients > span';
+    }
 
-	public function getIngredients($domHtml) {
+    public function getIngredientsCssSelector()
+    {
 
-		$ingredients = $domHtml->find($this->getIngredientsCssSelector(), 0);
-		$ingredients->find('span', 0)->innertext = '';
+        return '.m_content_recette_main .m_content_recette_ingredients';
+    }
 
-		return $this->addMarker($ingredients->innertext);
-	}
+    public function getPreparationsCssSelector()
+    {
 
-	public function getPreparations($domHtml) {
-		$preparation = $domHtml->find($this->getPreparationsCssSelector(), 0);
-		$preparation->find('h4', 0)->innertext = '';
-		$preparation->find('.m_content_recette_ps', 0)->innertext = '';
+        return '.m_content_recette_todo';
+    }
 
-		$body = $preparation->innertext;
-		$body = preg_replace('/[\s]+/mu', ' ', $body);
-		$preparations = preg_split("/(<br>\s){2}/", $body);
+    public function getIngredients($domHtml)
+    {
 
-		$preparationList = '<br/>';
-		foreach ($preparations as $preparation) {
-			$preparationList .= $preparation . '<br/>';
-		}
+        $ingredients                             = $domHtml->find($this->getIngredientsCssSelector(), 0);
+        $ingredients->find('span', 0)->innertext = '';
 
-		return $preparationList;
-	}
+
+        return $this->addMarker($ingredients->innertext);
+    }
+
+    public function getPreparations($domHtml)
+    {
+        $preparation                                              = $domHtml->find($this->getPreparationsCssSelector(), 0);
+        $preparation->find('h4', 0)->innertext                    = '';
+        $preparation->find('.m_content_recette_ps', 0)->innertext = '';
+
+        $body         = $preparation->innertext;
+        $body         = preg_replace('/[\s]+/mu', ' ', $body);
+        $preparations = preg_split("/(<br>\s){2}/", $body);
+
+        $preparationList = '<br/>';
+        foreach ($preparations as $preparation) {
+            $preparationList .= $preparation . '<br/>';
+        }
+
+
+        return $preparationList;
+    }
 }

@@ -42,14 +42,14 @@ class QualitySynthaxFixerCommand extends Command
 
     protected function fix($folder)
     {
-        $process = new Process('vendor/bin/php-cs-fixer fix '.$folder.' --fixers=indentation,php_closing_tag,return,function_declaration,lowercase_keywords,object_operator,elseif,lowercase_keywords,trailing_spaces,unused_use,extra_empty_lines,braces,return,phpdoc_params,eof_ending,visibility -v');
+        $process = new Process('vendor/bin/php-cs-fixer fix ' . $folder . ' --fixers=indentation,php_closing_tag,return,function_declaration,lowercase_keywords,object_operator,elseif,lowercase_keywords,trailing_spaces,unused_use,extra_empty_lines,braces,return,phpdoc_params,eof_ending,visibility -v');
         $process->run(function ($type, $buffer) {
             if (Process::ERR === $type) {
                 $this->error($buffer);
             } else {
-                if(strlen($buffer) === 1) {
+                if (strlen($buffer) === 1) {
                     echo $buffer;
-                }else{
+                } else {
                     $this->info($buffer);
                 }
             }

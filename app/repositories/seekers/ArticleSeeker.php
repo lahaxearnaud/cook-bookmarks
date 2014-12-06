@@ -19,11 +19,11 @@ class ArticleSeeker extends ElasticSearchSeeker implements AutoCompleteInterface
     /**
      *
      * @param string $query
-     * @param array $parameters
+     * @param array  $parameters
      *
      * @return array
      */
-    public function query ($query, array $parameters = array())
+    public function query($query, array $parameters = array())
     {
         $parameters = array_merge(array(
             'max'    => 10,
@@ -48,6 +48,7 @@ class ArticleSeeker extends ElasticSearchSeeker implements AutoCompleteInterface
 
         // handle no result
         if ($result['hits']['total'] == 0 || $result['timed_out']) {
+
             return array();
         }
 
@@ -57,17 +58,18 @@ class ArticleSeeker extends ElasticSearchSeeker implements AutoCompleteInterface
             $arrayIds[] = $element['_id'];
         }
 
+
         return array_slice($arrayIds, $parameters['offset'], $parameters['max']);
     }
 
     /**
      *
      * @param string $query
-     * @param array $parameters
+     * @param array  $parameters
      *
      * @return array
      */
-    public function autocomplete ($query, array $parameters = array())
+    public function autocomplete($query, array $parameters = array())
     {
         $parameters = array_merge(array(
             'max'    => 10,
@@ -93,6 +95,7 @@ class ArticleSeeker extends ElasticSearchSeeker implements AutoCompleteInterface
 
         // handle no result
         if (count($result) == 0) {
+
             return array();
         }
 
@@ -105,6 +108,7 @@ class ArticleSeeker extends ElasticSearchSeeker implements AutoCompleteInterface
                 'title' => current($element['fields']['title'])
             ];
         }
+
 
         return array_slice($searchResults, $parameters['offset'], $parameters['max']);
     }

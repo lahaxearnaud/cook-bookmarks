@@ -24,6 +24,7 @@ class NoteRepositoriesTest extends RepositoryCase
      */
     public function getRepositoryName()
     {
+
         return 'NotesRepository';
     }
 

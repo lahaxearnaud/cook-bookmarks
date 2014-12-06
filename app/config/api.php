@@ -6,6 +6,8 @@ return array(
      *  Example routes with passwords
      */
     'noParamsLogRoutesNames' => array(
-        'user.login'
+        'api.v1.users.login',
+        'api.v1.user.subscribe',
+        'api.v1.user.password.change',
     )
 );

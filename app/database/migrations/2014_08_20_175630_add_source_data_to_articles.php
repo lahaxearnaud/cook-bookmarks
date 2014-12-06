@@ -6,10 +6,10 @@ use Illuminate\Database\Schema\Blueprint;
 class AddSourceDataToArticles extends Migration
 {
     /**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
+     * Run the migrations.
+     *
+     * @return void
+     */
     public function up()
     {
         Schema::table('articles', function (Blueprint $table) {
@@ -21,10 +21,10 @@ class AddSourceDataToArticles extends Migration
     }
 
     /**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
+     * Reverse the migrations.
+     *
+     * @return void
+     */
     public function down()
     {
         Schema::table('articles', function (Blueprint $table) {

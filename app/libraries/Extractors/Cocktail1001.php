@@ -2,44 +2,57 @@
 
 namespace Extractors;
 
-class Cocktail1001 extends AbstractExtractor {
+class Cocktail1001 extends AbstractExtractor
+{
 
-	public function getTitleCssSelector() {
-		return 'h1';
-	}
+    public function getTitleCssSelector()
+    {
 
-	public function getYieldCssSelector() {
-		return '';
-	}
+        return 'h1';
+    }
 
-	public function getIngredientsCssSelector() {
-		return 'a[itemprop=ingredients]';
-	}
+    public function getYieldCssSelector()
+    {
 
-	public function getPreparationsCssSelector() {
-		return 'span[itemprop=recipeInstructions]';
-	}
+        return '';
+    }
 
-	public function extract($html) {
-		$dom = $this->getDomElement($html);
+    public function getIngredientsCssSelector()
+    {
 
-		return array(
-			'title' => $this->tidy($this->getTitle($dom)),
-			'body'  => '<h2>Ingrédients</h2> <br/> ' .
-			$this->tidy($this->getIngredients($dom)) . '<br/>
+        return 'a[itemprop=ingredients]';
+    }
+
+    public function getPreparationsCssSelector()
+    {
+
+        return 'span[itemprop=recipeInstructions]';
+    }
+
+    public function extract($html)
+    {
+        $dom = $this->getDomElement($html);
+
+
+        return array(
+            'title'   => $this->tidy($this->getTitle($dom)),
+            'body'    => '<h2>Ingrédients</h2> <br/> ' .
+                $this->tidy($this->getIngredients($dom)) . '<br/>
             <h2>Preparations:</h2>' . $this->tidy($this->getPreparations($dom)),
-			'success' => true
-		);
-	}
+            'success' => true
+        );
+    }
 
-	public function getIngredients($domHtml) {
-		$ingredients = $domHtml->find($this->getIngredientsCssSelector());
+    public function getIngredients($domHtml)
+    {
+        $ingredients = $domHtml->find($this->getIngredientsCssSelector());
 
-		$ingredientsList = "<br/>";
-		foreach ($ingredients as $ingredient) {
-			$ingredientsList .= ' - ' . $this->addMarker(strip_tags($ingredient->parent()->innertext)) . "<br/>";
-		}
+        $ingredientsList = "<br/>";
+        foreach ($ingredients as $ingredient) {
+            $ingredientsList .= ' - ' . $this->addMarker(strip_tags($ingredient->parent()->innertext)) . "<br/>";
+        }
 
-		return $ingredientsList;
-	}
+
+        return $ingredientsList;
+    }
 }
