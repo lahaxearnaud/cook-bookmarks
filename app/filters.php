@@ -14,7 +14,7 @@ App::before(function (Symfony\Component\HttpFoundation\Request $request) {
     header('Access-Control-Allow-Origin: *');
     header('Access-Control-Allow-Credentials: true');
     header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
-    header('Access-Control-Allow-Headers: Origin, Content-Type, Accept, Authorization, X-Auth-Token, Location, Id');
+    header('Access-Control-Allow-Headers: Origin, Content-Type, Accept, Authorization, X-Auth-Token, Location, Id, authToken');
 });
 
 App::after(function (Symfony\Component\HttpFoundation\Request $request, Symfony\Component\HttpFoundation\Response $response) {
