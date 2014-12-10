@@ -26,7 +26,7 @@ abstract class AbstractExtractor implements ExtractorInterface
 
         return array(
             'title'   => $this->tidy($this->getTitle($dom)),
-            'body'    => '<h2>Ingrédients (' . $this->tidy($this->getYield($dom)) . ')</h2> <br/>' .
+            'body'    => '<h2>Ingrédients (' . $this->tidy($this->getYield($dom)) . ')</h2><br/>' .
                 $this->tidy($this->getIngredients($dom)) . '<br/>
             <h2>Preparations:</h2>' . $this->tidy($this->getPreparations($dom)),
             'success' => true
@@ -51,7 +51,7 @@ abstract class AbstractExtractor implements ExtractorInterface
 
         $ingredientsList = "<br/>";
         foreach ($ingredients as $ingredient) {
-            $ingredientsList .= '- ' . $this->addMarker(strip_tags($ingredient->innertext)) . "<br/>";
+            $ingredientsList .= ' - ' . $this->addMarker(strip_tags($ingredient->innertext)) . "<br/>";
         }
 
 
